@@ -99,7 +99,7 @@ namespace CTP
 	/// <summary>
 	/// TFtdcInvestorRangeType是一个投资者范围类型
 	/// </summary>
-	public enum struct EnumInvestorRangeType : Byte
+	public enum struct EnumInvestorRangeTypeType : Byte
 	{
 		/// <summary>
 		/// 所有
@@ -653,7 +653,21 @@ namespace CTP
 		/// </summary>
 		NoUseHistory = (Byte)'2'
 	};
+	/// <summary>
+	///TFtdcMaxMarginSideAlgorithmType是一个大额单边保证金算法类型
+	/// </summary>
+	public enum struct EnumMaxMarginSideAlgorithmTypeType : Byte
+	{
+		/// <summary>
+		/// 不使用大额单边保证金算法
+		/// </summary>
+		NO = (Byte)'0',
 
+		/// <summary>
+		/// 使用大额单边保证金算法
+		/// </summary>
+		YES = (Byte)'1'
+	};
 	/// <summary>
 	/// TFtdcOptionsTypeType是一个期权类型类型
 	/// </summary>
@@ -5942,9 +5956,322 @@ namespace CTP
 		/// </summary>
 		Restore = (Byte)'3',
 	};
+	///<summary>
+	///TFtdcTemplateTypeType是一个模型类型类型
+	///</summary>
+	public enum struct EnumTemplateTypeType : Byte
+	{
+		/// <summary>
+		/// 全量
+		/// </summary>
+		Full = (Byte)'1',
 
+		/// <summary>
+		/// 增量
+		/// </summary>
+		Increment = (Byte)'2',
 
-	/// --------------------------------------------------------------------------------------------------------------------
+		/// <summary>
+		/// 备份
+		/// </summary>
+		BackUp = (Byte)'3',
+	};
+
+	///<summary>
+	///TFtdcLoginModeType是一个登录模式类型
+	///</summary>
+	public enum struct EnumLoginModeType : Byte
+	{
+		/// <summary>
+		/// 交易
+		/// </summary>
+		Trade = (Byte)'0',
+
+		/// <summary>
+		/// 转账
+		/// </summary>
+		Transfer = (Byte)'1'
+	};
+
+	///<summary>
+	///TFtdcPromptTypeType是一个日历提示类型类型
+	///</summary>
+	public enum struct EnumPromptTypeType : Byte
+	{
+		/// <summary>
+		/// 合约上下市
+		/// </summary>
+		Instrument = (Byte)'1',
+
+		/// <summary>
+		/// 保证金分段生效
+		/// </summary>
+		Margin = (Byte)'2'
+	};
+
+	///<summary>
+	///TFtdcHasTrusteeType是一个是否有托管人类型
+	///</summary>
+	public enum struct EnumHasTrusteeType : Byte
+	{
+		/// <summary>
+		/// 没有
+		/// </summary>
+		NO = (Byte)'0',
+
+		/// <summary>
+		/// 有
+		/// </summary>
+		YES = (Byte)'1'
+	};
+
+	///<summary>
+	///TFtdcAmTypeType是一个机构类型类型
+	///</summary>
+	public enum struct EnumAmTypeType : Byte
+	{
+		///<summary>
+		///银行
+		/// </summary>
+		Bank = (Byte) '1',
+		///<summary>
+		///证券公司
+		/// </summary>
+		Securities = (Byte)'2',
+		///<summary>
+		///基金公司
+		/// </summary>
+		Fund = (Byte) '3',
+		///<summary>
+		///保险公司
+		/// </summary>
+		Insurance = (Byte) '4',
+		///<summary>
+		///信托公司
+		/// </summary>
+		Trust = (Byte) '5',
+		///<summary>
+		///其他
+		/// </summary>
+		Other = (Byte) '9'
+	};
+	///<summary>
+	///TFtdcCSRCFundIOTypeType是一个出入金类型类型
+	///</summary>
+	public enum struct EnumCSRCFundIOTypeType : Byte
+	{
+		///<summary>
+		///出入金
+		///</summary>
+		FundIO = (Byte)'0',
+		///<summary>
+		///银期换汇
+		///</summary>
+		SwapCurrency = (Byte)'1'
+	};
+	///<summary>
+	///TFtdcCusAccountTypeType是一个结算账户类型类型
+	///</summary>
+	public enum struct EnumCusAccountTypeType : Byte
+	{
+		///<summary>
+		///期货结算账户
+		///</summary>
+		Futures = (Byte)'1',
+		///<summary>
+		///纯期货资管业务下的资管结算账户
+		///</summary>
+		AssetmgrFuture = (Byte) '2',
+		///<summary>
+		///综合类资管业务下的期货资管托管账户
+		///</summary>
+		AssetmgrTrustee = (Byte) '3',
+		///<summary>
+		///综合类资管业务下的资金中转账户
+		///</summary>
+		AssetmgrTransfer = (Byte) '4'
+	};
+	///<summary>
+	///TFtdcLanguageTypeType是一个通知语言类型类型
+	///</summary>
+	public enum struct EnumLanguageTypeType : Byte
+	{
+		///<summary>
+		///中文
+		///</summary>
+		Chinese = (Byte)'1',
+		///<summary>
+		///英文
+		///</summary>
+		English = (Byte)'2'
+	};
+
+	///<summary>
+	///TFtdcAssetmgrClientTypeType是一个资产管理客户类型类型
+	///</summary>
+	public enum struct EnumAssetmgrClientTypeType : Byte
+	{
+		///<summary>
+		///个人资管客户
+		///</summary>
+		Person = (Byte)'1',
+		///<summary>
+		///单位资管客户
+		///</summary>
+		Organ = (Byte) '2',
+		///<summary>
+		///特殊单位资管客户
+		///</summary>
+		SpecialOrgan = (Byte)'4'
+	};
+
+	///<summary>
+	///TFtdcAssetmgrTypeType是一个投资类型类型
+	///</summary>
+	public enum struct EnumAssetmgrTypeType : Byte
+	{
+		///<summary>
+		///期货类
+		///</summary>
+		Futures = (Byte) '3',
+		///<summary>
+		///综合类
+		///</summary>
+		SpecialOrgan = (Byte) '4'
+	};
+
+	///<summary>
+	///TFtdcCheckInstrTypeType是一个合约比较类型类型
+	///</summary>
+	public enum struct EnumCheckInstrTypeType : Byte
+	{
+		///<summary>
+		///合约交易所不存在
+		///</summary>
+		HasExch = (Byte) '0',
+		///<summary>
+		///合约本系统不存在
+		///</summary>
+		HasATP = (Byte)'1',
+		///<summary>
+		///合约比较不一致
+		///</summary>
+		HasDiff = (Byte) '2'
+	};
+	///<summary>
+	///TFtdcDeliveryTypeType是一个交割类型类型
+	///</summary>
+	public enum struct EnumDeliveryTypeType : Byte
+	{
+		///<summary>
+		///手工交割
+		///</summary>
+		HandDeliv = (Byte) '1',
+		///<summary>
+		///到期交割
+		///</summary>
+		PersonDeliv = (Byte) '2'
+	};
+	///<summary>
+	///TFtdcMaxMarginSideAlgorithmType是一个大额单边保证金算法类型
+	///</summary>
+	public enum struct EnumMaxMarginSideAlgorithmType : Byte
+	{
+		///<summary>
+		///不使用大额单边保证金算法
+		///</summary>
+		NO = (Byte)'0',
+		///<summary>
+		///使用大额单边保证金算法
+		///</summary>
+		YES = (Byte)'1'
+	};
+
+	///<summary>
+	///TFtdcDAClientTypeType是一个资产管理客户类型类型
+	///</summary>
+	public enum struct EnumDAClientTypeType : Byte
+	{
+		///<summary>
+		///自然人
+		///</summary>
+		Person = (Byte) '0',
+		///<summary>
+		///法人
+		///</summary>
+		Company = (Byte) '1',
+		///<summary>
+		///其他
+		///</summary>
+		Other = (Byte) '2'
+	};
+
+	///<summary>
+	///TFtdcUOAAssetmgrTypeType是一个投资类型类型
+	///</summary>
+	public enum struct EnumUOAAssetmgrTypeType : Byte
+	{
+		///<summary>
+		///期货类
+		///</summary>
+		Futures = (Byte) '1',
+		///<summary>
+		///综合类
+		///</summary>
+		SpecialOrgan = (Byte) '2',
+	};
+
+	///<summary>
+	///TFtdcDirectionEnType是一个买卖方向类型
+	///</summary>
+	public enum struct EnumDirectionEnType : Byte
+	{
+		///<summary>
+		///Buy
+		///</summary>
+		Buy = (Byte) '0',
+		///<summary>
+		///Sell
+		///</summary>
+		Sell = (Byte) '1',
+	};
+
+	///<summary>
+	///TFtdcOffsetFlagEnType是一个开平标志类型
+	///</summary>
+	public enum struct EnumOffsetFlagEnType : Byte
+	{
+		///<summary>
+		///Position Opening
+		///<summary>
+		Open = (Byte)  '0',
+		///<summary>
+		///Position Close
+		///<summary>
+		Close = (Byte)  '1',
+		///<summary>
+		///Forced Liquidation
+		///<summary>
+		ForceClose = (Byte) '2',
+		///<summary>
+		///Close Today
+		///<summary>
+		CloseToday = (Byte) '3',
+		///<summary>
+		///Close Prev.
+		///<summary>
+		CloseYesterday = (Byte)  '4',
+		///<summary>
+		///Forced Reduction
+		///<summary>
+		ForceOff = (Byte) '5',
+		///<summary>
+		///Local Forced Liquidation
+		///<summary>
+		LocalForceClose = (Byte) '6'
+	};
+
+	/// 以上是userapidatatype.h里面的内容--------------------------------------------------------------------------------------------------------------------
 
 
 	/// <summary>
@@ -6843,7 +7170,7 @@ namespace CTP
 		double ShortMarginRatio;
 		/// <summary>
 		///是否使用大额单边保证金算法
-		TThostFtdcMaxMarginSideAlgorithmType	MaxMarginSideAlgorithm;
+		EnumMaxMarginSideAlgorithmTypeType	MaxMarginSideAlgorithm;
 		/// <summary>
 		///基础商品代码
 		/// </summary>
@@ -7526,7 +7853,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeType InvestorRange;
+		EnumInvestorRangeTypeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -7577,7 +7904,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeType InvestorRange;
+		EnumInvestorRangeTypeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -7818,7 +8145,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeType InvestorRange;
+		EnumInvestorRangeTypeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -8056,7 +8383,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeType InvestorRange;
+		EnumInvestorRangeTypeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -10588,7 +10915,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeType InvestorRange;
+		EnumInvestorRangeTypeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -10639,7 +10966,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeType InvestorRange;
+		EnumInvestorRangeTypeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -10690,7 +11017,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeType InvestorRange;
+		EnumInvestorRangeTypeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -10749,22 +11076,42 @@ namespace CTP
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeEnd;
 	};
+	/// <summary>
 	///当前期权合约最小保证金
-	struct CThostFtdcOptionInstrMiniMarginField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcOptionInstrMiniMarginField
 	{
-		///合约代码
-		TThostFtdcInstrumentIDType	InstrumentID;
-		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
-		///经纪公司代码
-		TThostFtdcBrokerIDType	BrokerID;
-		///投资者代码
-		TThostFtdcInvestorIDType	InvestorID;
+		/// <summary>
+		/// 合约代码
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		/// 投资者范围
+		/// </summary>
+		EnumInvestorRangeTypeType InvestorRange;
+		/// <summary>
+		/// 经纪公司代码
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// 投资者代码
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
 		///单位（手）期权合约最小保证金
-		TThostFtdcMoneyType	MinMargin;
+		/// </summary>
+		double	MinMargin;
+		/// <summary>
 		///取值方式
+		/// </summary>
 		TThostFtdcValueMethodType	ValueMethod;
+		/// <summary>
 		///是否跟随交易所收取
+		/// </summary>
 		TThostFtdcBoolType	IsRelative;
 	};
 
@@ -16566,3 +16913,4 @@ namespace CTP
 		TThostFtdcErrorMsgType	ErrorMsg;
 	};
 
+}
