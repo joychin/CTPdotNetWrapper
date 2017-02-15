@@ -5726,8 +5726,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		/// 交易所交易员代码
 		/// </summary>
@@ -5742,21 +5745,21 @@ namespace CTP
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报单提示序号
+		/// </summary>
 		int OrderSubmitStatus;
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-///结算编号
-/// </summary>
+		///结算编号
+		/// </summary>
 		int SettlementID;
 		/// <summary>
-///执行宣告编号
-/// </summary>
+		///执行宣告编号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ExecOrderSysID;
 		/// <summary>
@@ -5806,7 +5809,8 @@ namespace CTP
 	/// <summary>
 	///交易所执行宣告查询
 	/// </summary>
-	struct CThostFtdcQryExchangeExecOrderField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryExchangeExecOrderField
 	{
 		/// <summary>
 		///会员代码
@@ -5818,8 +5822,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -5834,7 +5841,8 @@ namespace CTP
 	/// <summary>
 	///执行宣告操作查询
 	/// </summary>
-	struct CThostFtdcQryExecOrderActionField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryExecOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -5855,7 +5863,8 @@ namespace CTP
 	/// <summary>
 	///交易所执行宣告操作
 	/// </summary>
-	struct CThostFtdcExchangeExecOrderActionField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcExchangeExecOrderActionField
 	{
 		/// <summary>
 		///交易所代码
@@ -5947,7 +5956,8 @@ namespace CTP
 	/// <summary>
 	///交易所执行宣告操作查询
 	/// </summary>
-	struct CThostFtdcQryExchangeExecOrderActionField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryExchangeExecOrderActionField
 	{
 		/// <summary>
 		///会员代码
@@ -5973,7 +5983,8 @@ namespace CTP
 	/// <summary>
 	///错误执行宣告
 	/// </summary>
-	struct CThostFtdcErrExecOrderField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcErrExecOrderField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6036,7 +6047,7 @@ namespace CTP
 		/// <summary>
 		///期权行权后生成的头寸是否自动平仓
 		/// </summary>
-		EnumExecOrderCloseFlagType CloseFlag; 
+		EnumExecOrderCloseFlagType CloseFlag;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -6069,15 +6080,21 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 	/// <summary>
 	///查询错误执行宣告
 	/// </summary>
-	struct CThostFtdcQryErrExecOrderField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryErrExecOrderField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6091,8 +6108,11 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///错误执行宣告操作
-	struct CThostFtdcErrExecOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcErrExecOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6164,14 +6184,22 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
+	/// <summary>
 	///查询错误执行宣告操作
-	struct CThostFtdcQryErrExecOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryErrExecOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6185,8 +6213,11 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///投资者期权合约交易权限
-	struct CThostFtdcOptionInstrTradingRightField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcOptionInstrTradingRightField
 	{
 		/// <summary>
 		///合约代码
@@ -6209,12 +6240,17 @@ namespace CTP
 		///买卖方向
 		/// </summary>
 		EnumDirectionType Direction;
+		/// <summary>
 		///交易权限
-		TThostFtdcTradingRightType	TradingRight;
+		/// </summary>
+		EnumTradingRightType TradingRight;
 	};
 
+	/// <summary>
 	///查询期权合约交易权限
-	struct CThostFtdcQryOptionInstrTradingRightField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryOptionInstrTradingRightField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6237,8 +6273,11 @@ namespace CTP
 		EnumDirectionType Direction;
 	};
 
+	/// <summary>
 	///输入的询价
-	struct CThostFtdcInputForQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcInputForQuoteField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6284,8 +6323,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///询价
-	struct CThostFtdcForQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcForQuoteField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6326,8 +6368,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		/// 交易所交易员代码
 		/// </summary>
@@ -6347,8 +6392,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
+		/// <summary>
 		///询价状态
-		TThostFtdcForQuoteStatusType	ForQuoteStatus;
+		/// </summary>
+		EnumForQuoteStatusType ForQuoteStatus;
 		/// <summary>
 		///前置编号
 		/// </summary>
@@ -6388,8 +6435,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///询价查询
-	struct CThostFtdcQryForQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryForQuoteField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6423,8 +6473,11 @@ namespace CTP
 		String^ InsertTimeEnd;
 	};
 
+	/// <summary>
 	///交易所询价信息
-	struct CThostFtdcExchangeForQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcExchangeForQuoteField
 	{
 		///本地询价编号
 		TThostFtdcOrderLocalIDType	ForQuoteLocalID;
@@ -6443,8 +6496,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		/// 交易所交易员代码
 		/// </summary>
@@ -6464,8 +6520,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
+		/// <summary>
 		///询价状态
-		TThostFtdcForQuoteStatusType	ForQuoteStatus;
+		/// </summary>
+		EnumForQuoteStatusType ForQuoteStatus;
 		/// <summary>
 		///IP地址
 		/// </summary>
@@ -6478,8 +6536,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///交易所询价查询
-	struct CThostFtdcQryExchangeForQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryExchangeForQuoteField
 	{
 		/// <summary>
 		///会员代码
@@ -6491,8 +6552,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -6505,8 +6569,11 @@ namespace CTP
 		String^ TraderID;
 	};
 
+	/// <summary>
 	///输入的报价
-	struct CThostFtdcInputQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcInputQuoteField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6523,21 +6590,32 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///报价引用
-		TThostFtdcOrderRefType	QuoteRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ QuoteRef;
 		/// <summary>
 		///用户代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
+		/// <summary>
 		///卖价格
-		TThostFtdcPriceType	AskPrice;
+		/// </summary>
+		double AskPrice;
+		/// <summary>
 		///买价格
-		TThostFtdcPriceType	BidPrice;
+		/// </summary>
+		double BidPrice;
+		/// <summary>
 		///卖数量
-		TThostFtdcVolumeType	AskVolume;
+		/// </summary>
+		int AskVolume;
+		/// <summary>
 		///买数量
-		TThostFtdcVolumeType	BidVolume;
+		/// </summary>
+		int BidVolume;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -6547,20 +6625,37 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
+		/// <summary>
 		///卖开平标志
-		TThostFtdcOffsetFlagType	AskOffsetFlag;
+		/// </summary>
+		EnumOffsetFlagType AskOffsetFlag;
+		/// <summary>
 		///买开平标志
-		TThostFtdcOffsetFlagType	BidOffsetFlag;
+		/// </summary>
+		EnumOffsetFlagType BidOffsetFlag;
+		/// <summary>
 		///卖投机套保标志
-		TThostFtdcHedgeFlagType	AskHedgeFlag;
+		/// </summary>
+		EnumHedgeFlagType AskHedgeFlag;
+		/// <summary>
 		///买投机套保标志
-		TThostFtdcHedgeFlagType	BidHedgeFlag;
+		/// </summary>
+		EnumHedgeFlagType BidHedgeFlag;
+		/// <summary>
 		///衍生卖报单引用
-		TThostFtdcOrderRefType	AskOrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ AskOrderRef;
+		/// <summary>
 		///衍生买报单引用
-		TThostFtdcOrderRefType	BidOrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ BidOrderRef;
+		/// <summary>
 		///应价编号
-		TThostFtdcOrderSysIDType	ForQuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ ForQuoteSysID;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -6585,8 +6680,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///输入报价操作
-	struct CThostFtdcInputQuoteActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcInputQuoteActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6600,8 +6698,11 @@ namespace CTP
 		String^ InvestorID;
 		///报价操作引用
 		TThostFtdcOrderActionRefType	QuoteActionRef;
+		/// <summary>
 		///报价引用
-		TThostFtdcOrderRefType	QuoteRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ QuoteRef;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -6619,8 +6720,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///报价操作编号
-		TThostFtdcOrderSysIDType	QuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ QuoteSysID;
 		/// <summary>
 		///操作标志
 		/// </summary>
@@ -6654,8 +6758,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///报价
-	struct CThostFtdcQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQuoteField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6672,21 +6779,32 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///报价引用
-		TThostFtdcOrderRefType	QuoteRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ QuoteRef;
 		/// <summary>
 		///用户代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
+		/// <summary>
 		///卖价格
-		TThostFtdcPriceType	AskPrice;
+		/// </summary>
+		double AskPrice;
+		/// <summary>
 		///买价格
-		TThostFtdcPriceType	BidPrice;
+		/// </summary>
+		double BidPrice;
+		/// <summary>
 		///卖数量
-		TThostFtdcVolumeType	AskVolume;
+		/// </summary>
+		int AskVolume;
+		/// <summary>
 		///买数量
-		TThostFtdcVolumeType	BidVolume;
+		/// </summary>
+		int BidVolume;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -6696,16 +6814,27 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
+		/// <summary>
 		///卖开平标志
-		TThostFtdcOffsetFlagType	AskOffsetFlag;
+		/// </summary>
+		EnumOffsetFlagType AskOffsetFlag;
+		/// <summary>
 		///买开平标志
-		TThostFtdcOffsetFlagType	BidOffsetFlag;
+		/// </summary>
+		EnumOffsetFlagType BidOffsetFlag;
+		/// <summary>
 		///卖投机套保标志
-		TThostFtdcHedgeFlagType	AskHedgeFlag;
+		/// </summary>
+		EnumHedgeFlagType AskHedgeFlag;
+		/// <summary>
 		///买投机套保标志
-		TThostFtdcHedgeFlagType	BidHedgeFlag;
+		/// </summary>
+		EnumHedgeFlagType BidHedgeFlag;
+		/// <summary>
 		///本地报价编号
-		TThostFtdcOrderLocalIDType	QuoteLocalID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ QuoteLocalID;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -6721,8 +6850,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		/// 交易所交易员代码
 		/// </summary>
@@ -6732,21 +6864,28 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///报价提示序号
-		TThostFtdcSequenceNoType	NotifySequence;
-		///报价提交状态
-		TThostFtdcOrderSubmitStatusType	OrderSubmitStatus;
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报价提示序号
+		/// </summary>
+		int NotifySequence;
+		/// <summary>
+		///报价提交状态
+		/// </summary>
+		EnumOrderSubmitStatusType OrderSubmitStatus;
+		/// <summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-///结算编号
-/// </summary>
+		///结算编号
+		/// </summary>
 		int SettlementID;
+		/// <summary>
 		///报价编号
-		TThostFtdcOrderSysIDType	QuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ QuoteSysID;
 		/// <summary>
 		///报单日期
 		/// </summary>
@@ -6773,10 +6912,16 @@ namespace CTP
 		///序号
 		/// </summary>
 		int SequenceNo;
+		/// <summary>
 		///卖方报单编号
-		TThostFtdcOrderSysIDType	AskOrderSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ AskOrderSysID;
+		/// <summary>
 		///买方报单编号
-		TThostFtdcOrderSysIDType	BidOrderSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ BidOrderSysID;
 		/// <summary>
 		///前置编号
 		/// </summary>
@@ -6800,14 +6945,25 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ ActiveUserID;
+		/// <summary>
 		///经纪公司报价编号
-		TThostFtdcSequenceNoType	BrokerQuoteSeq;
+		/// </summary>
+		int BrokerQuoteSeq;
+		/// <summary>
 		///衍生卖报单引用
-		TThostFtdcOrderRefType	AskOrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ AskOrderRef;
+		/// <summary>
 		///衍生买报单引用
-		TThostFtdcOrderRefType	BidOrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ BidOrderRef;
+		/// <summary>
 		///应价编号
-		TThostFtdcOrderSysIDType	ForQuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ ForQuoteSysID;
 		/// <summary>
 		///营业部编号
 		/// </summary>
@@ -6840,8 +6996,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///报价操作
-	struct CThostFtdcQuoteActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQuoteActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6855,8 +7014,11 @@ namespace CTP
 		String^ InvestorID;
 		///报价操作引用
 		TThostFtdcOrderActionRefType	QuoteActionRef;
+		/// <summary>
 		///报价引用
-		TThostFtdcOrderRefType	QuoteRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ QuoteRef;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -6874,8 +7036,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///报价操作编号
-		TThostFtdcOrderSysIDType	QuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ QuoteSysID;
 		/// <summary>
 		///操作标志
 		/// </summary>
@@ -6899,8 +7064,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
+		/// <summary>
 		///本地报价编号
-		TThostFtdcOrderLocalIDType	QuoteLocalID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ QuoteLocalID;
 		/// <summary>
 		///操作本地编号
 		/// </summary>
@@ -6962,8 +7130,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///报价查询
-	struct CThostFtdcQryQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryQuoteField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -6985,8 +7156,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///报价编号
-		TThostFtdcOrderSysIDType	QuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ QuoteSysID;
 		/// <summary>
 		///开始时间
 		/// </summary>
@@ -6999,17 +7173,28 @@ namespace CTP
 		String^ InsertTimeEnd;
 	};
 
+	/// <summary>
 	///交易所报价信息
-	struct CThostFtdcExchangeQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcExchangeQuoteField
 	{
+		/// <summary>
 		///卖价格
-		TThostFtdcPriceType	AskPrice;
+		/// </summary>
+		double AskPrice;
+		/// <summary>
 		///买价格
-		TThostFtdcPriceType	BidPrice;
+		/// </summary>
+		double BidPrice;
+		/// <summary>
 		///卖数量
-		TThostFtdcVolumeType	AskVolume;
+		/// </summary>
+		int AskVolume;
+		/// <summary>
 		///买数量
-		TThostFtdcVolumeType	BidVolume;
+		/// </summary>
+		int BidVolume;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -7019,16 +7204,27 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
+		/// <summary>
 		///卖开平标志
-		TThostFtdcOffsetFlagType	AskOffsetFlag;
+		/// </summary>
+		EnumOffsetFlagType AskOffsetFlag;
+		/// <summary>
 		///买开平标志
-		TThostFtdcOffsetFlagType	BidOffsetFlag;
+		/// </summary>
+		EnumOffsetFlagType BidOffsetFlag;
+		/// <summary>
 		///卖投机套保标志
-		TThostFtdcHedgeFlagType	AskHedgeFlag;
+		/// </summary>
+		EnumHedgeFlagType AskHedgeFlag;
+		/// <summary>
 		///买投机套保标志
-		TThostFtdcHedgeFlagType	BidHedgeFlag;
+		/// </summary>
+		EnumHedgeFlagType BidHedgeFlag;
+		/// <summary>
 		///本地报价编号
-		TThostFtdcOrderLocalIDType	QuoteLocalID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ QuoteLocalID;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -7044,8 +7240,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		/// 交易所交易员代码
 		/// </summary>
@@ -7055,21 +7254,28 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///报价提示序号
-		TThostFtdcSequenceNoType	NotifySequence;
-		///报价提交状态
-		TThostFtdcOrderSubmitStatusType	OrderSubmitStatus;
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报价提示序号
+		/// </summary>
+		int NotifySequence;
+		/// <summary>
+		///报价提交状态
+		/// </summary>
+		EnumOrderSubmitStatusType OrderSubmitStatus;
+		/// <summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
 		///结算编号
 		/// </summary>
 		int SettlementID;
+		/// <summary>
 		///报价编号
-		TThostFtdcOrderSysIDType	QuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ QuoteSysID;
 		/// <summary>
 		///报单日期
 		/// </summary>
@@ -7096,12 +7302,21 @@ namespace CTP
 		///序号
 		/// </summary>
 		int SequenceNo;
+		/// <summary>
 		///卖方报单编号
-		TThostFtdcOrderSysIDType	AskOrderSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ AskOrderSysID;
+		/// <summary>
 		///买方报单编号
-		TThostFtdcOrderSysIDType	BidOrderSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ BidOrderSysID;
+		/// <summary>
 		///应价编号
-		TThostFtdcOrderSysIDType	ForQuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ ForQuoteSysID;
 		/// <summary>
 		///营业部编号
 		/// </summary>
@@ -7119,8 +7334,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///交易所报价查询
-	struct CThostFtdcQryExchangeQuoteField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryExchangeQuoteField
 	{
 		/// <summary>
 		///会员代码
@@ -7132,8 +7350,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -7147,7 +7368,9 @@ namespace CTP
 	};
 
 	///报价操作查询
-	struct CThostFtdcQryQuoteActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryQuoteActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7166,16 +7389,22 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///交易所报价操作
-	struct CThostFtdcExchangeQuoteActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcExchangeQuoteActionField
 	{
 		/// <summary>
 		///交易所代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///报价操作编号
-		TThostFtdcOrderSysIDType	QuoteSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ QuoteSysID;
 		/// <summary>
 		///操作标志
 		/// </summary>
@@ -7199,8 +7428,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
+		/// <summary>
 		///本地报价编号
-		TThostFtdcOrderLocalIDType	QuoteLocalID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ QuoteLocalID;
 		/// <summary>
 		///操作本地编号
 		/// </summary>
@@ -7242,8 +7474,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///交易所报价操作查询
-	struct CThostFtdcQryExchangeQuoteActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryExchangeQuoteActionField
 	{
 		/// <summary>
 		///会员代码
@@ -7267,8 +7502,11 @@ namespace CTP
 		String^ TraderID;
 	};
 
+	/// <summary>
 	///期权合约delta值
-	struct CThostFtdcOptionInstrDeltaField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcOptionInstrDeltaField
 	{
 		/// <summary>
 		///合约代码
@@ -7292,7 +7530,9 @@ namespace CTP
 	};
 
 	///发给做市商的询价请求
-	struct CThostFtdcForQuoteRspField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcForQuoteRspField
 	{
 		/// <summary>
 ///报单提示序号
@@ -7317,8 +7557,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///当前期权合约执行偏移值的详细内容
-	struct CThostFtdcStrikeOffsetField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcStrikeOffsetField
 	{
 		/// <summary>
 		///合约代码
@@ -7343,8 +7586,11 @@ namespace CTP
 		TThostFtdcStrikeOffsetTypeType	OffsetType;
 	};
 
+	/// <summary>
 	///期权执行偏移值查询
-	struct CThostFtdcQryStrikeOffsetField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryStrikeOffsetField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7363,8 +7609,11 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///输入批量报单操作
-	struct CThostFtdcInputBatchOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcInputBatchOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7417,8 +7666,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///批量报单操作
-	struct CThostFtdcBatchOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcBatchOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7519,8 +7771,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///交易所批量报单操作
-	struct CThostFtdcExchangeBatchOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcExchangeBatchOrderActionField
 	{
 		/// <summary>
 		///交易所代码
@@ -7587,8 +7842,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///查询批量报单操作
-	struct CThostFtdcQryBatchOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryBatchOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7607,8 +7865,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///组合合约安全系数
-	struct CThostFtdcCombInstrumentGuardField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcCombInstrumentGuardField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7624,8 +7885,11 @@ namespace CTP
 		TThostFtdcRatioType	GuarantRatio;
 	};
 
+	/// <summary>
 	///组合合约安全系数查询
-	struct CThostFtdcQryCombInstrumentGuardField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryCombInstrumentGuardField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7639,8 +7903,11 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///输入的申请组合
-	struct CThostFtdcInputCombActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcInputCombActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7695,8 +7962,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///申请组合
-	struct CThostFtdcCombActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcCombActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7751,8 +8021,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 	/// 交易所交易员代码
 	/// </summary>
@@ -7811,8 +8084,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///申请组合查询
-	struct CThostFtdcQryCombActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryCombActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7836,8 +8112,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///交易所申请组合信息
-	struct CThostFtdcExchangeCombActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcExchangeCombActionField
 	{
 		/// <summary>
 		///买卖方向
@@ -7870,8 +8149,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		/// 交易所交易员代码
 		/// </summary>
@@ -7912,8 +8194,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///交易所申请组合查询
-	struct CThostFtdcQryExchangeCombActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryExchangeCombActionField
 	{
 		/// <summary>
 		///会员代码
@@ -7925,8 +8210,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -7939,8 +8227,11 @@ namespace CTP
 		String^ TraderID;
 	};
 
+	/// <summary>
 	///产品报价汇率
-	struct CThostFtdcProductExchRateField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcProductExchRateField
 	{
 		///产品代码
 		TThostFtdcInstrumentIDType	ProductID;
@@ -7950,15 +8241,20 @@ namespace CTP
 		TThostFtdcExchangeRateType	ExchangeRate;
 	};
 
+	/// <summary>
 	///产品报价汇率查询
-	struct CThostFtdcQryProductExchRateField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryProductExchRateField
 	{
 		///产品代码
 		TThostFtdcInstrumentIDType	ProductID;
 	};
 
 	///查询询价价差参数
-	struct CThostFtdcQryForQuoteParamField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryForQuoteParamField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -7978,7 +8274,9 @@ namespace CTP
 	};
 
 	///询价价差参数
-	struct CThostFtdcForQuoteParamField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcForQuoteParamField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8001,8 +8299,11 @@ namespace CTP
 		TThostFtdcPriceType	PriceInterval;
 	};
 
+	/// <summary>
 	///当前做市商期权合约手续费的详细内容
-	struct CThostFtdcMMOptionInstrCommRateField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMMOptionInstrCommRateField
 	{
 		/// <summary>
 		///合约代码
@@ -8021,26 +8322,42 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///开仓手续费率
-		TThostFtdcRatioType	OpenRatioByMoney;
+		/// </summary>
+		double OpenRatioByMoney;
+		/// <summary>
 		///开仓手续费
-		TThostFtdcRatioType	OpenRatioByVolume;
+		/// </summary>
+		double OpenRatioByVolume;
+		/// <summary>
 		///平仓手续费率
-		TThostFtdcRatioType	CloseRatioByMoney;
+		/// </summary>
+		double CloseRatioByMoney;
+		/// <summary>
 		///平仓手续费
-		TThostFtdcRatioType	CloseRatioByVolume;
+		/// </summary>
+		double CloseRatioByVolume;
+		/// <summary>
 		///平今手续费率
-		TThostFtdcRatioType	CloseTodayRatioByMoney;
+		/// </summary>
+		double CloseTodayRatioByMoney;
+		/// <summary>
 		///平今手续费
-		TThostFtdcRatioType	CloseTodayRatioByVolume;
+		/// </summary>
+		double CloseTodayRatioByVolume;
 		///执行手续费率
 		TThostFtdcRatioType	StrikeRatioByMoney;
 		///执行手续费
 		TThostFtdcRatioType	StrikeRatioByVolume;
 	};
 
+	/// <summary>
 	///做市商期权手续费率查询
-	struct CThostFtdcQryMMOptionInstrCommRateField
+	/// </summary>
+	[StructLay
+	/// <summary>out(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryMMOptionInstrCommRateField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8059,8 +8376,11 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///做市商合约手续费率
-	struct CThostFtdcMMInstrumentCommissionRateField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMMInstrumentCommissionRateField
 	{
 		/// <summary>
 		///合约代码
@@ -8079,22 +8399,37 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///开仓手续费率
-		TThostFtdcRatioType	OpenRatioByMoney;
+		/// </summary>
+		double OpenRatioByMoney;
+		/// <summary>
 		///开仓手续费
-		TThostFtdcRatioType	OpenRatioByVolume;
+		/// </summary>
+		double OpenRatioByVolume;
+		/// <summary>
 		///平仓手续费率
-		TThostFtdcRatioType	CloseRatioByMoney;
+		/// </summary>
+		double CloseRatioByMoney;
+		/// <summary>
 		///平仓手续费
-		TThostFtdcRatioType	CloseRatioByVolume;
+		/// </summary>
+		double CloseRatioByVolume;
+		/// <summary>
 		///平今手续费率
-		TThostFtdcRatioType	CloseTodayRatioByMoney;
+		/// </summary>
+		double CloseTodayRatioByMoney;
+		/// <summary>
 		///平今手续费
-		TThostFtdcRatioType	CloseTodayRatioByVolume;
+		/// </summary>
+		double CloseTodayRatioByVolume;
 	};
 
+	/// <summary>
 	///查询做市商合约手续费率
-	struct CThostFtdcQryMMInstrumentCommissionRateField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryMMInstrumentCommissionRateField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8113,8 +8448,11 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///当前报单手续费的详细内容
-	struct CThostFtdcInstrumentOrderCommRateField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcInstrumentOrderCommRateField
 	{
 		/// <summary>
 		///合约代码
@@ -8143,8 +8481,11 @@ namespace CTP
 		TThostFtdcRatioType	OrderActionCommByVolume;
 	};
 
+	/// <summary>
 	///报单手续费率查询
-	struct CThostFtdcQryInstrumentOrderCommRateField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryInstrumentOrderCommRateField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8163,12 +8504,15 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///市场行情
-	struct CThostFtdcMarketDataField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataField
 	{
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
@@ -8181,8 +8525,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		///最新价
 		TThostFtdcPriceType	LastPrice;
 		///上次结算价
@@ -8225,12 +8572,15 @@ namespace CTP
 		TThostFtdcDateType	ActionDay;
 	};
 
+	/// <summary>
 	///行情基础属性
-	struct CThostFtdcMarketDataBaseField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataBaseField
 	{
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		///上次结算价
@@ -8243,8 +8593,11 @@ namespace CTP
 		TThostFtdcRatioType	PreDelta;
 	};
 
+	/// <summary>
 	///行情静态属性
-	struct CThostFtdcMarketDataStaticField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataStaticField
 	{
 		///今开盘
 		TThostFtdcPriceType	OpenPrice;
@@ -8264,8 +8617,11 @@ namespace CTP
 		TThostFtdcRatioType	CurrDelta;
 	};
 
+	/// <summary>
 	///行情最新成交属性
-	struct CThostFtdcMarketDataLastMatchField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataLastMatchField
 	{
 		///最新价
 		TThostFtdcPriceType	LastPrice;
@@ -8279,8 +8635,11 @@ namespace CTP
 		TThostFtdcLargeVolumeType	OpenInterest;
 	};
 
+	/// <summary>
 	///行情最优价属性
-	struct CThostFtdcMarketDataBestPriceField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataBestPriceField
 	{
 		///申买价一
 		TThostFtdcPriceType	BidPrice1;
@@ -8292,8 +8651,11 @@ namespace CTP
 		TThostFtdcVolumeType	AskVolume1;
 	};
 
+	/// <summary>
 	///行情申买二、三属性
-	struct CThostFtdcMarketDataBid23Field
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataBid23Field
 	{
 		///申买价二
 		TThostFtdcPriceType	BidPrice2;
@@ -8305,8 +8667,11 @@ namespace CTP
 		TThostFtdcVolumeType	BidVolume3;
 	};
 
+	/// <summary>
 	///行情申卖二、三属性
-	struct CThostFtdcMarketDataAsk23Field
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataAsk23Field
 	{
 		///申卖价二
 		TThostFtdcPriceType	AskPrice2;
@@ -8318,8 +8683,11 @@ namespace CTP
 		TThostFtdcVolumeType	AskVolume3;
 	};
 
+	/// <summary>
 	///行情申买四、五属性
-	struct CThostFtdcMarketDataBid45Field
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataBid45Field
 	{
 		///申买价四
 		TThostFtdcPriceType	BidPrice4;
@@ -8331,8 +8699,11 @@ namespace CTP
 		TThostFtdcVolumeType	BidVolume5;
 	};
 
+	/// <summary>
 	///行情申卖四、五属性
-	struct CThostFtdcMarketDataAsk45Field
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataAsk45Field
 	{
 		///申卖价四
 		TThostFtdcPriceType	AskPrice4;
@@ -8344,8 +8715,11 @@ namespace CTP
 		TThostFtdcVolumeType	AskVolume5;
 	};
 
+	/// <summary>
 	///行情更新时间属性
-	struct CThostFtdcMarketDataUpdateTimeField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataUpdateTimeField
 	{
 		/// <summary>
 		///合约代码
@@ -8360,8 +8734,11 @@ namespace CTP
 		TThostFtdcDateType	ActionDay;
 	};
 
+	/// <summary>
 	///行情交易所代码属性
-	struct CThostFtdcMarketDataExchangeField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMarketDataExchangeField
 	{
 		/// <summary>
 		///交易所代码
@@ -8370,8 +8747,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///指定的合约
-	struct CThostFtdcSpecificInstrumentField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcSpecificInstrumentField
 	{
 		/// <summary>
 		///合约代码
@@ -8380,16 +8760,22 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///合约状态
-	struct CThostFtdcInstrumentStatusField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcInstrumentStatusField
 	{
 		/// <summary>
 		///交易所代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		///结算组代码
 		TThostFtdcSettlementGroupIDType	SettlementGroupID;
 		/// <summary>
@@ -8407,20 +8793,29 @@ namespace CTP
 		TThostFtdcInstStatusEnterReasonType	EnterReason;
 	};
 
+	/// <summary>
 	///查询合约状态
-	struct CThostFtdcQryInstrumentStatusField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryInstrumentStatusField
 	{
 		/// <summary>
 		///交易所代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 	};
 
+	/// <summary>
 	///投资者账户
-	struct CThostFtdcInvestorAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcInvestorAccountField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8441,8 +8836,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///浮动盈亏算法
-	struct CThostFtdcPositionProfitAlgorithmField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcPositionProfitAlgorithmField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8462,8 +8860,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///会员资金折扣
-	struct CThostFtdcDiscountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcDiscountField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8481,7 +8882,9 @@ namespace CTP
 		TThostFtdcRatioType	Discount;
 	};
 
+	/// <summary>
 	///查询转帐银行
+	/// </summary>
 	struct CThostFtdcQryTransferBankField
 	{
 		///银行代码
@@ -8490,8 +8893,11 @@ namespace CTP
 		TThostFtdcBankBrchIDType	BankBrchID;
 	};
 
+	/// <summary>
 	///转帐银行
-	struct CThostFtdcTransferBankField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcTransferBankField
 	{
 		///银行代码
 		TThostFtdcBankIDType	BankID;
@@ -8503,8 +8909,11 @@ namespace CTP
 		TThostFtdcBoolType	IsActive;
 	};
 
+	/// <summary>
 	///查询投资者持仓明细
-	struct CThostFtdcQryInvestorPositionDetailField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryInvestorPositionDetailField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8523,8 +8932,11 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///投资者持仓明细
-	struct CThostFtdcInvestorPositionDetailField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcInvestorPositionDetailField
 	{
 		/// <summary>
 		///合约代码
@@ -8601,8 +9013,11 @@ namespace CTP
 		TThostFtdcMoneyType	CloseAmount;
 	};
 
+	/// <summary>
 	///资金账户口令域
-	struct CThostFtdcTradingAccountPasswordField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcTradingAccountPasswordField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8620,8 +9035,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///交易所行情报盘机
-	struct CThostFtdcMDTraderOfferField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcMDTraderOfferField
 	{
 		/// <summary>
 		///交易所代码
@@ -8680,8 +9098,11 @@ namespace CTP
 		TThostFtdcReturnCodeType	MaxOrderMessageReference;
 	};
 
+	/// <summary>
 	///查询行情报盘机
-	struct CThostFtdcQryMDTraderOfferField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryMDTraderOfferField
 	{
 		/// <summary>
 		///交易所代码
@@ -8700,8 +9121,11 @@ namespace CTP
 		String^ TraderID;
 	};
 
+	/// <summary>
 	///查询客户通知
-	struct CThostFtdcQryNoticeField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryNoticeField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8710,8 +9134,11 @@ namespace CTP
 		String^ BrokerID;
 	};
 
+	/// <summary>
 	///客户通知
-	struct CThostFtdcNoticeField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcNoticeField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8725,7 +9152,9 @@ namespace CTP
 	};
 
 	///用户权限
-	struct CThostFtdcUserRightField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcUserRightField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8743,8 +9172,11 @@ namespace CTP
 		TThostFtdcBoolType	IsForbidden;
 	};
 
+	/// <summary>
 	///查询结算信息确认域
-	struct CThostFtdcQrySettlementInfoConfirmField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQrySettlementInfoConfirmField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8758,8 +9190,11 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///装载结算信息
-	struct CThostFtdcLoadSettlementInfoField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcLoadSettlementInfoField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8768,8 +9203,11 @@ namespace CTP
 		String^ BrokerID;
 	};
 
+	/// <summary>
 	///经纪公司可提资金算法表
-	struct CThostFtdcBrokerWithdrawAlgorithmField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcBrokerWithdrawAlgorithmField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8799,8 +9237,11 @@ namespace CTP
 		TThostFtdcBalanceAlgorithmType	BalanceAlgorithm;
 	};
 
+	/// <summary>
 	///资金账户口令变更域
-	struct CThostFtdcTradingAccountPasswordUpdateV1Field
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcTradingAccountPasswordUpdateV1Field
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8818,8 +9259,11 @@ namespace CTP
 		TThostFtdcPasswordType	NewPassword;
 	};
 
+	/// <summary>
 	///资金账户口令变更域
-	struct CThostFtdcTradingAccountPasswordUpdateField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcTradingAccountPasswordUpdateField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8839,8 +9283,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///查询组合合约分腿
-	struct CThostFtdcQryCombinationLegField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryCombinationLegField
 	{
 		///组合合约代码
 		TThostFtdcInstrumentIDType	CombInstrumentID;
@@ -8850,8 +9297,11 @@ namespace CTP
 		TThostFtdcInstrumentIDType	LegInstrumentID;
 	};
 
+	/// <summary>
 	///查询组合合约分腿
-	struct CThostFtdcQrySyncStatusField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQrySyncStatusField
 	{
 		/// <summary>
 ///报单提示序号
@@ -8860,8 +9310,11 @@ namespace CTP
 		String^ OrderSubmitStatus;
 	};
 
+	/// <summary>
 	///组合交易合约的单腿
-	struct CThostFtdcCombinationLegField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcCombinationLegField
 	{
 		///组合合约代码
 		TThostFtdcInstrumentIDType	CombInstrumentID;
@@ -8879,8 +9332,11 @@ namespace CTP
 		TThostFtdcImplyLevelType	ImplyLevel;
 	};
 
+	/// <summary>
 	///数据同步状态
-	struct CThostFtdcSyncStatusField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcSyncStatusField
 	{
 		/// <summary>
 ///报单提示序号
@@ -8891,8 +9347,11 @@ namespace CTP
 		TThostFtdcDataSyncStatusType	DataSyncStatus;
 	};
 
+	/// <summary>
 	///查询联系人
-	struct CThostFtdcQryLinkManField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryLinkManField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8906,8 +9365,11 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///联系人
-	struct CThostFtdcLinkManField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcLinkManField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8941,8 +9403,11 @@ namespace CTP
 		TThostFtdcInvestorFullNameType	PersonFullName;
 	};
 
+	/// <summary>
 	///查询经纪公司用户事件
-	struct CThostFtdcQryBrokerUserEventField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryBrokerUserEventField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8958,8 +9423,11 @@ namespace CTP
 		TThostFtdcUserEventTypeType	UserEventType;
 	};
 
+	/// <summary>
 	///查询经纪公司用户事件
-	struct CThostFtdcBrokerUserEventField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcBrokerUserEventField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8993,8 +9461,11 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///查询签约银行请求
-	struct CThostFtdcQryContractBankField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryContractBankField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9007,8 +9478,11 @@ namespace CTP
 		TThostFtdcBankBrchIDType	BankBrchID;
 	};
 
+	/// <summary>
 	///查询签约银行响应
-	struct CThostFtdcContractBankField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcContractBankField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9023,8 +9497,11 @@ namespace CTP
 		TThostFtdcBankNameType	BankName;
 	};
 
+	/// <summary>
 	///投资者组合持仓明细
-	struct CThostFtdcInvestorPositionCombineDetailField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcInvestorPositionCombineDetailField
 	{
 		/// <summary>
 ///报单提示序号
@@ -9087,8 +9564,11 @@ namespace CTP
 		TThostFtdcTradeGroupIDType	TradeGroupID;
 	};
 
+	/// <summary>
 	///预埋单
-	struct CThostFtdcParkedOrderField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcParkedOrderField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9164,10 +9644,15 @@ namespace CTP
 		TThostFtdcUserTypeType	UserType;
 		///预埋单状态
 		TThostFtdcParkedOrderStatusType	Status;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///互换单标志
 		TThostFtdcBoolType	IsSwapOrder;
 		/// <summary>
@@ -9199,8 +9684,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///输入预埋单操作
-	struct CThostFtdcParkedOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcParkedOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9259,10 +9747,15 @@ namespace CTP
 		TThostFtdcUserTypeType	UserType;
 		///预埋撤单状态
 		TThostFtdcParkedOrderStatusType	Status;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		/// <summary>
 		///投资单元代码
 		/// </summary>
@@ -9280,8 +9773,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///查询预埋单
-	struct CThostFtdcQryParkedOrderField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryParkedOrderField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9305,8 +9801,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///查询预埋撤单
-	struct CThostFtdcQryParkedOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryParkedOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9330,8 +9829,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///删除预埋单
-	struct CThostFtdcRemoveParkedOrderField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRemoveParkedOrderField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9347,8 +9849,11 @@ namespace CTP
 		TThostFtdcParkedOrderIDType	ParkedOrderID;
 	};
 
+	/// <summary>
 	///删除预埋撤单
-	struct CThostFtdcRemoveParkedOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRemoveParkedOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9364,8 +9869,11 @@ namespace CTP
 		TThostFtdcParkedOrderActionIDType	ParkedOrderActionID;
 	};
 
+	/// <summary>
 	///经纪公司可提资金算法表
-	struct CThostFtdcInvestorWithdrawAlgorithmField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcInvestorWithdrawAlgorithmField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9390,8 +9898,11 @@ namespace CTP
 		TThostFtdcRatioType	FundMortgageRatio;
 	};
 
+	/// <summary>
 	///查询组合持仓明细
-	struct CThostFtdcQryInvestorPositionCombineDetailField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryInvestorPositionCombineDetailField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9407,15 +9918,21 @@ namespace CTP
 		TThostFtdcInstrumentIDType	CombInstrumentID;
 	};
 
+	/// <summary>
 	///成交均价
-	struct CThostFtdcMarketDataAveragePriceField
+	/// </summary>
+	[Str
+	public ref struct  CThostFtdcMarketDataAveragePriceField
 	{
 		///当日均价
 		TThostFtdcPriceType	AveragePrice;
 	};
 
+	/// <summary>
 	///校验投资者密码
-	struct CThostFtdcVerifyInvestorPasswordField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcVerifyInvestorPasswordField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9431,8 +9948,11 @@ namespace CTP
 		TThostFtdcPasswordType	Password;
 	};
 
+	/// <summary>
 	///用户IP
-	struct CThostFtdcUserIPField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcUserIPField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9458,8 +9978,11 @@ namespace CTP
 		TThostFtdcIPAddressType	IPMask;
 	};
 
+	/// <summary>
 	///用户事件通知信息
-	struct CThostFtdcTradingNoticeInfoField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcTradingNoticeInfoField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9481,8 +10004,11 @@ namespace CTP
 		TThostFtdcSequenceNoType	SequenceNo;
 	};
 
+	/// <summary>
 	///用户事件通知
-	struct CThostFtdcTradingNoticeField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcTradingNoticeField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9511,8 +10037,11 @@ namespace CTP
 		TThostFtdcContentType	FieldContent;
 	};
 
+	/// <summary>
 	///查询交易事件通知
-	struct CThostFtdcQryTradingNoticeField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryTradingNoticeField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9526,8 +10055,11 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///查询错误报单
-	struct CThostFtdcQryErrOrderField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryErrOrderField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9541,8 +10073,11 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///错误报单
-	struct CThostFtdcErrOrderField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcErrOrderField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9607,10 +10142,15 @@ namespace CTP
 		int RequestID;
 		///用户强评标志
 		TThostFtdcBoolType	UserForceClose;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///互换单标志
 		TThostFtdcBoolType	IsSwapOrder;
 		/// <summary>
@@ -9647,8 +10187,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///查询错误报单操作
-	struct CThostFtdcErrorConditionalOrderField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcErrorConditionalOrderField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9728,8 +10271,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
+		/// <summary>
 		///合约在交易所的代码
-		TThostFtdcExchangeInstIDType	ExchangeInstID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
 		/// <summary>
 		/// 交易所交易员代码
 		/// </summary>
@@ -9826,10 +10372,15 @@ namespace CTP
 		TThostFtdcOrderSysIDType	RelativeOrderSysID;
 		///郑商所成交数量
 		TThostFtdcVolumeType	ZCETotalTradedVolume;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///互换单标志
 		TThostFtdcBoolType	IsSwapOrder;
 		/// <summary>
@@ -9864,8 +10415,11 @@ namespace CTP
 		String^	MacAddress;
 	};
 
+	/// <summary>
 	///查询错误报单操作
-	struct CThostFtdcQryErrOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryErrOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -9879,8 +10433,11 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///错误报单操作
-	struct CThostFtdcErrOrderActionField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcErrOrderActionField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10003,14 +10560,22 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
+	/// <summary>
 	///查询交易所状态
-	struct CThostFtdcQryExchangeSequenceField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryExchangeSequenceField
 	{
 		/// <summary>
 		///交易所代码
@@ -10019,8 +10584,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///交易所状态
-	struct CThostFtdcExchangeSequenceField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcExchangeSequenceField
 	{
 		/// <summary>
 		///交易所代码
@@ -10035,8 +10603,11 @@ namespace CTP
 		TThostFtdcInstrumentStatusType	MarketStatus;
 	};
 
+	/// <summary>
 	///根据价格查询最大报单数量
-	struct CThostFtdcQueryMaxOrderVolumeWithPriceField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQueryMaxOrderVolumeWithPriceField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10071,8 +10642,11 @@ namespace CTP
 		TThostFtdcPriceType	Price;
 	};
 
+	/// <summary>
 	///查询经纪公司交易参数
-	struct CThostFtdcQryBrokerTradingParamsField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryBrokerTradingParamsField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10091,8 +10665,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///经纪公司交易参数
-	struct CThostFtdcBrokerTradingParamsField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcBrokerTradingParamsField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10119,8 +10696,11 @@ namespace CTP
 		TThostFtdcOptionRoyaltyPriceTypeType	OptionRoyaltyPriceType;
 	};
 
+	/// <summary>
 	///查询经纪公司交易算法
-	struct CThostFtdcQryBrokerTradingAlgosField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryBrokerTradingAlgosField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10139,8 +10719,11 @@ namespace CTP
 		String^ InstrumentID;
 	};
 
+	/// <summary>
 	///经纪公司交易算法
-	struct CThostFtdcBrokerTradingAlgosField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcBrokerTradingAlgosField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10165,8 +10748,11 @@ namespace CTP
 		TThostFtdcHandleTradingAccountAlgoIDType	HandleTradingAccountAlgoID;
 	};
 
+	/// <summary>
 	///查询经纪公司资金
-	struct CThostFtdcQueryBrokerDepositField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQueryBrokerDepositField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10180,8 +10766,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///经纪公司资金
-	struct CThostFtdcBrokerDepositField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcBrokerDepositField
 	{
 		///交易日期
 		TThostFtdcTradeDateType	TradingDay;
@@ -10220,8 +10809,11 @@ namespace CTP
 		TThostFtdcMoneyType	FrozenMargin;
 	};
 
+	/// <summary>
 	///查询保证金监管系统经纪公司密钥
-	struct CThostFtdcQryCFMMCBrokerKeyField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryCFMMCBrokerKeyField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10230,8 +10822,11 @@ namespace CTP
 		String^ BrokerID;
 	};
 
+	/// <summary>
 	///保证金监管系统经纪公司密钥
-	struct CThostFtdcCFMMCBrokerKeyField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcCFMMCBrokerKeyField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10252,8 +10847,11 @@ namespace CTP
 		TThostFtdcCFMMCKeyKindType	KeyKind;
 	};
 
+	/// <summary>
 	///保证金监管系统经纪公司资金账户密钥
-	struct CThostFtdcCFMMCTradingAccountKeyField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcCFMMCTradingAccountKeyField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10270,8 +10868,11 @@ namespace CTP
 		TThostFtdcCFMMCKeyType	CurrentKey;
 	};
 
+	/// <summary>
 	///请求查询保证金监管系统经纪公司资金账户密钥
-	struct CThostFtdcQryCFMMCTradingAccountKeyField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryCFMMCTradingAccountKeyField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10286,7 +10887,9 @@ namespace CTP
 	};
 
 	///用户动态令牌参数
-	struct CThostFtdcBrokerUserOTPParamField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcBrokerUserOTPParamField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10312,8 +10915,11 @@ namespace CTP
 		TThostFtdcOTPTypeType	OTPType;
 	};
 
+	/// <summary>
 	///手工同步用户动态令牌
-	struct CThostFtdcManualSyncBrokerUserOTPField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcManualSyncBrokerUserOTPField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10334,7 +10940,9 @@ namespace CTP
 	};
 
 	///投资者手续费率模板
-	struct CThostFtdcCommRateModelField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcCommRateModelField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10347,8 +10955,11 @@ namespace CTP
 		TThostFtdcCommModelNameType	CommModelName;
 	};
 
+	/// <summary>
 	///请求查询投资者手续费率模板
-	struct CThostFtdcQryCommRateModelField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryCommRateModelField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10359,8 +10970,11 @@ namespace CTP
 		TThostFtdcInvestorIDType	CommModelID;
 	};
 
+	/// <summary>
 	///投资者保证金率模板
-	struct CThostFtdcMarginModelField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcMarginModelField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10373,8 +10987,11 @@ namespace CTP
 		TThostFtdcCommModelNameType	MarginModelName;
 	};
 
+	/// <summary>
 	///请求查询投资者保证金率模板
-	struct CThostFtdcQryMarginModelField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryMarginModelField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10385,8 +11002,11 @@ namespace CTP
 		TThostFtdcInvestorIDType	MarginModelID;
 	};
 
+	/// <summary>
 	///仓单折抵信息
-	struct CThostFtdcEWarrantOffsetField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcEWarrantOffsetField
 	{
 		///交易日期
 		TThostFtdcTradeDateType	TradingDay;
@@ -10424,8 +11044,11 @@ namespace CTP
 		int Volume;
 	};
 
+	/// <summary>
 	///查询仓单折抵信息
-	struct CThostFtdcQryEWarrantOffsetField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryEWarrantOffsetField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10450,7 +11073,9 @@ namespace CTP
 	};
 
 	///查询投资者品种/跨品种保证金
-	struct CThostFtdcQryInvestorProductGroupMarginField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryInvestorProductGroupMarginField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10470,8 +11095,11 @@ namespace CTP
 		EnumHedgeFlagType HedgeFlag;
 	};
 
+	/// <summary>
 	///投资者品种/跨品种保证金
-	struct CThostFtdcInvestorProductGroupMarginField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcInvestorProductGroupMarginField
 	{
 		///品种/跨品种标示
 		TThostFtdcInstrumentIDType	ProductGroupID;
@@ -10486,13 +11114,13 @@ namespace CTP
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-///结算编号
-/// </summary>
+		///结算编号
+		/// </summary>
 		int SettlementID;
 		///冻结的保证金
 		TThostFtdcMoneyType	FrozenMargin;
@@ -10542,8 +11170,11 @@ namespace CTP
 		EnumHedgeFlagType HedgeFlag;
 	};
 
+	/// <summary>
 	///查询监控中心用户令牌
-	struct CThostFtdcQueryCFMMCTradingAccountTokenField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQueryCFMMCTradingAccountTokenField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10558,7 +11189,9 @@ namespace CTP
 	};
 
 	///监控中心用户令牌
-	struct CThostFtdcCFMMCTradingAccountTokenField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcCFMMCTradingAccountTokenField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -10575,8 +11208,11 @@ namespace CTP
 		TThostFtdcCFMMCTokenType	Token;
 	};
 
+	/// <summary>
 	///查询产品组
-	struct CThostFtdcQryProductGroupField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryProductGroupField
 	{
 		///产品代码
 		TThostFtdcInstrumentIDType	ProductID;
@@ -10587,8 +11223,11 @@ namespace CTP
 		String^ ExchangeID;
 	};
 
+	/// <summary>
 	///投资者品种/跨品种保证金产品组
-	struct CThostFtdcProductGroupField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcProductGroupField
 	{
 		///产品代码
 		TThostFtdcInstrumentIDType	ProductID;
@@ -10602,7 +11241,9 @@ namespace CTP
 	};
 
 	///交易所公告
-	struct CThostFtdcBulletinField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcBulletinField
 	{
 		/// <summary>
 		///交易所代码
@@ -10610,8 +11251,8 @@ namespace CTP
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		///公告编号
@@ -10636,6 +11277,7 @@ namespace CTP
 		TThostFtdcMarketIDType	MarketID;
 	};
 
+	/// <summary>
 	///查询交易所公告
 	struct CThostFtdcQryBulletinField
 	{
@@ -10654,8 +11296,11 @@ namespace CTP
 		TThostFtdcNewsUrgencyType	NewsUrgency;
 	};
 
+	/// <summary>
 	///转帐开户请求
-	struct CThostFtdcReqOpenAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqOpenAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -10754,8 +11399,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///转帐销户请求
-	struct CThostFtdcReqCancelAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqCancelAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -10854,8 +11502,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///变更银行账户请求
-	struct CThostFtdcReqChangeAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqChangeAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -10946,8 +11597,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///转账请求
-	struct CThostFtdcReqTransferField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqTransferField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11046,8 +11700,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///银行发起银行资金转期货响应
-	struct CThostFtdcRspTransferField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRspTransferField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11142,16 +11799,24 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 		///转账交易状态
 		TThostFtdcTransferStatusType	TransferStatus;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///长客户姓名
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///冲正请求
-	struct CThostFtdcReqRepealField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqRepealField
 	{
 		///冲正时间间隔
 		TThostFtdcRepealTimeIntervalType	RepealTimeInterval;
@@ -11264,8 +11929,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///冲正响应
-	struct CThostFtdcRspRepealField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRspRepealField
 	{
 		///冲正时间间隔
 		TThostFtdcRepealTimeIntervalType	RepealTimeInterval;
@@ -11374,16 +12042,24 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 		///转账交易状态
 		TThostFtdcTransferStatusType	TransferStatus;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///长客户姓名
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///查询账户信息请求
-	struct CThostFtdcReqQueryAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqQueryAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11468,8 +12144,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///查询账户信息响应
-	struct CThostFtdcRspQueryAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRspQueryAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11558,8 +12237,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///期商签到签退
-	struct CThostFtdcFutureSignIOField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcFutureSignIOField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11612,8 +12294,11 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 	};
 
+	/// <summary>
 	///期商签到响应
-	struct CThostFtdcRspFutureSignInField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRspFutureSignInField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11664,18 +12349,26 @@ namespace CTP
 		int RequestID;
 		///交易ID
 		TThostFtdcTIDType	TID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///PIN密钥
 		TThostFtdcPasswordKeyType	PinKey;
 		///MAC密钥
 		TThostFtdcPasswordKeyType	MacKey;
 	};
 
+	/// <summary>
 	///期商签退请求
-	struct CThostFtdcReqFutureSignOutField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqFutureSignOutField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11728,8 +12421,11 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 	};
 
+	/// <summary>
 	///期商签退响应
-	struct CThostFtdcRspFutureSignOutField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRspFutureSignOutField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11780,14 +12476,22 @@ namespace CTP
 		int RequestID;
 		///交易ID
 		TThostFtdcTIDType	TID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
+	/// <summary>
 	///查询指定流水号的交易结果请求
-	struct CThostFtdcReqQueryTradeResultBySerialField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqQueryTradeResultBySerialField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11848,8 +12552,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///查询指定流水号的交易结果响应
-	struct CThostFtdcRspQueryTradeResultBySerialField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRspQueryTradeResultBySerialField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11875,10 +12582,15 @@ namespace CTP
 		TThostFtdcLastFragmentType	LastFragment;
 		///会话号
 		TThostFtdcSessionIDType	SessionID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///流水号
 		TThostFtdcSerialType	Reference;
 		///本流水号发布者的机构类型
@@ -11908,8 +12620,11 @@ namespace CTP
 		TThostFtdcDigestType	Digest;
 	};
 
+	/// <summary>
 	///日终文件就绪请求
-	struct CThostFtdcReqDayEndFileReadyField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqDayEndFileReadyField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11941,8 +12656,11 @@ namespace CTP
 		TThostFtdcDigestType	Digest;
 	};
 
+	/// <summary>
 	///返回结果
-	struct CThostFtdcReturnResultField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReturnResultField
 	{
 		///返回代码
 		TThostFtdcReturnCodeType	ReturnCode;
@@ -11950,8 +12668,11 @@ namespace CTP
 		TThostFtdcDescrInfoForReturnCodeType	DescrInfoForReturnCode;
 	};
 
+	/// <summary>
 	///验证期货资金密码
-	struct CThostFtdcVerifyFuturePasswordField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcVerifyFuturePasswordField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -11998,8 +12719,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///验证客户信息
-	struct CThostFtdcVerifyCustInfoField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcVerifyCustInfoField
 	{
 		///客户姓名
 		TThostFtdcIndividualNameType	CustomerName;
@@ -12013,8 +12737,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///验证期货资金密码和客户信息
-	struct CThostFtdcVerifyFuturePasswordAndCustInfoField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcVerifyFuturePasswordAndCustInfoField
 	{
 		///客户姓名
 		TThostFtdcIndividualNameType	CustomerName;
@@ -12037,8 +12764,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///验证期货资金密码和客户信息
-	struct CThostFtdcDepositResultInformField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcDepositResultInformField
 	{
 		///出入金流水号，该流水号为银期报盘返回的流水号
 		TThostFtdcDepositSeqNoType	DepositSeqNo;
@@ -12064,8 +12794,11 @@ namespace CTP
 		TThostFtdcDescrInfoForReturnCodeType	DescrInfoForReturnCode;
 	};
 
+	/// <summary>
 	///交易核心向银期报盘发出密钥同步请求
-	struct CThostFtdcReqSyncKeyField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReqSyncKeyField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12113,8 +12846,11 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 	};
 
+	/// <summary>
 	///交易核心向银期报盘发出密钥同步响应
-	struct CThostFtdcRspSyncKeyField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcRspSyncKeyField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12160,14 +12896,22 @@ namespace CTP
 		int RequestID;
 		///交易ID
 		TThostFtdcTIDType	TID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
+	/// <summary>
 	///查询账户信息通知
-	struct CThostFtdcNotifyQueryAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcNotifyQueryAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12252,16 +12996,24 @@ namespace CTP
 		TThostFtdcTradeAmountType	BankUseAmount;
 		///银行可取金额
 		TThostFtdcTradeAmountType	BankFetchAmount;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///长客户姓名
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///银期转账交易流水表
-	struct CThostFtdcTransferSerialField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcTransferSerialField
 	{
 		///平台流水号
 		TThostFtdcPlateSerialType	PlateSerial;
@@ -12323,12 +13075,18 @@ namespace CTP
 		TThostFtdcOperatorCodeType	OperatorCode;
 		///新银行帐号
 		TThostFtdcBankAccountType	BankNewAccount;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
+	/// <summary>
 	///请求查询转帐流水
 	struct CThostFtdcQryTransferSerialField
 	{
@@ -12348,8 +13106,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///期商签到通知
-	struct CThostFtdcNotifyFutureSignInField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcNotifyFutureSignInField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12400,18 +13161,26 @@ namespace CTP
 		int RequestID;
 		///交易ID
 		TThostFtdcTIDType	TID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///PIN密钥
 		TThostFtdcPasswordKeyType	PinKey;
 		///MAC密钥
 		TThostFtdcPasswordKeyType	MacKey;
 	};
 
+	/// <summary>
 	///期商签退通知
-	struct CThostFtdcNotifyFutureSignOutField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcNotifyFutureSignOutField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12462,14 +13231,22 @@ namespace CTP
 		int RequestID;
 		///交易ID
 		TThostFtdcTIDType	TID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
+	/// <summary>
 	///交易核心向银期报盘发出密钥同步处理结果的通知
-	struct CThostFtdcNotifySyncKeyField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcNotifySyncKeyField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12515,14 +13292,22 @@ namespace CTP
 		int RequestID;
 		///交易ID
 		TThostFtdcTIDType	TID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
+	/// <summary>
 	///请求查询银期签约关系
-	struct CThostFtdcQryAccountregisterField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryAccountregisterField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -12542,8 +13327,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///客户开销户信息表
-	struct CThostFtdcAccountregisterField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcAccountregisterField
 	{
 		///交易日期
 		TThostFtdcTradeDateType	TradeDay;
@@ -12586,8 +13374,11 @@ namespace CTP
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///银期开户信息
-	struct CThostFtdcOpenAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcOpenAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12682,16 +13473,24 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 		///用户标识
 		TThostFtdcUserIDType	UserID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///长客户姓名
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///银期销户信息
-	struct CThostFtdcCancelAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcCancelAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12786,16 +13585,24 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 		///用户标识
 		TThostFtdcUserIDType	UserID;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///长客户姓名
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///银期变更银行账号信息
-	struct CThostFtdcChangeAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcChangeAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -12882,16 +13689,24 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 		///摘要
 		TThostFtdcDigestType	Digest;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 		///长客户姓名
 		TThostFtdcLongIndividualNameType	LongCustomerName;
 	};
 
+	/// <summary>
 	///二级代理操作员银期权限
-	struct CThostFtdcSecAgentACIDMapField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcSecAgentACIDMapField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -12911,8 +13726,11 @@ namespace CTP
 		TThostFtdcAccountIDType	BrokerSecAgentID;
 	};
 
+	/// <summary>
 	///二级代理操作员银期权限查询
-	struct CThostFtdcQrySecAgentACIDMapField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQrySecAgentACIDMapField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -12930,8 +13748,11 @@ namespace CTP
 		TThostFtdcCurrencyIDType	CurrencyID;
 	};
 
+	/// <summary>
 	///灾备中心交易权限
-	struct CThostFtdcUserRightsAssignField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcUserRightsAssignField
 	{
 		///应用单元代码
 		TThostFtdcBrokerIDType	BrokerID;
@@ -12944,8 +13765,11 @@ namespace CTP
 		TThostFtdcDRIdentityIDType	DRIdentityID;
 	};
 
+	/// <summary>
 	///经济公司是否有在本标示的交易权限
-	struct CThostFtdcBrokerUserRightAssignField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcBrokerUserRightAssignField
 	{
 		///应用单元代码
 		TThostFtdcBrokerIDType	BrokerID;
@@ -12955,8 +13779,11 @@ namespace CTP
 		TThostFtdcBoolType	Tradeable;
 	};
 
+	/// <summary>
 	///灾备交易转换报文
-	struct CThostFtdcDRTransferField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcDRTransferField
 	{
 		///原交易中心代码
 		TThostFtdcDRIdentityIDType	OrigDRIdentityID;
@@ -12968,8 +13795,11 @@ namespace CTP
 		TThostFtdcBrokerIDType	DestBrokerID;
 	};
 
+	/// <summary>
 	///Fens用户信息
-	struct CThostFtdcFensUserInfoField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcFensUserInfoField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -12985,15 +13815,21 @@ namespace CTP
 		TThostFtdcLoginModeType	LoginMode;
 	};
 
+	/// <summary>
 	///当前银期所属交易中心
-	struct CThostFtdcCurrTransferIdentityField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcCurrTransferIdentityField
 	{
 		///交易中心代码
 		TThostFtdcDRIdentityIDType	IdentityID;
 	};
 
+	/// <summary>
 	///禁止登录用户
-	struct CThostFtdcLoginForbiddenUserField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcLoginForbiddenUserField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -13012,8 +13848,11 @@ namespace CTP
 		String^	IPAddress;
 	};
 
+	/// <summary>
 	///查询禁止登录用户
-	struct CThostFtdcQryLoginForbiddenUserField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcQryLoginForbiddenUserField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -13027,8 +13866,11 @@ namespace CTP
 		String^ UserID;
 	};
 
+	/// <summary>
 	///UDP组播组信息
-	struct CThostFtdcMulticastGroupInfoField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcMulticastGroupInfoField
 	{
 		///组播组IP地址
 		TThostFtdcIPAddressType	GroupIP;
@@ -13038,8 +13880,11 @@ namespace CTP
 		TThostFtdcIPAddressType	SourceIP;
 	};
 
+	/// <summary>
 	///资金账户基本准备金
-	struct CThostFtdcTradingAccountReserveField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcTradingAccountReserveField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -13057,8 +13902,11 @@ namespace CTP
 		String^ CurrencyID;
 	};
 
+	/// <summary>
 	///银期预约开户确认请求
-	struct CThostFtdcReserveOpenAccountConfirmField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReserveOpenAccountConfirmField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -13143,14 +13991,22 @@ namespace CTP
 		TThostFtdcTradeDateType	BookDate;
 		///预约开户验证密码
 		TThostFtdcPasswordType	BookPsw;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
+	/// <summary>
 	///银期预约开户
-	struct CThostFtdcReserveOpenAccountField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcReserveOpenAccountField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
@@ -13227,10 +14083,15 @@ namespace CTP
 		TThostFtdcTIDType	TID;
 		///预约开户状态
 		TThostFtdcReserveOpenAccStasType	ReserveOpenAccStas;
+		/// <summary>
 		///错误代码
-		TThostFtdcErrorIDType	ErrorID;
+		/// </summary>
+		int ErrorID;
+		/// <summary>
 		///错误信息
-		TThostFtdcErrorMsgType	ErrorMsg;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ ErrorMsg;
 	};
 
 }

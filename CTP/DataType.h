@@ -6373,5 +6373,23 @@ namespace CTP
 		Unknown = (Byte) 'a'
 	};
 
+	///<summary>
+	///TFtdcForQuoteStatusType是一个询价状态类型
+	///</summary>
+	public enum struct EnumForQuoteStatusType : Byte
+	{
+		///<summary>
+		///已经提交
+		///</summary>
+		Submitted = (Byte) 'a',
+		///<summary>
+		///已经接受
+		///</summary>
+		Accepted = (Byte) 'b',
+		///<summary>
+		///已经被拒绝
+		///</summary>
+		Rejected = (Byte) 'c'
+	};
 	/// 以上是userapidatatype.h里面的内容--------------------------------------------------------------------------------------------------------------------
 }
