@@ -11279,7 +11279,9 @@ namespace CTP
 
 	/// <summary>
 	///查询交易所公告
-	struct CThostFtdcQryBulletinField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryBulletinField
 	{
 		/// <summary>
 		///交易所代码
@@ -13088,7 +13090,9 @@ namespace CTP
 
 	/// <summary>
 	///请求查询转帐流水
-	struct CThostFtdcQryTransferSerialField
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryTransferSerialField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -13110,7 +13114,7 @@ namespace CTP
 	///期商签到通知
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcNotifyFutureSignInField
+	public ref struct CThostFtdcNotifyFutureSignInField
 	{
 		///业务功能码
 		TThostFtdcTradeCodeType	TradeCode;
