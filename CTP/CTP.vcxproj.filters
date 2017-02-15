@@ -35,6 +35,9 @@
     <ClInclude Include="ThostFtdcUserApiStruct.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DataType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CTP.cpp">

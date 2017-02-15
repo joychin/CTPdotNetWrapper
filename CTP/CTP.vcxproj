@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CTP.h" />
+    <ClInclude Include="DataType.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="ThostFtdcMdApi.h" />
