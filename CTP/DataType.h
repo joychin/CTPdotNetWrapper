@@ -82,7 +82,42 @@ namespace CTP
 		/// 营业执照号
 		/// </summary>
 		LicenseNo = (Byte)'9',
-
+		/// <summary>
+		///税务登记号/当地纳税ID
+		/// </summary>
+		TaxNo = (Byte) 'A',
+		/// <summary>
+		///港澳居民来往内地通行证
+		/// </summary>
+		HMMainlandTravelPermit = (Byte)  'B',
+		/// <summary>
+		///台湾居民来往大陆通行证
+		/// </summary>
+		TwMainlandTravelPermit = (Byte) 'C',
+		/// <summary>
+		///驾照
+		/// </summary>
+		DrivingLicense = (Byte) 'D',
+		/// <summary>
+		///当地社保ID
+		/// </summary>
+		SocialID = (Byte) 'F',
+		/// <summary>
+		///当地身份证
+		/// </summary>
+		LocalID = (Byte) 'G',
+		/// <summary>
+		///商业登记证
+		/// </summary>
+		BusinessRegistration = (Byte) 'H',
+		/// <summary>
+		///港澳永久性居民身份证
+		/// </summary>
+		HKMCIDCard = (Byte) 'I',
+		/// <summary>
+		///人行开户许可证
+		/// </summary>
+		AccountsPermits = (Byte) 'J',
 		/// <summary>
 		/// 其他证件
 		/// </summary>
@@ -1342,6 +1377,10 @@ namespace CTP
 	public enum struct EnumTradeTypeType : Byte
 	{
 		/// <summary>
+		/// 组合持仓拆分为单一持仓,初始化不应包含该类型的持仓
+		/// </summary>
+		SplitCombination = (Byte)'#',
+		/// <summary>
 		/// 普通成交
 		/// </summary>
 		Common = (Byte)'0',
@@ -2359,7 +2398,12 @@ namespace CTP
 		/// <summary>
 		/// 受可提比例限制
 		/// </summary>
-		Disable = (Byte)'2'
+		Disable = (Byte)'2',
+
+		/// <summary>
+		///无仓不受可提比例限制
+		/// </summary>
+		NoHoldEnable = (Byte) '3'
 	};
 
 	/// <summary>
@@ -2730,24 +2774,61 @@ namespace CTP
 	public enum struct EnumPersonTypeType : Byte
 	{
 		/// <summary>
-		/// 指定下单人
+		///指定下单人
 		/// </summary>
-		Order = (Byte)'1',
-
+		Order = (Byte) '1',
 		/// <summary>
-		/// 开户授权人
+		///开户授权人
 		/// </summary>
-		Open = (Byte)'2',
-
+		Open = (Byte) '2',
 		/// <summary>
-		/// 资金调拨人
+		///资金调拨人
 		/// </summary>
-		Fund = (Byte)'3',
-
+		Fund = (Byte) '3',
 		/// <summary>
-		/// 结算单确认人
+		///结算单确认人
 		/// </summary>
-		Settlement = (Byte)'4'
+		Settlement = (Byte) '4',
+		/// <summary>
+		///法人
+		/// </summary>
+		Company = (Byte) '5',
+		/// <summary>
+		///法人代表
+		/// </summary>
+		Corporation = (Byte) '6',
+		/// <summary>
+		///投资者联系人
+		/// </summary>
+		LinkMan = (Byte) '7',
+		/// <summary>
+		///分户管理资产负责人
+		/// </summary>
+		Ledger = (Byte) '8',
+		/// <summary>
+		///托（保）管人
+		/// </summary>
+		Trustee = (Byte) '9',
+		/// <summary>
+		///托（保）管机构法人代表
+		/// </summary>
+		TrusteeCorporation = (Byte) 'A',
+		/// <summary>
+		///托（保）管机构开户授权人
+		/// </summary>
+		TrusteeOpen = (Byte) 'B',
+		/// <summary>
+		///托（保）管机构联系人
+		/// </summary>
+		TrusteeContact = (Byte) 'C',
+		/// <summary>
+		///境外自然人参考证件
+		/// </summary>
+		ForeignerRefer = (Byte) 'D',
+		/// <summary>
+		///法人代表参考证件
+		/// </summary>
+		CorporationRefer = (Byte) 'E'
 	};
 
 	/// <summary>
@@ -2808,39 +2889,33 @@ namespace CTP
 	public enum struct EnumUserEventTypeType : Byte
 	{
 		/// <summary>
-		/// 所有
-		/// </summary>
-		All = (Byte)' ',
-
+		///登录
 		/// <summary>
-		/// 登录
-		/// </summary>
 		Login = (Byte)'1',
-
 		/// <summary>
-		/// 登出
-		/// </summary>
-		Logout = (Byte)'2',
-
-		/// <summary>
-		/// 交易成功
-		/// </summary>
-		Trading = (Byte)'3',
-
-		/// <summary>
-		/// 交易失败
-		/// </summary>
-		TradingError = (Byte)'4',
-
-		/// <summary>
-		/// 修改密码
-		/// </summary>
-		UpdatePassword = (Byte)'5',
-
-		/// <summary>
-		/// 其他
-		/// </summary>
-		Other = (Byte)'9'
+				///登出
+				/// <summary>
+				Logout = (Byte) '2',
+				/// <summary>
+						///交易成功
+						/// <summary>
+						Trading = (Byte) '3',
+						/// <summary>
+								///交易失败
+								/// <summary>
+								TradingError = (Byte) '4',
+								/// <summary>
+										///修改密码
+										/// <summary>
+										UpdatePassword = (Byte) '5',
+										/// <summary>
+												///客户端认证
+												/// <summary>
+												Authenticate = (Byte)'6',
+												/// <summary>
+														///其他
+														/// <summary>
+														Other = (Byte)'9'
 	};
 
 	/// <summary>
@@ -6390,6 +6465,75 @@ namespace CTP
 		///已经被拒绝
 		///</summary>
 		Rejected = (Byte) 'c'
+	};
+
+	///<summary>
+	///TFtdcCombDirectionType是一个组合指令方向类型
+	///</summary>
+	public enum struct EnumCombDirectionType : Byte
+	{
+		///<summary>
+		///申请组合
+		///</summary>
+		Comb = (Byte) '0',
+		///<summary>
+		///申请拆分
+		///</summary>
+		UnComb = (Byte) '1'
+	};
+	///<summary>
+	///TFtdcBalanceAlgorithmType是一个权益算法类型
+	///</summary>
+	public enum struct EnumBalanceAlgorithmType : Byte
+	{
+		///<summary>
+		///不计算期权市值盈亏
+		///</summary>
+		Default = (Byte) '1',
+		///<summary>
+		///计算期权市值亏损
+		///</summary>
+		IncludeOptValLost = (Byte) '2'
+	};
+	///<summary>
+	///TFtdcGenderType是一个性别类型
+	///</summary>
+	public enum struct EnumGenderType : Byte
+	{
+		///<summary>
+		///未知状态
+	///</summary>
+		Unknown = (Byte) '0',
+		///<summary>
+				///男
+			///</summary>
+			Male = (Byte) '1',
+			///<summary>
+					///女
+				///</summary>
+				Female = (Byte) '2'
+	};
+	///<summary>
+	///TFtdcReserveOpenAccStasType是一个预约开户状态类型
+	///</summary>
+	public enum struct EnumReserveOpenAccStasType : Byte
+	{
+		///<summary>
+		///等待处理中
+		///</summary>
+		Processing = (Byte) '0',
+		///<summary>
+		///已撤销
+		///</summary>
+		Cancelled = (Byte) '1',
+		///<summary>
+		///已开户
+		///</summary>
+		Opened = (Byte) '2',
+		///<summary>
+		///无效请求
+		///</summary>
+		Invalid = (Byte) '3'
 	};
 	/// 以上是userapidatatype.h里面的内容--------------------------------------------------------------------------------------------------------------------
 }
