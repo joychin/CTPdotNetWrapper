@@ -1,0 +1,32 @@
+﻿20160606：
+更新到CTP库20120530版本,增加Multiple AppDomain支持
+
+
+---------------------------------------------------------------------------------
+CTP.dll
+将非托管C++库转换为托管库，供.Net程序调用。包括行情接口和交易接口。
+Struct.h头文件修改自海风版C#的Struct.cs文件，非常感谢！
+
+
+ThostTraderApi目录为上期CTP C++库
+
+
+CTP.VS2008
+为VS2008版本
+
+CTP.VS2010
+为VS2010版本，包含四个项目
+CTP.Net3.5，TargetFrameworkVersion为3.5 (VS2010编译.net3.5 C++/CLI项目可能需要同时安装VS2008)
+CTP.Net4.0，TargetFrameworkVersion为4.0
+
+CTPMA 
+为对应的各Multiple AppDomain版本
+
+非MA版本用于跨AppDomain环境(比如RightEdge)时，会报错：
+“无法跨 AppDomain 传递 GCHandle”
+“Cannot pass a GCHandle across AppDomains”
+其实就是gcroot<>指针无法正确的跨AppDomain传递
+此时必须使用MA版本。
+
+----------------------------
+shawn666.liu@gmail.com

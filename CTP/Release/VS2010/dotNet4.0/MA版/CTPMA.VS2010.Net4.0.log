@@ -1,0 +1,1121 @@
+﻿生成启动时间为 2017/2/19 1:01:16。
+     1>项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”在节点 2 上(Build 个目标)。
+     1>正在使用工具版本“14.0”进行生成。
+       项目文件包含 ToolsVersion="4.0"。 此工具集未知或缺失(在此情况下，您可以通过安装合适的 MSBuild 版本来解决此问题)，或者生成可能已被强制到特定的 ToolsVersion (出于策略原因)。 将项目视为具有 ToolsVersion="14.0"。 有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=293424。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“_CheckForInvalidConfigurationAndPlatform”(入口点):
+       由于 false 条件，已跳过任务“Error”；( '$(_InvalidConfigurationError)' == 'true' )计算为( '' == 'true' )。
+       由于 false 条件，已跳过任务“Warning”；( '$(_InvalidConfigurationWarning)' == 'true' )计算为( '' == 'true' )。
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“Message”任务。
+       任务“Message”
+         Configuration=Release
+       已完成执行任务“Message”的操作。
+       任务“Message”
+         Platform=Win32
+       已完成执行任务“Message”的操作。
+       由于 false 条件，已跳过任务“Error”；('$(OutDir)' != '' and !HasTrailingSlash('$(OutDir)'))计算为('C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\' != '' and !HasTrailingSlash('C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\'))。
+       由于 false 条件，已跳过任务“Error”；('$(BaseIntermediateOutputPath)' != '' and !HasTrailingSlash('$(BaseIntermediateOutputPath)'))计算为('obj\' != '' and !HasTrailingSlash('obj\'))。
+       由于 false 条件，已跳过任务“Error”；('$(IntermediateOutputPath)' != '' and !HasTrailingSlash('$(IntermediateOutputPath)'))计算为('Release\VS2010\dotNet4.0\MA版\' != '' and !HasTrailingSlash('Release\VS2010\dotNet4.0\MA版\'))。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_CheckForInvalidConfigurationAndPlatform”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets”中的目标“_PrepareForBuild”(目标“Build”依赖于它):
+       由于 false 条件，已跳过任务“CreateItem”；('%(CustomBuild.IncludeFileToTool)'!='')计算为(''!='')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_PrepareForBuild”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_PrepareForReferenceResolution”(目标“ResolveReferences”依赖于它):
+       由于 false 条件，已跳过任务“Message”；('$(_REFERENCE_DEBUG)'=='true')计算为(''=='true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_PrepareForReferenceResolution”的操作。
+       由于条件的计算结果为 false，已跳过目标“ComputeCrtSDKReference”；('@(ClCompile)'!='' and '$(WindowsAppContainer)'=='true' and '$(UseCrtSDKReference)' != 'false')的计算结果为('AssemblyInfo.cpp;CTP.cpp;CTPMDAdapter.cpp;CTPTraderAdapter.cpp;MdSpi.cpp;Stdafx.cpp;TraderSpi.cpp;Util.cpp'!='' and 'false'=='true' and '' != 'false')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“BeforeResolveReferences”(目标“ResolveReferences”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BeforeResolveReferences”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“AssignProjectConfiguration”(目标“ResolveReferences”依赖于它):
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“AssignProjectConfiguration”任务。
+       任务“AssignProjectConfiguration”
+       已完成执行任务“AssignProjectConfiguration”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AssignProjectConfiguration”的操作。
+       已跳过目标“AssignProjectConfiguration”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“_SplitProjectReferencesByFileExistence”(目标“ResolveProjectReferences”依赖于它):
+       由于 false 条件，已跳过任务“ResolveNonMSBuildProjectOutput”；('$(BuildingInsideVisualStudio)'=='true' and '@(ProjectReferenceWithConfiguration)'!='')计算为('true'=='true' and ''!='')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_SplitProjectReferencesByFileExistence”的操作。
+       由于条件的计算结果为 false，已跳过目标“_RemoveNameMetadataFromProjectReferenceItems”；('@(ProjectReference)'!='')的计算结果为(''!='')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“ResolveProjectReferences”(目标“ResolveReferences”依赖于它):
+       由于 false 条件，已跳过任务“MSBuild”；('%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and ('$(BuildingInsideVisualStudio)' == 'true' or '$(BuildProjectReferences)' != 'true') and '$(VisualStudioVersion)' != '10.0' and '@(_MSBuildProjectReferenceExistent)' != '')计算为('' == 'true' and '' != '' and ('true' == 'true' or 'true' != 'true') and '14.0' != '10.0' and '' != '')。
+       由于 false 条件，已跳过任务“MSBuild”；('%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and ('$(BuildingInsideVisualStudio)' == 'true' or '$(BuildProjectReferences)' != 'true') and '$(VisualStudioVersion)' == '10.0' and '@(_MSBuildProjectReferenceExistent)' != '')计算为('' == 'true' and '' != '' and ('true' == 'true' or 'true' != 'true') and '14.0' == '10.0' and '' != '')。
+       由于 false 条件，已跳过任务“MSBuild”；('%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '$(BuildingInsideVisualStudio)' != 'true' and '$(BuildProjectReferences)' == 'true' and '@(_MSBuildProjectReferenceExistent)' != '')计算为('' == 'true' and '' != '' and 'true' != 'true' and 'true' == 'true' and '' != '')。
+       由于 false 条件，已跳过任务“MSBuild”；('%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '$(BuildingProject)' == 'true' and '@(_MSBuildProjectReferenceExistent)' != '')计算为('' == 'true' and '' != '' and 'true' == 'true' and '' != '')。
+       由于 false 条件，已跳过任务“Warning”；('@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceNonexistent)' != '')计算为('' != '' and '' != '')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ResolveProjectReferences”的操作。
+       由于条件的计算结果为 false，已跳过目标“FindInvalidProjectReferences”；('$(FindInvalidProjectReferences)' == 'true')的计算结果为('' == 'true')。
+       由于条件的计算结果为 false，已跳过目标“ResolveNativeReferences”；('@(NativeReference)'!='')的计算结果为(''!='')。
+       已跳过目标“_PrepareForReferenceResolution”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.NetFramework.CurrentVersion.targets”中的目标“GetFrameworkPaths”(目标“ResolveAssemblyReferences”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“GetFrameworkPaths”的操作。
+       由于条件的计算结果为 false，已跳过目标“GetWinFXPath”；(('@(Page)' != '' or '@(ApplicationDefinition)' != '' or '@(Resource)' != '') and ('$(GetWinFXNativePath)' != '' or '$(GetWinFXWoWPath)' != '' ))的计算结果为(('' != '' or '' != '' or '' != '') and ('' != '' or '' != '' ))。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“GetReferenceAssemblyPaths”(目标“ResolveAssemblyReferences”依赖于它):
+       由于 false 条件，已跳过任务“GetReferenceAssemblyPaths”；('$(TargetFrameworkMoniker)' != '' and ('$(_TargetFrameworkDirectories)' == '' or '$(_FullFrameworkReferenceAssemblyPaths)' == ''))计算为('.NETFramework,Version=v4.0' != '' and ('C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0' == '' or 'C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0' == ''))。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“GetReferenceAssemblyPaths”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Current.targets”中的目标“SetBuildDefaultEnvironmentVariables”(目标“PrepareForBuild”依赖于它):
+       正在使用程序集“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Build.CppTasks.Common.dll”中的“SetEnv”任务。
+       任务“SetEnv”
+         PATH=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin;C:\Program Files (x86)\Windows Kits\8.1\bin\x86;;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\tools;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\ide;C:\Program Files (x86)\HTML Help Workshop;;C:\Program Files (x86)\MSBuild\14.0\bin\;C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\;C:\WINDOWS\SysWow64;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\NativeBinaries\x86;C:\Python27\;C:\Python27\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PrivateAssemblies\;C:\Program Files (x86)\Microsoft SQL Server\110\DTS\Binn\;D:\Program Files\TortoiseSVN\bin;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Mercurial\;C:\Program Files (x86)\Bitvise SSH Client;C:\wamp64\bin\php\php5.6.16;C:\ProgramData\ComposerSetup\bin;C:\Users\卓\AppData\Roaming\Composer\vendor\bin;;:\Go\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\TortoiseGit\bin;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\卓\.dnx\runtimes\dnx-clr-win-x86.1.0.0-rc1-update1\bin;C:\Users\卓\.dnx\bin;C:\Python27;C:\Go\bin;E:\项目\GO\bin;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Program Files\Git\usr\bin;C:\Users\卓\AppData\Local\Microsoft\WindowsApps;C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.0.0;C:\Users\卓\AppData\Roaming\npm;
+       已完成执行任务“SetEnv”的操作。
+       任务“SetEnv”
+         LIB=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib;;C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86;;;C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86;;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\Lib\um\x86
+       已完成执行任务“SetEnv”的操作。
+       任务“SetEnv”
+         LIBPATH=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib;
+       已完成执行任务“SetEnv”的操作。
+       任务“SetEnv”
+         INCLUDE=C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include;;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt;;;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;
+       已完成执行任务“SetEnv”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“SetBuildDefaultEnvironmentVariables”的操作。
+       由于条件的计算结果为 false，已跳过目标“SetUserMacroEnvironmentVariables”；('@(BuildMacro)' != '' and '$(DesignTimeBuild)' != 'true')的计算结果为('' != '' and '' != 'true')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“GetResolvedWinMD”(目标“PrepareForBuild”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“GetResolvedWinMD”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Platform.targets”中的目标“PlatformPrepareForBuild”(目标“PrepareForBuild”依赖于它):
+       由于 false 条件，已跳过任务“VCMessage”；('$(_Error64bitToolsNotInstalled)' == 'true')计算为('' == 'true')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(DesignTimeBuild)'!='true' and '$(_ToolsetFound)' != 'true' and '$(PlatformToolset)' == 'v110')计算为(''!='true' and 'true' != 'true' and 'v140' == 'v110')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(DesignTimeBuild)'!='true' and '$(_ToolsetFound)' != 'true' and '$(PlatformToolset)' == 'v100')计算为(''!='true' and 'true' != 'true' and 'v140' == 'v100')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(DesignTimeBuild)'!='true' and '$(_ToolsetFound)' != 'true' and '$(PlatformToolset)' == 'v90')计算为(''!='true' and 'true' != 'true' and 'v140' == 'v90')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(DesignTimeBuild)'!='true' and '$(_ToolsetFound)' != 'true' and '$(PlatformToolset)' != 'v90' and '$(PlatformToolset)' != 'v100' and '$(PlatformToolset)' != 'v110')计算为(''!='true' and 'true' != 'true' and 'v140' != 'v90' and 'v140' != 'v100' and 'v140' != 'v110')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“PlatformPrepareForBuild”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Platforms\Win32\PlatformToolsets\v140\Toolset.targets”中的目标“Desktop_PlatformPrepareForBuild”(目标“PrepareForBuild”依赖于它):
+       由于 false 条件，已跳过任务“VCMessage”；($(MissingSDKProps) == 'true')计算为( == 'true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“Desktop_PlatformPrepareForBuild”的操作。
+       已跳过目标“GetFrameworkPaths”。以前的生成已成功。
+       已跳过目标“GetReferenceAssemblyPaths”。以前的生成已成功。
+       由于条件的计算结果为 false，已跳过目标“AssignLinkMetadata”；( '$(SynthesizeLinkMetadata)' == 'true' )的计算结果为( '' == 'true' )。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v14.0\CodeAnalysis\Microsoft.CodeAnalysis.targets”中的目标“SetCABuildNativeEnvironmentVariables”(目标“PrepareForBuild”依赖于它):
+       正在从程序集“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Build.Tasks.Core.dll”初始化任务工厂“CodeTaskFactory”。
+       正在使用来自任务工厂“Code Task Factory”的“SetEnvironmentVariable”任务。
+       任务“SetEnvironmentVariable”
+       已完成执行任务“SetEnvironmentVariable”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“SetCABuildNativeEnvironmentVariables”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“PrepareForBuild”(目标“ResolveAssemblyReferences”依赖于它):
+       由于 false 条件，已跳过任务“VCMessage”；('$(DesignTimeBuild)' != 'true' and '$(ConfigurationPlatformExists)' != 'true')计算为('' != 'true' and 'true' != 'true')。
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“MakeDir”任务。
+       任务“MakeDir”
+       已完成执行任务“MakeDir”的操作。
+       由于 false 条件，已跳过任务“VCMessage”；('$(DesignTimeBuild)'!='true' and '$(WindowsAppContainer)'=='true' and '$(ConfigurationType)'!='Application' and '$(ConfigurationType)'!='DynamicLibrary' and '$(ConfigurationType)'!='StaticLibrary')计算为(''!='true' and 'false'=='true' and 'DynamicLibrary'!='Application' and 'DynamicLibrary'!='DynamicLibrary' and 'DynamicLibrary'!='StaticLibrary')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(DesignTimeBuild)'!='true' and '$(VCInstallDir)'=='' and '$(UseEnv)' != 'true' and ('$(TargetFrameworkVersion)'=='v3.5' or '$(TargetFrameworkVersion)'=='v3.0' or '$(TargetFrameworkVersion)'=='v2.0' ))计算为(''!='true' and 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\'=='' and '' != 'true' and ('v4.0'=='v3.5' or 'v4.0'=='v3.0' or 'v4.0'=='v2.0' ))。
+       由于 false 条件，已跳过任务“VCMessage”；('$(DesignTimeBuild)'!='true' and '$(VCInstallDir)'=='' and '$(UseEnv)' != 'true' and '$(PlatformToolset)'=='v90')计算为(''!='true' and 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\'=='' and '' != 'true' and 'v140'=='v90')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(VCInstallDir)'=='' and '$(UseEnv)' != 'true')计算为('C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\'=='' and '' != 'true')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(WindowsSDKDir)'=='' and '$(UseEnv)' != 'true')计算为('C:\Program Files (x86)\Windows Kits\8.1\'=='' and '' != 'true')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(IntDirTrailingSlashWarning)'=='true')计算为(''=='true')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(OutDirTrailingSlashWarning)'=='true')计算为(''=='true')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(CompatibilityIssues.Identity)' != '' and '$(DesignTimeBuild)'!='true')计算为('' != '' and ''!='true')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(_MBCS_Using)' == 'true' and '$(_MBCS_Installed)' != 'true' and '$(DesignTimeBuild)' != 'true')计算为('' == 'true' and '' != 'true' and '' != 'true')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(IgnoreWarnIntDirSharingDetected)' != 'true' and '$(IntDirSharingDetected)' == 'true')计算为('' != 'true' and '' == 'true')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(IgnoreWarnIntDirInTempDetected)' != 'true' and ('$(_IntDirFullpath.StartsWith($(Tmp), true, null))' == 'true' or '$(_IntDirFullpath.StartsWith($(Temp), true, null))' == 'true' or '$(_OutDirFullpath.StartsWith($(Tmp), true, null))' == 'true' or '$(_OutDirFullpath.StartsWith($(Temp), true, null))' == 'true'))计算为('' != 'true' and ('False' == 'true' or 'False' == 'true' or 'False' == 'true' or 'False' == 'true'))。
+       任务“MakeDir”
+       已完成执行任务“MakeDir”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“PrepareForBuild”的操作。
+       已跳过目标“_PrepareForReferenceResolution”。以前的生成已成功。
+       由于条件的计算结果为 false，已跳过目标“ComputeCrtSDKReference”；('@(ClCompile)'!='' and '$(WindowsAppContainer)'=='true' and '$(UseCrtSDKReference)' != 'false')的计算结果为('AssemblyInfo.cpp;CTP.cpp;CTPMDAdapter.cpp;CTPTraderAdapter.cpp;MdSpi.cpp;Stdafx.cpp;TraderSpi.cpp;Util.cpp'!='' and 'false'=='true' and '' != 'false')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“GetInstalledSDKLocations”(目标“ResolveSDKReferences”依赖于它):
+       由于 false 条件，已跳过任务“GetInstalledSDKLocations”；('@(SDKReference)' != '')计算为('' != '')。
+       由于 false 条件，已跳过任务“GetInstalledSDKLocations”；('@(SDKReference)' != '' and '$(SupportWindows81SDKs)' == 'true' and '$(TargetPlatformIdentifierWindows81)' != '' and '$(TargetPlatformVersionWindows81)' != '')计算为('' != '' and '' == 'true' and '' != '' and '' != '')。
+       由于 false 条件，已跳过任务“GetInstalledSDKLocations”；('@(SDKReference)' != '' and '$(SupportWindowsPhone81SDKs)' == 'true' and '$(TargetPlatformIdentifierWindowsPhone81)' != '' and '$(TargetPlatformVersionWindowsPhone81)' != '')计算为('' != '' and '' == 'true' and '' != '' and '' != '')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“GetInstalledSDKLocations”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\Microsoft.Common.targets\ImportBefore\Windows.8.1.UT_SDKReference.props”中的目标“ModifyUnitTestPlatformVersion”(目标“ResolveSDKReferences”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ModifyUnitTestPlatformVersion”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“ResolveSDKReferences”(目标“ResolveAssemblyReferences”依赖于它):
+       由于 false 条件，已跳过任务“ResolveSDKReference”；('@(SDKReference)'!='')计算为(''!='')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ResolveSDKReferences”的操作。
+       已跳过目标“ResolveSDKReferences”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“ExpandSDKReferences”(目标“ResolveAssemblyReferences”依赖于它):
+       由于 false 条件，已跳过任务“GetSDKReferenceFiles”；('@(ResolvedSDKReference)'!='')计算为(''!='')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ExpandSDKReferences”的操作。
+       由于条件的计算结果为 false，已跳过目标“ResolveNuGetPackageAssets”；('$(ResolveNuGetPackages)' == 'true' and exists('$(ProjectLockFile)'))的计算结果为('true' == 'true' and exists('project.lock.json'))。
+       由于条件的计算结果为 false，已跳过目标“FakesGenerateBeforeBuild”；(@(Fakes) != '' AND $(BuildingProject))的计算结果为( != '' AND true)。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“ResolveAssemblyReferences”(目标“ResolveReferences”依赖于它):
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“ResolveAssemblyReference”任务。
+       任务“ResolveAssemblyReference”
+         TargetFrameworkMoniker:
+             .NETFramework,Version=v4.0
+         TargetFrameworkMonikerDisplayName:
+             .NET Framework 4
+         TargetedRuntimeVersion:
+             v4.0.30319
+         Assemblies:
+             System
+             mscorlib
+         AssemblyFiles:
+         CandidateAssemblyFiles:
+         TargetFrameworkDirectories:
+             C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0,C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral
+         InstalledAssemblyTables:
+         IgnoreInstalledAssemblyTable:
+             False
+         SearchPaths:
+             {CandidateAssemblyFiles}
+             C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib
+             C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib
+             {HintPathFromItem}
+             {TargetFrameworkDirectory}
+             {Registry:Software\Microsoft\.NETFramework,v4.0,AssemblyFoldersEx}
+             {AssemblyFolders}
+             {GAC}
+             {RawFileName}
+             C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\
+         AllowedAssemblyExtensions:
+             .winmd
+             .dll
+             .exe
+         AllowedRelatedFileExtensions:
+             .pdb
+             .xml
+             .pri
+         AppConfigFile:
+             
+         AutoUnify:
+             True
+         CopyLocalDependenciesWhenParentReferenceInGac:
+             True
+         FindDependencies:
+             True
+         TargetProcessorArchitecture:
+             x86
+         StateFile:
+             Release\VS2010\dotNet4.0\MA版\CTPMA.VS2010.Net4.0.vcxprojResolveAssemblyReference.cache
+         InstalledAssemblySubsetTables:
+         IgnoreInstalledAssemblySubsetTable:
+             False
+         TargetFrameworkSubsets:
+         FullTargetFrameworkSubsetNames:
+             Full
+         ProfileName:
+             
+         FullFrameworkFolders:
+             C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0
+         LatestTargetFrameworkDirectories:
+         ProfileTablesLocation:
+         主引用“System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089”。
+             解析的文件路径为“C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll”。
+             在搜索路径位置“{TargetFrameworkDirectory}”找到引用。
+                 用于 SearchPath“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib”。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib\System.winmd”，但它不存在。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib\System.dll”，但它不存在。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib\System.exe”，但它不存在。
+                 用于 SearchPath“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib”。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\System.winmd”，但它不存在。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\System.dll”，但它不存在。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\System.exe”，但它不存在。
+                 用于 SearchPath“{TargetFrameworkDirectory}”。
+                 已考虑使用“C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.winmd”，但它不存在。
+             此引用不是“CopyLocal”，因为它是系统必备文件。
+             此引用的 ImageRuntimeVersion 是“v4.0.30319”。
+         主引用“mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089”。
+             解析的文件路径为“C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll”。
+             在搜索路径位置“{TargetFrameworkDirectory}”找到引用。
+                 用于 SearchPath“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib”。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib\mscorlib.winmd”，但它不存在。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib\mscorlib.dll”，但它不存在。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib\mscorlib.exe”，但它不存在。
+                 用于 SearchPath“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib”。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\mscorlib.winmd”，但它不存在。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\mscorlib.dll”，但它不存在。
+                 已考虑使用“C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\mscorlib.exe”，但它不存在。
+                 用于 SearchPath“{TargetFrameworkDirectory}”。
+                 已考虑使用“C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.winmd”，但它不存在。
+             此引用不是“CopyLocal”，因为它是系统必备文件。
+             此引用的 ImageRuntimeVersion 是“v4.0.30319”。
+       已完成执行任务“ResolveAssemblyReference”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ResolveAssemblyReferences”的操作。
+       由于条件的计算结果为 false，已跳过目标“GenerateBindingRedirects”；('$(AutoGenerateBindingRedirects)' == 'true' and '$(GenerateBindingRedirectsOutputType)' == 'true')的计算结果为('' == 'true' and '' == 'true')。
+       由于条件的计算结果为 false，已跳过目标“GenerateBindingRedirectsUpdateAppConfig”；('$(AutoGenerateBindingRedirects)' == 'true' and '$(GenerateBindingRedirectsOutputType)' == 'true' and Exists('$(_GenerateBindingRedirectsIntermediateAppConfig)'))的计算结果为('' == 'true' and '' == 'true' and Exists('Release\VS2010\dotNet4.0\MA版\CTPMA.VS2010.Net4.0.vcxproj.CTP.dll.config'))。
+       由于条件的计算结果为 false，已跳过目标“ResolveComReferences”；('@(COMReference)'!='' or '@(COMFileReference)'!='')的计算结果为(''!='' or ''!='')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“AfterResolveReferences”(目标“ResolveReferences”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterResolveReferences”的操作。
+       由于条件的计算结果为 false，已跳过目标“ImplicitlyExpandDesignTimeFacades”；('$(ImplicitlyExpandDesignTimeFacades)' == 'true')的计算结果为('' == 'true')。
+       由于条件的计算结果为 false，已跳过目标“ResolveTestReferences”；('@(Shadow)'!='')的计算结果为(''!='')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“ResolveReferences”(目标“Build”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ResolveReferences”的操作。
+       已跳过目标“PrepareForBuild”。以前的生成已成功。
+       已跳过目标“PrepareForBuild”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“InitializeBuildStatus”(目标“Build”依赖于它):
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“ReadLinesFromFile”任务。
+       任务“ReadLinesFromFile”
+       已完成执行任务“ReadLinesFromFile”的操作。
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“WriteLinesToFile”任务。
+       任务“WriteLinesToFile”
+       已完成执行任务“WriteLinesToFile”的操作。
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“Touch”任务。
+       任务“Touch”
+         正在对“Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\unsuccessfulbuild”执行 Touch 任务。
+       已完成执行任务“Touch”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“InitializeBuildStatus”的操作。
+       已跳过目标“AssignProjectConfiguration”。以前的生成已成功。
+       已跳过目标“_SplitProjectReferencesByFileExistence”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“BuildGenerateSourcesTraverse”(目标“BuildGenerateSources”依赖于它):
+       由于 false 条件，已跳过任务“MSBuild”；('$(BuildPassReferences)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != '' and '%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true')计算为('' == 'true' and '' != '' and '' != '' and '' == 'true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BuildGenerateSourcesTraverse”的操作。
+       已跳过目标“PrepareForBuild”。以前的生成已成功。
+       已跳过目标“ResolveReferences”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets”中的目标“BeforeBuildGenerateSources”(目标“_BuildGenerateSourcesAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BeforeBuildGenerateSources”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“PreBuildEvent”(目标“_BuildGenerateSourcesAction”依赖于它):
+       由于 false 条件，已跳过任务“Message”；('%(PreBuildEvent.Message)' != '' and '%(PreBuildEvent.Command)' != '')计算为('' != '' and '' != '')。
+       由于 false 条件，已跳过任务“Exec”；('%(PreBuildEvent.Command)' != '')计算为('' != '')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“PreBuildEvent”的操作。
+       由于条件的计算结果为 false，已跳过目标“CustomBuild”；('@(CustomBuild)' != '')的计算结果为('' != '')。
+       由于条件的计算结果为 false，已跳过目标“FxExport”；('@(FxCompile)' != '')的计算结果为('' != '')。
+       由于条件的计算结果为 false，已跳过目标“FxCompile”；('@(FxCompile)' != '')的计算结果为('' != '')。
+       由于条件的计算结果为 false，已跳过目标“Xsd”；('@(Xsd)' != '')的计算结果为('' != '')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_Xsd”(目标“_BuildGenerateSourcesAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_Xsd”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“MakeDirsForMidl”(目标“_Midl”依赖于它):
+       任务“Makedir”
+       已完成执行任务“Makedir”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“MakeDirsForMidl”的操作。
+       由于条件的计算结果为 false，已跳过目标“Midl”；('@(Midl)' != '')的计算结果为('' != '')。
+       由于条件的计算结果为 false，已跳过目标“CustomBuild”；('@(CustomBuild)' != '')的计算结果为('' != '')。
+       由于条件的计算结果为 false，已跳过目标“FxExport”；('@(FxCompile)' != '')的计算结果为('' != '')。
+       由于条件的计算结果为 false，已跳过目标“FxCompile”；('@(FxCompile)' != '')的计算结果为('' != '')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeMIDLGeneratedCompileInputs”(目标“_Midl”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeMIDLGeneratedCompileInputs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“AfterMidl”(目标“_Midl”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterMidl”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_Midl”(目标“_BuildGenerateSourcesAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_Midl”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets”中的目标“AfterBuildGenerateSources”(目标“_BuildGenerateSourcesAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterBuildGenerateSources”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“AfterBuildGenerateSourcesEvent”(目标“_BuildGenerateSourcesAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterBuildGenerateSourcesEvent”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_BuildGenerateSourcesAction”(目标“BuildGenerateSources”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_BuildGenerateSourcesAction”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“BuildGenerateSources”(目标“Build”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BuildGenerateSources”的操作。
+       已跳过目标“AssignProjectConfiguration”。以前的生成已成功。
+       已跳过目标“_SplitProjectReferencesByFileExistence”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“BuildCompileTraverse”(目标“BuildCompile”依赖于它):
+       由于 false 条件，已跳过任务“MSBuild”；('$(BuildPassReferences)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != ''  and '%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true')计算为('' == 'true' and '' != '' and '' != ''  and '' == 'true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BuildCompileTraverse”的操作。
+       已跳过目标“PrepareForBuild”。以前的生成已成功。
+       已跳过目标“ResolveReferences”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“BeforeClCompile”(目标“_ClCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BeforeClCompile”的操作。
+       已跳过目标“ComputeMIDLGeneratedCompileInputs”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeCLInputPDBName”(目标“_ClCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeCLInputPDBName”的操作。
+       已跳过目标“ResolveReferences”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeReferenceCLInput”(目标“_ClCompile”依赖于它):
+       由于 false 条件，已跳过任务“WriteLinesToFile”；(('@(_ReferenceCopyLocalPaths)'!='') and '$(DesignTimeBuild)' != 'true')计算为((''!='') and '' != 'true')。
+       由于 false 条件，已跳过任务“Message”；('$(_REFERENCE_DEBUG)'=='true')计算为(''=='true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeReferenceCLInput”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“WarnCompileDuplicatedFilename”(目标“_ClCompile”依赖于它):
+       由于 false 条件，已跳过任务“VCMessage”；('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())')计算为('' != 'true' and 'AssemblyInfo.cpp' != 'AssemblyInfo.cpp' and 'Release\VS2010\dotNet4.0\MA版\' == 'Release\VS2010\dotNet4.0\MA版\')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())')计算为('' != 'true' and 'CTP.cpp' != 'CTP.cpp' and 'Release\VS2010\dotNet4.0\MA版\' == 'Release\VS2010\dotNet4.0\MA版\')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())')计算为('' != 'true' and 'CTPMDAdapter.cpp' != 'CTPMDAdapter.cpp' and 'Release\VS2010\dotNet4.0\MA版\' == 'Release\VS2010\dotNet4.0\MA版\')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())')计算为('' != 'true' and 'CTPTraderAdapter.cpp' != 'CTPTraderAdapter.cpp' and 'Release\VS2010\dotNet4.0\MA版\' == 'Release\VS2010\dotNet4.0\MA版\')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())')计算为('' != 'true' and 'MdSpi.cpp' != 'MdSpi.cpp' and 'Release\VS2010\dotNet4.0\MA版\' == 'Release\VS2010\dotNet4.0\MA版\')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())')计算为('' != 'true' and 'Stdafx.cpp' != 'Stdafx.cpp' and 'Release\VS2010\dotNet4.0\MA版\' == 'Release\VS2010\dotNet4.0\MA版\')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())')计算为('' != 'true' and 'TraderSpi.cpp' != 'TraderSpi.cpp' and 'Release\VS2010\dotNet4.0\MA版\' == 'Release\VS2010\dotNet4.0\MA版\')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())')计算为('' != 'true' and 'Util.cpp' != 'Util.cpp' and 'Release\VS2010\dotNet4.0\MA版\' == 'Release\VS2010\dotNet4.0\MA版\')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“WarnCompileDuplicatedFilename”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“FixupCLCompileOptions”(目标“_ClCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“FixupCLCompileOptions”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“MakeDirsForCl”(目标“_ClCompile”依赖于它):
+       任务“MakeDir”
+       已完成执行任务“MakeDir”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“MakeDirsForCl”的操作。
+       已跳过目标“PrepareForBuild”。以前的生成已成功。
+       已跳过目标“SetBuildDefaultEnvironmentVariables”。以前的生成已成功。
+       由于条件的计算结果为 false，已跳过目标“SetUserMacroEnvironmentVariables”；('@(BuildMacro)' != '' and '$(DesignTimeBuild)' != 'true')的计算结果为('' != '' and '' != 'true')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_SelectedFiles”(目标“SelectClCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_SelectedFiles”的操作。
+       已跳过目标“ComputeMIDLGeneratedCompileInputs”。以前的生成已成功。
+       已跳过目标“ComputeCLInputPDBName”。以前的生成已成功。
+       已跳过目标“ComputeReferenceCLInput”。以前的生成已成功。
+       已跳过目标“WarnCompileDuplicatedFilename”。以前的生成已成功。
+       已跳过目标“FixupCLCompileOptions”。以前的生成已成功。
+       已跳过目标“_SelectedFiles”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“SelectCustomBuild”(目标“SelectClCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“SelectCustomBuild”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“SelectClCompile”(目标“ClCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“SelectClCompile”的操作。
+       已跳过目标“PrepareForBuild”。以前的生成已成功。
+       已跳过目标“GetReferenceAssemblyPaths”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets”中的目标“GenerateTargetFrameworkMonikerAttribute”(目标“ClCompile”依赖于它):
+       正在跳过目标“GenerateTargetFrameworkMonikerAttribute”，因为所有输出文件相对于输入文件而言都是最新的。
+       输入文件:C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\\Microsoft.BuildSteps.targets
+       输出文件:C:\Users\卓\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“GenerateTargetFrameworkMonikerAttribute”的操作。
+       已跳过目标“GetReferenceAssemblyPaths”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.MetaGen.targets”中的目标“ManagedIncrementalBuildPreProcessDependencyGraph”(目标“ClCompile”依赖于它):
+       正在使用程序集“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Build.CppTasks.Common.dll”中的“MIBPreProcessDependencyGraph”任务。
+       任务“MIBPreProcessDependencyGraph”
+       已完成执行任务“MIBPreProcessDependencyGraph”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ManagedIncrementalBuildPreProcessDependencyGraph”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“ClCompile”(目标“_ClCompile”依赖于它):
+       由于 false 条件，已跳过任务“Delete”；('%(ClCompile.DebugInformationFormat)' != '' and '%(ClCompile.DebugInformationFormat)' != 'None' and '%(ClCompile.DebugInformationFormat)' != 'OldStyle' and '%(ClCompile.ProgramDataBaseFileName)' != '' and !Exists(%(ClCompile.ProgramDataBaseFileName)))计算为('ProgramDatabase' != '' and 'ProgramDatabase' != 'None' and 'ProgramDatabase' != 'OldStyle' and 'Release\VS2010\dotNet4.0\MA版\vc140.pdb' != '' and !Exists(Release\VS2010\dotNet4.0\MA版\vc140.pdb))。
+       由于 false 条件，已跳过任务“CL”；('%(ClCompile.PrecompiledHeader)' == 'Create' and '%(ClCompile.ExcludedFromBuild)'!='true' and '%(ClCompile.CompilerIteration)' == '')计算为('Use' == 'Create' and ''!='true' and '' == '')。
+       正在使用程序集“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Build.CppTasks.Common.dll”中的“CL”任务。
+       任务“CL”
+         使用从以下项生成的缓存输入依赖关系表:
+         	C:\Users\卓\Desktop\CTP.Solution\CTP\Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\cl.read.1.tlog
+         C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\STDAFX.CPP 的输出:
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\STDAFX.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\STDAFX.XDC
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTP.PCH
+         所有输出均为最新。
+       已完成执行任务“CL”的操作。
+       由于 false 条件，已跳过任务“CL”；('%(ClCompile.PrecompiledHeader)' == 'Create' and '%(ClCompile.ExcludedFromBuild)'!='true' and '%(ClCompile.CompilerIteration)' == '')计算为('NotUsing' == 'Create' and ''!='true' and '' == '')。
+       任务“CL”
+         使用从以下项生成的缓存输入依赖关系表:
+         	C:\Users\卓\Desktop\CTP.Solution\CTP\Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\cl.read.1.tlog
+         C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\ASSEMBLYINFO.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\CTP.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\CTPMDADAPTER.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\CTPTRADERADAPTER.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\MDSPI.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\TRADERSPI.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\UTIL.CPP 的输出:
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\ASSEMBLYINFO.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\ASSEMBLYINFO.XDC
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTP.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTP.XDC
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTPMDADAPTER.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTPMDADAPTER.XDC
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTPTRADERADAPTER.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTPTRADERADAPTER.XDC
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\MDSPI.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\MDSPI.XDC
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\TRADERSPI.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\TRADERSPI.XDC
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\UTIL.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\UTIL.XDC
+         将编译 CTPMDAdapter.cpp，因为在 2017/2/19 0:55:53 处修改了 C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\STRUCT.H。
+         将编译 CTPTraderAdapter.cpp，因为未能在跟踪日志中找到它。
+         将编译 MdSpi.cpp，因为在 2017/2/19 0:55:53 处修改了 C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\STRUCT.H。
+         将编译 TraderSpi.cpp，因为未能在跟踪日志中找到它。
+         将编译 Util.cpp，因为在 2017/2/19 0:55:53 处修改了 C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\STRUCT.H。
+         在跟踪日志中未找到 C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\CTPMDADAPTER.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\CTPTRADERADAPTER.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\MDSPI.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\TRADERSPI.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\UTIL.CPP 的输出；需要编译源。
+         使用从以下项生成的缓存输出依赖关系表:
+         	C:\Users\卓\Desktop\CTP.Solution\CTP\Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\cl.write.1.tlog
+         传递给工具的环境变量为:
+           VS_UNICODE_OUTPUT=1780
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /GL /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /D __CTP_MA__ /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Release\VS2010\dotNet4.0\MA版\CTP.pch" /Fo"Release\VS2010\dotNet4.0\MA版\\" /Fd"Release\VS2010\dotNet4.0\MA版\vc140.pdb" /doc"Release\VS2010\dotNet4.0\MA版\\" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /analyze- /errorReport:prompt /clr:nostdlib CTPMDAdapter.cpp CTPTraderAdapter.cpp MdSpi.cpp TraderSpi.cpp Util.cpp
+         Tracking command:
+         C:\Program Files (x86)\MSBuild\14.0\bin\Tracker.exe /d "C:\Program Files (x86)\MSBuild\14.0\bin\FileTracker32.dll" /i "C:\Users\卓\Desktop\CTP.Solution\CTP\Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog" /r "C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\CTPMDADAPTER.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\CTPTRADERADAPTER.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\MDSPI.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\TRADERSPI.CPP|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\UTIL.CPP" /b MSBuildConsole_CancelEventfa5f4e5507d74e04b8982731cdd916f2  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe"  /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /GL /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /D __CTP_MA__ /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Release\VS2010\dotNet4.0\MA版\CTP.pch" /Fo"Release\VS2010\dotNet4.0\MA版\\" /Fd"Release\VS2010\dotNet4.0\MA版\vc140.pdb" /doc"Release\VS2010\dotNet4.0\MA版\\" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /analyze- /errorReport:prompt /clr:nostdlib CTPMDAdapter.cpp CTPTraderAdapter.cpp MdSpi.cpp TraderSpi.cpp Util.cpp
+         CTPMDAdapter.cpp
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(2898): warning C4635: XML 文档注释 应用于“<unknown type>.TradingError”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6307): warning C4635: XML 文档注释 应用于“<unknown type>.Open”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6311): warning C4635: XML 文档注释 应用于“<unknown type>.Close”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6315): warning C4635: XML 文档注释 应用于“<unknown type>.ForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6319): warning C4635: XML 文档注释 应用于“<unknown type>.CloseToday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6323): warning C4635: XML 文档注释 应用于“<unknown type>.CloseYesterday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6327): warning C4635: XML 文档注释 应用于“<unknown type>.ForceOff”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6331): warning C4635: XML 文档注释 应用于“<unknown type>.LocalForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6402): warning C4635: XML 文档注释 应用于“<unknown type>.Canceled”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6441): warning C4635: XML 文档注释 应用于“<unknown type>.Unknown”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(7411): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInstrumentField.MaxMarginSideAlgorithm”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(10569): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcSyncFundMortgageField.InvestorID”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(14453): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcQryQuoteActionField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16318): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcMDTraderOfferField.ConnectRequestTime”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16433): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16448): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField.UserRightType”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16743): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcLinkManField.Address”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16810): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserEventField.EventSequenceNo”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16950): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorPositionCombineDetailField.TotalAmt”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(17925): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcErrorConditionalOrderField.BrokerOrderSeq”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18498): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserOTPParamField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18572): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCommRateModelField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18806): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.ExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18809): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.LongExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18888): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18898): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.ParticipantID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18908): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.KeyID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18912): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.Token”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18960): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBulletinField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20119): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20123): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20127): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20131): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20135): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20355): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20359): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20363): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20367): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20371): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23004): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.RegDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23009): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.OutDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+         CTPTraderAdapter.cpp
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(2898): warning C4635: XML 文档注释 应用于“<unknown type>.TradingError”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6307): warning C4635: XML 文档注释 应用于“<unknown type>.Open”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6311): warning C4635: XML 文档注释 应用于“<unknown type>.Close”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6315): warning C4635: XML 文档注释 应用于“<unknown type>.ForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6319): warning C4635: XML 文档注释 应用于“<unknown type>.CloseToday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6323): warning C4635: XML 文档注释 应用于“<unknown type>.CloseYesterday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6327): warning C4635: XML 文档注释 应用于“<unknown type>.ForceOff”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6331): warning C4635: XML 文档注释 应用于“<unknown type>.LocalForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6402): warning C4635: XML 文档注释 应用于“<unknown type>.Canceled”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6441): warning C4635: XML 文档注释 应用于“<unknown type>.Unknown”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(7411): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInstrumentField.MaxMarginSideAlgorithm”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(10569): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcSyncFundMortgageField.InvestorID”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(14453): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcQryQuoteActionField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16318): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcMDTraderOfferField.ConnectRequestTime”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16433): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16448): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField.UserRightType”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16743): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcLinkManField.Address”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16810): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserEventField.EventSequenceNo”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16950): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorPositionCombineDetailField.TotalAmt”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(17925): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcErrorConditionalOrderField.BrokerOrderSeq”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18498): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserOTPParamField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18572): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCommRateModelField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18806): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.ExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18809): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.LongExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18888): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18898): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.ParticipantID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18908): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.KeyID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18912): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.Token”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18960): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBulletinField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20119): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20123): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20127): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20131): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20135): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20355): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20359): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20363): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20367): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20371): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23004): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.RegDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23009): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.OutDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+         MdSpi.cpp
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(2898): warning C4635: XML 文档注释 应用于“<unknown type>.TradingError”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6307): warning C4635: XML 文档注释 应用于“<unknown type>.Open”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6311): warning C4635: XML 文档注释 应用于“<unknown type>.Close”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6315): warning C4635: XML 文档注释 应用于“<unknown type>.ForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6319): warning C4635: XML 文档注释 应用于“<unknown type>.CloseToday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6323): warning C4635: XML 文档注释 应用于“<unknown type>.CloseYesterday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6327): warning C4635: XML 文档注释 应用于“<unknown type>.ForceOff”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6331): warning C4635: XML 文档注释 应用于“<unknown type>.LocalForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6402): warning C4635: XML 文档注释 应用于“<unknown type>.Canceled”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6441): warning C4635: XML 文档注释 应用于“<unknown type>.Unknown”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(7411): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInstrumentField.MaxMarginSideAlgorithm”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(10569): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcSyncFundMortgageField.InvestorID”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(14453): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcQryQuoteActionField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16318): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcMDTraderOfferField.ConnectRequestTime”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16433): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16448): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField.UserRightType”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16743): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcLinkManField.Address”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16810): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserEventField.EventSequenceNo”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16950): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorPositionCombineDetailField.TotalAmt”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(17925): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcErrorConditionalOrderField.BrokerOrderSeq”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18498): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserOTPParamField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18572): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCommRateModelField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18806): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.ExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18809): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.LongExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18888): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18898): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.ParticipantID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18908): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.KeyID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18912): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.Token”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18960): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBulletinField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20119): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20123): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20127): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20131): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20135): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20355): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20359): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20363): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20367): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20371): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23004): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.RegDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23009): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.OutDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+         TraderSpi.cpp
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(2898): warning C4635: XML 文档注释 应用于“<unknown type>.TradingError”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6307): warning C4635: XML 文档注释 应用于“<unknown type>.Open”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6311): warning C4635: XML 文档注释 应用于“<unknown type>.Close”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6315): warning C4635: XML 文档注释 应用于“<unknown type>.ForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6319): warning C4635: XML 文档注释 应用于“<unknown type>.CloseToday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6323): warning C4635: XML 文档注释 应用于“<unknown type>.CloseYesterday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6327): warning C4635: XML 文档注释 应用于“<unknown type>.ForceOff”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6331): warning C4635: XML 文档注释 应用于“<unknown type>.LocalForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6402): warning C4635: XML 文档注释 应用于“<unknown type>.Canceled”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6441): warning C4635: XML 文档注释 应用于“<unknown type>.Unknown”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(7411): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInstrumentField.MaxMarginSideAlgorithm”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(10569): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcSyncFundMortgageField.InvestorID”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(14453): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcQryQuoteActionField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16318): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcMDTraderOfferField.ConnectRequestTime”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16433): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16448): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField.UserRightType”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16743): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcLinkManField.Address”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16810): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserEventField.EventSequenceNo”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16950): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorPositionCombineDetailField.TotalAmt”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(17925): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcErrorConditionalOrderField.BrokerOrderSeq”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18498): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserOTPParamField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18572): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCommRateModelField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18806): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.ExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18809): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.LongExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18888): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18898): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.ParticipantID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18908): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.KeyID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18912): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.Token”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18960): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBulletinField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20119): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20123): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20127): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20131): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20135): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20355): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20359): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20363): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20367): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20371): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23004): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.RegDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23009): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.OutDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+         Util.cpp
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(2898): warning C4635: XML 文档注释 应用于“<unknown type>.TradingError”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6307): warning C4635: XML 文档注释 应用于“<unknown type>.Open”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6311): warning C4635: XML 文档注释 应用于“<unknown type>.Close”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6315): warning C4635: XML 文档注释 应用于“<unknown type>.ForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6319): warning C4635: XML 文档注释 应用于“<unknown type>.CloseToday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6323): warning C4635: XML 文档注释 应用于“<unknown type>.CloseYesterday”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6327): warning C4635: XML 文档注释 应用于“<unknown type>.ForceOff”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6331): warning C4635: XML 文档注释 应用于“<unknown type>.LocalForceClose”: XML 格式不正确: 下列标记没有关闭: summary, summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6402): warning C4635: XML 文档注释 应用于“<unknown type>.Canceled”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(6441): warning C4635: XML 文档注释 应用于“<unknown type>.Unknown”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(7411): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInstrumentField.MaxMarginSideAlgorithm”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(10569): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcSyncFundMortgageField.InvestorID”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(14453): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcQryQuoteActionField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16318): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcMDTraderOfferField.ConnectRequestTime”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16433): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16448): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcUserRightField.UserRightType”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16743): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcLinkManField.Address”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16810): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserEventField.EventSequenceNo”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(16950): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorPositionCombineDetailField.TotalAmt”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(17925): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcErrorConditionalOrderField.BrokerOrderSeq”: XML 格式不正确: 下列标记没有关闭: summary。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18498): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBrokerUserOTPParamField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18572): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCommRateModelField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18806): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.ExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18809): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcInvestorProductGroupMarginField.LongExchMargin”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18888): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18898): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.ParticipantID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18908): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.KeyID”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18912): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcCFMMCTradingAccountTokenField.Token”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(18960): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcBulletinField”: XML 格式不正确: 文档顶层存在无效内容。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20119): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20123): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20127): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20131): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20135): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcReqRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20355): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.RepealedTimes”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20359): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20363): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BrokerRepealFlag”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20367): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.PlateRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(20371): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcRspRepealField.BankRepealSerial”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23004): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.RegDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+     1>c:\users\卓\desktop\ctp.solution\ctp\Struct.h(23009): warning C4635: XML 文档注释 应用于“CTP.ThostFtdcAccountregisterField.OutDate”: XML 格式不正确: 此位置不要求结束标记。
+         
+         正在生成代码...
+       已完成执行任务“CL”的操作。
+       由于 false 条件，已跳过任务“CL”；('%(ClCompile.PrecompiledHeader)' != 'Create' and '%(ClCompile.ExcludedFromBuild)'!='true' and '%(ClCompile.CompilerIteration)' == '' and @(ClCompile) != '')计算为('Create' != 'Create' and ''!='true' and '' == '' and Stdafx.cpp != '')。
+       任务“CL”
+         读取跟踪日志:
+         	Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\CL.read.1.tlog
+         C:\USERS\卓\APPDATA\LOCAL\TEMP\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.CPP 的输出:
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.XDC
+         将编译 C:\Users\卓\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp，因为未能在跟踪日志中找到它。
+         C:\USERS\卓\APPDATA\LOCAL\TEMP\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.CPP 的输出:
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.OBJ
+         	C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.XDC
+         写入跟踪日志:
+         	Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\CL.write.1.tlog
+         传递给工具的环境变量为:
+           VS_UNICODE_OUTPUT=1796
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /clr /nologo /W3 /WX- /O2 /Oy- /GL /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /D __CTP_MA__ /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fp"Release\VS2010\dotNet4.0\MA版\CTP.pch" /Fa"Release\VS2010\dotNet4.0\MA版\\" /Fo"Release\VS2010\dotNet4.0\MA版\\" /Fd"Release\VS2010\dotNet4.0\MA版\vc140.pdb" /doc"Release\VS2010\dotNet4.0\MA版\\" /analyze- /errorReport:prompt "C:\Users\卓\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+         Tracking command:
+         C:\Program Files (x86)\MSBuild\14.0\bin\Tracker.exe /d "C:\Program Files (x86)\MSBuild\14.0\bin\FileTracker32.dll" /i "C:\Users\卓\Desktop\CTP.Solution\CTP\Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog" /r "C:\USERS\卓\APPDATA\LOCAL\TEMP\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.CPP" /b MSBuildConsole_CancelEvent7ed3e6ac102948e79bc5ed84d4c39872  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe"  /c /Zi /clr /nologo /W3 /WX- /O2 /Oy- /GL /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /D __CTP_MA__ /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fp"Release\VS2010\dotNet4.0\MA版\CTP.pch" /Fa"Release\VS2010\dotNet4.0\MA版\\" /Fo"Release\VS2010\dotNet4.0\MA版\\" /Fd"Release\VS2010\dotNet4.0\MA版\vc140.pdb" /doc"Release\VS2010\dotNet4.0\MA版\\" /analyze- /errorReport:prompt "C:\Users\卓\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+       已完成执行任务“CL”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ClCompile”的操作。
+       已跳过目标“GetReferenceAssemblyPaths”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.MetaGen.targets”中的目标“ManagedIncrementalBuildPostProcessDependencyGraph”(目标“_ClCompile”依赖于它):
+       正在使用程序集“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Build.CppTasks.Common.dll”中的“MIBPostProcessDependencyGraph”任务。
+       任务“MIBPostProcessDependencyGraph”
+       已完成执行任务“MIBPostProcessDependencyGraph”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ManagedIncrementalBuildPostProcessDependencyGraph”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“AfterClCompile”(目标“_ClCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterClCompile”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_ClCompile”(目标“_BuildCompileAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_ClCompile”的操作。
+       由于条件的计算结果为 false，已跳过目标“_ResGen”；('@(EmbeddedResource)'!='')的计算结果为(''!='')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“BeforeResourceCompile”(目标“_ResourceCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BeforeResourceCompile”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“MakeDirsForResourceCompile”(目标“_ResourceCompile”依赖于它):
+       任务“MakeDir”
+       已完成执行任务“MakeDir”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“MakeDirsForResourceCompile”的操作。
+       由于条件的计算结果为 false，已跳过目标“ResourceCompile”；('@(ResourceCompile)' != '')的计算结果为('' != '')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“AfterResourceCompile”(目标“_ResourceCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterResourceCompile”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_ResourceCompile”(目标“_BuildCompileAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_ResourceCompile”的操作。
+       由于条件的计算结果为 false，已跳过目标“_ImpLib”；('$(ImpLibCompiled)' == 'true')的计算结果为('' == 'true')。
+       由于条件的计算结果为 false，已跳过目标“_Lib”；('$(LibCompiled)' == 'true')的计算结果为('' == 'true')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“AfterBuildCompileEvent”(目标“_BuildCompileAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterBuildCompileEvent”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_BuildCompileAction”(目标“BuildCompile”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_BuildCompileAction”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“BuildCompile”(目标“Build”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BuildCompile”的操作。
+       已跳过目标“AssignProjectConfiguration”。以前的生成已成功。
+       已跳过目标“_SplitProjectReferencesByFileExistence”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“BuildLinkTraverse”(目标“BuildLink”依赖于它):
+       由于 false 条件，已跳过任务“MSBuild”；('$(BuildPassReferences)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != ''  and '%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true')计算为('' == 'true' and '' != '' and '' != ''  and '' == 'true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BuildLinkTraverse”的操作。
+       已跳过目标“PrepareForBuild”。以前的生成已成功。
+       已跳过目标“ResolveReferences”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeLegacyManifestEmbedding”(目标“_BuildLinkAction”依赖于它):
+       由于 false 条件，已跳过任务“VCMessage”；('$(RevertManifestEmbedding)' == 'true' and '$(_LegacyManifestEmbeddingDebug)' == 'true')计算为('' == 'true' and '' == 'true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeLegacyManifestEmbedding”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“BeforeLink”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BeforeLink”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeRCOutputs”(目标“ComputeRCGeneratedLinkInputs”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeRCOutputs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeRCGeneratedLinkInputs”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeRCGeneratedLinkInputs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeManifestGeneratedLinkerInputs”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeManifestGeneratedLinkerInputs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeCustomBuildOutput”(目标“_Link”依赖于它):
+       由于 false 条件，已跳过任务“CreateItem”；('%(CustomBuildDirsToMake.OutputFileToTool)'!='')计算为(''!='')。
+       任务“MakeDir”
+       已完成执行任务“MakeDir”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeCustomBuildOutput”的操作。
+       已跳过目标“ComputeMIDLGeneratedCompileInputs”。以前的生成已成功。
+       已跳过目标“ComputeCLInputPDBName”。以前的生成已成功。
+       已跳过目标“ComputeReferenceCLInput”。以前的生成已成功。
+       已跳过目标“WarnCompileDuplicatedFilename”。以前的生成已成功。
+       已跳过目标“FixupCLCompileOptions”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeCLOutputs”(目标“ComputeCLGeneratedLinkInputs”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeCLOutputs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeCLGeneratedLinkInputs”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeCLGeneratedLinkInputs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeLinkInputsFromProject”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeLinkInputsFromProject”的操作。
+       由于条件的计算结果为 false，已跳过目标“ComputeReferenceLinkInputs”；(@(ProjectReference) != '')的计算结果为( != '')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeManifestInputsTargets”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeManifestInputsTargets”的操作。
+       由于条件的计算结果为 false，已跳过目标“ManifestResourceCompile”；('$(EmbedManifestBy)' == 'LINK' and '@(Manifest)' != '')的计算结果为('MT' == 'LINK' and '' != '')。
+       由于条件的计算结果为 false，已跳过目标“AssignWinFXEmbeddedResource”；('@(WinFXEmbeddedResource)' != '')的计算结果为('' != '')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“AssignTargetPaths”(目标“PrepareResourceNames”依赖于它):
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“AssignTargetPath”任务。
+       任务“AssignTargetPath”
+       已完成执行任务“AssignTargetPath”的操作。
+       任务“AssignTargetPath”
+       已完成执行任务“AssignTargetPath”的操作。
+       任务“AssignTargetPath”
+       已完成执行任务“AssignTargetPath”的操作。
+       任务“AssignTargetPath”
+       已完成执行任务“AssignTargetPath”的操作。
+       由于 false 条件，已跳过任务“AssignTargetPath”；('@(_DeploymentBaseManifestWithTargetPath)'=='' and '%(None.Extension)'=='.manifest')计算为(''=='' and ''=='.manifest')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AssignTargetPaths”的操作。
+       已跳过目标“AssignTargetPaths”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“SplitResourcesByCulture”(目标“PrepareResourceNames”依赖于它):
+       由于 false 条件，已跳过任务“Warning”；('@(ResxWithNoCulture)'!='')计算为(''!='')。
+       由于 false 条件，已跳过任务“Warning”；('@(ResxWithCulture)'!='')计算为(''!='')。
+       由于 false 条件，已跳过任务“Warning”；('@(NonResxWithCulture)'!='')计算为(''!='')。
+       由于 false 条件，已跳过任务“Warning”；('@(NonResxWithNoCulture)'!='')计算为(''!='')。
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“AssignCulture”任务。
+       任务“AssignCulture”
+       已完成执行任务“AssignCulture”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“SplitResourcesByCulture”的操作。
+       由于条件的计算结果为 false，已跳过目标“CreateManifestResourceNames”；('@(EmbeddedResource)' != '')的计算结果为('' != '')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“CreateCustomManifestResourceNames”(目标“PrepareResourceNames”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“CreateCustomManifestResourceNames”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“PrepareResourceNames”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“PrepareResourceNames”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“MakeDirsForLink”(目标“_Link”依赖于它):
+       任务“MakeDir”
+       已完成执行任务“MakeDir”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“MakeDirsForLink”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“DoLinkOutputFilesMatch”(目标“_Link”依赖于它):
+       由于 false 条件，已跳过任务“VCMessage”；('@(_OutputFileFromLink)' == '')计算为('C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll' == '')。
+       由于 false 条件，已跳过任务“VCMessage”；('@(_OutputFileFromLink)' != '' and '%(_OutputFileFromLink.FullPath)' != '$([System.IO.Path]::GetFullPath($(TargetPath)))')计算为('C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll' != '' and 'C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll' != 'C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll')。
+       由于 false 条件，已跳过任务“VCMessage”；('@(_OutputFileFromLink)' != '' and '%(_OutputFileFromLink.Extension)' != '' and '%(_OutputFileFromLink.Extension)' != '$(TargetExt)')计算为('C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll' != '' and '.dll' != '' and '.dll' != '.dll')。
+       由于 false 条件，已跳过任务“VCMessage”；('@(_OutputFileFromLink)' != '' and '%(_OutputFileFromLink.Filename)' != '' and '%(_OutputFileFromLink.Filename)' != '$(TargetName)')计算为('C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll' != '' and 'CTP' != '' and 'CTP' != 'CTP')。
+       由于 false 条件，已跳过任务“VCMessage”；('%(Link.MinimumRequiredVersion)' != '' and ('%(Link.Subsystem)' == '' or '%(Link.Subsystem)' == 'NotSet'))计算为('' != '' and ('' == '' or '' == 'NotSet'))。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“DoLinkOutputFilesMatch”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“PreLinkEvent”(目标“_Link”依赖于它):
+       由于 false 条件，已跳过任务“Message”；('%(PreLinkEvent.Message)' != '' and '%(PreLinkEvent.Command)' != '')计算为('' != '' and '' != '')。
+       由于 false 条件，已跳过任务“Exec”；('%(PreLinkEvent.Command)' != '')计算为('' != '')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“PreLinkEvent”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“ComputeLinkSwitches”(目标“Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeLinkSwitches”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“Link”(目标“_Link”依赖于它):
+       正在使用程序集“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Build.CppTasks.Common.dll”中的“Link”任务。
+       任务“Link”
+         传递给工具的环境变量为:
+           VS_UNICODE_OUTPUT=2028
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll" /INCREMENTAL:NO /NOLOGO ..\ThostTraderApi\thostmduserapi.lib ..\ThostTraderApi\thosttraderapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.pdb" /LTCG:incremental /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /SAFESEH /DLL "Release\VS2010\dotNet4.0\MA版\AssemblyInfo.obj"
+         "Release\VS2010\dotNet4.0\MA版\CTP.obj"
+         "Release\VS2010\dotNet4.0\MA版\CTPMDAdapter.obj"
+         "Release\VS2010\dotNet4.0\MA版\CTPTraderAdapter.obj"
+         "Release\VS2010\dotNet4.0\MA版\MdSpi.obj"
+         "Release\VS2010\dotNet4.0\MA版\Stdafx.obj"
+         "Release\VS2010\dotNet4.0\MA版\TraderSpi.obj"
+         "Release\VS2010\dotNet4.0\MA版\Util.obj"
+         "Release\VS2010\dotNet4.0\MA版\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         Tracking command:
+         C:\Program Files (x86)\MSBuild\14.0\bin\Tracker.exe /a /d "C:\Program Files (x86)\MSBuild\14.0\bin\FileTracker32.dll" /i "C:\Users\卓\Desktop\CTP.Solution\CTP\Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog" /r "C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.OBJ|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\ASSEMBLYINFO.OBJ|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTP.OBJ|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTPMDADAPTER.OBJ|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTPTRADERADAPTER.OBJ|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\MDSPI.OBJ|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\STDAFX.OBJ|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\TRADERSPI.OBJ|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\UTIL.OBJ" /b MSBuildConsole_CancelEvent736943f62d6f4596b8af3c1f01611e6c  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe"  /ERRORREPORT:PROMPT /OUT:"C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll" /INCREMENTAL:NO /NOLOGO ..\ThostTraderApi\thostmduserapi.lib ..\ThostTraderApi\thosttraderapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.pdb" /LTCG:incremental /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /SAFESEH /DLL "Release\VS2010\dotNet4.0\MA版\AssemblyInfo.obj"
+         "Release\VS2010\dotNet4.0\MA版\CTP.obj"
+         "Release\VS2010\dotNet4.0\MA版\CTPMDAdapter.obj"
+         "Release\VS2010\dotNet4.0\MA版\CTPTraderAdapter.obj"
+         "Release\VS2010\dotNet4.0\MA版\MdSpi.obj"
+         "Release\VS2010\dotNet4.0\MA版\Stdafx.obj"
+         "Release\VS2010\dotNet4.0\MA版\TraderSpi.obj"
+         "Release\VS2010\dotNet4.0\MA版\Util.obj"
+         "Release\VS2010\dotNet4.0\MA版\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         LINK : 已指定 /LTCG，但不需要生成代码；从链接命令行中移除 /LTCG 以提高链接器性能
+       已完成执行任务“Link”的操作。
+       任务“Message”
+         CTPMA.VS2010.Net4.0.vcxproj -> C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll
+       已完成执行任务“Message”的操作。
+       由于 false 条件，已跳过任务“Message”；(('$(EmbedManifestBy)' != 'LINK' or '$(LegacyManifestEmbedding)' != 'true' or '$(LinkSkippedExecution)' == 'true') and
+                    %(Link.GenerateDebugInformation) == 'DebugFastLink')计算为(('MT' != 'LINK' or '' != 'true' or 'False' == 'true') and
+                    true == 'DebugFastLink')。
+       任务“Message”
+         CTPMA.VS2010.Net4.0.vcxproj -> C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.pdb (Full PDB)
+       已完成执行任务“Message”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“Link”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“ComputeMetaGenInputs”(目标“MetaGenInputsOutputs”依赖于它):
+       由于 false 条件，已跳过任务“Delete”；('$(OutputAssemblyMetagenFile)' != '' and '$(ConsumeAnyMetaAssembly)' == 'false' and Exists('$(OutputAssemblyMetagenFile)'))计算为('C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll.metagen' != '' and 'true' == 'false' and Exists('C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll.metagen'))。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeMetaGenInputs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.MetaGen.targets”中的目标“MetaGenInputsOutputs”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“MetaGenInputsOutputs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.MetaGen.targets”中的目标“MetaGen”(目标“_Link”依赖于它):
+       正在完全生成目标“MetaGen”。
+       输入文件“C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.dll”比输出文件“Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\\metagen.write.1.tlog”新。
+       正在使用程序集“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Build.CppTasks.Common.dll”中的“METAGEN”任务。
+       任务“METAGEN”
+       已完成执行任务“METAGEN”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“MetaGen”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeLinkImportLibraryOutputsForClean”(目标“_Link”依赖于它):
+       由于 false 条件，已跳过任务“WriteLinesToFile”；('@(_LinkSecondaryOutput)' != '')计算为('' != '')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeLinkImportLibraryOutputsForClean”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“AfterLink”(目标“_Link”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterLink”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_Link”(目标“_BuildLinkAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_Link”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_ALink”(目标“_BuildLinkAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_ALink”的操作。
+       已跳过目标“ComputeLegacyManifestEmbedding”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_Manifest”(目标“_BuildLinkAction”依赖于它):
+       由于 false 条件，已跳过任务“CallTarget”；('$(LegacyManifestEmbedding)' == 'true')计算为('' == 'true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_Manifest”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“RegisterOutput”(目标“_BuildLinkAction”依赖于它):
+       由于 false 条件，已跳过任务“Exec”；('$(ConfigurationType)'=='DynamicLibrary' and '%(Link.RegisterOutput)'=='true' and '%(Link.PerUserRedirection)'!='true')计算为('DynamicLibrary'=='DynamicLibrary' and 'false'=='true' and 'false'!='true')。
+       由于 false 条件，已跳过任务“Exec”；('$(ConfigurationType)'=='DynamicLibrary' and '%(Link.RegisterOutput)'=='true' and '%(Link.PerUserRedirection)'=='true')计算为('DynamicLibrary'=='DynamicLibrary' and 'false'=='true' and 'false'=='true')。
+       由于 false 条件，已跳过任务“Exec”；('$(ConfigurationType)'=='Application' and '%(Link.RegisterOutput)'=='true' and '%(Link.PerUserRedirection)'!='true')计算为('DynamicLibrary'=='Application' and 'false'=='true' and 'false'!='true')。
+       由于 false 条件，已跳过任务“Exec”；('$(ConfigurationType)'=='Application' and '%(Link.RegisterOutput)'=='true' and '%(Link.PerUserRedirection)'=='true')计算为('DynamicLibrary'=='Application' and 'false'=='true' and 'false'=='true')。
+       由于 false 条件，已跳过任务“VCMessage”；('$(_RegisterOutputExitCode)' != '' and '$(_RegisterOutputExitCode)' != '0')计算为('' != '' and '' != '0')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“RegisterOutput”的操作。
+       已跳过目标“PrepareForBuild”。以前的生成已成功。
+       已跳过目标“ResolveReferences”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ResolvedXDCMake”(目标“_XdcMake”依赖于它):
+       由于 false 条件，已跳过任务“MSBuild”；('%(_MSBuildProjectReferenceExistent.Extension)' == '.vcxproj' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != '' and '$(_ClCompileGenerateXMLDocumentationFiles)' == 'true')计算为('' == '.vcxproj' and '' != '' and '' != '' and 'true' == 'true')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ResolvedXDCMake”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeCLCompileGeneratedXDCFiles”(目标“_XdcMake”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeCLCompileGeneratedXDCFiles”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“MakeDirsForXdcMake”(目标“_XdcMake”依赖于它):
+       任务“MakeDir”
+       已完成执行任务“MakeDir”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“MakeDirsForXdcMake”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“XdcMake”(目标“_XdcMake”依赖于它):
+       正在使用程序集“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Build.CppTasks.Common.dll”中的“XDCMake”任务。
+       任务“XDCMake”
+         Forcing rebuild of all source files due to missing command TLog "C:\Users\卓\Desktop\CTP.Solution\CTP\Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\XDCMake.command.1.tlog".
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\xdcmake.exe /old "CTPMA.VS2010.Net4.0" /nologo /Fo"C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.xml" /Fs"Release\VS2010\dotNet4.0\MA版\AssemblyInfo.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\CTP.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\CTPMDAdapter.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\CTPTraderAdapter.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\MdSpi.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\Stdafx.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\TraderSpi.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\Util.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\.NETFramework,Version=v4.0.AssemblyAttributes.xdc"
+         Tracking command:
+         C:\Program Files (x86)\MSBuild\14.0\bin\Tracker.exe /d "C:\Program Files (x86)\MSBuild\14.0\bin\FileTracker32.dll" /i "C:\Users\卓\Desktop\CTP.Solution\CTP\Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog" /r "C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\.NETFRAMEWORK,VERSION=V4.0.ASSEMBLYATTRIBUTES.XDC|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\ASSEMBLYINFO.XDC|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTP.XDC|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTPMDADAPTER.XDC|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\CTPTRADERADAPTER.XDC|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\MDSPI.XDC|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\STDAFX.XDC|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\TRADERSPI.XDC|C:\USERS\卓\DESKTOP\CTP.SOLUTION\CTP\RELEASE\VS2010\DOTNET4.0\MA版\UTIL.XDC" /b MSBuildConsole_CancelEvent3560010dcc234940b8121bdbccec0cbb  /c "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\xdcmake.exe"  /old "CTPMA.VS2010.Net4.0" /nologo /Fo"C:\Users\卓\Desktop\CTP.Solution\Release\VS2010\dotNet4.0\MA版\CTP.xml" /Fs"Release\VS2010\dotNet4.0\MA版\AssemblyInfo.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\CTP.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\CTPMDAdapter.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\CTPTraderAdapter.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\MdSpi.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\Stdafx.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\TraderSpi.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\Util.xdc" /Fs"Release\VS2010\dotNet4.0\MA版\.NETFramework,Version=v4.0.AssemblyAttributes.xdc"
+       已完成执行任务“XDCMake”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“XdcMake”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_XdcMake”(目标“_BuildLinkAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_XdcMake”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“ComputeCLCompileGeneratedSbrFiles”(目标“_BscMake”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“ComputeCLCompileGeneratedSbrFiles”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“MakeDirsForBscMake”(目标“_BscMake”依赖于它):
+       任务“MakeDir”
+       已完成执行任务“MakeDir”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“MakeDirsForBscMake”的操作。
+       由于条件的计算结果为 false，已跳过目标“BscMake”；('@(BscMake)' != '')的计算结果为('' != '')。
+       由于条件的计算结果为 false，已跳过目标“CustomBuildStep”；('@(CustomBuildStep)' != '' and '$(SelectedFiles)'=='')的计算结果为('' != '' and ''=='')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_BscMake”(目标“_BuildLinkAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_BscMake”的操作。
+       由于条件的计算结果为 false，已跳过目标“RunMergeNativeCodeAnalysis”；('$(Language)'=='C++' and '$(RunCodeAnalysisOnThisProject)'=='true')的计算结果为('C++'=='C++' and ''=='true')。
+       由于条件的计算结果为 false，已跳过目标“RunNativeCodeAnalysis”；('$(Language)'=='C++' and '$(RunCodeAnalysisOnThisProject)'=='true')的计算结果为('C++'=='C++' and ''=='true')。
+       由于条件的计算结果为 false，已跳过目标“RunCodeAnalysis”；('$(RunCodeAnalysisOnThisProject)'=='true')的计算结果为(''=='true')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“_GenerateSatelliteAssemblyInputs”(目标“CreateSatelliteAssemblies”依赖于它):
+       由于 false 条件，已跳过任务“Warning”；('@(ManifestResourceWithCulture)'!='' and '%(ManifestResourceWithCulture.EmittedForCompatibilityOnly)'=='')计算为(''!='' and ''=='')。
+       由于 false 条件，已跳过任务“Warning”；('@(ManifestNonResxWithCultureOnDisk)'!='' and '%(ManifestNonResxWithCultureOnDisk.EmittedForCompatibilityOnly)'=='')计算为(''!='' and ''=='')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_GenerateSatelliteAssemblyInputs”的操作。
+       由于条件的计算结果为 false，已跳过目标“ComputeIntermediateSatelliteAssemblies”；(@(ReferenceSatellitePaths->'%(DestinationSubDirectory)') != '')的计算结果为( != '')。
+       由于条件的计算结果为 false，已跳过目标“GenerateSatelliteAssemblies”；('@(_SatelliteAssemblyResourceInputs)' != '')的计算结果为('' != '')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“CreateSatelliteAssemblies”(目标“_BuildLinkAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“CreateSatelliteAssemblies”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_Appverifier”(目标“_BuildLinkAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_Appverifier”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_Deploy”(目标“_BuildLinkAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_Deploy”的操作。
+       由于条件的计算结果为 false，已跳过目标“ComputeIntermediateSatelliteAssemblies”；(@(ReferenceSatellitePaths->'%(DestinationSubDirectory)') != '')的计算结果为( != '')。
+       由于条件的计算结果为 false，已跳过目标“_CopyFilesMarkedCopyLocal”；('@(ReferenceCopyLocalPaths)' != '')的计算结果为('' != '')。
+       已跳过目标“AssignTargetPaths”。以前的生成已成功。
+       已跳过目标“_SplitProjectReferencesByFileExistence”。以前的生成已成功。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\Microsoft.Xaml.targets”中的目标“GetCopyToOutputDirectoryXamlAppDefs”(目标“GetCopyToOutputDirectoryItems”依赖于它):
+       任务“AssignTargetPath”
+       已完成执行任务“AssignTargetPath”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“GetCopyToOutputDirectoryXamlAppDefs”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“GetCopyToOutputDirectoryItems”(目标“_CopySourceItemsToOutputDirectory”依赖于它):
+       由于 false 条件，已跳过任务“MSBuild”；('@(_MSBuildProjectReferenceExistent)' != '' and '$(_GetChildProjectCopyToOutputDirectoryItems)' == 'true' and '%(_MSBuildProjectReferenceExistent.Private)' != 'false' and '$(UseCommonOutputDirectory)' != 'true')计算为('' != '' and 'true' == 'true' and '' != 'false' and 'false' != 'true')。
+       任务“AssignTargetPath”
+       已完成执行任务“AssignTargetPath”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“GetCopyToOutputDirectoryItems”的操作。
+       由于条件的计算结果为 false，已跳过目标“_CopyOutOfDateSourceItemsToOutputDirectory”；( '@(_SourceItemsToCopyToOutputDirectory)' != '' )的计算结果为( '' != '' )。
+       由于条件的计算结果为 false，已跳过目标“_CopyOutOfDateSourceItemsToOutputDirectoryAlways”；( '@(_SourceItemsToCopyToOutputDirectoryAlways)' != '' )的计算结果为( '' != '' )。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“_CopySourceItemsToOutputDirectory”(目标“CopyFilesToOutputDirectory”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_CopySourceItemsToOutputDirectory”的操作。
+       由于条件的计算结果为 false，已跳过目标“_CopyAppConfigFile”；( '@(AppConfigWithTargetPath)' != '' )的计算结果为( '' != '' )。
+       由于条件的计算结果为 false，已跳过目标“_CopyManifestFiles”；( '$(_DeploymentCopyApplicationManifest)'=='true' or '$(GenerateClickOnceManifests)'=='true' )的计算结果为( ''=='true' or ''=='true' )。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“_CheckForCompileOutputs”(目标“CopyFilesToOutputDirectory”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_CheckForCompileOutputs”的操作。
+       由于条件的计算结果为 false，已跳过目标“_SGenCheckForOutputs”；('$(_SGenGenerateSerializationAssembliesConfig)' == 'On' or ('@(WebReferenceUrl)'!='' and '$(_SGenGenerateSerializationAssembliesConfig)' == 'Auto'))的计算结果为('Auto' == 'On' or (''!='' and 'Auto' == 'Auto'))。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“CopyFilesToOutputDirectory”(目标“PrepareForRun”依赖于它):
+       由于 false 条件，已跳过任务“Copy”；('$(CopyBuildOutputToOutputDirectory)' == 'true' and '$(SkipCopyBuildProduct)' != 'true')计算为('true' == 'true' and 'true' != 'true')。
+       由于 false 条件，已跳过任务“Message”；('$(CopyBuildOutputToOutputDirectory)' == 'true' and '$(SkipCopyBuildProduct)'!='true')计算为('true' == 'true' and 'true'!='true')。
+       由于 false 条件，已跳过任务“Copy”；('@(AddModules)' != '')计算为('' != '')。
+       由于 false 条件，已跳过任务“Copy”；('$(_SGenDllCreated)'=='true')计算为('false'=='true')。
+       由于 false 条件，已跳过任务“Copy”；('$(_DebugSymbolsProduced)'=='true' and '$(SkipCopyingSymbolsToOutputDirectory)' != 'true' and '$(CopyOutputSymbolsToOutputDirectory)'=='true')计算为('false'=='true' and '' != 'true' and 'true'=='true')。
+       由于 false 条件，已跳过任务“Copy”；('$(_DocumentationFileProduced)'=='true')计算为('false'=='true')。
+       由于 false 条件，已跳过任务“Copy”；('@(IntermediateSatelliteAssembliesWithTargetPath)' != '')计算为('' != '')。
+       由于 false 条件，已跳过任务“Copy”；('@(ReferenceComWrappersToCopyLocal)' != '' or '@(ResolvedIsolatedComModules)' != '' or '@(_DeploymentLooseManifestFile)' != '' or '@(NativeReferenceFile)' != '' )计算为('' != '' or '' != '' or '' != '' or '' != '' )。
+       由于 false 条件，已跳过任务“Copy”；('$(SkipCopyWinMDArtifact)' != 'true' and '@(WinMDExpArtifacts)' != '')计算为('' != 'true' and '' != '')。
+       由于 false 条件，已跳过任务“Message”；('$(SkipCopyWinMDArtifact)' != 'true' and '$(_WindowsMetadataOutputPath)' != '')计算为('' != 'true' and '' != '')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“CopyFilesToOutputDirectory”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“PrepareForRun”(目标“_BuildLinkAction”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“PrepareForRun”的操作。
+       由于条件的计算结果为 false，已跳过目标“CustomBuildStep”；('@(CustomBuildStep)' != '' and '$(SelectedFiles)'=='')的计算结果为('' != '' and ''=='')。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets”中的目标“PostBuildEvent”(目标“_BuildLinkAction”依赖于它):
+       由于 false 条件，已跳过任务“Message”；('%(PostBuildEvent.Message)' != '' and '%(PostBuildEvent.Command)' != '')计算为('' != '' and '' != '')。
+       由于 false 条件，已跳过任务“Exec”；('%(PostBuildEvent.Command)' != '')计算为('' != '')。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“PostBuildEvent”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“_BuildLinkAction”(目标“BuildLink”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“_BuildLinkAction”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets”中的目标“BuildLink”(目标“Build”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“BuildLink”的操作。
+       由于条件的计算结果为 false，已跳过目标“CreateTfsBuildInfoResource”；( $(AddBuildInfoToAssembly)==true )的计算结果为( false==true )。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets”中的目标“AfterBuild”(目标“Build”依赖于它):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“AfterBuild”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets”中的目标“FinalizeBuildStatus”(目标“Build”依赖于它):
+       正在使用程序集“Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a”中的“Delete”任务。
+       任务“Delete”
+         正在删除文件“Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\unsuccessfulbuild”。
+       已完成执行任务“Delete”的操作。
+       任务“Touch”
+         正在对“Release\VS2010\dotNet4.0\MA版\CTPMA.VS.ACFB53E6.tlog\CTPMA.VS2010.Net4.0.lastbuildstate”执行 Touch 任务。
+       已完成执行任务“Touch”的操作。
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“FinalizeBuildStatus”的操作。
+     1>来自项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”的文件“C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets”中的目标“Build”(入口点):
+     1>已完成在项目“CTPMA.VS2010.Net4.0.vcxproj”中生成目标“Build”的操作。
+     1>已完成生成项目“C:\Users\卓\Desktop\CTP.Solution\CTP\CTPMA.VS2010.Net4.0.vcxproj”(Build 个目标)的操作。
+
+已成功生成。
+
+已用时间 00:00:31.08

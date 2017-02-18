@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45C2F8AF-9AE2-419B-B94E-15689EFB31B5}"
+	ProjectSection(SolutionItems) = preProject
+		说明.txt = 说明.txt
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CTP.VS2010.Net4.0", "CTP\CTP.VS2010.Net4.0.vcxproj", "{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CTPMA.VS2010.Net4.0", "CTP\CTPMA.VS2010.Net4.0.vcxproj", "{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Debug|Win32.Build.0 = Debug|Win32
+		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Release|Win32.ActiveCfg = Release|Win32
+		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Release|Win32.Build.0 = Release|Win32
+		{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}.Debug|Win32.Build.0 = Debug|Win32
+		{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}.Release|Win32.ActiveCfg = Release|Win32
+		{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "..\tradeapi\ThostFtdcTraderApi.h"
-#include "..\tradeapi\ThostFtdcMdApi.h"
+#include "..\thosttraderapi\ThostFtdcTraderApi.h"
+#include "..\thosttraderapi\ThostFtdcMdApi.h"
 #include "Struct.h"
-//#include "Delegates.h"
+#include "Delegates.h"
 
 
 using namespace CTP;
@@ -25,17 +25,17 @@ namespace Native
 	/// 非托管类, 自动转换 Managed <==> Native 
 	// M: managed
 	// N: native
-	template<typename M, typename N>
+	template<typename M, typename N> 
 	class MNConv
 	{
 	public:
 		// 模版类的实现部分必须放在头文件里，否则链接会出错
 		/// Native to Managed
-		static M N2M(N* pNative) {
+		static M N2M(N* pNative){
 			return safe_cast<M>(Marshal::PtrToStructure(IntPtr(pNative), M::typeid));
 		};
 		// Managed to Native
-		static void M2N(M managed, N* pNative) {
+		static void M2N(M managed, N* pNative){
 			Marshal::StructureToPtr(managed, IntPtr(pNative), true);
 		};
 	};

@@ -1,93 +1,6594 @@
-ï»¿/////////////////////////////////////////////////////////////////////////
-/// ä¸ŠæœŸæŠ€æœ¯ CTP C++ => .Net Framework Adapter
-/// æœ¬æ–‡ä»¶ä¿®æ”¹è‡ªæµ·é£ç‰ˆC#æ¥å£struct.csæ–‡ä»¶ï¼Œååˆ†æ„Ÿè°¢ 
+/////////////////////////////////////////////////////////////////////////
+/// ÉÏÆÚ¼¼Êõ CTP C++ => .Net Framework Adapter
+/// ±¾ÎÄ¼şĞŞ¸Ä×Ôº£·ç°æC#½Ó¿Ústruct.csÎÄ¼ş£¬Ê®·Ö¸ĞĞ» 
 /// http://www.oceantribe.org/vb/showthread.php?t=26711
 /////////////////////////////////////////////////////////////////////////
 
 #pragma once
-
-#include "DataType.h"
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
 
 namespace CTP
 {
+	public enum struct EnumTeResumeType : Byte	//THOST_TE_RESUME_TYPE
+	{
+		THOST_TERT_RESTART = 0,
+		THOST_TERT_RESUME,
+		THOST_TERT_QUICK
+	};
+
 	/// <summary>
-	/// ä¿¡æ¯åˆ†å‘
+	/// TFtdcExchangePropertyTypeÊÇÒ»¸ö½»Ò×ËùÊôĞÔÀàĞÍ
+	/// </summary>
+	public enum struct EnumExchangePropertyType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'0',
+
+		/// <summary>
+		/// ¸ù¾İ³É½»Éú³É±¨µ¥
+		/// </summary>
+		GenOrderByTrade = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcIdCardTypeTypeÊÇÒ»¸öÖ¤¼şÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumIdCardTypeType : Byte
+	{
+		/// <summary>
+		/// ×éÖ¯»ú¹¹´úÂë
+		/// </summary>
+		EID = (Byte)'0',
+
+		/// <summary>
+		/// Éí·İÖ¤
+		/// </summary>
+		IDCard = (Byte)'1',
+
+		/// <summary>
+		/// ¾ü¹ÙÖ¤
+		/// </summary>
+		OfficerIDCard = (Byte)'2',
+
+		/// <summary>
+		/// ¾¯¹ÙÖ¤
+		/// </summary>
+		PoliceIDCard = (Byte)'3',
+
+		/// <summary>
+		/// Ê¿±øÖ¤
+		/// </summary>
+		SoldierIDCard = (Byte)'4',
+
+		/// <summary>
+		/// »§¿Ú²¾
+		/// </summary>
+		HouseholdRegister = (Byte)'5',
+
+		/// <summary>
+		/// »¤ÕÕ
+		/// </summary>
+		Passport = (Byte)'6',
+
+		/// <summary>
+		/// Ì¨°ûÖ¤
+		/// </summary>
+		TaiwanCompatriotIDCard = (Byte)'7',
+
+		/// <summary>
+		/// »ØÏçÖ¤
+		/// </summary>
+		HomeComingCard = (Byte)'8',
+
+		/// <summary>
+		/// ÓªÒµÖ´ÕÕºÅ
+		/// </summary>
+		LicenseNo = (Byte)'9',
+		/// <summary>
+		///Ë°ÎñµÇ¼ÇºÅ/µ±µØÄÉË°ID
+		/// </summary>
+		TaxNo = (Byte) 'A',
+		/// <summary>
+		///¸Û°Ä¾ÓÃñÀ´ÍùÄÚµØÍ¨ĞĞÖ¤
+		/// </summary>
+		HMMainlandTravelPermit = (Byte)  'B',
+		/// <summary>
+		///Ì¨Íå¾ÓÃñÀ´Íù´óÂ½Í¨ĞĞÖ¤
+		/// </summary>
+		TwMainlandTravelPermit = (Byte) 'C',
+		/// <summary>
+		///¼İÕÕ
+		/// </summary>
+		DrivingLicense = (Byte) 'D',
+		/// <summary>
+		///µ±µØÉç±£ID
+		/// </summary>
+		SocialID = (Byte) 'F',
+		/// <summary>
+		///µ±µØÉí·İÖ¤
+		/// </summary>
+		LocalID = (Byte) 'G',
+		/// <summary>
+		///ÉÌÒµµÇ¼ÇÖ¤
+		/// </summary>
+		BusinessRegistration = (Byte) 'H',
+		/// <summary>
+		///¸Û°ÄÓÀ¾ÃĞÔ¾ÓÃñÉí·İÖ¤
+		/// </summary>
+		HKMCIDCard = (Byte) 'I',
+		/// <summary>
+		///ÈËĞĞ¿ª»§Ğí¿ÉÖ¤
+		/// </summary>
+		AccountsPermits = (Byte) 'J',
+		/// <summary>
+		/// ÆäËûÖ¤¼ş
+		/// </summary>
+		OtherCard = (Byte)'x'
+	};
+
+	/// <summary>
+	/// TFtdcInvestorRangeTypeÊÇÒ»¸öÍ¶×ÊÕß·¶Î§ÀàĞÍ
+	/// </summary>
+	public enum struct EnumInvestorRangeType : Byte
+	{
+		/// <summary>
+		/// ËùÓĞ
+		/// </summary>
+		All = (Byte)'1',
+
+		/// <summary>
+		/// Í¶×ÊÕß×é
+		/// </summary>
+		Group = (Byte)'2',
+
+		/// <summary>
+		/// µ¥Ò»Í¶×ÊÕß
+		/// </summary>
+		Single = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcDepartmentRangeTypeÊÇÒ»¸öÍ¶×ÊÕß·¶Î§ÀàĞÍ
+	/// </summary>
+	public enum struct EnumDepartmentRangeType : Byte
+	{
+		/// <summary>
+		/// ËùÓĞ
+		/// </summary>
+		All = (Byte)'1',
+
+		/// <summary>
+		/// ×éÖ¯¼Ü¹¹
+		/// </summary>
+		Group = (Byte)'2',
+
+		/// <summary>
+		/// µ¥Ò»Í¶×ÊÕß
+		/// </summary>
+		Single = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcDataSyncStatusTypeÊÇÒ»¸öÊı¾İÍ¬²½×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumDataSyncStatusType : Byte
+	{
+		/// <summary>
+		/// Î´Í¬²½
+		/// </summary>
+		Asynchronous = (Byte)'1',
+
+		/// <summary>
+		/// Í¬²½ÖĞ
+		/// </summary>
+		Synchronizing = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑÍ¬²½
+		/// </summary>
+		Synchronized = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcBrokerDataSyncStatusTypeÊÇÒ»¸ö¾­¼Í¹«Ë¾Êı¾İÍ¬²½×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumBrokerDataSyncStatusType : Byte
+	{
+		/// <summary>
+		/// ÒÑÍ¬²½
+		/// </summary>
+		Synchronized = (Byte)'1',
+
+		/// <summary>
+		/// Í¬²½ÖĞ
+		/// </summary>
+		Synchronizing = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcExchangeConnectStatusTypeÊÇÒ»¸ö½»Ò×ËùÁ¬½Ó×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumExchangeConnectStatusType : Byte
+	{
+		/// <summary>
+		/// Ã»ÓĞÈÎºÎÁ¬½Ó
+		/// </summary>
+		NoConnection = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑ¾­·¢³öºÏÔ¼²éÑ¯ÇëÇó
+		/// </summary>
+		QryInstrumentSent = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑ¾­»ñÈ¡ĞÅÏ¢
+		/// </summary>
+		GotInformation = (Byte)'9'
+	};
+
+	/// <summary>
+	/// TFtdcTraderConnectStatusTypeÊÇÒ»¸ö½»Ò×Ëù½»Ò×Ô±Á¬½Ó×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumTraderConnectStatusType : Byte
+	{
+		/// <summary>
+		/// Ã»ÓĞÈÎºÎÁ¬½Ó
+		/// </summary>
+		NotConnected = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑ¾­Á¬½Ó
+		/// </summary>
+		Connected = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑ¾­·¢³öºÏÔ¼²éÑ¯ÇëÇó
+		/// </summary>
+		QryInstrumentSent = (Byte)'3',
+
+		/// <summary>
+		/// ¶©ÔÄË½ÓĞÁ÷
+		/// </summary>
+		SubPrivateFlow = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcFunctionCodeTypeÊÇÒ»¸ö¹¦ÄÜ´úÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumFunctionCodeType : Byte
+	{
+		/// <summary>
+		/// Êı¾İÒì²½»¯
+		/// </summary>
+		DataAsync = (Byte)'1',
+
+		/// <summary>
+		/// Ç¿ÖÆÓÃ»§µÇ³ö
+		/// </summary>
+		ForceUserLogout = (Byte)'2',
+
+		/// <summary>
+		/// ±ä¸ü¹ÜÀíÓÃ»§¿ÚÁî
+		/// </summary>
+		UserPasswordUpdate = (Byte)'3',
+
+		/// <summary>
+		/// ±ä¸ü¾­¼Í¹«Ë¾¿ÚÁî
+		/// </summary>
+		BrokerPasswordUpdate = (Byte)'4',
+
+		/// <summary>
+		/// ±ä¸üÍ¶×ÊÕß¿ÚÁî
+		/// </summary>
+		InvestorPasswordUpdate = (Byte)'5',
+
+		/// <summary>
+		/// ±¨µ¥²åÈë
+		/// </summary>
+		OrderInsert = (Byte)'6',
+
+		/// <summary>
+		/// ±¨µ¥²Ù×÷
+		/// </summary>
+		OrderAction = (Byte)'7',
+
+		/// <summary>
+		/// Í¬²½ÏµÍ³Êı¾İ
+		/// </summary>
+		SyncSystemData = (Byte)'8',
+
+		/// <summary>
+		/// Í¬²½¾­¼Í¹«Ë¾Êı¾İ
+		/// </summary>
+		SyncBrokerData = (Byte)'9',
+
+		/// <summary>
+		/// ÅúÁ¿Í¬²½¾­¼Í¹«Ë¾Êı¾İ
+		/// </summary>
+		BachSyncBrokerData = (Byte)'A',
+
+		/// <summary>
+		/// ³¬¼¶²éÑ¯
+		/// </summary>
+		SuperQuery = (Byte)'B',
+
+		/// <summary>
+		/// ±¨µ¥²åÈë
+		/// </summary>
+		ParkedOrderInsert = (Byte)'C',
+
+		/// <summary>
+		/// ±¨µ¥²Ù×÷
+		/// </summary>
+		ParkedOrderAction = (Byte)'D',
+
+		/// <summary>
+		/// Í¬²½¶¯Ì¬ÁîÅÆ
+		/// </summary>
+		SyncOTP = (Byte)'E'
+	};
+
+	/// <summary>
+	/// TFtdcBrokerFunctionCodeTypeÊÇÒ»¸ö¾­¼Í¹«Ë¾¹¦ÄÜ´úÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumBrokerFunctionCodeType : Byte
+	{
+		/// <summary>
+		/// Ç¿ÖÆÓÃ»§µÇ³ö
+		/// </summary>
+		ForceUserLogout = (Byte)'1',
+
+		/// <summary>
+		/// ±ä¸üÓÃ»§¿ÚÁî
+		/// </summary>
+		UserPasswordUpdate = (Byte)'2',
+
+		/// <summary>
+		/// Í¬²½¾­¼Í¹«Ë¾Êı¾İ
+		/// </summary>
+		SyncBrokerData = (Byte)'3',
+
+		/// <summary>
+		/// ÅúÁ¿Í¬²½¾­¼Í¹«Ë¾Êı¾İ
+		/// </summary>
+		BachSyncBrokerData = (Byte)'4',
+
+		/// <summary>
+		/// ±¨µ¥²åÈë
+		/// </summary>
+		OrderInsert = (Byte)'5',
+
+		/// <summary>
+		/// ±¨µ¥²Ù×÷
+		/// </summary>
+		OrderAction = (Byte)'6',
+
+		/// <summary>
+		/// È«²¿²éÑ¯
+		/// </summary>
+		AllQuery = (Byte)'7',
+
+		/// <summary>
+		/// ÏµÍ³¹¦ÄÜ£ºµÇÈë/µÇ³ö/ĞŞ¸ÄÃÜÂëµÈ
+		/// </summary>
+		log = (Byte)'a',
+
+		/// <summary>
+		/// »ù±¾²éÑ¯£º²éÑ¯»ù´¡Êı¾İ£¬ÈçºÏÔ¼£¬½»Ò×ËùµÈ³£Á¿
+		/// </summary>
+		BaseQry = (Byte)'b',
+
+		/// <summary>
+		/// ½»Ò×²éÑ¯£ºÈç²é³É½»£¬Î¯ÍĞ
+		/// </summary>
+		TradeQry = (Byte)'c',
+
+		/// <summary>
+		/// ½»Ò×¹¦ÄÜ£º±¨µ¥£¬³·µ¥
+		/// </summary>
+		Trade = (Byte)'d',
+
+		/// <summary>
+		/// ÒøÆÚ×ªÕË
+		/// </summary>
+		Virement = (Byte)'e',
+
+		/// <summary>
+		/// ·çÏÕ¼à¿Ø
+		/// </summary>
+		Risk = (Byte)'f',
+
+		/// <summary>
+		/// ²éÑ¯/¹ÜÀí£º²éÑ¯»á»°£¬ÌßÈËµÈ
+		/// </summary>
+		Session = (Byte)'g',
+
+		/// <summary>
+		/// ·ç¿ØÍ¨Öª¿ØÖÆ
+		/// </summary>
+		RiskNoticeCtl = (Byte)'h',
+
+		/// <summary>
+		/// ·ç¿ØÍ¨Öª·¢ËÍ
+		/// </summary>
+		RiskNotice = (Byte)'i',
+
+		/// <summary>
+		/// ²ì¿´¾­¼Í¹«Ë¾×Ê½ğÈ¨ÏŞ
+		/// </summary>
+		BrokerDeposit = (Byte)'j',
+
+		/// <summary>
+		/// ×Ê½ğ²éÑ¯
+		/// </summary>
+		QueryFund = (Byte)'k',
+
+		/// <summary>
+		/// ±¨µ¥²éÑ¯
+		/// </summary>
+		QueryOrder = (Byte)'l',
+
+		/// <summary>
+		/// ³É½»²éÑ¯
+		/// </summary>
+		QueryTrade = (Byte)'m',
+
+		/// <summary>
+		/// ³Ö²Ö²éÑ¯
+		/// </summary>
+		QueryPosition = (Byte)'n',
+
+		/// <summary>
+		/// ĞĞÇé²éÑ¯
+		/// </summary>
+		QueryMarketData = (Byte)'o',
+
+		/// <summary>
+		/// ÓÃ»§ÊÂ¼ş²éÑ¯
+		/// </summary>
+		QueryUserEvent = (Byte)'p',
+
+		/// <summary>
+		/// ·çÏÕÍ¨Öª²éÑ¯
+		/// </summary>
+		QueryRiskNotify = (Byte)'q',
+
+		/// <summary>
+		/// ³öÈë½ğ²éÑ¯
+		/// </summary>
+		QueryFundChange = (Byte)'r',
+
+		/// <summary>
+		/// Í¶×ÊÕßĞÅÏ¢²éÑ¯
+		/// </summary>
+		QueryInvestor = (Byte)'s',
+
+		/// <summary>
+		/// ½»Ò×±àÂë²éÑ¯
+		/// </summary>
+		QueryTradingCode = (Byte)'t',
+
+		/// <summary>
+		/// Ç¿Æ½
+		/// </summary>
+		ForceClose = (Byte)'u',
+
+		/// <summary>
+		/// Ñ¹Á¦²âÊÔ
+		/// </summary>
+		PressTest = (Byte)'v',
+
+		/// <summary>
+		/// È¨Òæ·´Ëã
+		/// </summary>
+		RemainCalc = (Byte)'w',
+
+		/// <summary>
+		/// ¾»³Ö²Ö±£Ö¤½ğÖ¸±ê
+		/// </summary>
+		NetPositionInd = (Byte)'x',
+
+		/// <summary>
+		/// ·çÏÕÔ¤Ëã
+		/// </summary>
+		RiskPredict = (Byte)'y',
+
+		/// <summary>
+		/// Êı¾İµ¼³ö
+		/// </summary>
+		DataExport = (Byte)'z',
+
+		/// <summary>
+		/// ·ç¿ØÖ¸±êÉèÖÃ
+		/// </summary>
+		RiskTargetSetup = (Byte)'A',
+
+		/// <summary>
+		/// ĞĞÇéÔ¤¾¯
+		/// </summary>
+		MarketDataWarn = (Byte)'B',
+
+		/// <summary>
+		/// ÒµÎñÍ¨Öª²éÑ¯
+		/// </summary>
+		QryBizNotice = (Byte)'C',
+
+		/// <summary>
+		/// ÒµÎñÍ¨ÖªÄ£°åÉèÖÃ
+		/// </summary>
+		CfgBizNotice = (Byte)'D',
+
+		/// <summary>
+		/// Í¬²½¶¯Ì¬ÁîÅÆ
+		/// </summary>
+		SyncOTP = (Byte)'E',
+
+		/// <summary>
+		/// ·¢ËÍÒµÎñÍ¨Öª
+		/// </summary>
+		SendBizNotice = (Byte)'F',
+
+		/// <summary>
+		/// ·çÏÕ¼¶±ğ±ê×¼ÉèÖÃ
+		/// </summary>
+		CfgRiskLevelStd = (Byte)'G',
+
+		/// <summary>
+		/// ½»Ò×ÖÕ¶ËÓ¦¼±¹¦ÄÜ
+		/// </summary>
+		TbCommand = (Byte)'H'
+	};
+
+	/// <summary>
+	/// TFtdcOrderActionStatusTypeÊÇÒ»¸ö±¨µ¥²Ù×÷×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrderActionStatusType : Byte
+	{
+		/// <summary>
+		/// ÒÑ¾­Ìá½»
+		/// </summary>
+		Submitted = (Byte)'a',
+
+		/// <summary>
+		/// ÒÑ¾­½ÓÊÜ
+		/// </summary>
+		Accepted = (Byte)'b',
+
+		/// <summary>
+		/// ÒÑ¾­±»¾Ü¾ø
+		/// </summary>
+		Rejected = (Byte)'c'
+	};
+
+	/// <summary>
+	/// TFtdcOrderStatusTypeÊÇÒ»¸ö±¨µ¥×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrderStatusType : Byte
+	{
+		/// <summary>
+		/// È«²¿³É½»
+		/// </summary>
+		AllTraded = (Byte)'0',
+
+		/// <summary>
+		/// ²¿·Ö³É½»»¹ÔÚ¶ÓÁĞÖĞ
+		/// </summary>
+		PartTradedQueueing = (Byte)'1',
+
+		/// <summary>
+		/// ²¿·Ö³É½»²»ÔÚ¶ÓÁĞÖĞ
+		/// </summary>
+		PartTradedNotQueueing = (Byte)'2',
+
+		/// <summary>
+		/// Î´³É½»»¹ÔÚ¶ÓÁĞÖĞ
+		/// </summary>
+		NoTradeQueueing = (Byte)'3',
+
+		/// <summary>
+		/// Î´³É½»²»ÔÚ¶ÓÁĞÖĞ
+		/// </summary>
+		NoTradeNotQueueing = (Byte)'4',
+
+		/// <summary>
+		/// ³·µ¥
+		/// </summary>
+		Canceled = (Byte)'5',
+
+		/// <summary>
+		/// Î´Öª
+		/// </summary>
+		Unknown = (Byte)'a',
+
+		/// <summary>
+		/// ÉĞÎ´´¥·¢
+		/// </summary>
+		NotTouched = (Byte)'b',
+
+		/// <summary>
+		/// ÒÑ´¥·¢
+		/// </summary>
+		Touched = (Byte)'c'
+	};
+
+	/// <summary>
+	/// TFtdcOrderSubmitStatusTypeÊÇÒ»¸ö±¨µ¥Ìá½»×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrderSubmitStatusType : Byte
+	{
+		/// <summary>
+		/// ÒÑ¾­Ìá½»
+		/// </summary>
+		InsertSubmitted = (Byte)'0',
+
+		/// <summary>
+		/// ³·µ¥ÒÑ¾­Ìá½»
+		/// </summary>
+		CancelSubmitted = (Byte)'1',
+
+		/// <summary>
+		/// ĞŞ¸ÄÒÑ¾­Ìá½»
+		/// </summary>
+		ModifySubmitted = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑ¾­½ÓÊÜ
+		/// </summary>
+		Accepted = (Byte)'3',
+
+		/// <summary>
+		/// ±¨µ¥ÒÑ¾­±»¾Ü¾ø
+		/// </summary>
+		InsertRejected = (Byte)'4',
+
+		/// <summary>
+		/// ³·µ¥ÒÑ¾­±»¾Ü¾ø
+		/// </summary>
+		CancelRejected = (Byte)'5',
+
+		/// <summary>
+		/// ¸Äµ¥ÒÑ¾­±»¾Ü¾ø
+		/// </summary>
+		ModifyRejected = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcPositionDateTypeÊÇÒ»¸ö³Ö²ÖÈÕÆÚÀàĞÍ
+	/// </summary>
+	public enum struct EnumPositionDateType : Byte
+	{
+		/// <summary>
+		/// ½ñÈÕ³Ö²Ö
+		/// </summary>
+		Today = (Byte)'1',
+
+		/// <summary>
+		/// ÀúÊ·³Ö²Ö
+		/// </summary>
+		History = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcPositionDateTypeTypeÊÇÒ»¸ö³Ö²ÖÈÕÆÚÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumPositionDateTypeType : Byte
+	{
+		/// <summary>
+		/// Ê¹ÓÃÀúÊ·³Ö²Ö
+		/// </summary>
+		UseHistory = (Byte)'1',
+
+		/// <summary>
+		/// ²»Ê¹ÓÃÀúÊ·³Ö²Ö
+		/// </summary>
+		NoUseHistory = (Byte)'2'
+	};
+	/// <summary>
+	///TFtdcMaxMarginSideAlgorithmTypeÊÇÒ»¸ö´ó¶îµ¥±ß±£Ö¤½ğËã·¨ÀàĞÍ
+	/// </summary>
+	public enum struct EnumMaxMarginSideAlgorithmTypeType : Byte
+	{
+		/// <summary>
+		/// ²»Ê¹ÓÃ´ó¶îµ¥±ß±£Ö¤½ğËã·¨
+		/// </summary>
+		NO = (Byte)'0',
+
+		/// <summary>
+		/// Ê¹ÓÃ´ó¶îµ¥±ß±£Ö¤½ğËã·¨
+		/// </summary>
+		YES = (Byte)'1'
+	};
+	/// <summary>
+	/// TFtdcOptionsTypeTypeÊÇÒ»¸öÆÚÈ¨ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumOptionsTypeType : Byte
+	{
+		/// <summary>
+		/// ¿´ÕÇ
+		/// </summary>
+		CallOptions = (Byte)'1',
+
+		/// <summary>
+		/// ¿´µø
+		/// </summary>
+		PutOptions = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcCombinationTypeTypeÊÇÒ»¸ö×éºÏÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumCombinationTypeType : Byte
+	{
+		/// <summary>
+		/// ÆÚ»õ×éºÏ
+		/// </summary>
+		Future = (Byte)'0',
+		/// <summary>
+		/// ´¹Ö±¼Û²îBUL
+		/// </summary>
+		BUL = (Byte)'1',
+		/// <summary>
+		///´¹Ö±¼Û²îBER
+		/// </summary>
+		BER = (Byte)'2',
+		/// <summary>
+		///¿çÊ½×éºÏ			  
+		/// </summary>
+		STD = (Byte)'3',
+		/// <summary>
+		///¿í¿çÊ½×éºÏ	
+		/// </summary>	 
+		STG = (Byte)'4',
+		/// <summary>
+		///±¸¶Ò×éºÏ			  
+		/// </summary>
+		PRT = (Byte)'5',
+		/// <summary>
+		///Ê±¼ä¼Û²î×éºÏ		
+		/// </summary>
+		CLD = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcTradingRoleTypeÊÇÒ»¸ö½»Ò×½ÇÉ«ÀàĞÍ
+	/// </summary>
+	public enum struct EnumTradingRoleType : Byte
+	{
+		/// <summary>
+		/// ´úÀí
+		/// </summary>
+		Broker = (Byte)'1',
+
+		/// <summary>
+		/// ×ÔÓª
+		/// </summary>
+		Host = (Byte)'2',
+
+		/// <summary>
+		/// ×öÊĞÉÌ
+		/// </summary>
+		Maker = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcProductClassTypeÊÇÒ»¸ö²úÆ·ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumProductClassTypeType : Byte
+	{
+		/// <summary>
+		/// ÆÚ»õ
+		/// </summary>
+		Futures = (Byte)'1',
+
+		/// <summary>
+		/// ÆÚÈ¨
+		/// </summary>
+		Options = (Byte)'2',
+
+		/// <summary>
+		/// ×éºÏ
+		/// </summary>
+		Combination = (Byte)'3',
+
+		/// <summary>
+		/// ¼´ÆÚ
+		/// </summary>
+		Spot = (Byte)'4',
+
+		/// <summary>
+		/// ÆÚ×ªÏÖ
+		/// </summary>
+		EFP = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcInstLifePhaseTypeÊÇÒ»¸öºÏÔ¼ÉúÃüÖÜÆÚ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumInstLifePhaseType : Byte
+	{
+		/// <summary>
+		/// Î´ÉÏÊĞ
+		/// </summary>
+		NotStart = (Byte)'0',
+
+		/// <summary>
+		/// ÉÏÊĞ
+		/// </summary>
+		Started = (Byte)'1',
+
+		/// <summary>
+		/// Í£ÅÆ
+		/// </summary>
+		Pause = (Byte)'2',
+
+		/// <summary>
+		/// µ½ÆÚ
+		/// </summary>
+		Expired = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcDirectionTypeÊÇÒ»¸öÂòÂô·½ÏòÀàĞÍ
+	/// </summary>
+	public enum struct EnumDirectionType : Byte
+	{
+		/// <summary>
+		/// Âò
+		/// </summary>
+		Buy = (Byte)'0',
+
+		/// <summary>
+		/// Âô
+		/// </summary>
+		Sell = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcPositionTypeTypeÊÇÒ»¸ö³Ö²ÖÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumPositionTypeType : Byte
+	{
+		/// <summary>
+		/// ¾»³Ö²Ö
+		/// </summary>
+		Net = (Byte)'1',
+
+		/// <summary>
+		/// ×ÛºÏ³Ö²Ö
+		/// </summary>
+		Gross = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcPosiDirectionTypeÊÇÒ»¸ö³Ö²Ö¶à¿Õ·½ÏòÀàĞÍ
+	/// </summary>
+	public enum struct EnumPosiDirectionType : Byte
+	{
+		/// <summary>
+		/// ¾»
+		/// </summary>
+		Net = (Byte)'1',
+
+		/// <summary>
+		/// ¶àÍ·
+		/// </summary>
+		Long = (Byte)'2',
+
+		/// <summary>
+		/// ¿ÕÍ·
+		/// </summary>
+		Short = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcSysSettlementStatusTypeÊÇÒ»¸öÏµÍ³½áËã×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSysSettlementStatusType : Byte
+	{
+		/// <summary>
+		/// ²»»îÔ¾
+		/// </summary>
+		NonActive = (Byte)'1',
+
+		/// <summary>
+		/// Æô¶¯
+		/// </summary>
+		Startup = (Byte)'2',
+
+		/// <summary>
+		/// ²Ù×÷
+		/// </summary>
+		Operating = (Byte)'3',
+
+		/// <summary>
+		/// ½áËã
+		/// </summary>
+		Settlement = (Byte)'4',
+
+		/// <summary>
+		/// ½áËãÍê³É
+		/// </summary>
+		SettlementFinished = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcRatioAttrTypeÊÇÒ»¸ö·ÑÂÊÊôĞÔÀàĞÍ
+	/// </summary>
+	public enum struct EnumRatioAttrType : Byte
+	{
+		/// <summary>
+		/// ½»Ò×·ÑÂÊ
+		/// </summary>
+		Trade = (Byte)'0',
+
+		/// <summary>
+		/// ½áËã·ÑÂÊ
+		/// </summary>
+		Settlement = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcHedgeFlagTypeÊÇÒ»¸öÍ¶»úÌ×±£±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumHedgeFlagType : Byte
+	{
+		/// <summary>
+		/// Í¶»ú
+		/// </summary>
+		Speculation = (Byte)'1',
+
+		/// <summary>
+		/// Ì×Àû
+		/// </summary>
+		Arbitrage = (Byte)'2',
+
+		/// <summary>
+		/// Ì×±£
+		/// </summary>
+		Hedge = (Byte)'3',
+
+		/// <summary>
+		/// ×öÊĞÉÌ
+		/// </summary>
+		MarketMaker = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcClientIDTypeTypeÊÇÒ»¸ö½»Ò×±àÂëÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumClientIDTypeType : Byte
+	{
+		/// <summary>
+		/// Í¶»ú
+		/// </summary>
+		Speculation = (Byte)'1',
+
+		/// <summary>
+		/// Ì×Àû
+		/// </summary>
+		Arbitrage = (Byte)'2',
+
+		/// <summary>
+		/// Ì×±£
+		/// </summary>
+		Hedge = (Byte)'3'
+	};
+
+
+	/// <summary>
+	/// TFtdcOrderPriceTypeTypeÊÇÒ»¸ö±¨µ¥¼Û¸ñÌõ¼şÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrderPriceTypeType : Byte
+	{
+		/// <summary>
+		/// ÈÎÒâ¼Û
+		/// </summary>
+		AnyPrice = (Byte)'1',
+
+		/// <summary>
+		/// ÏŞ¼Û
+		/// </summary>
+		LimitPrice = (Byte)'2',
+
+		/// <summary>
+		/// ×îÓÅ¼Û
+		/// </summary>
+		BestPrice = (Byte)'3',
+
+		/// <summary>
+		/// ×îĞÂ¼Û
+		/// </summary>
+		LastPrice = (Byte)'4',
+
+		/// <summary>
+		/// ×îĞÂ¼Û¸¡¶¯ÉÏ¸¡1¸öticks
+		/// </summary>
+		LastPricePlusOneTicks = (Byte)'5',
+
+		/// <summary>
+		/// ×îĞÂ¼Û¸¡¶¯ÉÏ¸¡2¸öticks
+		/// </summary>
+		LastPricePlusTwoTicks = (Byte)'6',
+
+		/// <summary>
+		/// ×îĞÂ¼Û¸¡¶¯ÉÏ¸¡3¸öticks
+		/// </summary>
+		LastPricePlusThreeTicks = (Byte)'7',
+
+		/// <summary>
+		/// ÂôÒ»¼Û
+		/// </summary>
+		AskPrice1 = (Byte)'8',
+
+		/// <summary>
+		/// ÂôÒ»¼Û¸¡¶¯ÉÏ¸¡1¸öticks
+		/// </summary>
+		AskPrice1PlusOneTicks = (Byte)'9',
+
+		/// <summary>
+		/// ÂôÒ»¼Û¸¡¶¯ÉÏ¸¡2¸öticks
+		/// </summary>
+		AskPrice1PlusTwoTicks = (Byte)'A',
+
+		/// <summary>
+		/// ÂôÒ»¼Û¸¡¶¯ÉÏ¸¡3¸öticks
+		/// </summary>
+		AskPrice1PlusThreeTicks = (Byte)'B',
+
+		/// <summary>
+		/// ÂòÒ»¼Û
+		/// </summary>
+		BidPrice1 = (Byte)'C',
+
+		/// <summary>
+		/// ÂòÒ»¼Û¸¡¶¯ÉÏ¸¡1¸öticks
+		/// </summary>
+		BidPrice1PlusOneTicks = (Byte)'D',
+
+		/// <summary>
+		/// ÂòÒ»¼Û¸¡¶¯ÉÏ¸¡2¸öticks
+		/// </summary>
+		BidPrice1PlusTwoTicks = (Byte)'E',
+
+		/// <summary>
+		/// ÂòÒ»¼Û¸¡¶¯ÉÏ¸¡3¸öticks
+		/// </summary>
+		BidPrice1PlusThreeTicks = (Byte)'F',
+		/// <summary>
+		/// Îåµµ¼Û
+		/// </summary>
+		FiveLevelPrice = (Byte)'G'
+	};
+
+	/// <summary>
+	/// TFtdcOffsetFlagTypeÊÇÒ»¸ö¿ªÆ½±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumOffsetFlagType : Byte
+	{
+		/// <summary>
+		/// ¿ª²Ö
+		/// </summary>
+		Open = (Byte)'0',
+
+		/// <summary>
+		/// Æ½²Ö
+		/// </summary>
+		Close = (Byte)'1',
+
+		/// <summary>
+		/// Ç¿Æ½
+		/// </summary>
+		ForceClose = (Byte)'2',
+
+		/// <summary>
+		/// Æ½½ñ
+		/// </summary>
+		CloseToday = (Byte)'3',
+
+		/// <summary>
+		/// Æ½×ò
+		/// </summary>
+		CloseYesterday = (Byte)'4',
+
+		/// <summary>
+		/// Ç¿¼õ
+		/// </summary>
+		ForceOff = (Byte)'5',
+
+		/// <summary>
+		/// ±¾µØÇ¿Æ½
+		/// </summary>
+		LocalForceClose = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcForceCloseReasonTypeÊÇÒ»¸öÇ¿Æ½Ô­ÒòÀàĞÍ
+	/// </summary>
+	public enum struct EnumForceCloseReasonType : Byte
+	{
+		/// <summary>
+		/// ·ÇÇ¿Æ½
+		/// </summary>
+		NotForceClose = (Byte)'0',
+
+		/// <summary>
+		/// ×Ê½ğ²»×ã
+		/// </summary>
+		LackDeposit = (Byte)'1',
+
+		/// <summary>
+		/// ¿Í»§³¬²Ö
+		/// </summary>
+		ClientOverPositionLimit = (Byte)'2',
+
+		/// <summary>
+		/// »áÔ±³¬²Ö
+		/// </summary>
+		MemberOverPositionLimit = (Byte)'3',
+
+		/// <summary>
+		/// ³Ö²Ö·ÇÕûÊı±¶
+		/// </summary>
+		NotMultiple = (Byte)'4',
+
+		/// <summary>
+		/// Î¥¹æ
+		/// </summary>
+		Violation = (Byte)'5',
+
+		/// <summary>
+		/// ÆäËü
+		/// </summary>
+		Other = (Byte)'6',
+
+		/// <summary>
+		/// ×ÔÈ»ÈËÁÙ½ü½»¸î
+		/// </summary>
+		PersonDeliv = (Byte)'7'
+	};
+
+	/// <summary>
+	/// TFtdcOrderTypeTypeÊÇÒ»¸ö±¨µ¥ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrderTypeType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'0',
+
+		/// <summary>
+		/// ±¨¼ÛÑÜÉú
+		/// </summary>
+		DeriveFromQuote = (Byte)'1',
+
+		/// <summary>
+		/// ×éºÏÑÜÉú
+		/// </summary>
+		DeriveFromCombination = (Byte)'2',
+
+		/// <summary>
+		/// ×éºÏ±¨µ¥
+		/// </summary>
+		Combination = (Byte)'3',
+
+		/// <summary>
+		/// Ìõ¼şµ¥
+		/// </summary>
+		ConditionalOrder = (Byte)'4',
+
+		/// <summary>
+		/// »¥»»µ¥
+		/// </summary>
+		Swap = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcTimeConditionTypeÊÇÒ»¸öÓĞĞ§ÆÚÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumTimeConditionType : Byte
+	{
+		/// <summary>
+		/// Á¢¼´Íê³É£¬·ñÔò³·Ïú
+		/// </summary>
+		IOC = (Byte)'1',
+
+		/// <summary>
+		/// ±¾½ÚÓĞĞ§
+		/// </summary>
+		GFS = (Byte)'2',
+
+		/// <summary>
+		/// µ±ÈÕÓĞĞ§
+		/// </summary>
+		GFD = (Byte)'3',
+
+		/// <summary>
+		/// Ö¸¶¨ÈÕÆÚÇ°ÓĞĞ§
+		/// </summary>
+		GTD = (Byte)'4',
+
+		/// <summary>
+		/// ³·ÏúÇ°ÓĞĞ§
+		/// </summary>
+		GTC = (Byte)'5',
+
+		/// <summary>
+		/// ¼¯ºÏ¾º¼ÛÓĞĞ§
+		/// </summary>
+		GFA = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcVolumeConditionTypeÊÇÒ»¸ö³É½»Á¿ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumVolumeConditionType : Byte
+	{
+		/// <summary>
+		/// ÈÎºÎÊıÁ¿
+		/// </summary>
+		AV = (Byte)'1',
+
+		/// <summary>
+		/// ×îĞ¡ÊıÁ¿
+		/// </summary>
+		MV = (Byte)'2',
+
+		/// <summary>
+		/// È«²¿ÊıÁ¿
+		/// </summary>
+		CV = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcContingentConditionTypeÊÇÒ»¸ö´¥·¢Ìõ¼şÀàĞÍ
+	/// </summary>
+	public enum struct EnumContingentConditionType : Byte
+	{
+		/// <summary>
+		/// Á¢¼´
+		/// </summary>
+		Immediately = (Byte)'1',
+
+		/// <summary>
+		/// Ö¹Ëğ
+		/// </summary>
+		Touch = (Byte)'2',
+
+		/// <summary>
+		/// Ö¹Ó®
+		/// </summary>
+		TouchProfit = (Byte)'3',
+
+		/// <summary>
+		/// Ô¤Âñµ¥
+		/// </summary>
+		ParkedOrder = (Byte)'4',
+
+		/// <summary>
+		/// ×îĞÂ¼Û´óÓÚÌõ¼ş¼Û
+		/// </summary>
+		LastPriceGreaterThanStopPrice = (Byte)'5',
+
+		/// <summary>
+		/// ×îĞÂ¼Û´óÓÚµÈÓÚÌõ¼ş¼Û
+		/// </summary>
+		LastPriceGreaterEqualStopPrice = (Byte)'6',
+
+		/// <summary>
+		/// ×îĞÂ¼ÛĞ¡ÓÚÌõ¼ş¼Û
+		/// </summary>
+		LastPriceLesserThanStopPrice = (Byte)'7',
+
+		/// <summary>
+		/// ×îĞÂ¼ÛĞ¡ÓÚµÈÓÚÌõ¼ş¼Û
+		/// </summary>
+		LastPriceLesserEqualStopPrice = (Byte)'8',
+
+		/// <summary>
+		/// ÂôÒ»¼Û´óÓÚÌõ¼ş¼Û
+		/// </summary>
+		AskPriceGreaterThanStopPrice = (Byte)'9',
+
+		/// <summary>
+		/// ÂôÒ»¼Û´óÓÚµÈÓÚÌõ¼ş¼Û
+		/// </summary>
+		AskPriceGreaterEqualStopPrice = (Byte)'A',
+
+		/// <summary>
+		/// ÂôÒ»¼ÛĞ¡ÓÚÌõ¼ş¼Û
+		/// </summary>
+		AskPriceLesserThanStopPrice = (Byte)'B',
+
+		/// <summary>
+		/// ÂôÒ»¼ÛĞ¡ÓÚµÈÓÚÌõ¼ş¼Û
+		/// </summary>
+		AskPriceLesserEqualStopPrice = (Byte)'C',
+
+		/// <summary>
+		/// ÂòÒ»¼Û´óÓÚÌõ¼ş¼Û
+		/// </summary>
+		BidPriceGreaterThanStopPrice = (Byte)'D',
+
+		/// <summary>
+		/// ÂòÒ»¼Û´óÓÚµÈÓÚÌõ¼ş¼Û
+		/// </summary>
+		BidPriceGreaterEqualStopPrice = (Byte)'E',
+
+		/// <summary>
+		/// ÂòÒ»¼ÛĞ¡ÓÚÌõ¼ş¼Û
+		/// </summary>
+		BidPriceLesserThanStopPrice = (Byte)'F',
+
+		/// <summary>
+		/// ÂòÒ»¼ÛĞ¡ÓÚµÈÓÚÌõ¼ş¼Û
+		/// </summary>
+		BidPriceLesserEqualStopPrice = (Byte)'H'
+	};
+
+	/// <summary>
+	/// TFtdcActionFlagTypeÊÇÒ»¸ö²Ù×÷±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumActionFlagType : Byte
+	{
+		/// <summary>
+		/// É¾³ı
+		/// </summary>
+		Delete = (Byte)'0',
+
+		/// <summary>
+		/// ĞŞ¸Ä
+		/// </summary>
+		Modify = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcTradingRightTypeÊÇÒ»¸ö½»Ò×È¨ÏŞÀàĞÍ
+	/// </summary>
+	public enum struct EnumTradingRightType : Byte
+	{
+		/// <summary>
+		/// ¿ÉÒÔ½»Ò×
+		/// </summary>
+		Allow = (Byte)'0',
+
+		/// <summary>
+		/// Ö»ÄÜÆ½²Ö
+		/// </summary>
+		CloseOnly = (Byte)'1',
+
+		/// <summary>
+		/// ²»ÄÜ½»Ò×
+		/// </summary>
+		Forbidden = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcOrderSourceTypeÊÇÒ»¸ö±¨µ¥À´Ô´ÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrderSourceType : Byte
+	{
+		/// <summary>
+		/// À´×Ô²ÎÓëÕß
+		/// </summary>
+		Participant = (Byte)'0',
+
+		/// <summary>
+		/// À´×Ô¹ÜÀíÔ±
+		/// </summary>
+		Administrator = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcTradeTypeTypeÊÇÒ»¸ö³É½»ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumTradeTypeType : Byte
+	{
+		/// <summary>
+		/// ×éºÏ³Ö²Ö²ğ·ÖÎªµ¥Ò»³Ö²Ö,³õÊ¼»¯²»Ó¦°üº¬¸ÃÀàĞÍµÄ³Ö²Ö
+		/// </summary>
+		SplitCombination = (Byte)'#',
+		/// <summary>
+		/// ÆÕÍ¨³É½»
+		/// </summary>
+		Common = (Byte)'0',
+
+		/// <summary>
+		/// ÆÚÈ¨Ö´ĞĞ
+		/// </summary>
+		OptionsExecution = (Byte)'1',
+
+		/// <summary>
+		/// OTC³É½»
+		/// </summary>
+		OTC = (Byte)'2',
+
+		/// <summary>
+		/// ÆÚ×ªÏÖÑÜÉú³É½»
+		/// </summary>
+		EFPDerived = (Byte)'3',
+
+		/// <summary>
+		/// ×éºÏÑÜÉú³É½»
+		/// </summary>
+		CombinationDerived = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcPriceSourceTypeÊÇÒ»¸ö³É½»¼ÛÀ´Ô´ÀàĞÍ
+	/// </summary>
+	public enum struct EnumPriceSourceType : Byte
+	{
+		/// <summary>
+		/// Ç°³É½»¼Û
+		/// </summary>
+		LastPrice = (Byte)'0',
+
+		/// <summary>
+		/// ÂòÎ¯ÍĞ¼Û
+		/// </summary>
+		Buy = (Byte)'1',
+
+		/// <summary>
+		/// ÂôÎ¯ÍĞ¼Û
+		/// </summary>
+		Sell = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcInstrumentStatusTypeÊÇÒ»¸öºÏÔ¼½»Ò××´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumInstrumentStatusType : Byte
+	{
+		/// <summary>
+		/// ¿ªÅÌÇ°
+		/// </summary>
+		BeforeTrading = (Byte)'0',
+
+		/// <summary>
+		/// ·Ç½»Ò×
+		/// </summary>
+		NoTrading = (Byte)'1',
+
+		/// <summary>
+		/// Á¬Ğø½»Ò×
+		/// </summary>
+		Continous = (Byte)'2',
+
+		/// <summary>
+		/// ¼¯ºÏ¾º¼Û±¨µ¥
+		/// </summary>
+		AuctionOrdering = (Byte)'3',
+
+		/// <summary>
+		/// ¼¯ºÏ¾º¼Û¼Û¸ñÆ½ºâ
+		/// </summary>
+		AuctionBalance = (Byte)'4',
+
+		/// <summary>
+		/// ¼¯ºÏ¾º¼Û´éºÏ
+		/// </summary>
+		AuctionMatch = (Byte)'5',
+
+		/// <summary>
+		/// ÊÕÅÌ
+		/// </summary>
+		Closed = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcInstStatusEnterReasonTypeÊÇÒ»¸öÆ·ÖÖ½øÈë½»Ò××´Ì¬Ô­ÒòÀàĞÍ
+	/// </summary>
+	public enum struct EnumInstStatusEnterReasonType : Byte
+	{
+		/// <summary>
+		/// ×Ô¶¯ÇĞ»»
+		/// </summary>
+		Automatic = (Byte)'1',
+
+		/// <summary>
+		/// ÊÖ¶¯ÇĞ»»
+		/// </summary>
+		Manual = (Byte)'2',
+
+		/// <summary>
+		/// ÈÛ¶Ï
+		/// </summary>
+		Fuse = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcBatchStatusTypeÊÇÒ»¸ö´¦Àí×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumBatchStatusType : Byte
+	{
+		/// <summary>
+		/// Î´ÉÏ´«
+		/// </summary>
+		NoUpload = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑÉÏ´«
+		/// </summary>
+		Uploaded = (Byte)'2',
+
+		/// <summary>
+		/// ÉóºËÊ§°Ü
+		/// </summary>
+		Failed = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcReturnStyleTypeÊÇÒ»¸ö°´Æ·ÖÖ·µ»¹·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumReturnStyleType : Byte
+	{
+		/// <summary>
+		/// °´ËùÓĞÆ·ÖÖ
+		/// </summary>
+		All = (Byte)'1',
+
+		/// <summary>
+		/// °´Æ·ÖÖ
+		/// </summary>
+		ByProduct = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcReturnPatternTypeÊÇÒ»¸ö·µ»¹Ä£Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumReturnPatternType : Byte
+	{
+		/// <summary>
+		/// °´³É½»ÊÖÊı
+		/// </summary>
+		ByVolume = (Byte)'1',
+
+		/// <summary>
+		/// °´Áô´æÊÖĞø·Ñ
+		/// </summary>
+		ByFeeOnHand = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcReturnLevelTypeÊÇÒ»¸ö·µ»¹¼¶±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumReturnLevelType : Byte
+	{
+		/// <summary>
+		/// ¼¶±ğ1
+		/// </summary>
+		Level1 = (Byte)'1',
+
+		/// <summary>
+		/// ¼¶±ğ2
+		/// </summary>
+		Level2 = (Byte)'2',
+
+		/// <summary>
+		/// ¼¶±ğ3
+		/// </summary>
+		Level3 = (Byte)'3',
+
+		/// <summary>
+		/// ¼¶±ğ4
+		/// </summary>
+		Level4 = (Byte)'4',
+
+		/// <summary>
+		/// ¼¶±ğ5
+		/// </summary>
+		Level5 = (Byte)'5',
+
+		/// <summary>
+		/// ¼¶±ğ6
+		/// </summary>
+		Level6 = (Byte)'6',
+
+		/// <summary>
+		/// ¼¶±ğ7
+		/// </summary>
+		Level7 = (Byte)'7',
+
+		/// <summary>
+		/// ¼¶±ğ8
+		/// </summary>
+		Level8 = (Byte)'8',
+
+		/// <summary>
+		/// ¼¶±ğ9
+		/// </summary>
+		Level9 = (Byte)'9'
+	};
+
+	/// <summary>
+	/// TFtdcReturnStandardTypeÊÇÒ»¸ö·µ»¹±ê×¼ÀàĞÍ
+	/// </summary>
+	public enum struct EnumReturnStandardType : Byte
+	{
+		/// <summary>
+		/// ·Ö½×¶Î·µ»¹
+		/// </summary>
+		ByPeriod = (Byte)'1',
+
+		/// <summary>
+		/// °´Ä³Ò»±ê×¼
+		/// </summary>
+		ByStandard = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcMortgageTypeTypeÊÇÒ»¸öÖÊÑºÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumMortgageTypeType : Byte
+	{
+		/// <summary>
+		/// ÖÊ³ö
+		/// </summary>
+		Out = (Byte)'0',
+
+		/// <summary>
+		/// ÖÊÈë
+		/// </summary>
+		In = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcInvestorSettlementParamIDTypeÊÇÒ»¸öÍ¶×ÊÕß½áËã²ÎÊı´úÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumInvestorSettlementParamIDType : Byte
+	{
+		/// <summary>
+		/// »ù´¡±£Ö¤½ğ
+		/// </summary>
+		BaseMargin = (Byte)'1',
+
+		/// <summary>
+		/// ×îµÍÈ¨Òæ±ê×¼
+		/// </summary>
+		LowestInterest = (Byte)'2',
+
+		/// <summary>
+		/// ÖÊÑº±ÈÀı
+		/// </summary>
+		MortgageRatio = (Byte)'4',
+
+		/// <summary>
+		/// ±£Ö¤½ğËã·¨
+		/// </summary>
+		MarginWay = (Byte)'5',
+
+		/// <summary>
+		/// ½áËãµ¥½á´æÊÇ·ñ°üº¬ÖÊÑº
+		/// </summary>
+		BillDeposit = (Byte)'9'
+	};
+
+	/// <summary>
+	/// TFtdcExchangeSettlementParamIDTypeÊÇÒ»¸ö½»Ò×Ëù½áËã²ÎÊı´úÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumExchangeSettlementParamIDType : Byte
+	{
+		/// <summary>
+		/// ÖÊÑº±ÈÀı
+		/// </summary>
+		MortgageRatio = (Byte)'1',
+
+		/// <summary>
+		/// ·ÖÏî×Ê½ğµ¼ÈëÏî
+		/// </summary>
+		OtherFundItem = (Byte)'2',
+
+		/// <summary>
+		/// ·ÖÏî×Ê½ğÈë½»Ò×Ëù³öÈë½ğ
+		/// </summary>
+		OtherFundImport = (Byte)'3',
+
+		/// <summary>
+		/// ÉÏÆÚËù½»¸îÊÖĞø·ÑÊÕÈ¡·½Ê½
+		/// </summary>
+		SHFEDelivFee = (Byte)'4',
+
+		/// <summary>
+		/// ´óÉÌËù½»¸îÊÖĞø·ÑÊÕÈ¡·½Ê½
+		/// </summary>
+		DCEDelivFee = (Byte)'5',
+
+		/// <summary>
+		/// ÖĞ½ğËù¿ª»§×îµÍ¿ÉÓÃ½ğ¶î
+		/// </summary>
+		CFFEXMinPrepa = (Byte)'6',
+
+		/// <summary>
+		/// Ö£ÉÌËù½áËã·½Ê½
+		/// </summary>
+		CZCESettlementType = (Byte)'7'
+	};
+
+	/// <summary>
+	/// TFtdcSystemParamIDTypeÊÇÒ»¸öÏµÍ³²ÎÊı´úÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumSystemParamIDType : Byte
+	{
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë×îĞ¡³¤¶È
+		/// </summary>
+		InvestorIDMinLength = (Byte)'1',
+
+		/// <summary>
+		/// Í¶×ÊÕßÕÊºÅ´úÂë×îĞ¡³¤¶È
+		/// </summary>
+		AccountIDMinLength = (Byte)'2',
+
+		/// <summary>
+		/// Í¶×ÊÕß¿ª»§Ä¬ÈÏµÇÂ¼È¨ÏŞ
+		/// </summary>
+		UserRightLogon = (Byte)'3',
+
+		/// <summary>
+		/// Í¶×ÊÕß½»Ò×½áËãµ¥³É½»»ã×Ü·½Ê½
+		/// </summary>
+		SettlementBillTrade = (Byte)'4',
+
+		/// <summary>
+		/// Í³Ò»¿ª»§¸üĞÂ½»Ò×±àÂë·½Ê½
+		/// </summary>
+		TradingCode = (Byte)'5',
+
+		/// <summary>
+		/// ½áËãÊÇ·ñÅĞ¶Ï´æÔÚÎ´¸´ºËµÄ³öÈë½ğºÍ·ÖÏî×Ê½ğ
+		/// </summary>
+		CheckFund = (Byte)'6',
+
+		/// <summary>
+		/// ÊÇ·ñÆôÓÃÊÖĞø·ÑÄ£°åÊı¾İÈ¨ÏŞ
+		/// </summary>
+		CommModelRight = (Byte)'7',
+
+		/// <summary>
+		/// ÊÇ·ñÆôÓÃ±£Ö¤½ğÂÊÄ£°åÊı¾İÈ¨ÏŞ
+		/// </summary>
+		MarginModelRight = (Byte)'9',
+
+		/// <summary>
+		/// ÊÇ·ñ¹æ·¶ÓÃ»§²ÅÄÜ¼¤»î
+		/// </summary>
+		IsStandardActive = (Byte)'8',
+
+		/// <summary>
+		/// ÉÏ´«µÄ½áËãÎÄ¼ş±êÊ¶
+		/// </summary>
+		UploadSettlementFile = (Byte)'U',
+
+		/// <summary>
+		/// ÏÂÔØµÄ±£Ö¤½ğ´æ¹ÜÎÄ¼ş
+		/// </summary>
+		DownloadCSRCFile = (Byte)'D',
+
+		/// <summary>
+		/// ½áËãµ¥ÎÄ¼ş±êÊ¶
+		/// </summary>
+		SettlementBillFile = (Byte)'S',
+
+		/// <summary>
+		/// Ö¤¼à»áÎÄ¼ş±êÊ¶
+		/// </summary>
+		CSRCOthersFile = (Byte)'C',
+
+		/// <summary>
+		/// Í¶×ÊÕßÕÕÆ¬Â·¾¶
+		/// </summary>
+		InvestorPhoto = (Byte)'P',
+
+		/// <summary>
+		/// ÉÏ±¨±£Ö¤½ğ¼à¿ØÖĞĞÄÊı¾İ
+		/// </summary>
+		CSRCData = (Byte)'R',
+
+		/// <summary>
+		/// ¿ª»§ÃÜÂëÂ¼Èë·½Ê½
+		/// </summary>
+		InvestorPwdModel = (Byte)'I',
+
+		/// <summary>
+		/// Í¶×ÊÕßÖĞ½ğËù½áËãÎÄ¼şÏÂÔØÂ·¾¶
+		/// </summary>
+		CFFEXInvestorSettleFile = (Byte)'F',
+
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë±àÂë·½Ê½
+		/// </summary>
+		InvestorIDType = (Byte)'a',
+
+		/// <summary>
+		/// ĞİÃß»§×î¸ßÈ¨Òæ
+		/// </summary>
+		FreezeMaxReMain = (Byte)'r',
+
+		/// <summary>
+		/// ÊÖĞø·ÑÏà¹Ø²Ù×÷ÊµÊ±ÉÏ³¡¿ª¹Ø
+		/// </summary>
+		IsSync = (Byte)'A'
+	};
+
+	/// <summary>
+	/// TFtdcTradeParamIDTypeÊÇÒ»¸ö½»Ò×ÏµÍ³²ÎÊı´úÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumTradeParamIDType : Byte
+	{
+		/// <summary>
+		/// ÏµÍ³¼ÓÃÜËã·¨
+		/// </summary>
+		EncryptionStandard = (Byte)'E',
+
+		/// <summary>
+		/// ÏµÍ³·çÏÕËã·¨
+		/// </summary>
+		RiskMode = (Byte)'R',
+
+		/// <summary>
+		/// ÏµÍ³·çÏÕËã·¨ÊÇ·ñÈ«¾Ö 0-·ñ 1-ÊÇ
+		/// </summary>
+		RiskModeGlobal = (Byte)'G'
+	};
+
+	/// <summary>
+	/// TFtdcFileIDTypeÊÇÒ»¸öÎÄ¼ş±êÊ¶ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFileIDType : Byte
+	{
+		/// <summary>
+		/// ×Ê½ğÊı¾İ
+		/// </summary>
+		SettlementFund = (Byte)'F',
+
+		/// <summary>
+		/// ³É½»Êı¾İ
+		/// </summary>
+		Trade = (Byte)'T',
+
+		/// <summary>
+		/// Í¶×ÊÕß³Ö²ÖÊı¾İ
+		/// </summary>
+		InvestorPosition = (Byte)'P',
+
+		/// <summary>
+		/// Í¶×ÊÕß·ÖÏî×Ê½ğÊı¾İ
+		/// </summary>
+		SubEntryFund = (Byte)'O',
+
+		/// <summary>
+		/// Ö£ÉÌËù×éºÏ³Ö²ÖÊı¾İ
+		/// </summary>
+		CZCECombinationPos = (Byte)'C',
+
+		/// <summary>
+		/// ÉÏ±¨±£Ö¤½ğ¼à¿ØÖĞĞÄÊı¾İ
+		/// </summary>
+		CSRCData = (Byte)'R',
+
+		/// <summary>
+		/// Ö£ÉÌËùÆ½²ÖÁË½áÊı¾İ
+		/// </summary>
+		CZCEClose = (Byte)'L',
+
+		/// <summary>
+		/// Ö£ÉÌËù·ÇÆ½²ÖÁË½áÊı¾İ
+		/// </summary>
+		CZCENoClose = (Byte)'N'
+
+	};
+
+	/// <summary>
+	/// TFtdcFileTypeTypeÊÇÒ»¸öÎÄ¼şÉÏ´«ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumFileTypeType : Byte
+	{
+		/// <summary>
+		/// ½áËã
+		/// </summary>
+		Settlement = (Byte)'0',
+
+		/// <summary>
+		/// ºË¶Ô
+		/// </summary>
+		Check = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcFileFormatTypeÊÇÒ»¸öÎÄ¼ş¸ñÊ½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFileFormatType : Byte
+	{
+		/// <summary>
+		/// ÎÄ±¾ÎÄ¼ş(.txt)
+		/// </summary>
+		Txt = (Byte)'0',
+
+		/// <summary>
+		/// Ñ¹ËõÎÄ¼ş(.zip)
+		/// </summary>
+		Zip = (Byte)'1',
+
+		/// <summary>
+		/// DBFÎÄ¼ş(.dbf)
+		/// </summary>
+		DBF = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcFileUploadStatusTypeÊÇÒ»¸öÎÄ¼ş×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFileUploadStatusType : Byte
+	{
+		/// <summary>
+		/// ÉÏ´«³É¹¦
+		/// </summary>
+		SucceedUpload = (Byte)'1',
+
+		/// <summary>
+		/// ÉÏ´«Ê§°Ü
+		/// </summary>
+		FailedUpload = (Byte)'2',
+
+		/// <summary>
+		/// µ¼Èë³É¹¦
+		/// </summary>
+		SucceedLoad = (Byte)'3',
+
+		/// <summary>
+		/// µ¼Èë²¿·Ö³É¹¦
+		/// </summary>
+		PartSucceedLoad = (Byte)'4',
+
+		/// <summary>
+		/// µ¼ÈëÊ§°Ü
+		/// </summary>
+		FailedLoad = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcTransferDirectionTypeÊÇÒ»¸öÒÆ²Ö·½ÏòÀàĞÍ
+	/// </summary>
+	public enum struct EnumTransferDirectionType : Byte
+	{
+		/// <summary>
+		/// ÒÆ³ö
+		/// </summary>
+		Out = (Byte)'0',
+
+		/// <summary>
+		/// ÒÆÈë
+		/// </summary>
+		In = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcBankFlagTypeÊÇÒ»¸öÒøĞĞÍ³Ò»±êÊ¶ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumBankFlagType : Byte
+	{
+		/// <summary>
+		/// ¹¤ÉÌÒøĞĞ
+		/// </summary>
+		ICBC = (Byte)'1',
+
+		/// <summary>
+		/// Å©ÒµÒøĞĞ
+		/// </summary>
+		ABC = (Byte)'2',
+
+		/// <summary>
+		/// ÖĞ¹úÒøĞĞ
+		/// </summary>
+		BC = (Byte)'3',
+
+		/// <summary>
+		/// ½¨ÉèÒøĞĞ
+		/// </summary>
+		CBC = (Byte)'4',
+
+		/// <summary>
+		/// ½»Í¨ÒøĞĞ
+		/// </summary>
+		BOC = (Byte)'5',
+
+		/// <summary>
+		/// ÆäËûÒøĞĞ
+		/// </summary>
+		Other = (Byte)'Z'
+	};
+
+	/// <summary>
+	/// TFtdcSpecialCreateRuleTypeÊÇÒ»¸öÌØÊâµÄ´´½¨¹æÔòÀàĞÍ
+	/// </summary>
+	public enum struct EnumSpecialCreateRuleType : Byte
+	{
+		/// <summary>
+		/// Ã»ÓĞÌØÊâ´´½¨¹æÔò
+		/// </summary>
+		NoSpecialRule = (Byte)'0',
+
+		/// <summary>
+		/// ²»°üº¬´º½Ú
+		/// </summary>
+		NoSpringFestival = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcBasisPriceTypeTypeÊÇÒ»¸ö¹ÒÅÆ»ù×¼¼ÛÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumBasisPriceTypeType : Byte
+	{
+		/// <summary>
+		/// ÉÏÒ»ºÏÔ¼½áËã¼Û
+		/// </summary>
+		LastSettlement = (Byte)'1',
+
+		/// <summary>
+		/// ÉÏÒ»ºÏÔ¼ÊÕÅÌ¼Û
+		/// </summary>
+		LaseClose = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcProductLifePhaseTypeÊÇÒ»¸ö²úÆ·ÉúÃüÖÜÆÚ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumProductLifePhaseType : Byte
+	{
+		/// <summary>
+		/// »îÔ¾
+		/// </summary>
+		Active = (Byte)'1',
+
+		/// <summary>
+		/// ²»»îÔ¾
+		/// </summary>
+		NonActive = (Byte)'2',
+
+		/// <summary>
+		/// ×¢Ïú
+		/// </summary>
+		Canceled = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcDeliveryModeTypeÊÇÒ»¸ö½»¸î·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumDeliveryModeType : Byte
+	{
+		/// <summary>
+		/// ÏÖ½ğ½»¸î
+		/// </summary>
+		CashDeliv = (Byte)'1',
+
+		/// <summary>
+		/// ÊµÎï½»¸î
+		/// </summary>
+		CommodityDeliv = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcFundIOTypeTypeÊÇÒ»¸ö³öÈë½ğÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumFundIOTypeType : Byte
+	{
+		/// <summary>
+		/// ³öÈë½ğ
+		/// </summary>
+		FundIO = (Byte)'1',
+
+		/// <summary>
+		/// ÒøÆÚ×ªÕÊ
+		/// </summary>
+		Transfer = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcFundTypeTypeÊÇÒ»¸ö×Ê½ğÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumFundTypeType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ´æ¿î
+		/// </summary>
+		Deposite = (Byte)'1',
+
+		/// <summary>
+		/// ·ÖÏî×Ê½ğ
+		/// </summary>
+		ItemFund = (Byte)'2',
+
+		/// <summary>
+		/// ¹«Ë¾µ÷Õû
+		/// </summary>
+		Company = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcFundDirectionTypeÊÇÒ»¸ö³öÈë½ğ·½ÏòÀàĞÍ
+	/// </summary>
+	public enum struct EnumFundDirectionType : Byte
+	{
+		/// <summary>
+		/// Èë½ğ
+		/// </summary>
+		In = (Byte)'1',
+
+		/// <summary>
+		/// ³ö½ğ
+		/// </summary>
+		Out = (Byte)'2'
+	};
+	/// <summary>
+	/// TFtdcFundStatusTypeÊÇÒ»¸ö×Ê½ğ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFundStatusType : Byte
+	{
+		/// <summary>
+		/// ÒÑÂ¼Èë
+		/// </summary>
+		Record = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑ¸´ºË
+		/// </summary>
+		Check = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑ³åÏú
+		/// </summary>
+		Charge = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcPublishStatusTypeÊÇÒ»¸ö·¢²¼×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumPublishStatusType : Byte
+	{
+		/// <summary>
+		/// Î´·¢²¼
+		/// </summary>
+		None = (Byte)'1',
+
+		/// <summary>
+		/// ÕıÔÚ·¢²¼
+		/// </summary>
+		Publishing = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑ·¢²¼
+		/// </summary>
+		Published = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcSystemStatusTypeÊÇÒ»¸öÏµÍ³×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSystemStatusType : Byte
+	{
+		/// <summary>
+		/// ²»»îÔ¾
+		/// </summary>
+		NonActive = (Byte)'1',
+
+		/// <summary>
+		/// Æô¶¯
+		/// </summary>
+		Startup = (Byte)'2',
+
+		/// <summary>
+		/// ½»Ò×¿ªÊ¼³õÊ¼»¯
+		/// </summary>
+		Initialize = (Byte)'3',
+
+		/// <summary>
+		/// ½»Ò×Íê³É³õÊ¼»¯
+		/// </summary>
+		Initialized = (Byte)'4',
+
+		/// <summary>
+		/// ÊÕÊĞ¿ªÊ¼
+		/// </summary>
+		Close = (Byte)'5',
+
+		/// <summary>
+		/// ÊÕÊĞÍê³É
+		/// </summary>
+		Closed = (Byte)'6',
+
+		/// <summary>
+		/// ½áËã
+		/// </summary>
+		Settlement = (Byte)'7'
+	};
+
+	/// <summary>
+	/// TFtdcSettlementStatusTypeÊÇÒ»¸ö½áËã×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSettlementStatusType : Byte
+	{
+		/// <summary>
+		/// ³õÊ¼
+		/// </summary>
+		Initialize = (Byte)'0',
+
+		/// <summary>
+		/// ½áËãÖĞ
+		/// </summary>
+		Settlementing = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑ½áËã
+		/// </summary>
+		Settlemented = (Byte)'2',
+
+		/// <summary>
+		/// ½áËãÍê³É
+		/// </summary>
+		Finished = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcInvestorTypeTypeÊÇÒ»¸öÍ¶×ÊÕßÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumInvestorTypeType : Byte
+	{
+		/// <summary>
+		/// ×ÔÈ»ÈË
+		/// </summary>
+		Person = (Byte)'0',
+
+		/// <summary>
+		/// ·¨ÈË
+		/// </summary>
+		Company = (Byte)'1',
+
+		/// <summary>
+		/// Í¶×Ê»ù½ğ
+		/// </summary>
+		Fund = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcBrokerTypeTypeÊÇÒ»¸ö¾­¼Í¹«Ë¾ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumBrokerTypeType : Byte
+	{
+		/// <summary>
+		/// ½»Ò×»áÔ±
+		/// </summary>
+		Trade = (Byte)'0',
+
+		/// <summary>
+		/// ½»Ò×½áËã»áÔ±
+		/// </summary>
+		TradeSettle = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcRiskLevelTypeÊÇÒ»¸ö·çÏÕµÈ¼¶ÀàĞÍ
+	/// </summary>
+	public enum struct EnumRiskLevelType : Byte
+	{
+		/// <summary>
+		/// µÍ·çÏÕ¿Í»§
+		/// </summary>
+		Low = (Byte)'1',
+
+		/// <summary>
+		/// ÆÕÍ¨¿Í»§
+		/// </summary>
+		Normal = (Byte)'2',
+
+		/// <summary>
+		/// ¹Ø×¢¿Í»§
+		/// </summary>
+		Focus = (Byte)'3',
+
+		/// <summary>
+		/// ·çÏÕ¿Í»§
+		/// </summary>
+		Risk = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcFeeAcceptStyleTypeÊÇÒ»¸öÊÖĞø·ÑÊÕÈ¡·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFeeAcceptStyleType : Byte
+	{
+		/// <summary>
+		/// °´½»Ò×ÊÕÈ¡
+		/// </summary>
+		ByTrade = (Byte)'1',
+
+		/// <summary>
+		/// °´½»¸îÊÕÈ¡
+		/// </summary>
+		ByDeliv = (Byte)'2',
+
+		/// <summary>
+		/// ²»ÊÕ
+		/// </summary>
+		None = (Byte)'3',
+
+		/// <summary>
+		/// °´Ö¸¶¨ÊÖĞø·ÑÊÕÈ¡
+		/// </summary>
+		FixFee = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcPasswordTypeTypeÊÇÒ»¸öÃÜÂëÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumPasswordTypeType : Byte
+	{
+		/// <summary>
+		/// ½»Ò×ÃÜÂë
+		/// </summary>
+		Trade = (Byte)'1',
+
+		/// <summary>
+		/// ×Ê½ğÃÜÂë
+		/// </summary>
+		Account = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcAlgorithmTypeÊÇÒ»¸öÓ¯¿÷Ëã·¨ÀàĞÍ
+	/// </summary>
+	public enum struct EnumAlgorithmType : Byte
+	{
+		/// <summary>
+		/// ¸¡Ó¯¸¡¿÷¶¼¼ÆËã
+		/// </summary>
+		All = (Byte)'1',
+
+		/// <summary>
+		/// ¸¡Ó¯²»¼Æ£¬¸¡¿÷¼Æ
+		/// </summary>
+		OnlyLost = (Byte)'2',
+
+		/// <summary>
+		/// ¸¡Ó¯¼Æ£¬¸¡¿÷²»¼Æ
+		/// </summary>
+		OnlyGain = (Byte)'3',
+
+		/// <summary>
+		/// ¸¡Ó¯¸¡¿÷¶¼²»¼ÆËã
+		/// </summary>
+		None = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcIncludeCloseProfitTypeÊÇÒ»¸öÊÇ·ñ°üº¬Æ½²ÖÓ¯ÀûÀàĞÍ
+	/// </summary>
+	public enum struct EnumIncludeCloseProfitType : Byte
+	{
+		/// <summary>
+		/// °üº¬Æ½²ÖÓ¯Àû
+		/// </summary>
+		Include = (Byte)'0',
+
+		/// <summary>
+		/// ²»°üº¬Æ½²ÖÓ¯Àû
+		/// </summary>
+		NotInclude = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcAllWithoutTradeTypeÊÇÒ»¸öÊÇ·ñÊÜ¿ÉÌá±ÈÀıÏŞÖÆÀàĞÍ
+	/// </summary>
+	public enum struct EnumAllWithoutTradeType : Byte
+	{
+		/// <summary>
+		/// ²»ÊÜ¿ÉÌá±ÈÀıÏŞÖÆ
+		/// </summary>
+		Enable = (Byte)'0',
+
+		/// <summary>
+		/// ÊÜ¿ÉÌá±ÈÀıÏŞÖÆ
+		/// </summary>
+		Disable = (Byte)'2',
+
+		/// <summary>
+		///ÎŞ²Ö²»ÊÜ¿ÉÌá±ÈÀıÏŞÖÆ
+		/// </summary>
+		NoHoldEnable = (Byte) '3'
+	};
+
+	/// <summary>
+	/// TFtdcFuturePwdFlagTypeÊÇÒ»¸ö×Ê½ğÃÜÂëºË¶Ô±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFuturePwdFlagType : Byte
+	{
+		/// <summary>
+		/// ²»ºË¶Ô
+		/// </summary>
+		UnCheck = (Byte)'0',
+
+		/// <summary>
+		/// ºË¶Ô
+		/// </summary>
+		Check = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcTransferTypeTypeÊÇÒ»¸öÒøÆÚ×ªÕËÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumTransferTypeType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ×ªÆÚ»õ
+		/// </summary>
+		BankToFuture = (Byte)'0',
+
+		/// <summary>
+		/// ÆÚ»õ×ªÒøĞĞ
+		/// </summary>
+		FutureToBank = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcTransferValidFlagTypeÊÇÒ»¸ö×ªÕËÓĞĞ§±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumTransferValidFlagType : Byte
+	{
+		/// <summary>
+		/// ÎŞĞ§»òÊ§°Ü
+		/// </summary>
+		Invalid = (Byte)'0',
+
+		/// <summary>
+		/// ÓĞĞ§
+		/// </summary>
+		Valid = (Byte)'1',
+
+		/// <summary>
+		/// ³åÕı
+		/// </summary>
+		Reverse = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcReasonTypeÊÇÒ»¸öÊÂÓÉÀàĞÍ
+	/// </summary>
+	public enum struct EnumReasonType : Byte
+	{
+		/// <summary>
+		/// ´íµ¥
+		/// </summary>
+		CD = (Byte)'0',
+
+		/// <summary>
+		/// ×Ê½ğÔÚÍ¾
+		/// </summary>
+		ZT = (Byte)'1',
+
+		/// <summary>
+		/// ÆäËü
+		/// </summary>
+		QT = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcSexTypeÊÇÒ»¸öĞÔ±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumSexType : Byte
+	{
+		/// <summary>
+		/// Î´Öª
+		/// </summary>
+		None = (Byte)'0',
+
+		/// <summary>
+		/// ÄĞ
+		/// </summary>
+		Man = (Byte)'1',
+
+		/// <summary>
+		/// Å®
+		/// </summary>
+		Woman = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcUserTypeTypeÊÇÒ»¸öÓÃ»§ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumUserTypeType : Byte
+	{
+		/// <summary>
+		/// Í¶×ÊÕß
+		/// </summary>
+		Investor = (Byte)'0',
+
+		/// <summary>
+		/// ²Ù×÷Ô±
+		/// </summary>
+		Operator = (Byte)'1',
+
+		/// <summary>
+		/// ¹ÜÀíÔ±
+		/// </summary>
+		SuperUser = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcRateTypeTypeÊÇÒ»¸ö·ÑÂÊÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumRateTypeType : Byte
+	{
+		/// <summary>
+		/// ±£Ö¤½ğÂÊ
+		/// </summary>
+		MarginRate = (Byte)'2',
+
+		/// <summary>
+		/// ÊÖĞø·ÑÂÊ
+		/// </summary>
+		CommRate = (Byte)'1',
+
+		/// <summary>
+		/// ËùÓĞ
+		/// </summary>
+		AllRate = (Byte)'0'
+	};
+
+	/// <summary>
+	/// TFtdcNoteTypeTypeÊÇÒ»¸öÍ¨ÖªÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumNoteTypeType : Byte
+	{
+		/// <summary>
+		/// ½»Ò×½áËãµ¥
+		/// </summary>
+		TradeSettleBill = (Byte)'1',
+
+		/// <summary>
+		/// ½»Ò×½áËãÔÂ±¨
+		/// </summary>
+		TradeSettleMonth = (Byte)'2',
+
+		/// <summary>
+		/// ×·¼Ó±£Ö¤½ğÍ¨ÖªÊé
+		/// </summary>
+		CallMarginNotes = (Byte)'3',
+
+		/// <summary>
+		/// Ç¿ĞĞÆ½²ÖÍ¨ÖªÊé
+		/// </summary>
+		ForceCloseNotes = (Byte)'4',
+
+		/// <summary>
+		/// ³É½»Í¨ÖªÊé
+		/// </summary>
+		TradeNotes = (Byte)'5',
+
+		/// <summary>
+		/// ½»¸îÍ¨ÖªÊé
+		/// </summary>
+		DelivNotes = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcSettlementStyleTypeÊÇÒ»¸ö½áËãµ¥·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSettlementStyleType : Byte
+	{
+		/// <summary>
+		/// ÖğÈÕ¶¢ÊĞ
+		/// </summary>
+		Day = (Byte)'1',
+
+		/// <summary>
+		/// Öğ±Ê¶Ô³å
+		/// </summary>
+		Volume = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcSettlementBillTypeTypeÊÇÒ»¸ö½áËãµ¥ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumSettlementBillTypeType : Byte
+	{
+		/// <summary>
+		/// ÈÕ±¨
+		/// </summary>
+		Day = (Byte)'0',
+
+		/// <summary>
+		/// ÔÂ±¨
+		/// </summary>
+		Month = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcUserRightTypeTypeÊÇÒ»¸ö¿Í»§È¨ÏŞÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumUserRightTypeType : Byte
+	{
+		/// <summary>
+		/// µÇÂ¼
+		/// </summary>
+		Logon = (Byte)'1',
+
+		/// <summary>
+		/// ÒøÆÚ×ªÕÊ
+		/// </summary>
+		Transfer = (Byte)'2',
+
+		/// <summary>
+		/// ÓÊ¼Ä½áËãµ¥
+		/// </summary>
+		EMail = (Byte)'3',
+
+		/// <summary>
+		/// ´«Õæ½áËãµ¥
+		/// </summary>
+		Fax = (Byte)'4',
+
+		/// <summary>
+		/// Ìõ¼şµ¥
+		/// </summary>
+		ConditionOrder = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcMarginPriceTypeTypeÊÇÒ»¸ö±£Ö¤½ğ¼Û¸ñÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumMarginPriceTypeType : Byte
+	{
+		/// <summary>
+		/// ×ò½áËã¼Û
+		/// </summary>
+		PreSettlementPrice = (Byte)'1',
+
+		/// <summary>
+		/// ×îĞÂ¼Û
+		/// </summary>
+		SettlementPrice = (Byte)'2',
+
+		/// <summary>
+		/// ³É½»¾ù¼Û
+		/// </summary>
+		AveragePrice = (Byte)'3',
+
+		/// <summary>
+		/// ¿ª²Ö¼Û
+		/// </summary>
+		OpenPrice = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcBillGenStatusTypeÊÇÒ»¸ö½áËãµ¥Éú³É×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumBillGenStatusType : Byte
+	{
+		/// <summary>
+		/// Î´Éú³É
+		/// </summary>
+		None = (Byte)'0',
+
+		/// <summary>
+		/// Éú³ÉÖĞ
+		/// </summary>
+		NoGenerated = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑÉú³É
+		/// </summary>
+		Generated = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcAlgoTypeTypeÊÇÒ»¸öËã·¨ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumAlgoTypeType : Byte
+	{
+		/// <summary>
+		/// ³Ö²Ö´¦ÀíËã·¨
+		/// </summary>
+		HandlePositionAlgo = (Byte)'1',
+
+		/// <summary>
+		/// Ñ°ÕÒ±£Ö¤½ğÂÊËã·¨
+		/// </summary>
+		FindMarginRateAlgo = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcHandlePositionAlgoIDTypeÊÇÒ»¸ö³Ö²Ö´¦ÀíËã·¨±àºÅÀàĞÍ
+	/// </summary>
+	public enum struct EnumHandlePositionAlgoIDType : Byte
+	{
+		/// <summary>
+		/// »ù±¾
+		/// </summary>
+		Base = (Byte)'1',
+
+		/// <summary>
+		/// ´óÁ¬ÉÌÆ·½»Ò×Ëù
+		/// </summary>
+		DCE = (Byte)'2',
+
+		/// <summary>
+		/// Ö£ÖİÉÌÆ·½»Ò×Ëù
+		/// </summary>
+		CZCE = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcFindMarginRateAlgoIDTypeÊÇÒ»¸öÑ°ÕÒ±£Ö¤½ğÂÊËã·¨±àºÅÀàĞÍ
+	/// </summary>
+	public enum struct EnumFindMarginRateAlgoIDType : Byte
+	{
+		/// <summary>
+		/// »ù±¾
+		/// </summary>
+		Base = (Byte)'1',
+
+		/// <summary>
+		/// ´óÁ¬ÉÌÆ·½»Ò×Ëù
+		/// </summary>
+		DCE = (Byte)'2',
+
+		/// <summary>
+		/// Ö£ÖİÉÌÆ·½»Ò×Ëù
+		/// </summary>
+		CZCE = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcHandleTradingAccountAlgoIDTypeÊÇÒ»¸ö×Ê½ğ´¦ÀíËã·¨±àºÅÀàĞÍ
+	/// </summary>
+	public enum struct EnumHandleTradingAccountAlgoIDType : Byte
+	{
+		/// <summary>
+		/// »ù±¾
+		/// </summary>
+		Base = (Byte)'1',
+
+		/// <summary>
+		/// ´óÁ¬ÉÌÆ·½»Ò×Ëù
+		/// </summary>
+		DCE = (Byte)'2',
+
+		/// <summary>
+		/// Ö£ÖİÉÌÆ·½»Ò×Ëù
+		/// </summary>
+		CZCE = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcPersonTypeTypeÊÇÒ»¸öÁªÏµÈËÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumPersonTypeType : Byte
+	{
+		/// <summary>
+		///Ö¸¶¨ÏÂµ¥ÈË
+		/// </summary>
+		Order = (Byte) '1',
+		/// <summary>
+		///¿ª»§ÊÚÈ¨ÈË
+		/// </summary>
+		Open = (Byte) '2',
+		/// <summary>
+		///×Ê½ğµ÷²¦ÈË
+		/// </summary>
+		Fund = (Byte) '3',
+		/// <summary>
+		///½áËãµ¥È·ÈÏÈË
+		/// </summary>
+		Settlement = (Byte) '4',
+		/// <summary>
+		///·¨ÈË
+		/// </summary>
+		Company = (Byte) '5',
+		/// <summary>
+		///·¨ÈË´ú±í
+		/// </summary>
+		Corporation = (Byte) '6',
+		/// <summary>
+		///Í¶×ÊÕßÁªÏµÈË
+		/// </summary>
+		LinkMan = (Byte) '7',
+		/// <summary>
+		///·Ö»§¹ÜÀí×Ê²ú¸ºÔğÈË
+		/// </summary>
+		Ledger = (Byte) '8',
+		/// <summary>
+		///ÍĞ£¨±££©¹ÜÈË
+		/// </summary>
+		Trustee = (Byte) '9',
+		/// <summary>
+		///ÍĞ£¨±££©¹Ü»ú¹¹·¨ÈË´ú±í
+		/// </summary>
+		TrusteeCorporation = (Byte) 'A',
+		/// <summary>
+		///ÍĞ£¨±££©¹Ü»ú¹¹¿ª»§ÊÚÈ¨ÈË
+		/// </summary>
+		TrusteeOpen = (Byte) 'B',
+		/// <summary>
+		///ÍĞ£¨±££©¹Ü»ú¹¹ÁªÏµÈË
+		/// </summary>
+		TrusteeContact = (Byte) 'C',
+		/// <summary>
+		///¾³Íâ×ÔÈ»ÈË²Î¿¼Ö¤¼ş
+		/// </summary>
+		ForeignerRefer = (Byte) 'D',
+		/// <summary>
+		///·¨ÈË´ú±í²Î¿¼Ö¤¼ş
+		/// </summary>
+		CorporationRefer = (Byte) 'E'
+	};
+
+	/// <summary>
+	/// TFtdcQueryInvestorRangeTypeÊÇÒ»¸ö²éÑ¯·¶Î§ÀàĞÍ
+	/// </summary>
+	public enum struct EnumQueryInvestorRangeType : Byte
+	{
+		/// <summary>
+		/// ËùÓĞ
+		/// </summary>
+		All = (Byte)'1',
+
+		/// <summary>
+		/// ²éÑ¯·ÖÀà
+		/// </summary>
+		Group = (Byte)'2',
+
+		/// <summary>
+		/// µ¥Ò»Í¶×ÊÕß
+		/// </summary>
+		Single = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcInvestorRiskStatusTypeÊÇÒ»¸öÍ¶×ÊÕß·çÏÕ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumInvestorRiskStatusType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'1',
+
+		/// <summary>
+		/// ¾¯¸æ
+		/// </summary>
+		Warn = (Byte)'2',
+
+		/// <summary>
+		/// ×·±£
+		/// </summary>
+		Call = (Byte)'3',
+
+		/// <summary>
+		/// Ç¿Æ½
+		/// </summary>
+		Force = (Byte)'4',
+
+		/// <summary>
+		/// Òì³£
+		/// </summary>
+		Exception = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcUserEventTypeTypeÊÇÒ»¸öÓÃ»§ÊÂ¼şÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumUserEventTypeType : Byte
+	{
+		/// <summary>
+		///µÇÂ¼
+		/// </summary>
+		Login = (Byte)'1',
+		/// <summary>
+		///µÇ³ö
+		/// </summary>
+		Logout = (Byte) '2',
+		/// <summary>
+		///½»Ò×³É¹¦
+		/// </summary>
+		Trading = (Byte) '3',
+		/// </summary>
+		///½»Ò×Ê§°Ü
+		/// </summary>
+		TradingError = (Byte) '4',
+		/// <summary>
+		///ĞŞ¸ÄÃÜÂë
+		/// </summary>
+		UpdatePassword = (Byte) '5',
+		/// <summary>
+		///¿Í»§¶ËÈÏÖ¤
+		/// </summary>
+		Authenticate = (Byte)'6',
+		/// <summary>
+		///ÆäËû
+		/// </summary>
+		Other = (Byte)'9'
+	};
+
+	/// <summary>
+	/// TFtdcCloseStyleTypeÊÇÒ»¸öÆ½²Ö·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumCloseStyleType : Byte
+	{
+		/// <summary>
+		/// ÏÈ¿ªÏÈÆ½
+		/// </summary>
+		Close = (Byte)'0',
+
+		/// <summary>
+		/// ÏÈÆ½½ñÔÙÆ½×ò
+		/// </summary>
+		CloseToday = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcStatModeTypeÊÇÒ»¸öÍ³¼Æ·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumStatModeType : Byte
+	{
+		/// <summary>
+		/// ----
+		/// </summary>
+		Non = (Byte)'0',
+
+		/// <summary>
+		/// °´ºÏÔ¼Í³¼Æ
+		/// </summary>
+		Instrument = (Byte)'1',
+
+		/// <summary>
+		/// °´²úÆ·Í³¼Æ
+		/// </summary>
+		Product = (Byte)'2',
+
+		/// <summary>
+		/// °´Í¶×ÊÕßÍ³¼Æ
+		/// </summary>
+		Investor = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcParkedOrderStatusTypeÊÇÒ»¸öÔ¤Âñµ¥×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumParkedOrderStatusType : Byte
+	{
+		/// <summary>
+		/// Î´·¢ËÍ
+		/// </summary>
+		NotSend = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑ·¢ËÍ
+		/// </summary>
+		Send = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑÉ¾³ı
+		/// </summary>
+		Deleted = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcVirDealStatusTypeÊÇÒ»¸ö´¦Àí×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumVirDealStatusType : Byte
+	{
+		/// <summary>
+		/// ÕıÔÚ´¦Àí
+		/// </summary>
+		Dealing = (Byte)'1',
+
+		/// <summary>
+		/// ´¦Àí³É¹¦
+		/// </summary>
+		DeaclSucceed = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcOrgSystemIDTypeÊÇÒ»¸öÔ­ÓĞÏµÍ³´úÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrgSystemIDType : Byte
+	{
+		/// <summary>
+		/// ×ÛºÏ½»Ò×Æ½Ì¨
+		/// </summary>
+		Standard = (Byte)'0',
+
+		/// <summary>
+		/// Ò×Ê¢ÏµÍ³
+		/// </summary>
+		ESunny = (Byte)'1',
+
+		/// <summary>
+		/// ½ğÊË´ïV6ÏµÍ³
+		/// </summary>
+		KingStarV6 = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcVirTradeStatusTypeÊÇÒ»¸ö½»Ò××´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumVirTradeStatusType : Byte
+	{
+		/// <summary>
+		/// Õı³£´¦ÀíÖĞ
+		/// </summary>
+		NaturalDeal = (Byte)'0',
+
+		/// <summary>
+		/// ³É¹¦½áÊø
+		/// </summary>
+		SucceedEnd = (Byte)'1',
+
+		/// <summary>
+		/// Ê§°Ü½áÊø
+		/// </summary>
+		FailedEND = (Byte)'2',
+
+		/// <summary>
+		/// Òì³£ÖĞ
+		/// </summary>
+		Exception = (Byte)'3',
+
+		/// <summary>
+		/// ÒÑÈË¹¤Òì³£´¦Àí
+		/// </summary>
+		ManualDeal = (Byte)'4',
+
+		/// <summary>
+		/// Í¨Ñ¶Òì³£ £¬ÇëÈË¹¤´¦Àí
+		/// </summary>
+		MesException = (Byte)'5',
+
+		/// <summary>
+		/// ÏµÍ³³ö´í£¬ÇëÈË¹¤´¦Àí
+		/// </summary>
+		SysException = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcVirBankAccTypeTypeÊÇÒ»¸öÒøĞĞÕÊ»§ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumVirBankAccTypeType : Byte
+	{
+		/// <summary>
+		/// ´æÕÛ
+		/// </summary>
+		BankBook = (Byte)'1',
+
+		/// <summary>
+		/// ´¢Ğî¿¨
+		/// </summary>
+		BankCard = (Byte)'2',
+
+		/// <summary>
+		/// ĞÅÓÃ¿¨
+		/// </summary>
+		CreditCard = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcVirementStatusTypeÊÇÒ»¸öÒøĞĞÕÊ»§ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumVirementStatusType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Natural = (Byte)'0',
+
+		/// <summary>
+		/// Ïú»§
+		/// </summary>
+		Canceled = (Byte)'9'
+	};
+
+	/// <summary>
+	/// TFtdcVirementAvailAbilityTypeÊÇÒ»¸öÓĞĞ§±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumVirementAvailAbilityType : Byte
+	{
+		/// <summary>
+		/// Î´È·ÈÏ
+		/// </summary>
+		NoAvailAbility = (Byte)'0',
+
+		/// <summary>
+		/// ÓĞĞ§
+		/// </summary>
+		AvailAbility = (Byte)'1',
+
+		/// <summary>
+		/// ³åÕı
+		/// </summary>
+		Repeal = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcVirementTradeCodeTypeÊÇÒ»¸ö½»Ò×´úÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumVirementTradeCodeType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õ
+		/// </summary>
+		BankBankToFuture_102001 = (Byte)'1',//'102001',
+
+											/// <summary>
+											/// ÒøĞĞ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞ
+											/// </summary>
+											BankFutureToBank_102002 = (Byte)'2',//'102002',
+
+																				/// <summary>
+																				/// ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õ
+																				/// </summary>
+																				FutureBankToFuture_202001 = (Byte)'3',//'202001',
+
+																													  /// <summary>
+																													  /// ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞ
+																													  /// </summary>
+																													  FutureFutureToBank_202002 = (Byte)'4'//'202002'
+	};
+
+	/// <summary>
+	/// TFtdcCFMMCKeyKindTypeÊÇÒ»¸ö¶¯Ì¬ÃÜÔ¿Àà±ğ(±£Ö¤½ğ¼à¹Ü)ÀàĞÍ
+	/// </summary>
+	public enum struct EnumCFMMCKeyKindType : Byte
+	{
+		/// <summary>
+		/// Ö÷¶¯ÇëÇó¸üĞÂ
+		/// </summary>
+		REQUEST = (Byte)'R',
+
+		/// <summary>
+		/// CFMMC×Ô¶¯¸üĞÂ
+		/// </summary>
+		AUTO = (Byte)'A',
+
+		/// <summary>
+		/// CFMMCÊÖ¶¯¸üĞÂ
+		/// </summary>
+		MANUAL = (Byte)'M'
+	};
+
+	/// <summary>
+	/// TFtdcCertificationTypeTypeÊÇÒ»¸öÖ¤¼şÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumCertificationTypeType : Byte
+	{
+		/// <summary>
+		/// Éí·İÖ¤
+		/// </summary>
+		IDCard = (Byte)'0',
+
+		/// <summary>
+		/// »¤ÕÕ
+		/// </summary>
+		Passport = (Byte)'1',
+
+		/// <summary>
+		/// ¾ü¹ÙÖ¤
+		/// </summary>
+		OfficerIDCard = (Byte)'2',
+
+		/// <summary>
+		/// Ê¿±øÖ¤
+		/// </summary>
+		SoldierIDCard = (Byte)'3',
+
+		/// <summary>
+		/// »ØÏçÖ¤
+		/// </summary>
+		HomeComingCard = (Byte)'4',
+
+		/// <summary>
+		/// »§¿Ú²¾
+		/// </summary>
+		HouseholdRegister = (Byte)'5',
+
+		/// <summary>
+		/// ÓªÒµÖ´ÕÕºÅ
+		/// </summary>
+		LicenseNo = (Byte)'6',
+
+		/// <summary>
+		/// ×éÖ¯»ú¹¹´úÂëÖ¤
+		/// </summary>
+		InstitutionCodeCard = (Byte)'7',
+
+		/// <summary>
+		/// ÁÙÊ±ÓªÒµÖ´ÕÕºÅ
+		/// </summary>
+		TempLicenseNo = (Byte)'8',
+
+		/// <summary>
+		/// Ãñ°ì·ÇÆóÒµµÇ¼ÇÖ¤Êé
+		/// </summary>
+		NoEnterpriseLicenseNo = (Byte)'9',
+
+		/// <summary>
+		/// ÆäËûÖ¤¼ş
+		/// </summary>
+		OtherCard = (Byte)'x',
+
+		/// <summary>
+		/// Ö÷¹Ü²¿ÃÅÅúÎÄ
+		/// </summary>
+		SuperDepAgree = (Byte)'a'
+	};
+
+	/// <summary>
+	/// TFtdcFileBusinessCodeTypeÊÇÒ»¸öÎÄ¼şÒµÎñ¹¦ÄÜÀàĞÍ
+	/// </summary>
+	public enum struct EnumFileBusinessCodeType : Byte
+	{
+		/// <summary>
+		/// ÆäËû
+		/// </summary>
+		Others = (Byte)'0',
+
+		/// <summary>
+		/// ×ªÕË½»Ò×Ã÷Ï¸¶ÔÕË
+		/// </summary>
+		TransferDetails = (Byte)'1',
+
+		/// <summary>
+		/// ¿Í»§ÕË»§×´Ì¬¶ÔÕË
+		/// </summary>
+		CustAccStatus = (Byte)'2',
+
+		/// <summary>
+		/// ÕË»§Àà½»Ò×Ã÷Ï¸¶ÔÕË
+		/// </summary>
+		AccountTradeDetails = (Byte)'3',
+
+		/// <summary>
+		/// ÆÚ»õÕË»§ĞÅÏ¢±ä¸üÃ÷Ï¸¶ÔÕË
+		/// </summary>
+		FutureAccountChangeInfoDetails = (Byte)'4',
+
+		/// <summary>
+		/// ¿Í»§×Ê½ğÌ¨ÕËÓà¶îÃ÷Ï¸¶ÔÕË
+		/// </summary>
+		CustMoneyDetail = (Byte)'5',
+
+		/// <summary>
+		/// ¿Í»§Ïú»§½áÏ¢Ã÷Ï¸¶ÔÕË
+		/// </summary>
+		CustCancelAccountInfo = (Byte)'6',
+
+		/// <summary>
+		/// ¿Í»§×Ê½ğÓà¶î¶ÔÕË½á¹û
+		/// </summary>
+		CustMoneyResult = (Byte)'7',
+
+		/// <summary>
+		/// ÆäËü¶ÔÕËÒì³£½á¹ûÎÄ¼ş
+		/// </summary>
+		OthersExceptionResult = (Byte)'8',
+
+		/// <summary>
+		/// ¿Í»§½áÏ¢¾»¶îÃ÷Ï¸
+		/// </summary>
+		CustInterestNetMoneyDetails = (Byte)'9',
+
+		/// <summary>
+		/// ¿Í»§×Ê½ğ½»ÊÕÃ÷Ï¸
+		/// </summary>
+		CustMoneySendAndReceiveDetails = (Byte)'a',
+
+		/// <summary>
+		/// ·¨ÈË´æ¹ÜÒøĞĞ×Ê½ğ½»ÊÕ»ã×Ü
+		/// </summary>
+		CorporationMoneyTotal = (Byte)'b',
+
+		/// <summary>
+		/// Ö÷Ìå¼ä×Ê½ğ½»ÊÕ»ã×Ü
+		/// </summary>
+		MainbodyMoneyTotal = (Byte)'c',
+
+		/// <summary>
+		/// ×Ü·ÖÆ½ºâ¼à¹ÜÊı¾İ
+		/// </summary>
+		MainPartMonitorData = (Byte)'d',
+
+		/// <summary>
+		/// ´æ¹ÜÒøĞĞ±¸¸¶½ğÓà¶î
+		/// </summary>
+		PreparationMoney = (Byte)'e',
+
+		/// <summary>
+		/// Ğ­°ì´æ¹ÜÒøĞĞ×Ê½ğ¼à¹ÜÊı¾İ
+		/// </summary>
+		BankMoneyMonitorData = (Byte)'f'
+	};
+
+	/// <summary>
+	/// TFtdcCashExchangeCodeTypeÊÇÒ»¸ö»ã³®±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumCashExchangeCodeType : Byte
+	{
+		/// <summary>
+		/// »ã
+		/// </summary>
+		Exchange = (Byte)'1',
+
+		/// <summary>
+		/// ³®
+		/// </summary>
+		Cash = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcYesNoIndicatorTypeÊÇÒ»¸öÊÇ»ò·ñ±êÊ¶ÀàĞÍ
+	/// </summary>
+	public enum struct EnumYesNoIndicatorType : Byte
+	{
+		/// <summary>
+		/// ÊÇ
+		/// </summary>
+		Yes = (Byte)'0',
+
+		/// <summary>
+		/// ·ñ
+		/// </summary>
+		No = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcBanlanceTypeTypeÊÇÒ»¸öÓà¶îÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumBanlanceTypeType : Byte
+	{
+		/// <summary>
+		/// µ±Ç°Óà¶î
+		/// </summary>
+		CurrentMoney = (Byte)'0',
+
+		/// <summary>
+		/// ¿ÉÓÃÓà¶î
+		/// </summary>
+		UsableMoney = (Byte)'1',
+
+		/// <summary>
+		/// ¿ÉÈ¡Óà¶î
+		/// </summary>
+		FetchableMoney = (Byte)'2',
+
+		/// <summary>
+		/// ¶³½áÓà¶î
+		/// </summary>
+		FreezeMoney = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcGenderTypeÊÇÒ»¸öĞÔ±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumGenderType : Byte
+	{
+		/// <summary>
+		/// Î´Öª×´Ì¬
+		/// </summary>
+		Unknown = (Byte)'0',
+
+		/// <summary>
+		/// ÄĞ
+		/// </summary>
+		Male = (Byte)'1',
+
+		/// <summary>
+		/// Å®
+		/// </summary>
+		Female = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcFeePayFlagTypeÊÇÒ»¸ö·ÑÓÃÖ§¸¶±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFeePayFlagType : Byte
+	{
+		/// <summary>
+		/// ÓÉÊÜÒæ·½Ö§¸¶·ÑÓÃ
+		/// </summary>
+		BEN = (Byte)'0',
+
+		/// <summary>
+		/// ÓÉ·¢ËÍ·½Ö§¸¶·ÑÓÃ
+		/// </summary>
+		OUR = (Byte)'1',
+
+		/// <summary>
+		/// ÓÉ·¢ËÍ·½Ö§¸¶·¢ÆğµÄ·ÑÓÃ£¬ÊÜÒæ·½Ö§¸¶½ÓÊÜµÄ·ÑÓÃ
+		/// </summary>
+		SHA = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcPassWordKeyTypeTypeÊÇÒ»¸öÃÜÔ¿ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumPassWordKeyTypeType : Byte
+	{
+		/// <summary>
+		/// ½»»»ÃÜÔ¿
+		/// </summary>
+		ExchangeKey = (Byte)'0',
+
+		/// <summary>
+		/// ÃÜÂëÃÜÔ¿
+		/// </summary>
+		PassWordKey = (Byte)'1',
+
+		/// <summary>
+		/// MACÃÜÔ¿
+		/// </summary>
+		MACKey = (Byte)'2',
+
+		/// <summary>
+		/// ±¨ÎÄÃÜÔ¿
+		/// </summary>
+		MessageKey = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcFBTPassWordTypeTypeÊÇÒ»¸öÃÜÂëÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumFBTPassWordTypeType : Byte
+	{
+		/// <summary>
+		/// ²éÑ¯
+		/// </summary>
+		Query = (Byte)'0',
+
+		/// <summary>
+		/// È¡¿î
+		/// </summary>
+		Fetch = (Byte)'1',
+
+		/// <summary>
+		/// ×ªÕÊ
+		/// </summary>
+		Transfer = (Byte)'2',
+
+		/// <summary>
+		/// ½»Ò×
+		/// </summary>
+		Trade = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcFBTEncryModeTypeÊÇÒ»¸ö¼ÓÃÜ·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFBTEncryModeType : Byte
+	{
+		/// <summary>
+		/// ²»¼ÓÃÜ
+		/// </summary>
+		NoEncry = (Byte)'0',
+
+		/// <summary>
+		/// DES
+		/// </summary>
+		DES = (Byte)'1',
+
+		/// <summary>
+		/// 3DES
+		/// </summary>
+		DES3 = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcBankRepealFlagTypeÊÇÒ»¸öÒøĞĞ³åÕı±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumBankRepealFlagType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞÎŞĞè×Ô¶¯³åÕı
+		/// </summary>
+		BankNotNeedRepeal = (Byte)'0',
+
+		/// <summary>
+		/// ÒøĞĞ´ı×Ô¶¯³åÕı
+		/// </summary>
+		BankWaitingRepeal = (Byte)'1',
+
+		/// <summary>
+		/// ÒøĞĞÒÑ×Ô¶¯³åÕı
+		/// </summary>
+		BankBeenRepealed = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcBrokerRepealFlagTypeÊÇÒ»¸öÆÚÉÌ³åÕı±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumBrokerRepealFlagType : Byte
+	{
+		/// <summary>
+		/// ÆÚÉÌÎŞĞè×Ô¶¯³åÕı
+		/// </summary>
+		BrokerNotNeedRepeal = (Byte)'0',
+
+		/// <summary>
+		/// ÆÚÉÌ´ı×Ô¶¯³åÕı
+		/// </summary>
+		BrokerWaitingRepeal = (Byte)'1',
+
+		/// <summary>
+		/// ÆÚÉÌÒÑ×Ô¶¯³åÕı
+		/// </summary>
+		BrokerBeenRepealed = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcInstitutionTypeTypeÊÇÒ»¸ö»ú¹¹Àà±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumInstitutionTypeType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ
+		/// </summary>
+		Bank = (Byte)'0',
+
+		/// <summary>
+		/// ÆÚÉÌ
+		/// </summary>
+		Future = (Byte)'1',
+
+		/// <summary>
+		/// È¯ÉÌ
+		/// </summary>
+		Store = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcLastFragmentTypeÊÇÒ»¸ö×îºó·ÖÆ¬±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumLastFragmentType : Byte
+	{
+		/// <summary>
+		/// ÊÇ×îºó·ÖÆ¬
+		/// </summary>
+		Yes = (Byte)'0',
+
+		/// <summary>
+		/// ²»ÊÇ×îºó·ÖÆ¬
+		/// </summary>
+		No = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcBankAccStatusTypeÊÇÒ»¸öÒøĞĞÕË»§×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumBankAccStatusType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'0',
+
+		/// <summary>
+		/// ¶³½á
+		/// </summary>
+		Freeze = (Byte)'1',
+
+		/// <summary>
+		/// ¹ÒÊ§
+		/// </summary>
+		ReportLoss = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcMoneyAccountStatusTypeÊÇÒ»¸ö×Ê½ğÕË»§×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumMoneyAccountStatusType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'0',
+
+		/// <summary>
+		/// Ïú»§
+		/// </summary>
+		Cancel = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcManageStatusTypeÊÇÒ»¸ö´æ¹Ü×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumManageStatusType : Byte
+	{
+		/// <summary>
+		/// Ö¸¶¨´æ¹Ü
+		/// </summary>
+		Point = (Byte)'0',
+
+		/// <summary>
+		/// Ô¤Ö¸¶¨
+		/// </summary>
+		PrePoint = (Byte)'1',
+
+		/// <summary>
+		/// ³·ÏúÖ¸¶¨
+		/// </summary>
+		CancelPoint = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcSystemTypeTypeÊÇÒ»¸öÓ¦ÓÃÏµÍ³ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumSystemTypeType : Byte
+	{
+		/// <summary>
+		/// ÒøÆÚ×ªÕÊ
+		/// </summary>
+		FutureBankTransfer = (Byte)'0',
+
+		/// <summary>
+		/// ÒøÖ¤×ªÕÊ
+		/// </summary>
+		StockBankTransfer = (Byte)'1',
+
+		/// <summary>
+		/// µÚÈı·½´æ¹Ü
+		/// </summary>
+		TheThirdPartStore = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcTxnEndFlagTypeÊÇÒ»¸öÒøÆÚ×ªÕÊ»®×ª½á¹û±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumTxnEndFlagType : Byte
+	{
+		/// <summary>
+		/// Õı³£´¦ÀíÖĞ
+		/// </summary>
+		NormalProcessing = (Byte)'0',
+
+		/// <summary>
+		/// ³É¹¦½áÊø
+		/// </summary>
+		Success = (Byte)'1',
+
+		/// <summary>
+		/// Ê§°Ü½áÊø
+		/// </summary>
+		Failed = (Byte)'2',
+
+		/// <summary>
+		/// Òì³£ÖĞ
+		/// </summary>
+		Abnormal = (Byte)'3',
+
+		/// <summary>
+		/// ÒÑÈË¹¤Òì³£´¦Àí
+		/// </summary>
+		ManualProcessedForException = (Byte)'4',
+
+		/// <summary>
+		/// Í¨Ñ¶Òì³£ £¬ÇëÈË¹¤´¦Àí
+		/// </summary>
+		CommuFailedNeedManualProcess = (Byte)'5',
+
+		/// <summary>
+		/// ÏµÍ³³ö´í£¬ÇëÈË¹¤´¦Àí
+		/// </summary>
+		SysErrorNeedManualProcess = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcProcessStatusTypeÊÇÒ»¸öÒøÆÚ×ªÕÊ·şÎñ´¦Àí×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumProcessStatusType : Byte
+	{
+		/// <summary>
+		/// Î´´¦Àí
+		/// </summary>
+		NotProcess = (Byte)'0',
+
+		/// <summary>
+		/// ¿ªÊ¼´¦Àí
+		/// </summary>
+		StartProcess = (Byte)'1',
+
+		/// <summary>
+		/// ´¦ÀíÍê³É
+		/// </summary>
+		Finished = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcCustTypeTypeÊÇÒ»¸ö¿Í»§ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumCustTypeType : Byte
+	{
+		/// <summary>
+		/// ×ÔÈ»ÈË
+		/// </summary>
+		Person = (Byte)'0',
+
+		/// <summary>
+		/// »ú¹¹»§
+		/// </summary>
+		Institution = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcFBTTransferDirectionTypeÊÇÒ»¸öÒøÆÚ×ªÕÊ·½ÏòÀàĞÍ
+	/// </summary>
+	public enum struct EnumFBTTransferDirectionType : Byte
+	{
+		/// <summary>
+		/// Èë½ğ£¬ÒøĞĞ×ªÆÚ»õ
+		/// </summary>
+		FromBankToFuture = (Byte)'1',
+
+		/// <summary>
+		/// ³ö½ğ£¬ÆÚ»õ×ªÒøĞĞ
+		/// </summary>
+		FromFutureToBank = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcOpenOrDestroyTypeÊÇÒ»¸ö¿ªÏú»§Àà±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumOpenOrDestroyType : Byte
+	{
+		/// <summary>
+		/// ¿ª»§
+		/// </summary>
+		Open = (Byte)'1',
+
+		/// <summary>
+		/// Ïú»§
+		/// </summary>
+		Destroy = (Byte)'0'
+	};
+
+	/// <summary>
+	/// TFtdcAvailabilityFlagTypeÊÇÒ»¸öÓĞĞ§±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumAvailabilityFlagType : Byte
+	{
+		/// <summary>
+		/// Î´È·ÈÏ
+		/// </summary>
+		Invalid = (Byte)'0',
+
+		/// <summary>
+		/// ÓĞĞ§
+		/// </summary>
+		Valid = (Byte)'1',
+
+		/// <summary>
+		/// ³åÕı
+		/// </summary>
+		Repeal = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcOrganTypeTypeÊÇÒ»¸ö»ú¹¹ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrganTypeType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ´úÀí
+		/// </summary>
+		Bank = (Byte)'1',
+
+		/// <summary>
+		/// ½»Ò×Ç°ÖÃ
+		/// </summary>
+		Future = (Byte)'2',
+
+		/// <summary>
+		/// ÒøÆÚ×ªÕÊÆ½Ì¨¹ÜÀí
+		/// </summary>
+		PlateForm = (Byte)'9'
+	};
+
+	/// <summary>
+	/// TFtdcOrganLevelTypeÊÇÒ»¸ö»ú¹¹¼¶±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrganLevelType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ×ÜĞĞ»òÆÚÉÌ×Ü²¿
+		/// </summary>
+		HeadQuarters = (Byte)'1',
+
+		/// <summary>
+		/// ÒøĞĞ·ÖÖĞĞÄ»òÆÚ»õ¹«Ë¾ÓªÒµ²¿
+		/// </summary>
+		Branch = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcProtocalIDTypeÊÇÒ»¸öĞ­ÒéÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumProtocalIDType : Byte
+	{
+		/// <summary>
+		/// ÆÚÉÌĞ­Òé
+		/// </summary>
+		FutureProtocal = (Byte)'0',
+
+		/// <summary>
+		/// ¹¤ĞĞĞ­Òé
+		/// </summary>
+		ICBCProtocal = (Byte)'1',
+
+		/// <summary>
+		/// Å©ĞĞĞ­Òé
+		/// </summary>
+		ABCProtocal = (Byte)'2',
+
+		/// <summary>
+		/// ÖĞ¹úÒøĞĞĞ­Òé
+		/// </summary>
+		CBCProtocal = (Byte)'3',
+
+		/// <summary>
+		/// ½¨ĞĞĞ­Òé
+		/// </summary>
+		CCBProtocal = (Byte)'4',
+
+		/// <summary>
+		/// ½»ĞĞĞ­Òé
+		/// </summary>
+		BOCOMProtocal = (Byte)'5',
+
+		/// <summary>
+		/// ÒøÆÚ×ªÕÊÆ½Ì¨Ğ­Òé
+		/// </summary>
+		FBTPlateFormProtocal = (Byte)'X'
+	};
+
+	/// <summary>
+	/// TFtdcConnectModeTypeÊÇÒ»¸öÌ×½Ó×ÖÁ¬½Ó·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumConnectModeType : Byte
+	{
+		/// <summary>
+		/// ¶ÌÁ¬½Ó
+		/// </summary>
+		ShortConnect = (Byte)'0',
+
+		/// <summary>
+		/// ³¤Á¬½Ó
+		/// </summary>
+		LongConnect = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcSyncModeTypeÊÇÒ»¸öÌ×½Ó×ÖÍ¨ĞÅ·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSyncModeType : Byte
+	{
+		/// <summary>
+		/// Òì²½
+		/// </summary>
+		ASync = (Byte)'0',
+
+		/// <summary>
+		/// Í¬²½
+		/// </summary>
+		Sync = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcBankAccTypeTypeÊÇÒ»¸öÒøĞĞÕÊºÅÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumBankAccTypeType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ´æÕÛ
+		/// </summary>
+		BankBook = (Byte)'1',
+
+		/// <summary>
+		/// ´¢Ğî¿¨
+		/// </summary>
+		SavingCard = (Byte)'2',
+
+		/// <summary>
+		/// ĞÅÓÃ¿¨
+		/// </summary>
+		CreditCard = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcFutureAccTypeTypeÊÇÒ»¸öÆÚ»õ¹«Ë¾ÕÊºÅÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumFutureAccTypeType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ´æÕÛ
+		/// </summary>
+		BankBook = (Byte)'1',
+
+		/// <summary>
+		/// ´¢Ğî¿¨
+		/// </summary>
+		SavingCard = (Byte)'2',
+
+		/// <summary>
+		/// ĞÅÓÃ¿¨
+		/// </summary>
+		CreditCard = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcOrganStatusTypeÊÇÒ»¸ö½ÓÈë»ú¹¹×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumOrganStatusType : Byte
+	{
+		/// <summary>
+		/// ÆôÓÃ
+		/// </summary>
+		Ready = (Byte)'0',
+
+		/// <summary>
+		/// Ç©µ½
+		/// </summary>
+		CheckIn = (Byte)'1',
+
+		/// <summary>
+		/// Ç©ÍË
+		/// </summary>
+		CheckOut = (Byte)'2',
+
+		/// <summary>
+		/// ¶ÔÕÊÎÄ¼şµ½´ï
+		/// </summary>
+		CheckFileArrived = (Byte)'3',
+
+		/// <summary>
+		/// ¶ÔÕÊ
+		/// </summary>
+		CheckDetail = (Byte)'4',
+
+		/// <summary>
+		/// ÈÕÖÕÇåÀí
+		/// </summary>
+		DayEndClean = (Byte)'5',
+
+		/// <summary>
+		/// ×¢Ïú
+		/// </summary>
+		Invalid = (Byte)'9'
+	};
+
+	/// <summary>
+	/// TFtdcCCBFeeModeTypeÊÇÒ»¸ö½¨ĞĞÊÕ·ÑÄ£Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumCCBFeeModeType : Byte
+	{
+		/// <summary>
+		/// °´½ğ¶î¿ÛÊÕ
+		/// </summary>
+		ByAmount = (Byte)'1',
+
+		/// <summary>
+		/// °´ÔÂ¿ÛÊÕ
+		/// </summary>
+		ByMonth = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcCommApiTypeTypeÊÇÒ»¸öÍ¨Ñ¶APIÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumCommApiTypeType : Byte
+	{
+		/// <summary>
+		/// ¿Í»§¶Ë
+		/// </summary>
+		Client = (Byte)'1',
+
+		/// <summary>
+		/// ·şÎñ¶Ë
+		/// </summary>
+		Server = (Byte)'2',
+
+		/// <summary>
+		/// ½»Ò×ÏµÍ³µÄUserApi
+		/// </summary>
+		UserApi = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcLinkStatusTypeÊÇÒ»¸öÁ¬½Ó×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumLinkStatusType : Byte
+	{
+		/// <summary>
+		/// ÒÑ¾­Á¬½Ó
+		/// </summary>
+		Connected = (Byte)'1',
+
+		/// <summary>
+		/// Ã»ÓĞÁ¬½Ó
+		/// </summary>
+		Disconnected = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcPwdFlagTypeÊÇÒ»¸öÃÜÂëºË¶Ô±êÖ¾ÀàĞÍ
+	/// </summary>
+	public enum struct EnumPwdFlagType : Byte
+	{
+		/// <summary>
+		/// ²»ºË¶Ô
+		/// </summary>
+		NoCheck = (Byte)'0',
+
+		/// <summary>
+		/// Ã÷ÎÄºË¶Ô
+		/// </summary>
+		BlankCheck = (Byte)'1',
+
+		/// <summary>
+		/// ÃÜÎÄºË¶Ô
+		/// </summary>
+		EncryptCheck = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcSecuAccTypeTypeÊÇÒ»¸öÆÚ»õÕÊºÅÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumSecuAccTypeType : Byte
+	{
+		/// <summary>
+		/// ×Ê½ğÕÊºÅ
+		/// </summary>
+		AccountID = (Byte)'1',
+
+		/// <summary>
+		/// ×Ê½ğ¿¨ºÅ
+		/// </summary>
+		CardID = (Byte)'2',
+
+		/// <summary>
+		/// ÉÏº£¹É¶«ÕÊºÅ
+		/// </summary>
+		SHStockholderID = (Byte)'3',
+
+		/// <summary>
+		/// ÉîÛÚ¹É¶«ÕÊºÅ
+		/// </summary>
+		SZStockholderID = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcTransferStatusTypeÊÇÒ»¸ö×ªÕË½»Ò××´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumTransferStatusType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'0',
+
+		/// <summary>
+		/// ±»³åÕı
+		/// </summary>
+		Repealed = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcSponsorTypeTypeÊÇÒ»¸ö·¢Æğ·½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSponsorTypeType : Byte
+	{
+		/// <summary>
+		/// ÆÚÉÌ
+		/// </summary>
+		Broker = (Byte)'0',
+
+		/// <summary>
+		/// ÒøĞĞ
+		/// </summary>
+		Bank = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcReqRspTypeTypeÊÇÒ»¸öÇëÇóÏìÓ¦Àà±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumReqRspTypeType : Byte
+	{
+		/// <summary>
+		/// ÇëÇó
+		/// </summary>
+		Request = (Byte)'0',
+
+		/// <summary>
+		/// ÏìÓ¦
+		/// </summary>
+		Response = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcFBTUserEventTypeTypeÊÇÒ»¸öÒøÆÚ×ªÕÊÓÃ»§ÊÂ¼şÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumFBTUserEventTypeType : Byte
+	{
+		/// <summary>
+		/// Ç©µ½
+		/// </summary>
+		SignIn = (Byte)'0',
+
+		/// <summary>
+		/// ÒøĞĞ×ªÆÚ»õ
+		/// </summary>
+		FromBankToFuture = (Byte)'1',
+
+		/// <summary>
+		/// ÆÚ»õ×ªÒøĞĞ
+		/// </summary>
+		FromFutureToBank = (Byte)'2',
+
+		/// <summary>
+		/// ¿ª»§
+		/// </summary>
+		OpenAccount = (Byte)'3',
+
+		/// <summary>
+		/// Ïú»§
+		/// </summary>
+		CancelAccount = (Byte)'4',
+
+		/// <summary>
+		/// ±ä¸üÒøĞĞÕË»§
+		/// </summary>
+		ChangeAccount = (Byte)'5',
+
+		/// <summary>
+		/// ³åÕıÒøĞĞ×ªÆÚ»õ
+		/// </summary>
+		RepealFromBankToFuture = (Byte)'6',
+
+		/// <summary>
+		/// ³åÕıÆÚ»õ×ªÒøĞĞ
+		/// </summary>
+		RepealFromFutureToBank = (Byte)'7',
+
+		/// <summary>
+		/// ²éÑ¯ÒøĞĞÕË»§
+		/// </summary>
+		QueryBankAccount = (Byte)'8',
+
+		/// <summary>
+		/// ²éÑ¯ÆÚ»õÕË»§
+		/// </summary>
+		QueryFutureAccount = (Byte)'9',
+
+		/// <summary>
+		/// Ç©ÍË
+		/// </summary>
+		SignOut = (Byte)'A',
+
+		/// <summary>
+		/// ÃÜÔ¿Í¬²½
+		/// </summary>
+		SyncKey = (Byte)'B',
+
+		/// <summary>
+		/// ÆäËû
+		/// </summary>
+		Other = (Byte)'Z'
+	};
+
+	/// <summary>
+	/// TFtdcDBOperationTypeÊÇÒ»¸ö¼ÇÂ¼²Ù×÷ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumDBOperationType : Byte
+	{
+		/// <summary>
+		/// ²åÈë
+		/// </summary>
+		Insert = (Byte)'0',
+
+		/// <summary>
+		/// ¸üĞÂ
+		/// </summary>
+		Update = (Byte)'1',
+
+		/// <summary>
+		/// É¾³ı
+		/// </summary>
+		Delet = (Byte)'2'
+	};
+
+
+	/// <summary>
+	/// TFtdcSyncFlagTypeÊÇÒ»¸öÍ¬²½±ê¼ÇÀàĞÍ
+	/// </summary>
+	public enum struct EnumSyncFlagType : Byte
+	{
+		/// <summary>
+		/// ÒÑÍ¬²½
+		/// </summary>
+		Yes = (Byte)'0',
+
+		/// <summary>
+		/// Î´Í¬²½
+		/// </summary>
+		No = (Byte)'1'
+	};
+
+
+	/// <summary>
+	/// TFtdcSyncTypeTypeÊÇÒ»¸öÍ¬²½ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumSyncTypeType : Byte
+	{
+		/// <summary>
+		/// Ò»´ÎÍ¬²½
+		/// </summary>
+		OneOffSync = (Byte)'0',
+
+		/// <summary>
+		/// ¶¨Ê±Í¬²½
+		/// </summary>
+		TimerSync = (Byte)'1',
+
+		/// <summary>
+		/// ¶¨Ê±ÍêÈ«Í¬²½
+		/// </summary>
+		TimerFullSync = (Byte)'2'
+	};
+
+
+	/// <summary>
+	/// TFtdcNotifyClassTypeÊÇÒ»¸ö·çÏÕÍ¨ÖªÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumNotifyClassType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		NOERROR = (Byte)'0',
+
+		/// <summary>
+		/// ¾¯Ê¾
+		/// </summary>
+		Warn = (Byte)'1',
+
+		/// <summary>
+		/// ×·±£
+		/// </summary>
+		Call = (Byte)'2',
+
+		/// <summary>
+		/// Ç¿Æ½
+		/// </summary>
+		Force = (Byte)'3',
+
+		/// <summary>
+		/// ´©²Ö
+		/// </summary>
+		CHUANCANG = (Byte)'4',
+
+		/// <summary>
+		/// Òì³£
+		/// </summary>
+		Exception = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcForceCloseTypeTypeÊÇÒ»¸öÇ¿Æ½µ¥ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumForceCloseTypeType : Byte
+	{
+		/// <summary>
+		/// ÊÖ¹¤Ç¿Æ½
+		/// </summary>
+		Manual = (Byte)'0',
+
+		/// <summary>
+		/// µ¥Ò»Í¶×ÊÕß¸¨ÖúÇ¿Æ½
+		/// </summary>
+		Single = (Byte)'1',
+
+		/// <summary>
+		/// ÅúÁ¿Í¶×ÊÕß¸¨ÖúÇ¿Æ½
+		/// </summary>
+		Group = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcRiskNotifyMethodTypeÊÇÒ»¸ö·çÏÕÍ¨ÖªÍ¾¾¶ÀàĞÍ
+	/// </summary>
+	public enum struct EnumRiskNotifyMethodType : Byte
+	{
+		/// <summary>
+		/// ÏµÍ³Í¨Öª
+		/// </summary>
+		System = (Byte)'0',
+
+		/// <summary>
+		/// ¶ÌĞÅÍ¨Öª
+		/// </summary>
+		SMS = (Byte)'1',
+
+		/// <summary>
+		/// ÓÊ¼şÍ¨Öª
+		/// </summary>
+		EMail = (Byte)'2',
+
+		/// <summary>
+		/// ÈË¹¤Í¨Öª
+		/// </summary>
+		Manual = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcRiskNotifyStatusTypeÊÇÒ»¸ö·çÏÕÍ¨Öª×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumRiskNotifyStatusType : Byte
+	{
+		/// <summary>
+		/// Î´Éú³É
+		/// </summary>
+		NotGen = (Byte)'0',
+
+		/// <summary>
+		/// ÒÑÉú³ÉÎ´·¢ËÍ
+		/// </summary>
+		Generated = (Byte)'1',
+
+		/// <summary>
+		/// ·¢ËÍÊ§°Ü
+		/// </summary>
+		SendError = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑ·¢ËÍÎ´½ÓÊÕ
+		/// </summary>
+		SendOk = (Byte)'3',
+
+		/// <summary>
+		/// ÒÑ½ÓÊÕÎ´È·ÈÏ
+		/// </summary>
+		Received = (Byte)'4',
+
+		/// <summary>
+		/// ÒÑÈ·ÈÏ
+		/// </summary>
+		Confirmed = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcRiskUserEventTypeÊÇÒ»¸ö·ç¿ØÓÃ»§²Ù×÷ÊÂ¼şÀàĞÍ
+	/// </summary>
+	public enum struct EnumRiskUserEventType : Byte
+	{
+		/// <summary>
+		/// µ¼³öÊı¾İ
+		/// </summary>
+		ExportData = (Byte)'0'
+	};
+
+	/// <summary>
+	/// TFtdcConditionalOrderSortTypeTypeÊÇÒ»¸öÌõ¼şµ¥Ë÷ÒıÌõ¼şÀàĞÍ
+	/// </summary>
+	public enum struct EnumConditionalOrderSortTypeType : Byte
+	{
+		/// <summary>
+		/// Ê¹ÓÃ×îĞÂ¼ÛÉıĞò
+		/// </summary>
+		LastPriceAsc = (Byte)'0',
+
+		/// <summary>
+		/// Ê¹ÓÃ×îĞÂ¼Û½µĞò
+		/// </summary>
+		LastPriceDesc = (Byte)'1',
+
+		/// <summary>
+		/// Ê¹ÓÃÂô¼ÛÉıĞò
+		/// </summary>
+		AskPriceAsc = (Byte)'2',
+
+		/// <summary>
+		/// Ê¹ÓÃÂô¼Û½µĞò
+		/// </summary>
+		AskPriceDesc = (Byte)'3',
+
+		/// <summary>
+		/// Ê¹ÓÃÂò¼ÛÉıĞò
+		/// </summary>
+		BidPriceAsc = (Byte)'4',
+
+		/// <summary>
+		/// Ê¹ÓÃÂò¼Û½µĞò
+		/// </summary>
+		BidPriceDesc = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcSendTypeTypeÊÇÒ»¸ö±¨ËÍ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSendTypeType : Byte
+	{
+		/// <summary>
+		/// Î´·¢ËÍ
+		/// </summary>
+		NoSend = (Byte)'0',
+
+		/// <summary>
+		/// ÒÑ·¢ËÍ
+		/// </summary>
+		Sended = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑÉú³É
+		/// </summary>
+		Generated = (Byte)'2',
+
+		/// <summary>
+		/// ±¨ËÍÊ§°Ü
+		/// </summary>
+		SendFail = (Byte)'3',
+
+		/// <summary>
+		/// ½ÓÊÕ³É¹¦
+		/// </summary>
+		Success = (Byte)'4',
+
+		/// <summary>
+		/// ½ÓÊÕÊ§°Ü
+		/// </summary>
+		Fail = (Byte)'5',
+
+		/// <summary>
+		/// È¡Ïû±¨ËÍ
+		/// </summary>
+		Cancel = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcClientIDStatusTypeÊÇÒ»¸ö½»Ò×±àÂë×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumClientIDStatusType : Byte
+	{
+		/// <summary>
+		/// Î´ÉêÇë
+		/// </summary>
+		NoApply = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑÌá½»ÉêÇë
+		/// </summary>
+		Submited = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑ·¢ËÍÉêÇë
+		/// </summary>
+		Sended = (Byte)'3',
+
+		/// <summary>
+		/// Íê³É
+		/// </summary>
+		Success = (Byte)'4',
+
+		/// <summary>
+		/// ¾Ü¾ø
+		/// </summary>
+		Refuse = (Byte)'5',
+
+		/// <summary>
+		/// ÒÑ³·Ïú±àÂë
+		/// </summary>
+		Cancel = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcQuestionTypeTypeÊÇÒ»¸öÌØÓĞĞÅÏ¢ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumQuestionTypeType : Byte
+	{
+		/// <summary>
+		/// µ¥Ñ¡
+		/// </summary>
+		Radio = (Byte)'1',
+
+		/// <summary>
+		/// ¶àÑ¡
+		/// </summary>
+		Option = (Byte)'2',
+
+		/// <summary>
+		/// Ìî¿Õ
+		/// </summary>
+		Blank = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcProcessTypeTypeÊÇÒ»¸öÁ÷³Ì¹¦ÄÜÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumProcessTypeType : Byte
+	{
+		/// <summary>
+		/// ÉêÇë½»Ò×±àÂë
+		/// </summary>
+		ApplyTradingCode = (Byte)'1',
+
+		/// <summary>
+		/// ³·Ïú½»Ò×±àÂë
+		/// </summary>
+		CancelTradingCode = (Byte)'2',
+
+		/// <summary>
+		/// ĞŞ¸ÄÉí·İĞÅÏ¢
+		/// </summary>
+		ModifyIDCard = (Byte)'3',
+
+		/// <summary>
+		/// ĞŞ¸ÄÒ»°ãĞÅÏ¢
+		/// </summary>
+		ModifyNoIDCard = (Byte)'4',
+
+		/// <summary>
+		/// ½»Ò×Ëù¿ª»§±¨±¸
+		/// </summary>
+		ExchOpenBak = (Byte)'5',
+
+		/// <summary>
+		/// ½»Ò×ËùÏú»§±¨±¸
+		/// </summary>
+		ExchCancelBak = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcBusinessTypeTypeÊÇÒ»¸öÒµÎñÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumBusinessTypeType : Byte
+	{
+		/// <summary>
+		/// ÇëÇó
+		/// </summary>
+		Request = (Byte)'1',
+
+		/// <summary>
+		/// Ó¦´ğ
+		/// </summary>
+		Response = (Byte)'2',
+
+		/// <summary>
+		/// Í¨Öª
+		/// </summary>
+		Notice = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcCfmmcReturnCodeTypeÊÇÒ»¸ö¼à¿ØÖĞĞÄ·µ»ØÂëÀàĞÍ
+	/// </summary>
+	public enum struct EnumCfmmcReturnCodeType : Byte
+	{
+		/// <summary>
+		/// ³É¹¦
+		/// </summary>
+		Success = (Byte)'0',
+
+		/// <summary>
+		/// ¸Ã¿Í»§ÒÑ¾­ÓĞÁ÷³ÌÔÚ´¦ÀíÖĞ
+		/// </summary>
+		Working = (Byte)'1',
+
+		/// <summary>
+		/// ¼à¿ØÖĞ¿Í»§×ÊÁÏ¼ì²éÊ§°Ü
+		/// </summary>
+		InfoFail = (Byte)'2',
+
+		/// <summary>
+		/// ¼à¿ØÖĞÊµÃûÖÆ¼ì²éÊ§°Ü
+		/// </summary>
+		IDCardFail = (Byte)'3',
+
+		/// <summary>
+		/// ÆäËû´íÎó
+		/// </summary>
+		OtherFail = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcClientTypeTypeÊÇÒ»¸ö¿Í»§ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumClientTypeType : Byte
+	{
+		/// <summary>
+		/// ËùÓĞ
+		/// </summary>
+		All = (Byte)'0',
+
+		/// <summary>
+		/// ¸öÈË
+		/// </summary>
+		Person = (Byte)'1',
+
+		/// <summary>
+		/// µ¥Î»
+		/// </summary>
+		Company = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcExchangeIDTypeTypeÊÇÒ»¸ö½»Ò×Ëù±àºÅÀàĞÍ
+	/// </summary>
+	public enum struct EnumExchangeIDTypeType : Byte
+	{
+		/// <summary>
+		/// ÉÏº£ÆÚ»õ½»Ò×Ëù
+		/// </summary>
+		SHFE = (Byte)'S',
+
+		/// <summary>
+		/// Ö£ÖİÉÌÆ·½»Ò×Ëù
+		/// </summary>
+		CZCE = (Byte)'Z',
+
+		/// <summary>
+		/// ´óÁ¬ÉÌÆ·½»Ò×Ëù
+		/// </summary>
+		DCE = (Byte)'D',
+
+		/// <summary>
+		/// ÖĞ¹ú½ğÈÚÆÚ»õ½»Ò×Ëù
+		/// </summary>
+		CFFEX = (Byte)'J'
+	};
+
+	/// <summary>
+	/// TFtdcExClientIDTypeTypeÊÇÒ»¸ö½»Ò×±àÂëÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumExClientIDTypeType : Byte
+	{
+		/// <summary>
+		/// Ì×±£
+		/// </summary>
+		Hedge = (Byte)'1',
+
+		/// <summary>
+		/// Ì×Àû
+		/// </summary>
+		Arbitrage = (Byte)'2',
+
+		/// <summary>
+		/// Í¶»ú
+		/// </summary>
+		Speculation = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcUpdateFlagTypeÊÇÒ»¸ö¸üĞÂ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumUpdateFlagType : Byte
+	{
+		/// <summary>
+		/// Î´¸üĞÂ
+		/// </summary>
+		NoUpdate = (Byte)'0',
+
+		/// <summary>
+		/// ¸üĞÂÈ«²¿ĞÅÏ¢³É¹¦
+		/// </summary>
+		Success = (Byte)'1',
+
+		/// <summary>
+		/// ¸üĞÂÈ«²¿ĞÅÏ¢Ê§°Ü
+		/// </summary>
+		Fail = (Byte)'2',
+
+		/// <summary>
+		/// ¸üĞÂ½»Ò×±àÂë³É¹¦
+		/// </summary>
+		TCSuccess = (Byte)'3',
+
+		/// <summary>
+		/// ¸üĞÂ½»Ò×±àÂëÊ§°Ü
+		/// </summary>
+		TCFail = (Byte)'4',
+
+		/// <summary>
+		/// ÒÑ¶ªÆú
+		/// </summary>
+		Cancel = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcApplyOperateIDTypeÊÇÒ»¸öÉêÇë¶¯×÷ÀàĞÍ
+	/// </summary>
+	public enum struct EnumApplyOperateIDType : Byte
+	{
+		/// <summary>
+		/// ¿ª»§
+		/// </summary>
+		OpenInvestor = (Byte)'1',
+
+		/// <summary>
+		/// ĞŞ¸ÄÉí·İĞÅÏ¢
+		/// </summary>
+		ModifyIDCard = (Byte)'2',
+
+		/// <summary>
+		/// ĞŞ¸ÄÒ»°ãĞÅÏ¢
+		/// </summary>
+		ModifyNoIDCard = (Byte)'3',
+
+		/// <summary>
+		/// ÉêÇë½»Ò×±àÂë
+		/// </summary>
+		ApplyTradingCode = (Byte)'4',
+
+		/// <summary>
+		/// ³·Ïú½»Ò×±àÂë
+		/// </summary>
+		CancelTradingCode = (Byte)'5',
+
+		/// <summary>
+		/// Ïú»§
+		/// </summary>
+		CancelInvestor = (Byte)'6'
+	};
+
+	/// <summary>
+	/// TFtdcApplyStatusIDTypeÊÇÒ»¸öÉêÇë×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumApplyStatusIDType : Byte
+	{
+		/// <summary>
+		/// Î´²¹È«
+		/// </summary>
+		NoComplete = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑÌá½»
+		/// </summary>
+		Submited = (Byte)'2',
+
+		/// <summary>
+		/// ÒÑÉóºË
+		/// </summary>
+		Checked = (Byte)'3',
+
+		/// <summary>
+		/// ÒÑ¾Ü¾ø
+		/// </summary>
+		Refused = (Byte)'4',
+
+		/// <summary>
+		/// ÒÑÉ¾³ı
+		/// </summary>
+		Deleted = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcSendMethodTypeÊÇÒ»¸ö·¢ËÍ·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSendMethodType : Byte
+	{
+		/// <summary>
+		/// µç×Ó·¢ËÍ
+		/// </summary>
+		ByAPI = (Byte)'1',
+
+		/// <summary>
+		/// ÎÄ¼ş·¢ËÍ
+		/// </summary>
+		ByFile = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcEventModeTypeÊÇÒ»¸ö²Ù×÷·½·¨ÀàĞÍ
+	/// </summary>
+	public enum struct EnumEventModeType : Byte
+	{
+		/// <summary>
+		/// Ôö¼Ó
+		/// </summary>
+		ADD = (Byte)'1',
+
+		/// <summary>
+		/// ĞŞ¸Ä
+		/// </summary>
+		UPDATE = (Byte)'2',
+
+		/// <summary>
+		/// É¾³ı
+		/// </summary>
+		DELETE = (Byte)'3',
+
+		/// <summary>
+		/// ¸´ºË
+		/// </summary>
+		CHECK = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcUOAAutoSendTypeÊÇÒ»¸öÍ³Ò»¿ª»§ÉêÇë×Ô¶¯·¢ËÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumUOAAutoSendType : Byte
+	{
+		/// <summary>
+		/// ×Ô¶¯·¢ËÍ²¢½ÓÊÕ
+		/// </summary>
+		ASR = (Byte)'1',
+
+		/// <summary>
+		/// ×Ô¶¯·¢ËÍ£¬²»×Ô¶¯½ÓÊÕ
+		/// </summary>
+		ASNR = (Byte)'2',
+
+		/// <summary>
+		/// ²»×Ô¶¯·¢ËÍ£¬×Ô¶¯½ÓÊÕ
+		/// </summary>
+		NSAR = (Byte)'3',
+
+		/// <summary>
+		/// ²»×Ô¶¯·¢ËÍ£¬Ò²²»×Ô¶¯½ÓÊÕ
+		/// </summary>
+		NSR = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcFlowIDTypeÊÇÒ»¸öÁ÷³ÌIDÀàĞÍ
+	/// </summary>
+	public enum struct EnumFlowIDType : Byte
+	{
+		/// <summary>
+		/// Í¶×ÊÕß¶ÔÓ¦Í¶×ÊÕß×éÉèÖÃ
+		/// </summary>
+		InvestorGroupFlow = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcCheckLevelTypeÊÇÒ»¸ö¸´ºË¼¶±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumCheckLevelType : Byte
+	{
+		/// <summary>
+		/// Áã¼¶¸´ºË
+		/// </summary>
+		Zero = (Byte)'0',
+
+		/// <summary>
+		/// Ò»¼¶¸´ºË
+		/// </summary>
+		One = (Byte)'1',
+
+		/// <summary>
+		/// ¶ş¼¶¸´ºË
+		/// </summary>
+		Two = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcCheckStatusTypeÊÇÒ»¸ö¸´ºË¼¶±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumCheckStatusType : Byte
+	{
+		/// <summary>
+		/// Î´¸´ºË
+		/// </summary>
+		Init = (Byte)'0',
+
+		/// <summary>
+		/// ¸´ºËÖĞ
+		/// </summary>
+		Checking = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑ¸´ºË
+		/// </summary>
+		Checked = (Byte)'2',
+
+		/// <summary>
+		/// ¾Ü¾ø
+		/// </summary>
+		Refuse = (Byte)'3',
+
+		/// <summary>
+		/// ×÷·Ï
+		/// </summary>
+		Cancel = (Byte)'4'
+	};
+
+	/// <summary>
+	/// TFtdcUsedStatusTypeÊÇÒ»¸öÉúĞ§×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumUsedStatusType : Byte
+	{
+		/// <summary>
+		/// Î´ÉúĞ§
+		/// </summary>
+		Unused = (Byte)'0',
+
+		/// <summary>
+		/// ÒÑÉúĞ§
+		/// </summary>
+		Used = (Byte)'1',
+
+		/// <summary>
+		/// ÉúĞ§Ê§°Ü
+		/// </summary>
+		Fail = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcBankAcountOriginTypeÊÇÒ»¸öÕË»§À´Ô´ÀàĞÍ
+	/// </summary>
+	public enum struct EnumBankAcountOriginType : Byte
+	{
+		/// <summary>
+		/// ÊÖ¹¤Â¼Èë
+		/// </summary>
+		ByAccProperty = (Byte)'0',
+
+		/// <summary>
+		/// ÒøÆÚ×ªÕË
+		/// </summary>
+		ByFBTransfer = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcMonthBillTradeSumTypeÊÇÒ»¸ö½áËãµ¥ÔÂ±¨³É½»»ã×Ü·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumMonthBillTradeSumType : Byte
+	{
+		/// <summary>
+		/// Í¬ÈÕÍ¬ºÏÔ¼
+		/// </summary>
+		ByInstrument = (Byte)'0',
+
+		/// <summary>
+		/// Í¬ÈÕÍ¬ºÏÔ¼Í¬¼Û¸ñ
+		/// </summary>
+		ByDayInsPrc = (Byte)'1',
+
+		/// <summary>
+		/// Í¬ºÏÔ¼
+		/// </summary>
+		ByDayIns = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcFBTTradeCodeEnumTypeÊÇÒ»¸öÒøÆÚ½»Ò×´úÂëÃ¶¾ÙÀàĞÍ
+	/// </summary>
+	public enum struct EnumFBTTradeCodeEnumType : Byte
+	{
+		/// <summary>
+		/// ÒøĞĞ·¢ÆğÒøĞĞ×ªÆÚ»õ
+		/// </summary>
+		BankLaunchBankToBroker_102001 = (Byte)'1',//'102001',
+
+												  /// <summary>
+												  /// ÆÚ»õ·¢ÆğÒøĞĞ×ªÆÚ»õ
+												  /// </summary>
+												  BrokerLaunchBankToBroker_202001 = (Byte)'2',//'202001',
+
+																							  /// <summary>
+																							  /// ÒøĞĞ·¢ÆğÆÚ»õ×ªÒøĞĞ
+																							  /// </summary>
+																							  BankLaunchBrokerToBank_102002 = (Byte)'3',//'102002',
+
+																																		/// <summary>
+																																		/// ÆÚ»õ·¢ÆğÆÚ»õ×ªÒøĞĞ
+																																		/// </summary>
+																																		BrokerLaunchBrokerToBank_202002 = (Byte)'4'//'202002'
+	};
+
+	/// <summary>
+	/// TFtdcOTPTypeTypeÊÇÒ»¸ö¶¯Ì¬ÁîÅÆÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumOTPTypeType : Byte
+	{
+		/// <summary>
+		/// ÎŞ¶¯Ì¬ÁîÅÆ
+		/// </summary>
+		NONE = (Byte)'0',
+
+		/// <summary>
+		/// Ê±¼äÁîÅÆ
+		/// </summary>
+		TOTP = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcOTPStatusTypeÊÇÒ»¸ö¶¯Ì¬ÁîÅÆ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumOTPStatusType : Byte
+	{
+		/// <summary>
+		/// Î´Ê¹ÓÃ
+		/// </summary>
+		Unused = (Byte)'0',
+
+		/// <summary>
+		/// ÒÑÊ¹ÓÃ
+		/// </summary>
+		Used = (Byte)'1',
+
+		/// <summary>
+		/// ×¢Ïú
+		/// </summary>
+		Disuse = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcBrokerUserTypeTypeÊÇÒ»¸ö¾­¼Ã¹«Ë¾ÓÃ»§ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumBrokerUserTypeType : Byte
+	{
+		/// <summary>
+		/// Í¶×ÊÕß
+		/// </summary>
+		Investor = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcFutureTypeTypeÊÇÒ»¸öÆÚ»õÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumFutureTypeType : Byte
+	{
+		/// <summary>
+		/// ÉÌÆ·ÆÚ»õ
+		/// </summary>
+		Commodity = (Byte)'1',
+
+		/// <summary>
+		/// ½ğÈÚÆÚ»õ
+		/// </summary>
+		Financial = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcFundEventTypeTypeÊÇÒ»¸ö×Ê½ğ¹ÜÀí²Ù×÷ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumFundEventTypeType : Byte
+	{
+		/// <summary>
+		/// ×ªÕËÏŞ¶î
+		/// </summary>
+		Restriction = (Byte)'0',
+
+		/// <summary>
+		/// µ±ÈÕ×ªÕËÏŞ¶î
+		/// </summary>
+		TodayRestriction = (Byte)'1',
+
+		/// <summary>
+		/// ÆÚÉÌÁ÷Ë®
+		/// </summary>
+		Transfer = (Byte)'2',
+
+		/// <summary>
+		/// ×Ê½ğ¶³½á
+		/// </summary>
+		Credit = (Byte)'3',
+
+		/// <summary>
+		/// Í¶×ÊÕß¿ÉÌá×Ê½ğ±ÈÀı
+		/// </summary>
+		InvestorWithdrawAlm = (Byte)'4',
+
+		/// <summary>
+		/// µ¥¸öÒøĞĞÕÊ»§×ªÕËÏŞ¶î
+		/// </summary>
+		BankRestriction = (Byte)'5'
+	};
+
+	/// <summary>
+	/// TFtdcAccountSourceTypeTypeÊÇÒ»¸ö×Ê½ğÕË»§À´Ô´ÀàĞÍ
+	/// </summary>
+	public enum struct EnumAccountSourceTypeType : Byte
+	{
+		/// <summary>
+		/// ÒøÆÚÍ¬²½
+		/// </summary>
+		FBTransfer = (Byte)'0',
+
+		/// <summary>
+		/// ÊÖ¹¤Â¼Èë
+		/// </summary>
+		ManualEntry = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcCodeSourceTypeTypeÊÇÒ»¸ö½»Ò×±àÂëÀ´Ô´ÀàĞÍ
+	/// </summary>
+	public enum struct EnumCodeSourceTypeType : Byte
+	{
+		/// <summary>
+		/// Í³Ò»¿ª»§
+		/// </summary>
+		UnifyAccount = (Byte)'0',
+
+		/// <summary>
+		/// ÊÖ¹¤Â¼Èë
+		/// </summary>
+		ManualEntry = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcUserRangeTypeÊÇÒ»¸ö²Ù×÷Ô±·¶Î§ÀàĞÍ
+	/// </summary>
+	public enum struct EnumUserRangeType : Byte
+	{
+		/// <summary>
+		/// ËùÓĞ
+		/// </summary>
+		All = (Byte)'0',
+
+		/// <summary>
+		/// µ¥Ò»²Ù×÷Ô±
+		/// </summary>
+		Single = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcByGroupTypeÊÇÒ»¸ö½»Ò×Í³¼Æ±í°´¿Í»§Í³¼Æ·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumByGroupType : Byte
+	{
+		/// <summary>
+		/// °´Í¶×ÊÕßÍ³¼Æ
+		/// </summary>
+		Investor = (Byte)'2',
+
+		/// <summary>
+		/// °´ÀàÍ³¼Æ
+		/// </summary>
+		Group = (Byte)'1'
+	};
+
+	/// <summary>
+	/// TFtdcTradeSumStatModeTypeÊÇÒ»¸ö½»Ò×Í³¼Æ±í°´·¶Î§Í³¼Æ·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumTradeSumStatModeType : Byte
+	{
+		/// <summary>
+		/// °´ºÏÔ¼Í³¼Æ
+		/// </summary>
+		Instrument = (Byte)'1',
+
+		/// <summary>
+		/// °´²úÆ·Í³¼Æ
+		/// </summary>
+		Product = (Byte)'2',
+
+		/// <summary>
+		/// °´½»Ò×ËùÍ³¼Æ
+		/// </summary>
+		Exchange = (Byte)'3'
+	};
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public enum struct EnumBoolType : int
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		No = 0,
+		/// <summary>
+		/// 
+		/// </summary>
+		Yes = 1
+	};
+
+	/// <summary>
+	/// TFtdcExprSetModeTypeÊÇÒ»¸öÈÕÆÚ±í´ïÊ½ÉèÖÃÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumExprSetModeType : Byte
+	{
+		/// <summary>
+		/// Ïà¶ÔÒÑÓĞ¹æÔòÉèÖÃ
+		/// </summary>
+		Relative = (Byte)'1',
+
+		/// <summary>
+		/// µäĞÍÉèÖÃ
+		/// </summary>
+		Typical = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcRateInvestorRangeTypeÊÇÒ»¸öÍ¶×ÊÕß·¶Î§ÀàĞÍ
+	/// </summary>
+	public enum struct EnumRateInvestorRangeType : Byte
+	{
+		/// <summary>
+		/// ¹«Ë¾±ê×¼
+		/// </summary>
+		All = (Byte)'1',
+
+		/// <summary>
+		/// Ä£°å
+		/// </summary>
+		Model = (Byte)'2',
+
+		/// <summary>
+		/// µ¥Ò»Í¶×ÊÕß
+		/// </summary>
+		Single = (Byte)'3'
+	};
+
+
+	/// <summary>
+	/// TFtdcSyncDataStatusTypeÊÇÒ»¸öÖ÷´ÎÓÃÏµÍ³Êı¾İÍ¬²½×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSyncDataStatusType : Byte
+	{
+		/// <summary>
+		/// Î´Í¬²½
+		/// </summary>
+		Initialize = (Byte)'0',
+
+		/// <summary>
+		/// Í¬²½ÖĞ
+		/// </summary>
+		Settlementin = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑÍ¬²½
+		/// </summary>
+		Settlemented = (Byte)'2'
+	};
+
+
+	/// <summary>
+	/// TFtdcTradeSourceTypeÊÇÒ»¸ö³É½»À´Ô´ÀàĞÍ
+	/// </summary>
+	public enum struct EnumTradeSourceType : Byte
+	{
+		/// <summary>
+		/// À´×Ô½»Ò×ËùÆÕÍ¨»Ø±¨
+		/// </summary>
+		NORMAL = (Byte)'0',
+
+		/// <summary>
+		/// À´×Ô²éÑ¯
+		/// </summary>
+		QUERY = (Byte)'1'
+	};
+
+
+	/// <summary>
+	/// TFtdcFlexStatModeTypeÊÇÒ»¸ö²úÆ·ºÏÔ¼Í³¼Æ·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFlexStatModeType : Byte
+	{
+		/// <summary>
+		/// ²úÆ·Í³¼Æ
+		/// </summary>
+		Product = (Byte)'1',
+
+		/// <summary>
+		/// ½»Ò×ËùÍ³¼Æ
+		/// </summary>
+		Exchange = (Byte)'2',
+
+		/// <summary>
+		/// Í³¼ÆËùÓĞ
+		/// </summary>
+		All = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcByInvestorRangeTypeÊÇÒ»¸öÍ¶×ÊÕß·¶Î§Í³¼Æ·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumByInvestorRangeType : Byte
+	{
+
+		/// <summary>
+		/// ÊôĞÔÍ³¼Æ
+		/// </summary>
+		Property = (Byte)'1',
+
+		/// <summary>
+		/// Í³¼ÆËùÓĞ
+		/// </summary>
+		All = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcPropertyInvestorRangeTypeÊÇÒ»¸öÍ¶×ÊÕß·¶Î§ÀàĞÍ
+	/// </summary>
+	public enum struct EnumPropertyInvestorRangeType : Byte
+	{
+		/// <summary>
+		/// ËùÓĞ
+		/// </summary>
+		All = (Byte)'1',
+
+		/// <summary>
+		/// Í¶×ÊÕßÊôĞÔ
+		/// </summary>
+		Property = (Byte)'2',
+
+		/// <summary>
+		/// µ¥Ò»Í¶×ÊÕß
+		/// </summary>
+		Single = (Byte)'3'
+	};
+
+	/// <summary>
+	/// TFtdcFileStatusTypeÊÇÒ»¸öÎÄ¼ş×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFileStatusType : Byte
+	{
+		/// <summary>
+		/// Î´Éú³É
+		/// </summary>
+		NoCreate = (Byte)'0',
+
+		/// <summary>
+		/// ÒÑÉú³É
+		/// </summary>
+		Created = (Byte)'1',
+
+		/// <summary>
+		/// Éú³ÉÊ§°Ü
+		/// </summary>
+		Failed = (Byte)'2'
+	};
+
+	/// <summary>
+	/// TFtdcFileGenStyleTypeÊÇÒ»¸öÎÄ¼şÉú³É·½Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFileGenStyleType : Byte
+	{
+		/// <summary>
+		/// ÏÂ·¢
+		/// </summary>
+		FileTransmit = (Byte)'0',
+
+		/// <summary>
+		/// Éú³É
+		/// </summary>
+		FileGen = (Byte)'1',
+	};
+
+	/// <summary>
+	/// TFtdcSysOperModeTypeÊÇÒ»¸öÏµÍ³ÈÕÖ¾²Ù×÷·½·¨ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSysOperModeType : Byte
+	{
+		/// <summary>
+		/// Ôö¼Ó
+		/// </summary>
+		Add = (Byte)'1',
+
+		/// <summary>
+		/// ĞŞ¸Ä
+		/// </summary>
+		Update = (Byte)'2',
+
+		/// <summary>
+		/// É¾³ı
+		/// </summary>
+		Delete = (Byte)'3',
+
+		/// <summary>
+		/// ¸´ÖÆ
+		/// </summary>
+		Copy = (Byte)'4',
+
+		/// <summary>
+		/// ¼¤»î
+		/// </summary>
+		AcTive = (Byte)'5',
+
+		/// <summary>
+		/// ×¢Ïú
+		/// </summary>
+		CanCel = (Byte)'6',
+
+		/// <summary>
+		/// ÖØÖÃ
+		/// </summary>
+		ReSet = (Byte)'7'
+	};
+
+	/// <summary>
+	/// TFtdcSysOperTypeTypeÊÇÒ»¸öÏµÍ³ÈÕÖ¾²Ù×÷ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumSysOperTypeType : Byte
+	{
+		/// <summary>
+		/// ĞŞ¸Ä²Ù×÷Ô±ÃÜÂë
+		/// </summary>
+		UpdatePassword = (Byte)'0',
+
+		/// <summary>
+		/// ²Ù×÷Ô±×éÖ¯¼Ü¹¹¹ØÏµ
+		/// </summary>
+		UserDepartment = (Byte)'1',
+
+		/// <summary>
+		/// ½ÇÉ«¹ÜÀí
+		/// </summary>
+		RoleManager = (Byte)'2',
+
+		/// <summary>
+		/// ½ÇÉ«¹¦ÄÜÉèÖÃ
+		/// </summary>
+		RoleFunction = (Byte)'3',
+
+		/// <summary>
+		/// »ù´¡²ÎÊıÉèÖÃ
+		/// </summary>
+		BaseParam = (Byte)'4',
+
+		/// <summary>
+		/// ÉèÖÃ²Ù×÷Ô±
+		/// </summary>
+		SetUserID = (Byte)'5',
+
+		/// <summary>
+		/// ÓÃ»§½ÇÉ«ÉèÖÃ
+		/// </summary>
+		SetUserRole = (Byte)'6',
+
+		/// <summary>
+		/// ÓÃ»§IPÏŞÖÆ
+		/// </summary>
+		UserIpRestriction = (Byte)'7',
+
+		/// <summary>
+		/// ×éÖ¯¼Ü¹¹¹ÜÀí
+		/// </summary>
+		DepartmentManager = (Byte)'8',
+
+		/// <summary>
+		/// ×éÖ¯¼Ü¹¹Ïò²éÑ¯·ÖÀà¸´ÖÆ
+		/// </summary>
+		DepartmentCopy = (Byte)'9',
+
+		/// <summary>
+		/// ½»Ò×±àÂë¹ÜÀí
+		/// </summary>
+		Tradingcode = (Byte)'A',
+
+		/// <summary>
+		/// Í¶×ÊÕß×´Ì¬Î¬»¤
+		/// </summary>
+		InvestorStatus = (Byte)'B',
+
+		/// <summary>
+		/// Í¶×ÊÕßÈ¨ÏŞ¹ÜÀí
+		/// </summary>
+		InvestorAuthority = (Byte)'C',
+
+		/// <summary>
+		/// ÊôĞÔÉèÖÃ
+		/// </summary>
+		PropertySet = (Byte)'D',
+
+		/// <summary>
+		/// ÖØÖÃÍ¶×ÊÕßÃÜÂë
+		/// </summary>
+		ReSetInvestorPasswd = (Byte)'E',
+
+		/// <summary>
+		/// Í¶×ÊÕß¸öĞÔĞÅÏ¢Î¬»¤
+		/// </summary>
+		InvestorPersonalityInfo = (Byte)'F'
+	};
+
+	/// <summary>
+	/// TFtdcCSRCDataQueyTypeTypeÊÇÒ»¸öÉÏ±¨Êı¾İ²éÑ¯ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumCSRCDataQueyTypeType : Byte
+	{
+		/// <summary>
+		/// ²éÑ¯µ±Ç°½»Ò×ÈÕ±¨ËÍµÄÊı¾İ
+		/// </summary>
+		Current = (Byte)'0',
+
+		/// <summary>
+		/// ²éÑ¯ÀúÊ·±¨ËÍµÄ´úÀí¾­¼Í¹«Ë¾µÄÊı¾İ
+		/// </summary>
+		History = (Byte)'1',
+	};
+
+	/// <summary>
+	/// TFtdcFreezeStatusTypeÊÇÒ»¸öĞİÃß×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumFreezeStatusType : Byte
+	{
+		/// <summary>
+		/// »îÔ¾
+		/// </summary>
+		Normal = (Byte)'1',
+
+		/// <summary>
+		/// ĞİÃß
+		/// </summary>
+		Freeze = (Byte)'0',
+	};
+
+	/// <summary>
+	/// TFtdcStandardStatusTypeÊÇÒ»¸ö¹æ·¶×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumStandardStatusType : Byte
+	{
+		/// <summary>
+		/// ÒÑ¹æ·¶
+		/// </summary>
+		Standard = (Byte)'0',
+
+		/// <summary>
+		/// Î´¹æ·¶
+		/// </summary>
+		NonStandard = (Byte)'1',
+	};
+
+	/// <summary>
+	/// TFtdcRightParamTypeTypeÊÇÒ»¸öÅäÖÃÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumRightParamTypeType : Byte
+	{
+		/// <summary>
+		/// ĞİÃß»§
+		/// </summary>
+		Freeze = (Byte)'1',
+
+		/// <summary>
+		/// ¼¤»îĞİÃß»§
+		/// </summary>
+		FreezeActive = (Byte)'2',
+	};
+
+	/// <summary>
+	/// TFtdcDataStatusTypeÊÇÒ»¸ö·´Ï´Ç®ÉóºË±íÊı¾İ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumDataStatusType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'0',
+
+		/// <summary>
+		/// ÒÑÉ¾³ı
+		/// </summary>
+		Deleted = (Byte)'1',
+	};
+
+
+	/// <summary>
+	/// TFtdcAMLCheckStatusTypeÊÇÒ»¸öÉóºË×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumAMLCheckStatusType : Byte
+	{
+		/// <summary>
+		/// Î´¸´ºË
+		/// </summary>
+		Init = (Byte)'0',
+
+		/// <summary>
+		/// ¸´ºËÖĞ
+		/// </summary>
+		Checking = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑ¸´ºË
+		/// </summary>
+		Checked = (Byte)'2',
+
+		/// <summary>
+		/// ¾Ü¾øÉÏ±¨
+		/// </summary>
+		RefuseReport = (Byte)'3',
+	};
+
+
+	/// <summary>
+	/// TFtdcAmlDateTypeTypeÊÇÒ»¸öÈÕÆÚÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumAmlDateTypeType : Byte
+	{
+		/// <summary>
+		/// ¼ì²éÈÕÆÚ
+		/// </summary>
+		DrawDay = (Byte)'0',
+
+		/// <summary>
+		/// ·¢ÉúÈÕÆÚ
+		/// </summary>
+		TouchDay = (Byte)'1',
+	};
+	/// <summary>
+	/// TFtdcAmlCheckLevelTypeÊÇÒ»¸öÉóºË¼¶±ğÀàĞÍ
+	/// </summary>
+	public enum struct EnumAmlCheckLevelType : Byte
+	{
+		/// <summary>
+		/// Áã¼¶ÉóºË
+		/// </summary>
+		CheckLevel0 = (Byte)'0',
+
+		/// <summary>
+		/// Ò»¼¶ÉóºË
+		/// </summary>
+		CheckLevel1 = (Byte)'1',
+
+		/// <summary>
+		/// ¶ş¼¶ÉóºË
+		/// </summary>
+		CheckLevel2 = (Byte)'2',
+
+		/// <summary>
+		/// Èı¼¶ÉóºË
+		/// </summary>
+		CheckLevel3 = (Byte)'3',
+	};
+
+
+	/// <summary>
+	/// TFtdcExportFileTypeTypeÊÇÒ»¸öµ¼³öÎÄ¼şÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumExportFileTypeType : Byte
+	{
+		/// <summary>
+		/// CSV
+		/// </summary>
+		CSV = (Byte)'0',
+
+		/// <summary>
+		/// Excel
+		/// </summary>
+		EXCEL = (Byte)'1',
+
+		/// <summary>
+		/// DBF
+		/// </summary>
+		DBF = (Byte)'2',
+	};
+
+	/// <summary>
+	/// TFtdcSettleManagerTypeTypeÊÇÒ»¸ö½áËãÅäÖÃÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumSettleManagerTypeType : Byte
+	{
+		/// <summary>
+		/// ½áËãÇ°×¼±¸
+		/// </summary>
+		Before = (Byte)'1',
+
+		/// <summary>
+		/// ½áËã
+		/// </summary>
+		Settlement = (Byte)'2',
+
+		/// <summary>
+		/// ½áËãºóºË¶Ô
+		/// </summary>
+		After = (Byte)'3',
+
+		/// <summary>
+		/// ½áËãºó´¦Àí
+		/// </summary>
+		Settlemented = (Byte)'4',
+	};
+
+
+	/// <summary>
+	/// TFtdcSettleManagerLevelTypeÊÇÒ»¸ö½áËãÅäÖÃµÈ¼¶ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSettleManagerLevelType : Byte
+	{
+		/// <summary>
+		/// ±ØÒª
+		/// </summary>
+		Must = (Byte)'1',
+
+		/// <summary>
+		/// ¾¯¸æ
+		/// </summary>
+		Alarm = (Byte)'2',
+
+		/// <summary>
+		/// ÌáÊ¾
+		/// </summary>
+		Prompt = (Byte)'3',
+
+		/// <summary>
+		/// ²»¼ì²é
+		/// </summary>
+		Ignore = (Byte)'4',
+	};
+
+	/// <summary>
+	/// TFtdcSettleManagerGroupTypeÊÇÒ»¸öÄ£¿é·Ö×éÀàĞÍ
+	/// </summary>
+	public enum struct EnumSettleManagerGroupType : Byte
+	{
+		/// <summary>
+		/// ½»Ò×ËùºË¶Ô
+		/// </summary>
+		Exhcange = (Byte)'1',
+
+		/// <summary>
+		/// ÄÚ²¿ºË¶Ô
+		/// </summary>
+		ASP = (Byte)'2',
+
+		/// <summary>
+		/// ÉÏ±¨Êı¾İºË¶Ô
+		/// </summary>
+		CSRC = (Byte)'3',
+	};
+
+	/// <summary>
+	/// TFtdcLimitUseTypeTypeÊÇÒ»¸ö±£Öµ¶î¶ÈÊ¹ÓÃÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumLimitUseTypeType : Byte
+	{
+		/// <summary>
+		/// ¿ÉÖØ¸´Ê¹ÓÃ
+		/// </summary>
+		Repeatable = (Byte)'1',
+
+		/// <summary>
+		/// ²»¿ÉÖØ¸´Ê¹ÓÃ
+		/// </summary>
+		Unrepeatable = (Byte)'2',
+	};
+
+
+	/// <summary>
+	/// TFtdcDataResourceTypeÊÇÒ»¸öÊı¾İÀ´Ô´ÀàĞÍ
+	/// </summary>
+	public enum struct EnumDataResourceType : Byte
+	{
+		/// <summary>
+		/// ±¾ÏµÍ³
+		/// </summary>
+		Settle = (Byte)'1',
+
+		/// <summary>
+		/// ½»Ò×Ëù
+		/// </summary>
+		Exchange = (Byte)'2',
+
+		/// <summary>
+		/// ±¨ËÍÊı¾İ
+		/// </summary>
+		CSRC = (Byte)'3',
+	};
+
+	/// <summary>
+	/// TFtdcMarginTypeTypeÊÇÒ»¸ö±£Ö¤½ğÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumMarginTypeType : Byte
+	{
+		/// <summary>
+		/// ½»Ò×Ëù±£Ö¤½ğÂÊ
+		/// </summary>
+		ExchMarginRate = (Byte)'0',
+
+		/// <summary>
+		/// Í¶×ÊÕß±£Ö¤½ğÂÊ
+		/// </summary>
+		InstrMarginRate = (Byte)'1',
+
+		/// <summary>
+		/// Í¶×ÊÕß½»Ò×±£Ö¤½ğÂÊ
+		/// </summary>
+		InstrMarginRateTrade = (Byte)'2',
+	};
+
+
+	/// <summary>
+	/// TFtdcActiveTypeTypeÊÇÒ»¸öÉúĞ§ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumActiveTypeType : Byte
+	{
+		/// <summary>
+		/// ½öµ±ÈÕÉúĞ§
+		/// </summary>
+		Intraday = (Byte)'1',
+
+		/// <summary>
+		/// ³¤ÆÚÉúĞ§
+		/// </summary>
+		Long = (Byte)'2',
+	};
+
+	/// <summary>
+	/// TFtdcMarginRateTypeTypeÊÇÒ»¸ö³åÍ»±£Ö¤½ğÂÊÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumMarginRateTypeType : Byte
+	{
+		/// <summary>
+		/// ½»Ò×Ëù±£Ö¤½ğÂÊ
+		/// </summary>
+		Exchange = (Byte)'1',
+
+		/// <summary>
+		/// Í¶×ÊÕß±£Ö¤½ğÂÊ
+		/// </summary>
+		Investor = (Byte)'2',
+
+		/// <summary>
+		/// Í¶×ÊÕß½»Ò×±£Ö¤½ğÂÊ
+		/// </summary>
+		InvestorTrade = (Byte)'3',
+	};
+
+	/// <summary>
+	/// TFtdcBackUpStatusTypeÊÇÒ»¸ö±¸·İÊı¾İ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumBackUpStatusType : Byte
+	{
+		/// <summary>
+		/// Î´Éú³É±¸·İÊı¾İ
+		/// </summary>
+		UnBak = (Byte)'0',
+
+		/// <summary>
+		/// ±¸·İÊı¾İÉú³ÉÖĞ
+		/// </summary>
+		BakUp = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑÉú³É±¸·İÊı¾İ
+		/// </summary>
+		BakUped = (Byte)'2',
+
+		/// <summary>
+		/// ±¸·İÊı¾İÊ§°Ü
+		/// </summary>
+		BakFail = (Byte)'3',
+	};
+
+	/// <summary>
+	/// TFtdcInitSettlementTypeÊÇÒ»¸ö½áËã³õÊ¼»¯×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumInitSettlementType : Byte
+	{
+		/// <summary>
+		/// ½áËã³õÊ¼»¯Î´¿ªÊ¼
+		/// </summary>
+		UnInitialize = (Byte)'0',
+
+		/// <summary>
+		/// ½áËã³õÊ¼»¯ÖĞ
+		/// </summary>
+		Initialize = (Byte)'1',
+
+		/// <summary>
+		/// ½áËã³õÊ¼»¯Íê³É
+		/// </summary>
+		Initialized = (Byte)'2',
+	};
+
+	/// <summary>
+	/// TFtdcReportStatusTypeÊÇÒ»¸ö±¨±íÊı¾İÉú³É×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumReportStatusType : Byte
+	{
+		/// <summary>
+		/// Î´Éú³É±¨±íÊı¾İ
+		/// </summary>
+		NoCreate = (Byte)'0',
+
+		/// <summary>
+		/// ±¨±íÊı¾İÉú³ÉÖĞ
+		/// </summary>
+		Create = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑÉú³É±¨±íÊı¾İ
+		/// </summary>
+		Created = (Byte)'2',
+
+		/// <summary>
+		/// Éú³É±¨±íÊı¾İÊ§°Ü
+		/// </summary>
+		CreateFail = (Byte)'3',
+	};
+
+	/// <summary>
+	/// TFtdcSaveStatusTypeÊÇÒ»¸öÊı¾İ¹éµµ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSaveStatusType : Byte
+	{
+		/// <summary>
+		/// ¹éµµÎ´Íê³É
+		/// </summary>
+		UnSaveData = (Byte)'0',
+
+		/// <summary>
+		/// ¹éµµÍê³É
+		/// </summary>
+		SaveDatad = (Byte)'1',
+	};
+
+
+	/// <summary>
+	/// TFtdcSettArchiveStatusTypeÊÇÒ»¸ö½áËãÈ·ÈÏÊı¾İ¹éµµ×´Ì¬ÀàĞÍ
+	/// </summary>
+	public enum struct EnumSettArchiveStatusType : Byte
+	{
+		/// <summary>
+		/// Î´¹éµµÊı¾İ
+		/// </summary>
+		UnArchived = (Byte)'0',
+
+		/// <summary>
+		/// Êı¾İ¹éµµÖĞ
+		/// </summary>
+		Archiving = (Byte)'1',
+
+		/// <summary>
+		/// ÒÑ¹éµµÊı¾İ
+		/// </summary>
+		Archived = (Byte)'2',
+
+		/// <summary>
+		/// ¹éµµÊı¾İÊ§°Ü
+		/// </summary>
+		ArchiveFail = (Byte)'3',
+	};
+
+	/// <summary>
+	/// TFtdcCTPTypeTypeÊÇÒ»¸öCTP½»Ò×ÏµÍ³ÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumCTPTypeType : Byte
+	{
+		/// <summary>
+		/// Î´ÖªÀàĞÍ
+		/// </summary>
+		Unkown = (Byte)'0',
+
+		/// <summary>
+		/// Ö÷ÖĞĞÄ
+		/// </summary>
+		MainCenter = (Byte)'1',
+
+		/// <summary>
+		/// ±¸ÖĞĞÄ
+		/// </summary>
+		BackUp = (Byte)'2',
+	};
+
+	/// <summary>
+	/// TFtdcCloseDealTypeTypeÊÇÒ»¸öÆ½²Ö´¦ÀíÀàĞÍÀàĞÍ
+	/// </summary>
+	public enum struct EnumCloseDealTypeType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'0',
+		/// <summary>
+		/// Í¶»úÆ½²ÖÓÅÏÈ
+		/// </summary>
+		SpecFirst = (Byte)'1'
+	};
+
+	/// <summary>
+	///TThostFtdcMortgageFundUseRangeTypeÊÇÒ»¸ö»õ±ÒÖÊÑº×Ê½ğ¿ÉÓÃ·¶Î§ÀàĞÍ
+	/// </summary>
+	public enum struct EnumMortgageFundUseRangeTypeType : Byte
+	{
+		/// <summary>
+		///²»ÄÜÊ¹ÓÃ
+		/// </summary>
+		None = (Byte)'0',
+		/// <summary>
+		///ÓÃÓÚ±£Ö¤½ğ
+		/// </summary>
+		Margin = (Byte)'1',
+		/// <summary>
+		///ÓÃÓÚÊÖĞø·Ñ¡¢Ó¯¿÷¡¢±£Ö¤½ğ
+		/// </summary>
+		All = (Byte)'2'
+	};
+
+
+
+	/// <summary>
+	/// TFtdcStartModeTypeÊÇÒ»¸öÆô¶¯Ä£Ê½ÀàĞÍ
+	/// </summary>
+	public enum struct EnumStartModeType : Byte
+	{
+		/// <summary>
+		/// Õı³£
+		/// </summary>
+		Normal = (Byte)'1',
+
+		/// <summary>
+		/// Ó¦¼±
+		/// </summary>
+		Emerge = (Byte)'2',
+
+		/// <summary>
+		/// »Ö¸´
+		/// </summary>
+		Restore = (Byte)'3',
+	};
+	///<summary>
+	///TFtdcTemplateTypeTypeÊÇÒ»¸öÄ£ĞÍÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumTemplateTypeType : Byte
+	{
+		/// <summary>
+		/// È«Á¿
+		/// </summary>
+		Full = (Byte)'1',
+
+		/// <summary>
+		/// ÔöÁ¿
+		/// </summary>
+		Increment = (Byte)'2',
+
+		/// <summary>
+		/// ±¸·İ
+		/// </summary>
+		BackUp = (Byte)'3',
+	};
+
+	///<summary>
+	///TFtdcLoginModeTypeÊÇÒ»¸öµÇÂ¼Ä£Ê½ÀàĞÍ
+	///</summary>
+	public enum struct EnumLoginModeType : Byte
+	{
+		/// <summary>
+		/// ½»Ò×
+		/// </summary>
+		Trade = (Byte)'0',
+
+		/// <summary>
+		/// ×ªÕË
+		/// </summary>
+		Transfer = (Byte)'1'
+	};
+
+	///<summary>
+	///TFtdcPromptTypeTypeÊÇÒ»¸öÈÕÀúÌáÊ¾ÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumPromptTypeType : Byte
+	{
+		/// <summary>
+		/// ºÏÔ¼ÉÏÏÂÊĞ
+		/// </summary>
+		Instrument = (Byte)'1',
+
+		/// <summary>
+		/// ±£Ö¤½ğ·Ö¶ÎÉúĞ§
+		/// </summary>
+		Margin = (Byte)'2'
+	};
+
+	///<summary>
+	///TFtdcHasTrusteeTypeÊÇÒ»¸öÊÇ·ñÓĞÍĞ¹ÜÈËÀàĞÍ
+	///</summary>
+	public enum struct EnumHasTrusteeType : Byte
+	{
+		/// <summary>
+		/// Ã»ÓĞ
+		/// </summary>
+		NO = (Byte)'0',
+
+		/// <summary>
+		/// ÓĞ
+		/// </summary>
+		YES = (Byte)'1'
+	};
+
+	///<summary>
+	///TFtdcAmTypeTypeÊÇÒ»¸ö»ú¹¹ÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumAmTypeType : Byte
+	{
+		///<summary>
+		///ÒøĞĞ
+		/// </summary>
+		Bank = (Byte) '1',
+		///<summary>
+		///Ö¤È¯¹«Ë¾
+		/// </summary>
+		Securities = (Byte)'2',
+		///<summary>
+		///»ù½ğ¹«Ë¾
+		/// </summary>
+		Fund = (Byte) '3',
+		///<summary>
+		///±£ÏÕ¹«Ë¾
+		/// </summary>
+		Insurance = (Byte) '4',
+		///<summary>
+		///ĞÅÍĞ¹«Ë¾
+		/// </summary>
+		Trust = (Byte) '5',
+		///<summary>
+		///ÆäËû
+		/// </summary>
+		Other = (Byte) '9'
+	};
+	///<summary>
+	///TFtdcCSRCFundIOTypeTypeÊÇÒ»¸ö³öÈë½ğÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumCSRCFundIOTypeType : Byte
+	{
+		///<summary>
+		///³öÈë½ğ
+		///</summary>
+		FundIO = (Byte)'0',
+		///<summary>
+		///ÒøÆÚ»»»ã
+		///</summary>
+		SwapCurrency = (Byte)'1'
+	};
+	///<summary>
+	///TFtdcCusAccountTypeTypeÊÇÒ»¸ö½áËãÕË»§ÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumCusAccountTypeType : Byte
+	{
+		///<summary>
+		///ÆÚ»õ½áËãÕË»§
+		///</summary>
+		Futures = (Byte)'1',
+		///<summary>
+		///´¿ÆÚ»õ×Ê¹ÜÒµÎñÏÂµÄ×Ê¹Ü½áËãÕË»§
+		///</summary>
+		AssetmgrFuture = (Byte) '2',
+		///<summary>
+		///×ÛºÏÀà×Ê¹ÜÒµÎñÏÂµÄÆÚ»õ×Ê¹ÜÍĞ¹ÜÕË»§
+		///</summary>
+		AssetmgrTrustee = (Byte) '3',
+		///<summary>
+		///×ÛºÏÀà×Ê¹ÜÒµÎñÏÂµÄ×Ê½ğÖĞ×ªÕË»§
+		///</summary>
+		AssetmgrTransfer = (Byte) '4'
+	};
+	///<summary>
+	///TFtdcLanguageTypeTypeÊÇÒ»¸öÍ¨ÖªÓïÑÔÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumLanguageTypeType : Byte
+	{
+		///<summary>
+		///ÖĞÎÄ
+		///</summary>
+		Chinese = (Byte)'1',
+		///<summary>
+		///Ó¢ÎÄ
+		///</summary>
+		English = (Byte)'2'
+	};
+
+	///<summary>
+	///TFtdcAssetmgrClientTypeTypeÊÇÒ»¸ö×Ê²ú¹ÜÀí¿Í»§ÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumAssetmgrClientTypeType : Byte
+	{
+		///<summary>
+		///¸öÈË×Ê¹Ü¿Í»§
+		///</summary>
+		Person = (Byte)'1',
+		///<summary>
+		///µ¥Î»×Ê¹Ü¿Í»§
+		///</summary>
+		Organ = (Byte) '2',
+		///<summary>
+		///ÌØÊâµ¥Î»×Ê¹Ü¿Í»§
+		///</summary>
+		SpecialOrgan = (Byte)'4'
+	};
+
+	///<summary>
+	///TFtdcAssetmgrTypeTypeÊÇÒ»¸öÍ¶×ÊÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumAssetmgrTypeType : Byte
+	{
+		///<summary>
+		///ÆÚ»õÀà
+		///</summary>
+		Futures = (Byte) '3',
+		///<summary>
+		///×ÛºÏÀà
+		///</summary>
+		SpecialOrgan = (Byte) '4'
+	};
+
+	///<summary>
+	///TFtdcCheckInstrTypeTypeÊÇÒ»¸öºÏÔ¼±È½ÏÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumCheckInstrTypeType : Byte
+	{
+		///<summary>
+		///ºÏÔ¼½»Ò×Ëù²»´æÔÚ
+		///</summary>
+		HasExch = (Byte) '0',
+		///<summary>
+		///ºÏÔ¼±¾ÏµÍ³²»´æÔÚ
+		///</summary>
+		HasATP = (Byte)'1',
+		///<summary>
+		///ºÏÔ¼±È½Ï²»Ò»ÖÂ
+		///</summary>
+		HasDiff = (Byte) '2'
+	};
+	///<summary>
+	///TFtdcDeliveryTypeTypeÊÇÒ»¸ö½»¸îÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumDeliveryTypeType : Byte
+	{
+		///<summary>
+		///ÊÖ¹¤½»¸î
+		///</summary>
+		HandDeliv = (Byte) '1',
+		///<summary>
+		///µ½ÆÚ½»¸î
+		///</summary>
+		PersonDeliv = (Byte) '2'
+	};
+	///<summary>
+	///TFtdcMaxMarginSideAlgorithmTypeÊÇÒ»¸ö´ó¶îµ¥±ß±£Ö¤½ğËã·¨ÀàĞÍ
+	///</summary>
+	public enum struct EnumMaxMarginSideAlgorithmType : Byte
+	{
+		///<summary>
+		///²»Ê¹ÓÃ´ó¶îµ¥±ß±£Ö¤½ğËã·¨
+		///</summary>
+		NO = (Byte)'0',
+		///<summary>
+		///Ê¹ÓÃ´ó¶îµ¥±ß±£Ö¤½ğËã·¨
+		///</summary>
+		YES = (Byte)'1'
+	};
+
+	///<summary>
+	///TFtdcDAClientTypeTypeÊÇÒ»¸ö×Ê²ú¹ÜÀí¿Í»§ÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumDAClientTypeType : Byte
+	{
+		///<summary>
+		///×ÔÈ»ÈË
+		///</summary>
+		Person = (Byte) '0',
+		///<summary>
+		///·¨ÈË
+		///</summary>
+		Company = (Byte) '1',
+		///<summary>
+		///ÆäËû
+		///</summary>
+		Other = (Byte) '2'
+	};
+
+	///<summary>
+	///TFtdcUOAAssetmgrTypeTypeÊÇÒ»¸öÍ¶×ÊÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumUOAAssetmgrTypeType : Byte
+	{
+		///<summary>
+		///ÆÚ»õÀà
+		///</summary>
+		Futures = (Byte) '1',
+		///<summary>
+		///×ÛºÏÀà
+		///</summary>
+		SpecialOrgan = (Byte) '2',
+	};
+
+	///<summary>
+	///TFtdcDirectionEnTypeÊÇÒ»¸öÂòÂô·½ÏòÀàĞÍ
+	///</summary>
+	public enum struct EnumDirectionEnType : Byte
+	{
+		///<summary>
+		///Buy
+		///</summary>
+		Buy = (Byte) '0',
+		///<summary>
+		///Sell
+		///</summary>
+		Sell = (Byte) '1',
+	};
+
+	///<summary>
+	///TFtdcOffsetFlagEnTypeÊÇÒ»¸ö¿ªÆ½±êÖ¾ÀàĞÍ
+	///</summary>
+	public enum struct EnumOffsetFlagEnType : Byte
+	{
+		///<summary>
+		///Position Opening
+		///<summary>
+		Open = (Byte)  '0',
+		///<summary>
+		///Position Close
+		///<summary>
+		Close = (Byte)  '1',
+		///<summary>
+		///Forced Liquidation
+		///<summary>
+		ForceClose = (Byte) '2',
+		///<summary>
+		///Close Today
+		///<summary>
+		CloseToday = (Byte) '3',
+		///<summary>
+		///Close Prev.
+		///<summary>
+		CloseYesterday = (Byte)  '4',
+		///<summary>
+		///Forced Reduction
+		///<summary>
+		ForceOff = (Byte) '5',
+		///<summary>
+		///Local Forced Liquidation
+		///<summary>
+		LocalForceClose = (Byte) '6'
+	};
+	///<summary>
+	///TFtdcValueMethodTypeÊÇÒ»¸öÈ¡Öµ·½Ê½ÀàĞÍ
+	///</summary>
+	public enum struct EnumValueMethodType : Byte
+	{
+		///<summary>
+		///°´¾ø¶ÔÖµ
+		///</summary>
+		Absolute = (Byte) '0',
+		///<summary>
+		///°´±ÈÂÊ
+		///</summary>
+		Ratio = (Byte) '1',
+	};
+	///<summary>
+	///TFtdcActionTypeTypeÊÇÒ»¸öÖ´ĞĞÀàĞÍÀàĞÍ
+	///</summary>
+	public enum struct EnumActionTypeType : Byte
+	{
+		///<summary>
+		///Ö´ĞĞ
+		///</summary>
+		Exec = (Byte) '1',
+		///<summary>
+		///·ÅÆú
+		///</summary>
+		Abandon = (Byte) '2',
+	};
+
+	///<summary>
+	///TFtdcExecOrderPositionFlagTypeÊÇÒ»¸öÆÚÈ¨ĞĞÈ¨ºóÊÇ·ñ±£ÁôÆÚ»õÍ·´çµÄ±ê¼ÇÀàĞÍ
+	///</summary>
+	public enum struct EnumExecOrderPositionFlagType : Byte
+	{
+		///<summary>
+		///±£Áô
+		///</summary>
+		Reserve = (Byte) '0',
+		///<summary>
+		///²»±£Áô
+		///</summary>
+		UnReserve = (Byte) '1',
+	};
+	///<summary>
+	///TFtdcExecOrderCloseFlagTypeÊÇÒ»¸öÆÚÈ¨ĞĞÈ¨ºóÉú³ÉµÄÍ·´çÊÇ·ñ×Ô¶¯Æ½²ÖÀàĞÍ
+	///</summary>
+	public enum struct EnumExecOrderCloseFlagType : Byte
+	{
+		///<summary>
+		///×Ô¶¯Æ½²Ö
+		///</summary>
+		AutoClose = (Byte) '0',
+		///<summary>
+		///ÃâÓÚ×Ô¶¯Æ½²Ö
+		///</summary>
+		NotToClose = (Byte) '1',
+	};
+	///<summary>
+	///TFtdcExecResultTypeÊÇÒ»¸öÖ´ĞĞ½á¹ûÀàĞÍ
+	///</summary>
+	public enum struct EnumExecResultType : Byte
+	{
+		///<summary>
+		///Ã»ÓĞÖ´ĞĞ
+		///</summary>
+		NoExec = (Byte) 'n',
+		///<summary>
+		///ÒÑ¾­È¡Ïû
+		Canceled = (Byte) 'c',
+		///<summary>
+		///Ö´ĞĞ³É¹¦
+		///</summary>
+		OK = (Byte) '0',
+		///<summary>
+		///ÆÚÈ¨³Ö²Ö²»¹»
+		///</summary>
+		NoPosition = (Byte) '1',
+		///<summary>
+		///×Ê½ğ²»¹»
+		///</summary>
+		NoDeposit = (Byte) '2',
+		///<summary>
+		///»áÔ±²»´æÔÚ
+		///</summary>
+		NoParticipant = (Byte) '3',
+		///<summary>
+		///¿Í»§²»´æÔÚ
+		///</summary>
+		NoClient = (Byte) '4',
+		///<summary>
+		///ºÏÔ¼²»´æÔÚ
+		///</summary>
+		NoInstrument = (Byte) '6',
+		///<summary>
+		///Ã»ÓĞÖ´ĞĞÈ¨ÏŞ
+		///</summary>
+		NoRight = (Byte) '7',
+		///<summary>
+		///²»ºÏÀíµÄÊıÁ¿
+		///</summary>
+		InvalidVolume = (Byte) '8',
+		///<summary>
+		///Ã»ÓĞ×ã¹»µÄÀúÊ·³É½»
+		///</summary>
+		NoEnoughHistoryTrade = (Byte) '9',
+		///<summary>
+		//Î´Öª
+		Unknown = (Byte) 'a'
+	};
+
+	///<summary>
+	///TFtdcForQuoteStatusTypeÊÇÒ»¸öÑ¯¼Û×´Ì¬ÀàĞÍ
+	///</summary>
+	public enum struct EnumForQuoteStatusType : Byte
+	{
+		///<summary>
+		///ÒÑ¾­Ìá½»
+		///</summary>
+		Submitted = (Byte) 'a',
+		///<summary>
+		///ÒÑ¾­½ÓÊÜ
+		///</summary>
+		Accepted = (Byte) 'b',
+		///<summary>
+		///ÒÑ¾­±»¾Ü¾ø
+		///</summary>
+		Rejected = (Byte) 'c'
+	};
+
+	///<summary>
+	///TFtdcCombDirectionTypeÊÇÒ»¸ö×éºÏÖ¸Áî·½ÏòÀàĞÍ
+	///</summary>
+	public enum struct EnumCombDirectionType : Byte
+	{
+		///<summary>
+		///ÉêÇë×éºÏ
+		///</summary>
+		Comb = (Byte) '0',
+		///<summary>
+		///ÉêÇë²ğ·Ö
+		///</summary>
+		UnComb = (Byte) '1'
+	};
+	///<summary>
+	///TFtdcBalanceAlgorithmTypeÊÇÒ»¸öÈ¨ÒæËã·¨ÀàĞÍ
+	///</summary>
+	public enum struct EnumBalanceAlgorithmType : Byte
+	{
+		///<summary>
+		///²»¼ÆËãÆÚÈ¨ÊĞÖµÓ¯¿÷
+		///</summary>
+		Default = (Byte) '1',
+		///<summary>
+		///¼ÆËãÆÚÈ¨ÊĞÖµ¿÷Ëğ
+		///</summary>
+		IncludeOptValLost = (Byte) '2'
+	};
+	///<summary>
+	///TFtdcReserveOpenAccStasTypeÊÇÒ»¸öÔ¤Ô¼¿ª»§×´Ì¬ÀàĞÍ
+	///</summary>
+	public enum struct EnumReserveOpenAccStasType : Byte
+	{
+		///<summary>
+		///µÈ´ı´¦ÀíÖĞ
+		///</summary>
+		Processing = (Byte) '0',
+		///<summary>
+		///ÒÑ³·Ïú
+		///</summary>
+		Cancelled = (Byte) '1',
+		///<summary>
+		///ÒÑ¿ª»§
+		///</summary>
+		Opened = (Byte) '2',
+		///<summary>
+		///ÎŞĞ§ÇëÇó
+		///</summary>
+		Invalid = (Byte) '3'
+	};
+	/// ÒÔÉÏÊÇuserapidatatype.hÀïÃæµÄÄÚÈİ--------------------------------------------------------------------------------------------------------------------
+
+
+	/// <summary>
+	/// ĞÅÏ¢·Ö·¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcDisseminationField
 	{
 		/// <summary>
-		/// åºåˆ—ç³»åˆ—å·
+		/// ĞòÁĞÏµÁĞºÅ
 		/// </summary>
 		short SequenceSeries;
 		/// <summary>
-		/// åºåˆ—å·
+		/// ĞòÁĞºÅ
 		/// </summary>
 		int SequenceNo;
 	};
 
 	/// <summary>
-	/// ç”¨æˆ·ç™»å½•è¯·æ±‚
+	/// ÓÃ»§µÇÂ¼ÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcReqUserLoginField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		/// ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		/// ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ UserProductInfo;
 		/// <summary>
-		/// æ¥å£ç«¯äº§å“ä¿¡æ¯
+		/// ½Ó¿Ú¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ InterfaceProductInfo;
 		/// <summary>
-		/// åè®®ä¿¡æ¯
+		/// Ğ­ÒéĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ProtocolInfo;
 		/// <summary>
-		/// Macåœ°å€
+		/// MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MacAddress;
 		/// <summary>
-		/// åŠ¨æ€å¯†ç 
+		/// ¶¯Ì¬ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ OneTimePassword;
 		/// <summary>
-		/// ç»ˆç«¯IPåœ°å€
+		/// ÖÕ¶ËIPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ ClientIPAddress;
-
 		/// <summary>
-		///ç™»å½•å¤‡æ³¨
+		///µÇÂ¼±¸×¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ LoginRemark;
@@ -98,17156 +6599,17715 @@ namespace CTP
 	public ref struct ThostFtdcFensUserInfoField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// ç™»å½•æ¨¡å¼
+		/// µÇÂ¼Ä£Ê½
 		/// </summary>
 		EnumLoginModeType	LoginMode;
 	};
 
 	/// <summary>
-	/// ç”¨æˆ·ç™»å½•åº”ç­”
+	/// ÓÃ»§µÇÂ¼Ó¦´ğ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcRspUserLoginField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç™»å½•æˆåŠŸæ—¶é—´
+		/// µÇÂ¼³É¹¦Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LoginTime;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// äº¤æ˜“ç³»ç»Ÿåç§°
+		/// ½»Ò×ÏµÍ³Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ SystemName;
 		/// <summary>
-		/// å‰ç½®ç¼–å·
+		/// Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		/// ä¼šè¯ç¼–å·
+		/// »á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		/// æœ€å¤§æŠ¥å•å¼•ç”¨
+		/// ×î´ó±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ MaxOrderRef;
 		/// <summary>
-		/// ä¸ŠæœŸæ‰€æ—¶é—´
+		/// ÉÏÆÚËùÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ SHFETime;
 		/// <summary>
-		/// å¤§å•†æ‰€æ—¶é—´
+		/// ´óÉÌËùÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ DCETime;
 		/// <summary>
-		/// éƒ‘å•†æ‰€æ—¶é—´
+		/// Ö£ÉÌËùÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CZCETime;
 		/// <summary>
-		/// ä¸­é‡‘æ‰€æ—¶é—´
+		/// ÖĞ½ğËùÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ FFEXTime;
 
 		/// <summary>
-		///èƒ½æºä¸­å¿ƒæ—¶é—´
+		///ÄÜÔ´ÖĞĞÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	INETime;
 	};
 
 	/// <summary>
-	/// ç”¨æˆ·ç™»å‡ºè¯·æ±‚
+	/// ÓÃ»§µÇ³öÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcUserLogoutField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 	};
 
 	/// <summary>
-	/// å¼ºåˆ¶äº¤æ˜“å‘˜é€€å‡º
+	/// Ç¿ÖÆ½»Ò×Ô±ÍË³ö
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcForceUserLogoutField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 	};
 
 	/// <summary>
-	/// å®¢æˆ·ç«¯è®¤è¯è¯·æ±‚
+	/// ¿Í»§¶ËÈÏÖ¤ÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcReqAuthenticateField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		///ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	UserProductInfo;
 		/// <summary>
-		///è®¤è¯ç 
+		///ÈÏÖ¤Âë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^	AuthCode;
 	};
 
 	/// <summary>
-	/// å®¢æˆ·ç«¯è®¤è¯å“åº”
+	/// ¿Í»§¶ËÈÏÖ¤ÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcRspAuthenticateField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		///ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	UserProductInfo;
 	};
 
 	/// <summary>
-	///å®¢æˆ·ç«¯è®¤è¯ä¿¡æ¯
+	///¿Í»§¶ËÈÏÖ¤ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	ref struct ThostFtdcAuthenticationInfoField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		/// ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	UserProductInfo;
 		/// <summary>
-		/// è®¤è¯ä¿¡æ¯
+		/// ÈÏÖ¤ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^	AuthInfo;
 		/// <summary>
-		/// æ˜¯å¦ä¸ºè®¤è¯ç»“æœ
+		/// ÊÇ·ñÎªÈÏÖ¤½á¹û
 		/// </summary>
 		int	IsResult;
 	};
 
 	/// <summary>
-	/// é“¶æœŸè½¬å¸æŠ¥æ–‡å¤´
+	/// ÒøÆÚ×ªÕÊ±¨ÎÄÍ·
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferHeaderField
 	{
 		/// <summary>
-		/// ç‰ˆæœ¬å·ï¼Œå¸¸é‡ï¼Œ1.0
+		/// °æ±¾ºÅ£¬³£Á¿£¬1.0
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ Version;
 		/// <summary>
-		/// äº¤æ˜“ä»£ç ï¼Œå¿…å¡«
+		/// ½»Ò×´úÂë£¬±ØÌî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		/// äº¤æ˜“æ—¥æœŸï¼Œå¿…å¡«ï¼Œæ ¼å¼ï¼šyyyymmdd
+		/// ½»Ò×ÈÕÆÚ£¬±ØÌî£¬¸ñÊ½£ºyyyymmdd
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		/// äº¤æ˜“æ—¶é—´ï¼Œå¿…å¡«ï¼Œæ ¼å¼ï¼šhhmmss
+		/// ½»Ò×Ê±¼ä£¬±ØÌî£¬¸ñÊ½£ºhhmmss
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		/// å‘èµ·æ–¹æµæ°´å·
+		/// ·¢Æğ·½Á÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeSerial;
 		/// <summary>
-		/// æœŸè´§å…¬å¸ä»£ç ï¼Œå¿…å¡«
+		/// ÆÚ»õ¹«Ë¾´úÂë£¬±ØÌî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ FutureID;
 		/// <summary>
-		/// é“¶è¡Œä»£ç ï¼Œæ ¹æ®æŸ¥è¯¢é“¶è¡Œå¾—åˆ°ï¼Œå¿…å¡«
+		/// ÒøĞĞ´úÂë£¬¸ù¾İ²éÑ¯ÒøĞĞµÃµ½£¬±ØÌî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		/// é“¶è¡Œåˆ†ä¸­å¿ƒä»£ç ï¼Œæ ¹æ®æŸ¥è¯¢é“¶è¡Œå¾—åˆ°ï¼Œå¿…å¡«
+		/// ÒøĞĞ·ÖÖĞĞÄ´úÂë£¬¸ù¾İ²éÑ¯ÒøĞĞµÃµ½£¬±ØÌî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBrchID;
 		/// <summary>
-		/// æ“ä½œå‘˜
+		/// ²Ù×÷Ô±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		/// äº¤æ˜“è®¾å¤‡ç±»å‹
+		/// ½»Ò×Éè±¸ÀàĞÍ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		/// è®°å½•æ•°
+		/// ¼ÇÂ¼Êı
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ RecordNum;
 		/// <summary>
-		/// ä¼šè¯ç¼–å·
+		/// »á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		/// è¯·æ±‚ç¼–å·
+		/// ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 	};
 
 	/// <summary>
-	/// é“¶è¡Œèµ„é‡‘è½¬æœŸè´§è¯·æ±‚ï¼ŒTradeCode=202001
+	/// ÒøĞĞ×Ê½ğ×ªÆÚ»õÇëÇó£¬TradeCode=202001
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferBankToFutureReqField
 	{
 		/// <summary>
-		/// æœŸè´§èµ„é‡‘è´¦æˆ·
+		/// ÆÚ»õ×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ FutureAccount;
 		/// <summary>
-		/// å¯†ç æ ‡å¿—
+		/// ÃÜÂë±êÖ¾
 		/// </summary>
 		EnumFuturePwdFlagType FuturePwdFlag;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ FutureAccPwd;
 		/// <summary>
-		/// è½¬è´¦é‡‘é¢
+		/// ×ªÕË½ğ¶î
 		/// </summary>
 		double TradeAmt;
 		/// <summary>
-		/// å®¢æˆ·æ‰‹ç»­è´¹
+		/// ¿Í»§ÊÖĞø·Ñ
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		/// å¸ç§ï¼šRMB-äººæ°‘å¸ USD-ç¾åœ† HKD-æ¸¯å…ƒ
+		/// ±ÒÖÖ£ºRMB-ÈËÃñ±Ò USD-ÃÀÔ² HKD-¸ÛÔª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
 	};
 
 	/// <summary>
-	/// é“¶è¡Œèµ„é‡‘è½¬æœŸè´§è¯·æ±‚å“åº”
+	/// ÒøĞĞ×Ê½ğ×ªÆÚ»õÇëÇóÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferBankToFutureRspField
 	{
 		/// <summary>
-		/// å“åº”ä»£ç 
+		/// ÏìÓ¦´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ RetCode;
 		/// <summary>
-		/// å“åº”ä¿¡æ¯
+		/// ÏìÓ¦ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ RetInfo;
 		/// <summary>
-		/// èµ„é‡‘è´¦æˆ·
+		/// ×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ FutureAccount;
 		/// <summary>
-		/// è½¬å¸é‡‘é¢
+		/// ×ªÕÊ½ğ¶î
 		/// </summary>
 		double TradeAmt;
 		/// <summary>
-		/// åº”æ”¶å®¢æˆ·æ‰‹ç»­è´¹
+		/// Ó¦ÊÕ¿Í»§ÊÖĞø·Ñ
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		/// å¸ç§ï¼šRMB-äººæ°‘å¸ USD-ç¾åœ† HKD-æ¸¯å…ƒ
+		/// ±ÒÖÖ£ºRMB-ÈËÃñ±Ò USD-ÃÀÔ² HKD-¸ÛÔª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
 	};
 
 	/// <summary>
-	/// æœŸè´§èµ„é‡‘è½¬é“¶è¡Œè¯·æ±‚ï¼ŒTradeCode=202002
+	/// ÆÚ»õ×Ê½ğ×ªÒøĞĞÇëÇó£¬TradeCode=202002
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferFutureToBankReqField
 	{
 		/// <summary>
-		/// æœŸè´§èµ„é‡‘è´¦æˆ·
+		/// ÆÚ»õ×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ FutureAccount;
 		/// <summary>
-		/// å¯†ç æ ‡å¿—
+		/// ÃÜÂë±êÖ¾
 		/// </summary>
 		EnumFuturePwdFlagType FuturePwdFlag;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ FutureAccPwd;
 		/// <summary>
-		/// è½¬è´¦é‡‘é¢
+		/// ×ªÕË½ğ¶î
 		/// </summary>
 		double TradeAmt;
 		/// <summary>
-		/// å®¢æˆ·æ‰‹ç»­è´¹
+		/// ¿Í»§ÊÖĞø·Ñ
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		/// å¸ç§ï¼šRMB-äººæ°‘å¸ USD-ç¾åœ† HKD-æ¸¯å…ƒ
+		/// ±ÒÖÖ£ºRMB-ÈËÃñ±Ò USD-ÃÀÔ² HKD-¸ÛÔª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
 	};
 
 	/// <summary>
-	/// æœŸè´§èµ„é‡‘è½¬é“¶è¡Œè¯·æ±‚å“åº”
+	/// ÆÚ»õ×Ê½ğ×ªÒøĞĞÇëÇóÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferFutureToBankRspField
 	{
 		/// <summary>
-		/// å“åº”ä»£ç 
+		/// ÏìÓ¦´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ RetCode;
 		/// <summary>
-		/// å“åº”ä¿¡æ¯
+		/// ÏìÓ¦ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ RetInfo;
 		/// <summary>
-		/// èµ„é‡‘è´¦æˆ·
+		/// ×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ FutureAccount;
 		/// <summary>
-		/// è½¬å¸é‡‘é¢
+		/// ×ªÕÊ½ğ¶î
 		/// </summary>
 		double TradeAmt;
 		/// <summary>
-		/// åº”æ”¶å®¢æˆ·æ‰‹ç»­è´¹
+		/// Ó¦ÊÕ¿Í»§ÊÖĞø·Ñ
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		/// å¸ç§
+		/// ±ÒÖÖ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
 	};
 
 	/// <summary>
-	/// æŸ¥è¯¢é“¶è¡Œèµ„é‡‘è¯·æ±‚ï¼ŒTradeCode=204002
+	/// ²éÑ¯ÒøĞĞ×Ê½ğÇëÇó£¬TradeCode=204002
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferQryBankReqField
 	{
 		/// <summary>
-		/// æœŸè´§èµ„é‡‘è´¦æˆ·
+		/// ÆÚ»õ×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ FutureAccount;
 		/// <summary>
-		/// å¯†ç æ ‡å¿—
+		/// ÃÜÂë±êÖ¾
 		/// </summary>
 		EnumFuturePwdFlagType FuturePwdFlag;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ FutureAccPwd;
 		/// <summary>
-		/// å¸ç§ï¼šRMB-äººæ°‘å¸ USD-ç¾åœ† HKD-æ¸¯å…ƒ
+		/// ±ÒÖÖ£ºRMB-ÈËÃñ±Ò USD-ÃÀÔ² HKD-¸ÛÔª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
 	};
 
 	/// <summary>
-	/// æŸ¥è¯¢é“¶è¡Œèµ„é‡‘è¯·æ±‚å“åº”
+	/// ²éÑ¯ÒøĞĞ×Ê½ğÇëÇóÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferQryBankRspField
 	{
 		/// <summary>
-		/// å“åº”ä»£ç 
+		/// ÏìÓ¦´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ RetCode;
 		/// <summary>
-		/// å“åº”ä¿¡æ¯
+		/// ÏìÓ¦ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ RetInfo;
 		/// <summary>
-		/// èµ„é‡‘è´¦æˆ·
+		/// ×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ FutureAccount;
 		/// <summary>
-		/// é“¶è¡Œä½™é¢
+		/// ÒøĞĞÓà¶î
 		/// </summary>
 		double TradeAmt;
 		/// <summary>
-		/// é“¶è¡Œå¯ç”¨ä½™é¢
+		/// ÒøĞĞ¿ÉÓÃÓà¶î
 		/// </summary>
 		double UseAmt;
 		/// <summary>
-		/// é“¶è¡Œå¯å–ä½™é¢
+		/// ÒøĞĞ¿ÉÈ¡Óà¶î
 		/// </summary>
 		double FetchAmt;
 		/// <summary>
-		/// å¸ç§
+		/// ±ÒÖÖ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
 	};
 
 	/// <summary>
-	/// æŸ¥è¯¢é“¶è¡Œäº¤æ˜“æ˜ç»†è¯·æ±‚ï¼ŒTradeCode=204999
+	/// ²éÑ¯ÒøĞĞ½»Ò×Ã÷Ï¸ÇëÇó£¬TradeCode=204999
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferQryDetailReqField
 	{
 		/// <summary>
-		/// æœŸè´§èµ„é‡‘è´¦æˆ·
+		/// ÆÚ»õ×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ FutureAccount;
 	};
 
 	/// <summary>
-	/// æŸ¥è¯¢é“¶è¡Œäº¤æ˜“æ˜ç»†è¯·æ±‚å“åº”
+	/// ²éÑ¯ÒøĞĞ½»Ò×Ã÷Ï¸ÇëÇóÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTransferQryDetailRspField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ—¥æœŸ
+		/// ½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		/// äº¤æ˜“æ—¶é—´
+		/// ½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		/// äº¤æ˜“ä»£ç 
+		/// ½»Ò×´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		/// æœŸè´§æµæ°´å·
+		/// ÆÚ»õÁ÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		/// æœŸè´§å…¬å¸ä»£ç 
+		/// ÆÚ»õ¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ FutureID;
 		/// <summary>
-		/// èµ„é‡‘å¸å·
+		/// ×Ê½ğÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 22)]
 		String^ FutureAccount;
 		/// <summary>
-		/// é“¶è¡Œæµæ°´å·
+		/// ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		int BankSerial;
 		/// <summary>
-		/// é“¶è¡Œä»£ç 
+		/// ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		/// é“¶è¡Œåˆ†ä¸­å¿ƒä»£ç 
+		/// ÒøĞĞ·ÖÖĞĞÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBrchID;
 		/// <summary>
-		/// é“¶è¡Œè´¦å·
+		/// ÒøĞĞÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		/// è¯ä»¶å·ç 
+		/// Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CertCode;
 		/// <summary>
-		/// è´§å¸ä»£ç 
+		/// »õ±Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
 		/// <summary>
-		/// å‘ç”Ÿé‡‘é¢
+		/// ·¢Éú½ğ¶î
 		/// </summary>
 		double TxAmount;
 		/// <summary>
-		/// æœ‰æ•ˆæ ‡å¿—
+		/// ÓĞĞ§±êÖ¾
 		/// </summary>
 		EnumTransferValidFlagType Flag;
 	};
 
 	/// <summary>
-	/// å“åº”ä¿¡æ¯
+	/// ÏìÓ¦ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcRspInfoField
 	{
 		/// <summary>
-		/// é”™è¯¯ä»£ç 
+		/// ´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		/// é”™è¯¯ä¿¡æ¯
+		/// ´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€
+	/// ½»Ò×Ëù
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcExchangeField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€åç§°
+		/// ½»Ò×ËùÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeName;
 		/// <summary>
-		/// äº¤æ˜“æ‰€å±æ€§
+		/// ½»Ò×ËùÊôĞÔ
 		/// </summary>
 		EnumExchangePropertyType ExchangeProperty;
 	};
 
 	/// <summary>
-	/// äº§å“
+	/// ²úÆ·
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcProductField
 	{
 		/// <summary>
-		/// äº§å“ä»£ç 
+		/// ²úÆ·´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ProductID;
 		/// <summary>
-		/// äº§å“åç§°
+		/// ²úÆ·Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ProductName;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº§å“ç±»å‹
+		/// ²úÆ·ÀàĞÍ
 		/// </summary>
 		EnumProductClassTypeType ProductClass;
 		/// <summary>
-		/// åˆçº¦æ•°é‡ä¹˜æ•°
+		/// ºÏÔ¼ÊıÁ¿³ËÊı
 		/// </summary>
 		int VolumeMultiple;
 		/// <summary>
-		/// æœ€å°å˜åŠ¨ä»·ä½
+		/// ×îĞ¡±ä¶¯¼ÛÎ»
 		/// </summary>
 		double PriceTick;
 		/// <summary>
-		/// å¸‚ä»·å•æœ€å¤§ä¸‹å•é‡
+		/// ÊĞ¼Ûµ¥×î´óÏÂµ¥Á¿
 		/// </summary>
 		int MaxMarketOrderVolume;
 		/// <summary>
-		/// å¸‚ä»·å•æœ€å°ä¸‹å•é‡
+		/// ÊĞ¼Ûµ¥×îĞ¡ÏÂµ¥Á¿
 		/// </summary>
 		int MinMarketOrderVolume;
 		/// <summary>
-		/// é™ä»·å•æœ€å¤§ä¸‹å•é‡
+		/// ÏŞ¼Ûµ¥×î´óÏÂµ¥Á¿
 		/// </summary>
 		int MaxLimitOrderVolume;
 		/// <summary>
-		/// é™ä»·å•æœ€å°ä¸‹å•é‡
+		/// ÏŞ¼Ûµ¥×îĞ¡ÏÂµ¥Á¿
 		/// </summary>
 		int MinLimitOrderVolume;
 		/// <summary>
-		/// æŒä»“ç±»å‹
+		/// ³Ö²ÖÀàĞÍ
 		/// </summary>
 		EnumPositionTypeType PositionType;
 		/// <summary>
-		/// æŒä»“æ—¥æœŸç±»å‹
+		/// ³Ö²ÖÈÕÆÚÀàĞÍ
 		/// </summary>
 		EnumPositionDateTypeType PositionDateType;
 		/// <summary>
-		///å¹³ä»“å¤„ç†ç±»å‹
+		///Æ½²Ö´¦ÀíÀàĞÍ
 		/// </summary>
 		EnumCloseDealTypeType CloseDealType;
 		/// <summary>
-		///äº¤æ˜“å¸ç§ç±»å‹
+		///½»Ò×±ÒÖÖÀàĞÍ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	TradeCurrencyID;
 		/// <summary>
-		///è´¨æŠ¼èµ„é‡‘å¯ç”¨èŒƒå›´
+		///ÖÊÑº×Ê½ğ¿ÉÓÃ·¶Î§
 		/// </summary>
 		EnumMortgageFundUseRangeTypeType MortgageFundUseRange;
 		/// <summary>
-		///äº¤æ˜“æ‰€äº§å“ä»£ç 
+		///½»Ò×Ëù²úÆ·´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeProductID;
 		/// <summary>
-		///åˆçº¦åŸºç¡€å•†å“ä¹˜æ•°
+		///ºÏÔ¼»ù´¡ÉÌÆ·³ËÊı
 		/// </summary>
 		double UnderlyingMultiple;
 	};
 
 	/// <summary>
-	/// åˆçº¦
+	/// ºÏÔ¼
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInstrumentField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// åˆçº¦åç§°
+		/// ºÏÔ¼Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ InstrumentName;
 		/// <summary>
-		/// åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº§å“ä»£ç 
+		/// ²úÆ·´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ProductID;
 		/// <summary>
-		/// äº§å“ç±»å‹
+		/// ²úÆ·ÀàĞÍ
 		/// </summary>
 		EnumProductClassTypeType ProductClass;
 		/// <summary>
-		/// äº¤å‰²å¹´ä»½
+		/// ½»¸îÄê·İ
 		/// </summary>
 		int DeliveryYear;
 		/// <summary>
-		/// äº¤å‰²æœˆ
+		/// ½»¸îÔÂ
 		/// </summary>
 		int DeliveryMonth;
 		/// <summary>
-		/// å¸‚ä»·å•æœ€å¤§ä¸‹å•é‡
+		/// ÊĞ¼Ûµ¥×î´óÏÂµ¥Á¿
 		/// </summary>
 		int MaxMarketOrderVolume;
 		/// <summary>
-		/// å¸‚ä»·å•æœ€å°ä¸‹å•é‡
+		/// ÊĞ¼Ûµ¥×îĞ¡ÏÂµ¥Á¿
 		/// </summary>
 		int MinMarketOrderVolume;
 		/// <summary>
-		/// é™ä»·å•æœ€å¤§ä¸‹å•é‡
+		/// ÏŞ¼Ûµ¥×î´óÏÂµ¥Á¿
 		/// </summary>
 		int MaxLimitOrderVolume;
 		/// <summary>
-		/// é™ä»·å•æœ€å°ä¸‹å•é‡
+		/// ÏŞ¼Ûµ¥×îĞ¡ÏÂµ¥Á¿
 		/// </summary>
 		int MinLimitOrderVolume;
 		/// <summary>
-		/// åˆçº¦æ•°é‡ä¹˜æ•°
+		/// ºÏÔ¼ÊıÁ¿³ËÊı
 		/// </summary>
 		int VolumeMultiple;
 		/// <summary>
-		/// æœ€å°å˜åŠ¨ä»·ä½
+		/// ×îĞ¡±ä¶¯¼ÛÎ»
 		/// </summary>
 		double PriceTick;
 		/// <summary>
-		/// åˆ›å»ºæ—¥
+		/// ´´½¨ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CreateDate;
 		/// <summary>
-		/// ä¸Šå¸‚æ—¥
+		/// ÉÏÊĞÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ OpenDate;
 		/// <summary>
-		/// åˆ°æœŸæ—¥
+		/// µ½ÆÚÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExpireDate;
 		/// <summary>
-		/// å¼€å§‹äº¤å‰²æ—¥
+		/// ¿ªÊ¼½»¸îÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ StartDelivDate;
 		/// <summary>
-		/// ç»“æŸäº¤å‰²æ—¥
+		/// ½áÊø½»¸îÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ EndDelivDate;
 		/// <summary>
-		/// åˆçº¦ç”Ÿå‘½å‘¨æœŸçŠ¶æ€
+		/// ºÏÔ¼ÉúÃüÖÜÆÚ×´Ì¬
 		/// </summary>
 		EnumInstLifePhaseType InstLifePhase;
 		/// <summary>
-		/// å½“å‰æ˜¯å¦äº¤æ˜“
+		/// µ±Ç°ÊÇ·ñ½»Ò×
 		/// </summary>
 		int IsTrading;
 		/// <summary>
-		/// æŒä»“ç±»å‹
+		/// ³Ö²ÖÀàĞÍ
 		/// </summary>
 		EnumPositionTypeType PositionType;
 		/// <summary>
-		/// æŒä»“æ—¥æœŸç±»å‹
+		/// ³Ö²ÖÈÕÆÚÀàĞÍ
 		/// </summary>
 		EnumPositionDateTypeType PositionDateType;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘ç‡
+		/// ¶àÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double LongMarginRatio;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘ç‡
+		/// ¿ÕÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double ShortMarginRatio;
 		/// <summary>
-		///æ˜¯å¦ä½¿ç”¨å¤§é¢å•è¾¹ä¿è¯é‡‘ç®—æ³•
+		///ÊÇ·ñÊ¹ÓÃ´ó¶îµ¥±ß±£Ö¤½ğËã·¨
 		EnumMaxMarginSideAlgorithmTypeType	MaxMarginSideAlgorithm;
 		/// <summary>
-		///åŸºç¡€å•†å“ä»£ç 
+		///»ù´¡ÉÌÆ·´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^	UnderlyingInstrID;
 		/// <summary>
-		///æ‰§è¡Œä»·
+		///Ö´ĞĞ¼Û
 		/// </summary>
 		double	StrikePrice;
 		/// <summary>
-		///æœŸæƒç±»å‹
+		///ÆÚÈ¨ÀàĞÍ
 		/// </summary>
 		EnumOptionsTypeType	OptionsType;
 		/// <summary>
-		///åˆçº¦åŸºç¡€å•†å“ä¹˜æ•°
+		///ºÏÔ¼»ù´¡ÉÌÆ·³ËÊı
 		/// </summary>
 		double	UnderlyingMultiple;
 		/// <summary>
-		///ç»„åˆç±»å‹
+		///×éºÏÀàĞÍ
 		/// </summary>
 		EnumCombinationTypeType	CombinationType;
 	};
 
 	/// <summary>
-	/// ç»çºªå…¬å¸
+	/// ¾­¼Í¹«Ë¾
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcBrokerField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ç®€ç§°
+		/// ¾­¼Í¹«Ë¾¼ò³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BrokerAbbr;
 		/// <summary>
-		/// ç»çºªå…¬å¸åç§°
+		/// ¾­¼Í¹«Ë¾Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ BrokerName;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜
+	/// ½»Ò×Ëù½»Ò×Ô±
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTraderField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		/// å®‰è£…æ•°é‡
+		/// °²×°ÊıÁ¿
 		/// </summary>
 		int InstallCount;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 	};
 
 	/// <summary>
-	/// æŠ•èµ„è€…
+	/// Í¶×ÊÕß
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInvestorField
 	{
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…åˆ†ç»„ä»£ç 
+		/// Í¶×ÊÕß·Ö×é´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorGroupID;
 		/// <summary>
-		/// æŠ•èµ„è€…åç§°
+		/// Í¶×ÊÕßÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ InvestorName;
 		/// <summary>
-		/// è¯ä»¶ç±»å‹
+		/// Ö¤¼şÀàĞÍ
 		/// </summary>
 		EnumIdCardTypeType IdentifiedCardType;
 		/// <summary>
-		/// è¯ä»¶å·ç 
+		/// Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 		/// <summary>
-		/// è”ç³»ç”µè¯
+		/// ÁªÏµµç»°
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		/// é€šè®¯åœ°å€
+		/// Í¨Ñ¶µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		/// å¼€æˆ·æ—¥æœŸ
+		/// ¿ª»§ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ OpenDate;
 		/// <summary>
-		/// æ‰‹æœº
+		/// ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Mobile;
 		/// <summary>
-		///æ‰‹ç»­è´¹ç‡æ¨¡æ¿ä»£ç 
+		///ÊÖĞø·ÑÂÊÄ£°å´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	CommModelID;
 		/// <summary>
-		///ä¿è¯é‡‘ç‡æ¨¡æ¿ä»£ç 
+		///±£Ö¤½ğÂÊÄ£°å´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	MarginModelID;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“ç¼–ç 
+	/// ½»Ò×±àÂë
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTradingCodeField
 	{
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 		/// <summary>
-		/// äº¤æ˜“ç¼–ç ç±»å‹
+		/// ½»Ò×±àÂëÀàĞÍ
 		/// </summary>
 		EnumClientIDTypeType ClientIDType;
 	};
 
 	/// <summary>
-	/// ä¼šå‘˜ç¼–ç å’Œç»çºªå…¬å¸ç¼–ç å¯¹ç…§è¡¨
+	/// »áÔ±±àÂëºÍ¾­¼Í¹«Ë¾±àÂë¶ÔÕÕ±í
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcPartBrokerField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 	};
 
 	/// <summary>
-	/// ç®¡ç†ç”¨æˆ·
+	/// ¹ÜÀíÓÃ»§
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSuperUserField
 	{
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// ç”¨æˆ·åç§°
+		/// ÓÃ»§Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ UserName;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 	};
 
 	/// <summary>
-	/// ç®¡ç†ç”¨æˆ·åŠŸèƒ½æƒé™
+	/// ¹ÜÀíÓÃ»§¹¦ÄÜÈ¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSuperUserFunctionField
 	{
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// åŠŸèƒ½ä»£ç 
+		/// ¹¦ÄÜ´úÂë
 		/// </summary>
 		EnumFunctionCodeType FunctionCode;
 	};
 
 	/// <summary>
-	/// æŠ•èµ„è€…ç»„
+	/// Í¶×ÊÕß×é
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInvestorGroupField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…åˆ†ç»„ä»£ç 
+		/// Í¶×ÊÕß·Ö×é´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorGroupID;
 		/// <summary>
-		/// æŠ•èµ„è€…åˆ†ç»„åç§°
+		/// Í¶×ÊÕß·Ö×éÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ InvestorGroupName;
 	};
 
 	/// <summary>
-	/// èµ„é‡‘è´¦æˆ·
+	/// ×Ê½ğÕË»§
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTradingAccountField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…å¸å·
+		/// Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		/// ä¸Šæ¬¡è´¨æŠ¼é‡‘é¢
+		/// ÉÏ´ÎÖÊÑº½ğ¶î
 		/// </summary>
 		double PreMortgage;
 		/// <summary>
-		/// ä¸Šæ¬¡ä¿¡ç”¨é¢åº¦
+		/// ÉÏ´ÎĞÅÓÃ¶î¶È
 		/// </summary>
 		double PreCredit;
 		/// <summary>
-		/// ä¸Šæ¬¡å­˜æ¬¾é¢
+		/// ÉÏ´Î´æ¿î¶î
 		/// </summary>
 		double PreDeposit;
 		/// <summary>
-		/// ä¸Šæ¬¡ç»“ç®—å‡†å¤‡é‡‘
+		/// ÉÏ´Î½áËã×¼±¸½ğ
 		/// </summary>
 		double PreBalance;
 		/// <summary>
-		/// ä¸Šæ¬¡å ç”¨çš„ä¿è¯é‡‘
+		/// ÉÏ´ÎÕ¼ÓÃµÄ±£Ö¤½ğ
 		/// </summary>
 		double PreMargin;
 		/// <summary>
-		/// åˆ©æ¯åŸºæ•°
+		/// ÀûÏ¢»ùÊı
 		/// </summary>
 		double InterestBase;
 		/// <summary>
-		/// åˆ©æ¯æ”¶å…¥
+		/// ÀûÏ¢ÊÕÈë
 		/// </summary>
 		double Interest;
 		/// <summary>
-		/// å…¥é‡‘é‡‘é¢
+		/// Èë½ğ½ğ¶î
 		/// </summary>
 		double Deposit;
 		/// <summary>
-		/// å‡ºé‡‘é‡‘é¢
+		/// ³ö½ğ½ğ¶î
 		/// </summary>
 		double Withdraw;
 		/// <summary>
-		/// å†»ç»“çš„ä¿è¯é‡‘
+		/// ¶³½áµÄ±£Ö¤½ğ
 		/// </summary>
 		double FrozenMargin;
 		/// <summary>
-		/// å†»ç»“çš„èµ„é‡‘
+		/// ¶³½áµÄ×Ê½ğ
 		/// </summary>
 		double FrozenCash;
 		/// <summary>
-		/// å†»ç»“çš„æ‰‹ç»­è´¹
+		/// ¶³½áµÄÊÖĞø·Ñ
 		/// </summary>
 		double FrozenCommission;
 		/// <summary>
-		/// å½“å‰ä¿è¯é‡‘æ€»é¢
+		/// µ±Ç°±£Ö¤½ğ×Ü¶î
 		/// </summary>
 		double CurrMargin;
 		/// <summary>
-		/// èµ„é‡‘å·®é¢
+		/// ×Ê½ğ²î¶î
 		/// </summary>
 		double CashIn;
 		/// <summary>
-		/// æ‰‹ç»­è´¹
+		/// ÊÖĞø·Ñ
 		/// </summary>
 		double Commission;
 		/// <summary>
-		/// å¹³ä»“ç›ˆäº
+		/// Æ½²ÖÓ¯¿÷
 		/// </summary>
 		double CloseProfit;
 		/// <summary>
-		/// æŒä»“ç›ˆäº
+		/// ³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double PositionProfit;
 		/// <summary>
-		/// æœŸè´§ç»“ç®—å‡†å¤‡é‡‘
+		/// ÆÚ»õ½áËã×¼±¸½ğ
 		/// </summary>
 		double Balance;
 		/// <summary>
-		/// å¯ç”¨èµ„é‡‘
+		/// ¿ÉÓÃ×Ê½ğ
 		/// </summary>
 		double Available;
 		/// <summary>
-		/// å¯å–èµ„é‡‘
+		/// ¿ÉÈ¡×Ê½ğ
 		/// </summary>
 		double WithdrawQuota;
 		/// <summary>
-		/// åŸºæœ¬å‡†å¤‡é‡‘
+		/// »ù±¾×¼±¸½ğ
 		/// </summary>
 		double Reserve;
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		/// ä¿¡ç”¨é¢åº¦
+		/// ĞÅÓÃ¶î¶È
 		/// </summary>
 		double Credit;
 		/// <summary>
-		/// è´¨æŠ¼é‡‘é¢
+		/// ÖÊÑº½ğ¶î
 		/// </summary>
 		double Mortgage;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä¿è¯é‡‘
+		/// ½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double ExchangeMargin;
 		/// <summary>
-		/// æŠ•èµ„è€…äº¤å‰²ä¿è¯é‡‘
+		/// Í¶×ÊÕß½»¸î±£Ö¤½ğ
 		/// </summary>
 		double DeliveryMargin;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤å‰²ä¿è¯é‡‘
+		/// ½»Ò×Ëù½»¸î±£Ö¤½ğ
 		/// </summary>
 		double ExchangeDeliveryMargin;
 		/// <summary>
-		///ä¿åº•æœŸè´§ç»“ç®—å‡†å¤‡é‡‘
+		///±£µ×ÆÚ»õ½áËã×¼±¸½ğ
 		/// </summary>
 		double	ReserveBalance;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	CurrencyID;
 		/// <summary>
-		///ä¸Šæ¬¡è´§å¸è´¨å…¥é‡‘é¢
+		///ÉÏ´Î»õ±ÒÖÊÈë½ğ¶î
 		/// </summary>
 		double	PreFundMortgageIn;
 		/// <summary>
-		///ä¸Šæ¬¡è´§å¸è´¨å‡ºé‡‘é¢
+		///ÉÏ´Î»õ±ÒÖÊ³ö½ğ¶î
 		/// </summary>
 		double	PreFundMortgageOut;
 		/// <summary>
-		///è´§å¸è´¨å…¥é‡‘é¢
+		///»õ±ÒÖÊÈë½ğ¶î
 		/// </summary>
 		double	FundMortgageIn;
 		/// <summary>
-		///è´§å¸è´¨å‡ºé‡‘é¢
+		///»õ±ÒÖÊ³ö½ğ¶î
 		/// </summary>
 		double	FundMortgageOut;
 		/// <summary>
-		///è´§å¸è´¨æŠ¼ä½™é¢
+		///»õ±ÒÖÊÑºÓà¶î
 		/// </summary>
 		double	FundMortgageAvailable;
 		/// <summary>
-		///å¯è´¨æŠ¼è´§å¸é‡‘é¢
+		///¿ÉÖÊÑº»õ±Ò½ğ¶î
 		/// </summary>
 		double	MortgageableFund;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“å ç”¨ä¿è¯é‡‘
+		///ÌØÊâ²úÆ·Õ¼ÓÃ±£Ö¤½ğ
 		/// </summary>
 		double	SpecProductMargin;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“å†»ç»“ä¿è¯é‡‘
+		///ÌØÊâ²úÆ·¶³½á±£Ö¤½ğ
 		/// </summary>
 		double	SpecProductFrozenMargin;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“æ‰‹ç»­è´¹
+		///ÌØÊâ²úÆ·ÊÖĞø·Ñ
 		/// </summary>
 		double	SpecProductCommission;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“å†»ç»“æ‰‹ç»­è´¹
+		///ÌØÊâ²úÆ·¶³½áÊÖĞø·Ñ
 		/// </summary>
 		double	SpecProductFrozenCommission;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“æŒä»“ç›ˆäº
+		///ÌØÊâ²úÆ·³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double	SpecProductPositionProfit;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“å¹³ä»“ç›ˆäº
+		///ÌØÊâ²úÆ·Æ½²ÖÓ¯¿÷
 		/// </summary>
 		double	SpecProductCloseProfit;
 		/// <summary>
-		///æ ¹æ®æŒä»“ç›ˆäºç®—æ³•è®¡ç®—çš„ç‰¹æ®Šäº§å“æŒä»“ç›ˆäº
+		///¸ù¾İ³Ö²ÖÓ¯¿÷Ëã·¨¼ÆËãµÄÌØÊâ²úÆ·³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double	SpecProductPositionProfitByAlg;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“äº¤æ˜“æ‰€ä¿è¯é‡‘
+		///ÌØÊâ²úÆ·½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double	SpecProductExchangeMargin;
 	};
 
 	/// <summary>
-	/// æŠ•èµ„è€…æŒä»“
+	/// Í¶×ÊÕß³Ö²Ö
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInvestorPositionField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// æŒä»“å¤šç©ºæ–¹å‘
+		/// ³Ö²Ö¶à¿Õ·½Ïò
 		/// </summary>
 		EnumPosiDirectionType PosiDirection;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// æŒä»“æ—¥æœŸ
+		/// ³Ö²ÖÈÕÆÚ
 		/// </summary>
 		EnumPositionDateType PositionDate;
 		/// <summary>
-		/// ä¸Šæ—¥æŒä»“
+		/// ÉÏÈÕ³Ö²Ö
 		/// </summary>
 		int YdPosition;
 		/// <summary>
-		/// ä»Šæ—¥æŒä»“
+		/// ½ñÈÕ³Ö²Ö
 		/// </summary>
 		int Position;
 		/// <summary>
-		/// å¤šå¤´å†»ç»“
+		/// ¶àÍ·¶³½á
 		/// </summary>
 		int LongFrozen;
 		/// <summary>
-		/// ç©ºå¤´å†»ç»“
+		/// ¿ÕÍ·¶³½á
 		/// </summary>
 		int ShortFrozen;
 		/// <summary>
-		/// å¼€ä»“å†»ç»“é‡‘é¢
+		/// ¿ª²Ö¶³½á½ğ¶î
 		/// </summary>
 		double LongFrozenAmount;
 		/// <summary>
-		/// å¼€ä»“å†»ç»“é‡‘é¢
+		/// ¿ª²Ö¶³½á½ğ¶î
 		/// </summary>
 		double ShortFrozenAmount;
 		/// <summary>
-		/// å¼€ä»“é‡
+		/// ¿ª²ÖÁ¿
 		/// </summary>
 		int OpenVolume;
 		/// <summary>
-		/// å¹³ä»“é‡
+		/// Æ½²ÖÁ¿
 		/// </summary>
 		int CloseVolume;
 		/// <summary>
-		/// å¼€ä»“é‡‘é¢
+		/// ¿ª²Ö½ğ¶î
 		/// </summary>
 		double OpenAmount;
 		/// <summary>
-		/// å¹³ä»“é‡‘é¢
+		/// Æ½²Ö½ğ¶î
 		/// </summary>
 		double CloseAmount;
 		/// <summary>
-		/// æŒä»“æˆæœ¬
+		/// ³Ö²Ö³É±¾
 		/// </summary>
 		double PositionCost;
 		/// <summary>
-		/// ä¸Šæ¬¡å ç”¨çš„ä¿è¯é‡‘
+		/// ÉÏ´ÎÕ¼ÓÃµÄ±£Ö¤½ğ
 		/// </summary>
 		double PreMargin;
 		/// <summary>
-		/// å ç”¨çš„ä¿è¯é‡‘
+		/// Õ¼ÓÃµÄ±£Ö¤½ğ
 		/// </summary>
 		double UseMargin;
 		/// <summary>
-		/// å†»ç»“çš„ä¿è¯é‡‘
+		/// ¶³½áµÄ±£Ö¤½ğ
 		/// </summary>
 		double FrozenMargin;
 		/// <summary>
-		/// å†»ç»“çš„èµ„é‡‘
+		/// ¶³½áµÄ×Ê½ğ
 		/// </summary>
 		double FrozenCash;
 		/// <summary>
-		/// å†»ç»“çš„æ‰‹ç»­è´¹
+		/// ¶³½áµÄÊÖĞø·Ñ
 		/// </summary>
 		double FrozenCommission;
 		/// <summary>
-		/// èµ„é‡‘å·®é¢
+		/// ×Ê½ğ²î¶î
 		/// </summary>
 		double CashIn;
 		/// <summary>
-		/// æ‰‹ç»­è´¹
+		/// ÊÖĞø·Ñ
 		/// </summary>
 		double Commission;
 		/// <summary>
-		/// å¹³ä»“ç›ˆäº
+		/// Æ½²ÖÓ¯¿÷
 		/// </summary>
 		double CloseProfit;
 		/// <summary>
-		/// æŒä»“ç›ˆäº
+		/// ³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double PositionProfit;
 		/// <summary>
-		/// ä¸Šæ¬¡ç»“ç®—ä»·
+		/// ÉÏ´Î½áËã¼Û
 		/// </summary>
 		double PreSettlementPrice;
 		/// <summary>
-		/// æœ¬æ¬¡ç»“ç®—ä»·
+		/// ±¾´Î½áËã¼Û
 		/// </summary>
 		double SettlementPrice;
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		/// å¼€ä»“æˆæœ¬
+		/// ¿ª²Ö³É±¾
 		/// </summary>
 		double OpenCost;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä¿è¯é‡‘
+		/// ½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double ExchangeMargin;
 		/// <summary>
-		/// ç»„åˆæˆäº¤å½¢æˆçš„æŒä»“
+		/// ×éºÏ³É½»ĞÎ³ÉµÄ³Ö²Ö
 		/// </summary>
 		int CombPosition;
 		/// <summary>
-		/// ç»„åˆå¤šå¤´å†»ç»“
+		/// ×éºÏ¶àÍ·¶³½á
 		/// </summary>
 		int CombLongFrozen;
 		/// <summary>
-		/// ç»„åˆç©ºå¤´å†»ç»“
+		/// ×éºÏ¿ÕÍ·¶³½á
 		/// </summary>
 		int CombShortFrozen;
 		/// <summary>
-		/// é€æ—¥ç›¯å¸‚å¹³ä»“ç›ˆäº
+		/// ÖğÈÕ¶¢ÊĞÆ½²ÖÓ¯¿÷
 		/// </summary>
 		double CloseProfitByDate;
 		/// <summary>
-		/// é€ç¬”å¯¹å†²å¹³ä»“ç›ˆäº
+		/// Öğ±Ê¶Ô³åÆ½²ÖÓ¯¿÷
 		/// </summary>
 		double CloseProfitByTrade;
 		/// <summary>
-		/// ä»Šæ—¥æŒä»“
+		/// ½ñÈÕ³Ö²Ö
 		/// </summary>
 		int TodayPosition;
 		/// <summary>
-		/// ä¿è¯é‡‘ç‡
+		/// ±£Ö¤½ğÂÊ
 		/// </summary>
 		double MarginRateByMoney;
 		/// <summary>
-		/// ä¿è¯é‡‘ç‡(æŒ‰æ‰‹æ•°)
+		/// ±£Ö¤½ğÂÊ(°´ÊÖÊı)
 		/// </summary>
 		double MarginRateByVolume;
 		/// <summary>
-		///æ‰§è¡Œå†»ç»“
+		///Ö´ĞĞ¶³½á
 		/// </summary>
 		int	StrikeFrozen;
 		/// <summary>
-		///æ‰§è¡Œå†»ç»“é‡‘é¢
+		///Ö´ĞĞ¶³½á½ğ¶î
 		/// </summary>
 		double	StrikeFrozenAmount;
 		/// <summary>
-		///æ”¾å¼ƒæ‰§è¡Œå†»ç»“
+		///·ÅÆúÖ´ĞĞ¶³½á
 		/// </summary>
 		int	AbandonFrozen;
 	};
 
 	/// <summary>
-	/// åˆçº¦ä¿è¯é‡‘ç‡
+	/// ºÏÔ¼±£Ö¤½ğÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInstrumentMarginRateField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
+		/// Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘ç‡
+		/// ¶àÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double LongMarginRatioByMoney;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘è´¹
+		/// ¶àÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double LongMarginRatioByVolume;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘ç‡
+		/// ¿ÕÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double ShortMarginRatioByMoney;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘è´¹
+		/// ¿ÕÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double ShortMarginRatioByVolume;
 		/// <summary>
-		/// æ˜¯å¦ç›¸å¯¹äº¤æ˜“æ‰€æ”¶å–
+		/// ÊÇ·ñÏà¶Ô½»Ò×ËùÊÕÈ¡
 		/// </summary>
 		EnumBoolType IsRelative;
 	};
 
 	/// <summary>
-	/// åˆçº¦æ‰‹ç»­è´¹ç‡
+	/// ºÏÔ¼ÊÖĞø·ÑÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInstrumentCommissionRateField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
+		/// Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// å¼€ä»“æ‰‹ç»­è´¹ç‡
+		/// ¿ª²ÖÊÖĞø·ÑÂÊ
 		/// </summary>
 		double OpenRatioByMoney;
 		/// <summary>
-		/// å¼€ä»“æ‰‹ç»­è´¹
+		/// ¿ª²ÖÊÖĞø·Ñ
 		/// </summary>
 		double OpenRatioByVolume;
 		/// <summary>
-		/// å¹³ä»“æ‰‹ç»­è´¹ç‡
+		/// Æ½²ÖÊÖĞø·ÑÂÊ
 		/// </summary>
 		double CloseRatioByMoney;
 		/// <summary>
-		/// å¹³ä»“æ‰‹ç»­è´¹
+		/// Æ½²ÖÊÖĞø·Ñ
 		/// </summary>
 		double CloseRatioByVolume;
 		/// <summary>
-		/// å¹³ä»Šæ‰‹ç»­è´¹ç‡
+		/// Æ½½ñÊÖĞø·ÑÂÊ
 		/// </summary>
 		double CloseTodayRatioByMoney;
 		/// <summary>
-		/// å¹³ä»Šæ‰‹ç»­è´¹
+		/// Æ½½ñÊÖĞø·Ñ
 		/// </summary>
 		double CloseTodayRatioByVolume;
 	};
 
 	/// <summary>
-	/// æ·±åº¦è¡Œæƒ…
+	/// Éî¶ÈĞĞÇé
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcDepthMarketDataField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// æœ€æ–°ä»·
+		/// ×îĞÂ¼Û
 		/// </summary>
 		double LastPrice;
 		/// <summary>
-		/// ä¸Šæ¬¡ç»“ç®—ä»·
+		/// ÉÏ´Î½áËã¼Û
 		/// </summary>
 		double PreSettlementPrice;
 		/// <summary>
-		/// æ˜¨æ”¶ç›˜
+		/// ×òÊÕÅÌ
 		/// </summary>
 		double PreClosePrice;
 		/// <summary>
-		/// æ˜¨æŒä»“é‡
+		/// ×ò³Ö²ÖÁ¿
 		/// </summary>
 		double PreOpenInterest;
 		/// <summary>
-		/// ä»Šå¼€ç›˜
+		/// ½ñ¿ªÅÌ
 		/// </summary>
 		double OpenPrice;
 		/// <summary>
-		/// æœ€é«˜ä»·
+		/// ×î¸ß¼Û
 		/// </summary>
 		double HighestPrice;
 		/// <summary>
-		/// æœ€ä½ä»·
+		/// ×îµÍ¼Û
 		/// </summary>
 		double LowestPrice;
 		/// <summary>
-		/// æ•°é‡
+		/// ÊıÁ¿
 		/// </summary>
 		int Volume;
 		/// <summary>
-		/// æˆäº¤é‡‘é¢
+		/// ³É½»½ğ¶î
 		/// </summary>
 		double Turnover;
 		/// <summary>
-		/// æŒä»“é‡
+		/// ³Ö²ÖÁ¿
 		/// </summary>
 		double OpenInterest;
 		/// <summary>
-		/// ä»Šæ”¶ç›˜
+		/// ½ñÊÕÅÌ
 		/// </summary>
 		double ClosePrice;
 		/// <summary>
-		/// æœ¬æ¬¡ç»“ç®—ä»·
+		/// ±¾´Î½áËã¼Û
 		/// </summary>
 		double SettlementPrice;
 		/// <summary>
-		/// æ¶¨åœæ¿ä»·
+		/// ÕÇÍ£°å¼Û
 		/// </summary>
 		double UpperLimitPrice;
 		/// <summary>
-		/// è·Œåœæ¿ä»·
+		/// µøÍ£°å¼Û
 		/// </summary>
 		double LowerLimitPrice;
 		/// <summary>
-		/// æ˜¨è™šå®åº¦
+		/// ×òĞéÊµ¶È
 		/// </summary>
 		double PreDelta;
 		/// <summary>
-		/// ä»Šè™šå®åº¦
+		/// ½ñĞéÊµ¶È
 		/// </summary>
 		double CurrDelta;
 		/// <summary>
-		/// æœ€åä¿®æ”¹æ—¶é—´
+		/// ×îºóĞŞ¸ÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ UpdateTime;
 		/// <summary>
-		/// æœ€åä¿®æ”¹æ¯«ç§’
+		/// ×îºóĞŞ¸ÄºÁÃë
 		/// </summary>
 		int UpdateMillisec;
 		/// <summary>
-		/// ç”³ä¹°ä»·ä¸€
+		/// ÉêÂò¼ÛÒ»
 		/// </summary>
 		double BidPrice1;
 		/// <summary>
-		/// ç”³ä¹°é‡ä¸€
+		/// ÉêÂòÁ¿Ò»
 		/// </summary>
 		int BidVolume1;
 		/// <summary>
-		/// ç”³å–ä»·ä¸€
+		/// ÉêÂô¼ÛÒ»
 		/// </summary>
 		double AskPrice1;
 		/// <summary>
-		/// ç”³å–é‡ä¸€
+		/// ÉêÂôÁ¿Ò»
 		/// </summary>
 		int AskVolume1;
 		/// <summary>
-		/// ç”³ä¹°ä»·äºŒ
+		/// ÉêÂò¼Û¶ş
 		/// </summary>
 		double BidPrice2;
 		/// <summary>
-		/// ç”³ä¹°é‡äºŒ
+		/// ÉêÂòÁ¿¶ş
 		/// </summary>
 		int BidVolume2;
 		/// <summary>
-		/// ç”³å–ä»·äºŒ
+		/// ÉêÂô¼Û¶ş
 		/// </summary>
 		double AskPrice2;
 		/// <summary>
-		/// ç”³å–é‡äºŒ
+		/// ÉêÂôÁ¿¶ş
 		/// </summary>
 		int AskVolume2;
 		/// <summary>
-		/// ç”³ä¹°ä»·ä¸‰
+		/// ÉêÂò¼ÛÈı
 		/// </summary>
 		double BidPrice3;
 		/// <summary>
-		/// ç”³ä¹°é‡ä¸‰
+		/// ÉêÂòÁ¿Èı
 		/// </summary>
 		int BidVolume3;
 		/// <summary>
-		/// ç”³å–ä»·ä¸‰
+		/// ÉêÂô¼ÛÈı
 		/// </summary>
 		double AskPrice3;
 		/// <summary>
-		/// ç”³å–é‡ä¸‰
+		/// ÉêÂôÁ¿Èı
 		/// </summary>
 		int AskVolume3;
 		/// <summary>
-		/// ç”³ä¹°ä»·å››
+		/// ÉêÂò¼ÛËÄ
 		/// </summary>
 		double BidPrice4;
 		/// <summary>
-		/// ç”³ä¹°é‡å››
+		/// ÉêÂòÁ¿ËÄ
 		/// </summary>
 		int BidVolume4;
 		/// <summary>
-		/// ç”³å–ä»·å››
+		/// ÉêÂô¼ÛËÄ
 		/// </summary>
 		double AskPrice4;
 		/// <summary>
-		/// ç”³å–é‡å››
+		/// ÉêÂôÁ¿ËÄ
 		/// </summary>
 		int AskVolume4;
 		/// <summary>
-		/// ç”³ä¹°ä»·äº”
+		/// ÉêÂò¼ÛÎå
 		/// </summary>
 		double BidPrice5;
 		/// <summary>
-		/// ç”³ä¹°é‡äº”
+		/// ÉêÂòÁ¿Îå
 		/// </summary>
 		int BidVolume5;
 		/// <summary>
-		/// ç”³å–ä»·äº”
+		/// ÉêÂô¼ÛÎå
 		/// </summary>
 		double AskPrice5;
 		/// <summary>
-		/// ç”³å–é‡äº”
+		/// ÉêÂôÁ¿Îå
 		/// </summary>
 		int AskVolume5;
 		/// <summary>
-		/// å½“æ—¥å‡ä»·
+		/// µ±ÈÕ¾ù¼Û
 		/// </summary>
 		double AveragePrice;
 		/// <summary>
-		/// ä¸šåŠ¡æ—¥æœŸ
+		/// ÒµÎñÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDay;
 	};
 
 	/// <summary>
-	/// æŠ•èµ„è€…åˆçº¦äº¤æ˜“æƒé™
+	/// Í¶×ÊÕßºÏÔ¼½»Ò×È¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInstrumentTradingRightField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
+		/// Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// äº¤æ˜“æƒé™
+		/// ½»Ò×È¨ÏŞ
 		/// </summary>
 		EnumTradingRightType TradingRight;
 	};
 
 	/// <summary>
-	/// ç»çºªå…¬å¸ç”¨æˆ·
+	/// ¾­¼Í¹«Ë¾ÓÃ»§
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcBrokerUserField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// ç”¨æˆ·åç§°
+		/// ÓÃ»§Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ UserName;
 		/// <summary>
-		/// ç”¨æˆ·ç±»å‹
+		/// ÓÃ»§ÀàĞÍ
 		/// </summary>
 		EnumUserTypeType UserType;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 		/// <summary>
-		/// æ˜¯å¦ä½¿ç”¨ä»¤ç‰Œ
+		/// ÊÇ·ñÊ¹ÓÃÁîÅÆ
 		/// </summary>
 		int IsUsingOTP;
 	};
 
 	/// <summary>
-	/// ç»çºªå…¬å¸ç”¨æˆ·å£ä»¤
+	/// ¾­¼Í¹«Ë¾ÓÃ»§¿ÚÁî
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcBrokerUserPasswordField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 	};
 
 	/// <summary>
-	/// ç»çºªå…¬å¸ç”¨æˆ·åŠŸèƒ½æƒé™
+	/// ¾­¼Í¹«Ë¾ÓÃ»§¹¦ÄÜÈ¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcBrokerUserFunctionField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// ç»çºªå…¬å¸åŠŸèƒ½ä»£ç 
+		/// ¾­¼Í¹«Ë¾¹¦ÄÜ´úÂë
 		/// </summary>
 		EnumBrokerFunctionCodeType BrokerFunctionCode;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜æŠ¥ç›˜æœº
+	/// ½»Ò×Ëù½»Ò×Ô±±¨ÅÌ»ú
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTraderOfferField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		/// å®‰è£…ç¼–å·
+		/// °²×°±àºÅ
 		/// </summary>
 		int InstallID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜è¿æ¥çŠ¶æ€
+		/// ½»Ò×Ëù½»Ò×Ô±Á¬½Ó×´Ì¬
 		/// </summary>
 		EnumTraderConnectStatusType TraderConnectStatus;
 		/// <summary>
-		/// å‘å‡ºè¿æ¥è¯·æ±‚çš„æ—¥æœŸ
+		/// ·¢³öÁ¬½ÓÇëÇóµÄÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ConnectRequestDate;
 		/// <summary>
-		/// å‘å‡ºè¿æ¥è¯·æ±‚çš„æ—¶é—´
+		/// ·¢³öÁ¬½ÓÇëÇóµÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ConnectRequestTime;
 		/// <summary>
-		/// ä¸Šæ¬¡æŠ¥å‘Šæ—¥æœŸ
+		/// ÉÏ´Î±¨¸æÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LastReportDate;
 		/// <summary>
-		/// ä¸Šæ¬¡æŠ¥å‘Šæ—¶é—´
+		/// ÉÏ´Î±¨¸æÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LastReportTime;
 		/// <summary>
-		/// å®Œæˆè¿æ¥æ—¥æœŸ
+		/// Íê³ÉÁ¬½ÓÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ConnectDate;
 		/// <summary>
-		/// å®Œæˆè¿æ¥æ—¶é—´
+		/// Íê³ÉÁ¬½ÓÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ConnectTime;
 		/// <summary>
-		/// å¯åŠ¨æ—¥æœŸ
+		/// Æô¶¯ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ StartDate;
 		/// <summary>
-		/// å¯åŠ¨æ—¶é—´
+		/// Æô¶¯Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ StartTime;
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 	};
 
 	/// <summary>
-	/// æŠ•èµ„è€…ç»“ç®—ç»“æœ
+	/// Í¶×ÊÕß½áËã½á¹û
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSettlementInfoField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// åºå·
+		/// ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		/// æ¶ˆæ¯æ­£æ–‡
+		/// ÏûÏ¢ÕıÎÄ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
 		String^ Content;
 	};
 
 	/// <summary>
-	/// åˆçº¦ä¿è¯é‡‘ç‡è°ƒæ•´
+	/// ºÏÔ¼±£Ö¤½ğÂÊµ÷Õû
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInstrumentMarginRateAdjustField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
+		/// Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘ç‡
+		/// ¶àÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double LongMarginRatioByMoney;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘è´¹
+		/// ¶àÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double LongMarginRatioByVolume;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘ç‡
+		/// ¿ÕÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double ShortMarginRatioByMoney;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘è´¹
+		/// ¿ÕÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double ShortMarginRatioByVolume;
 		/// <summary>
-		/// æ˜¯å¦ç›¸å¯¹äº¤æ˜“æ‰€æ”¶å–
+		/// ÊÇ·ñÏà¶Ô½»Ò×ËùÊÕÈ¡
 		/// </summary>
 		int IsRelative;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€ä¿è¯é‡‘ç‡
+	/// ½»Ò×Ëù±£Ö¤½ğÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcExchangeMarginRateField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘ç‡
+		/// ¶àÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double LongMarginRatioByMoney;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘è´¹
+		/// ¶àÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double LongMarginRatioByVolume;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘ç‡
+		/// ¿ÕÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double ShortMarginRatioByMoney;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘è´¹
+		/// ¿ÕÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double ShortMarginRatioByVolume;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€ä¿è¯é‡‘ç‡è°ƒæ•´
+	/// ½»Ò×Ëù±£Ö¤½ğÂÊµ÷Õû
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcExchangeMarginRateAdjustField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// è·Ÿéšäº¤æ˜“æ‰€æŠ•èµ„è€…å¤šå¤´ä¿è¯é‡‘ç‡
+		/// ¸úËæ½»Ò×ËùÍ¶×ÊÕß¶àÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double LongMarginRatioByMoney;
 		/// <summary>
-		/// è·Ÿéšäº¤æ˜“æ‰€æŠ•èµ„è€…å¤šå¤´ä¿è¯é‡‘è´¹
+		/// ¸úËæ½»Ò×ËùÍ¶×ÊÕß¶àÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double LongMarginRatioByVolume;
 		/// <summary>
-		/// è·Ÿéšäº¤æ˜“æ‰€æŠ•èµ„è€…ç©ºå¤´ä¿è¯é‡‘ç‡
+		/// ¸úËæ½»Ò×ËùÍ¶×ÊÕß¿ÕÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double ShortMarginRatioByMoney;
 		/// <summary>
-		/// è·Ÿéšäº¤æ˜“æ‰€æŠ•èµ„è€…ç©ºå¤´ä¿è¯é‡‘è´¹
+		/// ¸úËæ½»Ò×ËùÍ¶×ÊÕß¿ÕÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double ShortMarginRatioByVolume;
 		/// <summary>
-		/// äº¤æ˜“æ‰€å¤šå¤´ä¿è¯é‡‘ç‡
+		/// ½»Ò×Ëù¶àÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double ExchLongMarginRatioByMoney;
 		/// <summary>
-		/// äº¤æ˜“æ‰€å¤šå¤´ä¿è¯é‡‘è´¹
+		/// ½»Ò×Ëù¶àÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double ExchLongMarginRatioByVolume;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ç©ºå¤´ä¿è¯é‡‘ç‡
+		/// ½»Ò×Ëù¿ÕÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double ExchShortMarginRatioByMoney;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ç©ºå¤´ä¿è¯é‡‘è´¹
+		/// ½»Ò×Ëù¿ÕÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double ExchShortMarginRatioByVolume;
 		/// <summary>
-		/// ä¸è·Ÿéšäº¤æ˜“æ‰€æŠ•èµ„è€…å¤šå¤´ä¿è¯é‡‘ç‡
+		/// ²»¸úËæ½»Ò×ËùÍ¶×ÊÕß¶àÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double NoLongMarginRatioByMoney;
 		/// <summary>
-		/// ä¸è·Ÿéšäº¤æ˜“æ‰€æŠ•èµ„è€…å¤šå¤´ä¿è¯é‡‘è´¹
+		/// ²»¸úËæ½»Ò×ËùÍ¶×ÊÕß¶àÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double NoLongMarginRatioByVolume;
 		/// <summary>
-		/// ä¸è·Ÿéšäº¤æ˜“æ‰€æŠ•èµ„è€…ç©ºå¤´ä¿è¯é‡‘ç‡
+		/// ²»¸úËæ½»Ò×ËùÍ¶×ÊÕß¿ÕÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double NoShortMarginRatioByMoney;
 		/// <summary>
-		/// ä¸è·Ÿéšäº¤æ˜“æ‰€æŠ•èµ„è€…ç©ºå¤´ä¿è¯é‡‘è´¹
+		/// ²»¸úËæ½»Ò×ËùÍ¶×ÊÕß¿ÕÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double NoShortMarginRatioByVolume;
 	};
 	/// <summary>
-	///æ±‡ç‡
+	///»ãÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcExchangeRateField
+	public ref struct ThostFtdcExchangeRateField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	BrokerID;
 		/// <summary>
-		///æºå¸ç§
+		///Ô´±ÒÖÖ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	FromCurrencyID;
 		/// <summary>
-		///æºå¸ç§å•ä½æ•°é‡
+		///Ô´±ÒÖÖµ¥Î»ÊıÁ¿
 		/// </summary>
 		double	FromCurrencyUnit;
 		/// <summary>
-		///ç›®æ ‡å¸ç§
+		///Ä¿±ê±ÒÖÖ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	ToCurrencyID;
 		/// <summary>
-		///æ±‡ç‡
+		///»ãÂÊ
 		/// </summary>
 		double	ExchangeRate;
 	};
 	/// <summary>
-	/// ç»“ç®—å¼•ç”¨
+	/// ½áËãÒıÓÃ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSettlementRefField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 	};
 
 	/// <summary>
-	/// å½“å‰æ—¶é—´
+	/// µ±Ç°Ê±¼ä
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcCurrentTimeField
 	{
 		/// <summary>
-		/// å½“å‰æ—¥æœŸ
+		/// µ±Ç°ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CurrDate;
 		/// <summary>
-		/// å½“å‰æ—¶é—´
+		/// µ±Ç°Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CurrTime;
 		/// <summary>
-		/// å½“å‰æ—¶é—´ï¼ˆæ¯«ç§’ï¼‰
+		/// µ±Ç°Ê±¼ä£¨ºÁÃë£©
 		/// </summary>
 		int CurrMillisec;
 	};
 
 	/// <summary>
-	/// é€šè®¯é˜¶æ®µ
+	/// Í¨Ñ¶½×¶Î
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcCommPhaseField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// é€šè®¯æ—¶æ®µç¼–å·
+		/// Í¨Ñ¶Ê±¶Î±àºÅ
 		/// </summary>
 		short CommPhaseNo;
 	};
 
 	/// <summary>
-	/// ç™»å½•ä¿¡æ¯
+	/// µÇÂ¼ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcLoginInfoField
 	{
 		/// <summary>
-		/// å‰ç½®ç¼–å·
+		/// Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		/// ä¼šè¯ç¼–å·
+		/// »á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// ç™»å½•æ—¥æœŸ
+		/// µÇÂ¼ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LoginDate;
 		/// <summary>
-		/// ç™»å½•æ—¶é—´
+		/// µÇÂ¼Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LoginTime;
 		/// <summary>
-		/// IPåœ°å€
+		/// IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ IPAddress;
 		/// <summary>
-		/// ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		/// ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ UserProductInfo;
 		/// <summary>
-		/// æ¥å£ç«¯äº§å“ä¿¡æ¯
+		/// ½Ó¿Ú¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ InterfaceProductInfo;
 		/// <summary>
-		/// åè®®ä¿¡æ¯
+		/// Ğ­ÒéĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ProtocolInfo;
 		/// <summary>
-		/// ç³»ç»Ÿåç§°
+		/// ÏµÍ³Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ SystemName;
 		/// <summary>
-		/// å¯†ç 
+		/// ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		/// æœ€å¤§æŠ¥å•å¼•ç”¨
+		/// ×î´ó±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ MaxOrderRef;
 		/// <summary>
-		/// ä¸ŠæœŸæ‰€æ—¶é—´
+		/// ÉÏÆÚËùÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ SHFETime;
 		/// <summary>
-		/// å¤§å•†æ‰€æ—¶é—´
+		/// ´óÉÌËùÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ DCETime;
 		/// <summary>
-		/// éƒ‘å•†æ‰€æ—¶é—´
+		/// Ö£ÉÌËùÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CZCETime;
 		/// <summary>
-		/// ä¸­é‡‘æ‰€æ—¶é—´
+		/// ÖĞ½ğËùÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ FFEXTime;
 		/// <summary>
-		/// Macåœ°å€
+		/// MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MacAddress;
 		/// <summary>
-		/// åŠ¨æ€å¯†ç 
+		/// ¶¯Ì¬ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ OneTimePassword;
 		/// <summary>
-		///èƒ½æºä¸­å¿ƒæ—¶é—´
+		///ÄÜÔ´ÖĞĞÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	INETime;
 		/// <summary>
-		///æŸ¥è¯¢æ—¶æ˜¯å¦éœ€è¦æµæ§
+		///²éÑ¯Ê±ÊÇ·ñĞèÒªÁ÷¿Ø
 		/// </summary>
 		int	IsQryControl;
 		/// <summary>
-		///ç™»å½•å¤‡æ³¨
+		///µÇÂ¼±¸×¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^	LoginRemark;
 	};
 
 	/// <summary>
-	/// ç™»å½•ä¿¡æ¯
+	/// µÇÂ¼ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcLogoutAllField
 	{
 		/// <summary>
-		/// å‰ç½®ç¼–å·
+		/// Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		/// ä¼šè¯ç¼–å·
+		/// »á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		/// ç³»ç»Ÿåç§°
+		/// ÏµÍ³Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ SystemName;
 	};
 
 	/// <summary>
-	/// å‰ç½®çŠ¶æ€
+	/// Ç°ÖÃ×´Ì¬
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcFrontStatusField
 	{
 		/// <summary>
-		/// å‰ç½®ç¼–å·
+		/// Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		/// ä¸Šæ¬¡æŠ¥å‘Šæ—¥æœŸ
+		/// ÉÏ´Î±¨¸æÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LastReportDate;
 		/// <summary>
-		/// ä¸Šæ¬¡æŠ¥å‘Šæ—¶é—´
+		/// ÉÏ´Î±¨¸æÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LastReportTime;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 	};
 
 	/// <summary>
-	/// ç”¨æˆ·å£ä»¤å˜æ›´
+	/// ÓÃ»§¿ÚÁî±ä¸ü
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcUserPasswordUpdateField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// åŸæ¥çš„å£ä»¤
+		/// Ô­À´µÄ¿ÚÁî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ OldPassword;
 		/// <summary>
-		/// æ–°çš„å£ä»¤
+		/// ĞÂµÄ¿ÚÁî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ NewPassword;
 	};
 
 	/// <summary>
-	/// è¾“å…¥æŠ¥å•
+	/// ÊäÈë±¨µ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInputOrderField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ¥å•å¼•ç”¨
+		/// ±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// æŠ¥å•ä»·æ ¼æ¡ä»¶
+		/// ±¨µ¥¼Û¸ñÌõ¼ş
 		/// </summary>
 		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
-		/// ä¹°å–æ–¹å‘
+		/// ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType CombOffsetFlag;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
-		/// </summary>
-		EnumOffsetFlagType CombOffsetFlag_1;
-		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
-		/// </summary>
-		EnumOffsetFlagType CombOffsetFlag_2;
-		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
-		/// </summary>
-		EnumOffsetFlagType CombOffsetFlag_3;
-		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
-		/// </summary>
-		EnumOffsetFlagType CombOffsetFlag_4;
-		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType CombHedgeFlag;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
-		/// </summary>
-		EnumHedgeFlagType CombHedgeFlag_1;
-		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
-		/// </summary>
-		EnumHedgeFlagType CombHedgeFlag_2;
-		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
-		/// </summary>
-		EnumHedgeFlagType CombHedgeFlag_3;
-		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
-		/// </summary>
-		EnumHedgeFlagType CombHedgeFlag_4;
-		/// <summary>
-		/// ä»·æ ¼
+		/// ¼Û¸ñ
 		/// </summary>
 		double LimitPrice;
 		/// <summary>
-		/// æ•°é‡
+		/// ÊıÁ¿
 		/// </summary>
 		int VolumeTotalOriginal;
 		/// <summary>
-		/// æœ‰æ•ˆæœŸç±»å‹
+		/// ÓĞĞ§ÆÚÀàĞÍ
 		/// </summary>
 		EnumTimeConditionType TimeCondition;
 		/// <summary>
-		/// GTDæ—¥æœŸ
+		/// GTDÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ GTDDate;
 		/// <summary>
-		/// æˆäº¤é‡ç±»å‹
+		/// ³É½»Á¿ÀàĞÍ
 		/// </summary>
 		EnumVolumeConditionType VolumeCondition;
 		/// <summary>
-		/// æœ€å°æˆäº¤é‡
+		/// ×îĞ¡³É½»Á¿
 		/// </summary>
 		int MinVolume;
 		/// <summary>
-		/// è§¦å‘æ¡ä»¶
+		/// ´¥·¢Ìõ¼ş
 		/// </summary>
 		EnumContingentConditionType ContingentCondition;
 		/// <summary>
-		/// æ­¢æŸä»·
+		/// Ö¹Ëğ¼Û
 		/// </summary>
 		double StopPrice;
 		/// <summary>
-		/// å¼ºå¹³åŸå› 
+		/// Ç¿Æ½Ô­Òò
 		/// </summary>
 		EnumForceCloseReasonType ForceCloseReason;
 		/// <summary>
-		/// è‡ªåŠ¨æŒ‚èµ·æ ‡å¿—
+		/// ×Ô¶¯¹ÒÆğ±êÖ¾
 		/// </summary>
 		int IsAutoSuspend;
 		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
+		/// ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		/// è¯·æ±‚ç¼–å·
+		/// ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		/// ç”¨æˆ·å¼ºè¯„æ ‡å¿—
+		/// ÓÃ»§Ç¿ÆÀ±êÖ¾
 		/// </summary>
 		int UserForceClose;
 		/// <summary>
-		/// äº’æ¢å•æ ‡å¿—
+		/// »¥»»µ¥±êÖ¾
 		/// </summary>
 		int	IsSwapOrder;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	ExchangeID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^	InvestUnitID;
 		/// <summary>
-		///èµ„é‡‘è´¦å·
+		///×Ê½ğÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	CurrencyID;
 		/// <summary>
-		///äº¤æ˜“ç¼–ç 
+		///½»Ò×±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	ClientID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	/// æŠ¥å•
+	/// ±¨µ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcOrderField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ¥å•å¼•ç”¨
+		/// ±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// æŠ¥å•ä»·æ ¼æ¡ä»¶
+		/// ±¨µ¥¼Û¸ñÌõ¼ş
 		/// </summary>
 		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
-		/// ä¹°å–æ–¹å‘
+		/// ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType CombOffsetFlag;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType CombOffsetFlag_1;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType CombOffsetFlag_2;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType CombOffsetFlag_3;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType CombOffsetFlag_4;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType CombHedgeFlag;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType CombHedgeFlag_1;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType CombHedgeFlag_2;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType CombHedgeFlag_3;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType CombHedgeFlag_4;
 		/// <summary>
-		/// ä»·æ ¼
+		/// ¼Û¸ñ
 		/// </summary>
 		double LimitPrice;
 		/// <summary>
-		/// æ•°é‡
+		/// ÊıÁ¿
 		/// </summary>
 		int VolumeTotalOriginal;
 		/// <summary>
-		/// æœ‰æ•ˆæœŸç±»å‹
+		/// ÓĞĞ§ÆÚÀàĞÍ
 		/// </summary>
 		EnumTimeConditionType TimeCondition;
 		/// <summary>
-		/// GTDæ—¥æœŸ
+		/// GTDÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ GTDDate;
 		/// <summary>
-		/// æˆäº¤é‡ç±»å‹
+		/// ³É½»Á¿ÀàĞÍ
 		/// </summary>
 		EnumVolumeConditionType VolumeCondition;
 		/// <summary>
-		/// æœ€å°æˆäº¤é‡
+		/// ×îĞ¡³É½»Á¿
 		/// </summary>
 		int MinVolume;
 		/// <summary>
-		/// è§¦å‘æ¡ä»¶
+		/// ´¥·¢Ìõ¼ş
 		/// </summary>
 		EnumContingentConditionType ContingentCondition;
 		/// <summary>
-		/// æ­¢æŸä»·
+		/// Ö¹Ëğ¼Û
 		/// </summary>
 		double StopPrice;
 		/// <summary>
-		/// å¼ºå¹³åŸå› 
+		/// Ç¿Æ½Ô­Òò
 		/// </summary>
 		EnumForceCloseReasonType ForceCloseReason;
 		/// <summary>
-		/// è‡ªåŠ¨æŒ‚èµ·æ ‡å¿—
+		/// ×Ô¶¯¹ÒÆğ±êÖ¾
 		/// </summary>
 		int IsAutoSuspend;
 		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
+		/// ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		/// è¯·æ±‚ç¼–å·
+		/// ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// å®‰è£…ç¼–å·
+		/// °²×°±àºÅ
 		/// </summary>
 		int InstallID;
 		/// <summary>
-		/// æŠ¥å•æäº¤çŠ¶æ€
+		/// ±¨µ¥Ìá½»×´Ì¬
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
-		/// æŠ¥å•æç¤ºåºå·
+		/// ±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// æŠ¥å•æ¥æº
+		/// ±¨µ¥À´Ô´
 		/// </summary>
 		EnumOrderSourceType OrderSource;
 		/// <summary>
-		/// æŠ¥å•çŠ¶æ€
+		/// ±¨µ¥×´Ì¬
 		/// </summary>
 		EnumOrderStatusType OrderStatus;
 		/// <summary>
-		/// æŠ¥å•ç±»å‹
+		/// ±¨µ¥ÀàĞÍ
 		/// </summary>
 		EnumOrderTypeType OrderType;
 		/// <summary>
-		/// ä»Šæˆäº¤æ•°é‡
+		/// ½ñ³É½»ÊıÁ¿
 		/// </summary>
 		int VolumeTraded;
 		/// <summary>
-		/// å‰©ä½™æ•°é‡
+		/// Ê£ÓàÊıÁ¿
 		/// </summary>
 		int VolumeTotal;
 		/// <summary>
-		/// æŠ¥å•æ—¥æœŸ
+		/// ±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		/// å§”æ‰˜æ—¶é—´
+		/// Î¯ÍĞÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		/// æ¿€æ´»æ—¶é—´
+		/// ¼¤»îÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActiveTime;
 		/// <summary>
-		/// æŒ‚èµ·æ—¶é—´
+		/// ¹ÒÆğÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ SuspendTime;
 		/// <summary>
-		/// æœ€åä¿®æ”¹æ—¶é—´
+		/// ×îºóĞŞ¸ÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ UpdateTime;
 		/// <summary>
-		/// æ’¤é”€æ—¶é—´
+		/// ³·ÏúÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CancelTime;
 		/// <summary>
-		/// æœ€åä¿®æ”¹äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ×îºóĞŞ¸Ä½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ActiveTraderID;
 		/// <summary>
-		/// ç»“ç®—ä¼šå‘˜ç¼–å·
+		/// ½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		/// åºå·
+		/// ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		/// å‰ç½®ç¼–å·
+		/// Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		/// ä¼šè¯ç¼–å·
+		/// »á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		/// ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		/// ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ UserProductInfo;
 		/// <summary>
-		/// çŠ¶æ€ä¿¡æ¯
+		/// ×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		/// ç”¨æˆ·å¼ºè¯„æ ‡å¿—
+		/// ÓÃ»§Ç¿ÆÀ±êÖ¾
 		/// </summary>
 		int UserForceClose;
 		/// <summary>
-		/// æ“ä½œç”¨æˆ·ä»£ç 
+		/// ²Ù×÷ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ ActiveUserID;
 		/// <summary>
-		/// ç»çºªå…¬å¸æŠ¥å•ç¼–å·
+		/// ¾­¼Í¹«Ë¾±¨µ¥±àºÅ
 		/// </summary>
 		int BrokerOrderSeq;
 		/// <summary>
-		/// ç›¸å…³æŠ¥å•
+		/// Ïà¹Ø±¨µ¥
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ RelativeOrderSysID;
 		/// <summary>
-		///éƒ‘å•†æ‰€æˆäº¤æ•°é‡
+		///Ö£ÉÌËù³É½»ÊıÁ¿
 		/// </summary>
 		int	ZCETotalTradedVolume;
 		/// <summary>
-		///äº’æ¢å•æ ‡å¿—
+		///»¥»»µ¥±êÖ¾
 		/// </summary>
 		int	IsSwapOrder;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	BranchID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^	InvestUnitID;
 		/// <summary>
-		///èµ„é‡‘è´¦å·
+		///×Ê½ğÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	CurrencyID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€æŠ¥å•
+	/// ½»Ò×Ëù±¨µ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcExchangeOrderField
 	{
 		/// <summary>
-		/// æŠ¥å•ä»·æ ¼æ¡ä»¶
+		/// ±¨µ¥¼Û¸ñÌõ¼ş
 		/// </summary>
 		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
-		/// ä¹°å–æ–¹å‘
+		/// ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ CombOffsetFlag;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ CombHedgeFlag;
 		/// <summary>
-		/// ä»·æ ¼
+		/// ¼Û¸ñ
 		/// </summary>
 		double LimitPrice;
 		/// <summary>
-		/// æ•°é‡
+		/// ÊıÁ¿
 		/// </summary>
 		int VolumeTotalOriginal;
 		/// <summary>
-		/// æœ‰æ•ˆæœŸç±»å‹
+		/// ÓĞĞ§ÆÚÀàĞÍ
 		/// </summary>
 		EnumTimeConditionType TimeCondition;
 		/// <summary>
-		/// GTDæ—¥æœŸ
+		/// GTDÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ GTDDate;
 		/// <summary>
-		/// æˆäº¤é‡ç±»å‹
+		/// ³É½»Á¿ÀàĞÍ
 		/// </summary>
 		EnumVolumeConditionType VolumeCondition;
 		/// <summary>
-		/// æœ€å°æˆäº¤é‡
+		/// ×îĞ¡³É½»Á¿
 		/// </summary>
 		int MinVolume;
 		/// <summary>
-		/// è§¦å‘æ¡ä»¶
+		/// ´¥·¢Ìõ¼ş
 		/// </summary>
 		EnumContingentConditionType ContingentCondition;
 		/// <summary>
-		/// æ­¢æŸä»·
+		/// Ö¹Ëğ¼Û
 		/// </summary>
 		double StopPrice;
 		/// <summary>
-		/// å¼ºå¹³åŸå› 
+		/// Ç¿Æ½Ô­Òò
 		/// </summary>
 		EnumForceCloseReasonType ForceCloseReason;
 		/// <summary>
-		/// è‡ªåŠ¨æŒ‚èµ·æ ‡å¿—
+		/// ×Ô¶¯¹ÒÆğ±êÖ¾
 		/// </summary>
 		int IsAutoSuspend;
 		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
+		/// ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		/// è¯·æ±‚ç¼–å·
+		/// ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// å®‰è£…ç¼–å·
+		/// °²×°±àºÅ
 		/// </summary>
 		int InstallID;
 		/// <summary>
-		/// æŠ¥å•æäº¤çŠ¶æ€
+		/// ±¨µ¥Ìá½»×´Ì¬
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
-		/// æŠ¥å•æç¤ºåºå·
+		/// ±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// æŠ¥å•æ¥æº
+		/// ±¨µ¥À´Ô´
 		/// </summary>
 		EnumOrderSourceType OrderSource;
 		/// <summary>
-		/// æŠ¥å•çŠ¶æ€
+		/// ±¨µ¥×´Ì¬
 		/// </summary>
 		EnumOrderStatusType OrderStatus;
 		/// <summary>
-		/// æŠ¥å•ç±»å‹
+		/// ±¨µ¥ÀàĞÍ
 		/// </summary>
 		EnumOrderTypeType OrderType;
 		/// <summary>
-		/// ä»Šæˆäº¤æ•°é‡
+		/// ½ñ³É½»ÊıÁ¿
 		/// </summary>
 		int VolumeTraded;
 		/// <summary>
-		/// å‰©ä½™æ•°é‡
+		/// Ê£ÓàÊıÁ¿
 		/// </summary>
 		int VolumeTotal;
 		/// <summary>
-		/// æŠ¥å•æ—¥æœŸ
+		/// ±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		/// å§”æ‰˜æ—¶é—´
+		/// Î¯ÍĞÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		/// æ¿€æ´»æ—¶é—´
+		/// ¼¤»îÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActiveTime;
 		/// <summary>
-		/// æŒ‚èµ·æ—¶é—´
+		/// ¹ÒÆğÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ SuspendTime;
 		/// <summary>
-		/// æœ€åä¿®æ”¹æ—¶é—´
+		/// ×îºóĞŞ¸ÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ UpdateTime;
 		/// <summary>
-		/// æ’¤é”€æ—¶é—´
+		/// ³·ÏúÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CancelTime;
 		/// <summary>
-		/// æœ€åä¿®æ”¹äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ×îºóĞŞ¸Ä½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ActiveTraderID;
 		/// <summary>
-		/// ç»“ç®—ä¼šå‘˜ç¼–å·
+		/// ½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		/// åºå·
+		/// ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	BranchID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€æŠ¥å•æ’å…¥å¤±è´¥
+	/// ½»Ò×Ëù±¨µ¥²åÈëÊ§°Ü
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcExchangeOrderInsertErrorField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// å®‰è£…ç¼–å·
+		/// °²×°±àºÅ
 		/// </summary>
 		int InstallID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// é”™è¯¯ä»£ç 
+		/// ´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		/// é”™è¯¯ä¿¡æ¯
+		/// ´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	/// è¾“å…¥æŠ¥å•æ“ä½œ
+	/// ÊäÈë±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcInputOrderActionField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// æŠ¥å•æ“ä½œå¼•ç”¨
+		/// ±¨µ¥²Ù×÷ÒıÓÃ
 		/// </summary>
 		int OrderActionRef;
 		/// <summary>
-		/// æŠ¥å•å¼•ç”¨
+		/// ±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		/// è¯·æ±‚ç¼–å·
+		/// ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		/// å‰ç½®ç¼–å·
+		/// Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		/// ä¼šè¯ç¼–å·
+		/// »á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// æ“ä½œæ ‡å¿—
+		/// ²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		/// ä»·æ ¼
+		/// ¼Û¸ñ
 		/// </summary>
 		double LimitPrice;
 		/// <summary>
-		/// æ•°é‡å˜åŒ–
+		/// ÊıÁ¿±ä»¯
 		/// </summary>
 		int VolumeChange;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^	InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	/// æŠ¥å•æ“ä½œ
+	/// ±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcOrderActionField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// æŠ¥å•æ“ä½œå¼•ç”¨
+		/// ±¨µ¥²Ù×÷ÒıÓÃ
 		/// </summary>
 		int OrderActionRef;
 		/// <summary>
-		/// æŠ¥å•å¼•ç”¨
+		/// ±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		/// è¯·æ±‚ç¼–å·
+		/// ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		/// å‰ç½®ç¼–å·
+		/// Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		/// ä¼šè¯ç¼–å·
+		/// »á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// æ“ä½œæ ‡å¿—
+		/// ²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		/// ä»·æ ¼
+		/// ¼Û¸ñ
 		/// </summary>
 		double LimitPrice;
 		/// <summary>
-		/// æ•°é‡å˜åŒ–
+		/// ÊıÁ¿±ä»¯
 		/// </summary>
 		int VolumeChange;
 		/// <summary>
-		/// æ“ä½œæ—¥æœŸ
+		/// ²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		/// æ“ä½œæ—¶é—´
+		/// ²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// å®‰è£…ç¼–å·
+		/// °²×°±àºÅ
 		/// </summary>
 		int InstallID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// æ“ä½œæœ¬åœ°ç¼–å·
+		/// ²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
+		/// ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		/// æŠ¥å•æ“ä½œçŠ¶æ€
+		/// ±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// çŠ¶æ€ä¿¡æ¯
+		/// ×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	BranchID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^	InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€æŠ¥å•æ“ä½œ
+	/// ½»Ò×Ëù±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcExchangeOrderActionField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// æ“ä½œæ ‡å¿—
+		/// ²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		/// ä»·æ ¼
+		/// ¼Û¸ñ
 		/// </summary>
 		double LimitPrice;
 		/// <summary>
-		/// æ•°é‡å˜åŒ–
+		/// ÊıÁ¿±ä»¯
 		/// </summary>
 		int VolumeChange;
 		/// <summary>
-		/// æ“ä½œæ—¥æœŸ
+		/// ²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		/// æ“ä½œæ—¶é—´
+		/// ²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// å®‰è£…ç¼–å·
+		/// °²×°±àºÅ
 		/// </summary>
 		int InstallID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// æ“ä½œæœ¬åœ°ç¼–å·
+		/// ²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
+		/// ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		/// æŠ¥å•æ“ä½œçŠ¶æ€
+		/// ±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	BranchID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€æŠ¥å•æ“ä½œå¤±è´¥
+	/// ½»Ò×Ëù±¨µ¥²Ù×÷Ê§°Ü
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcExchangeOrderActionErrorField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// å®‰è£…ç¼–å·
+		/// °²×°±àºÅ
 		/// </summary>
 		int InstallID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// æ“ä½œæœ¬åœ°ç¼–å·
+		/// ²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		/// é”™è¯¯ä»£ç 
+		/// ´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		/// é”™è¯¯ä¿¡æ¯
+		/// ´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	/// äº¤æ˜“æ‰€æˆäº¤
+	/// ½»Ò×Ëù³É½»
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcExchangeTradeField
 	{
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// æˆäº¤ç¼–å·
+		/// ³É½»±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TradeID;
 		/// <summary>
-		/// ä¹°å–æ–¹å‘
+		/// ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// äº¤æ˜“è§’è‰²
+		/// ½»Ò×½ÇÉ«
 		/// </summary>
 		EnumTradingRoleType TradingRole;
 		/// <summary>
-		/// åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// å¼€å¹³æ ‡å¿—
+		/// ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType OffsetFlag;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// ä»·æ ¼
+		/// ¼Û¸ñ
 		/// </summary>
 		double Price;
 		/// <summary>
-		/// æ•°é‡
+		/// ÊıÁ¿
 		/// </summary>
 		int Volume;
 		/// <summary>
-		/// æˆäº¤æ—¶æœŸ
+		/// ³É½»Ê±ÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		/// æˆäº¤æ—¶é—´
+		/// ³É½»Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		/// æˆäº¤ç±»å‹
+		/// ³É½»ÀàĞÍ
 		/// </summary>
 		EnumTradeTypeType TradeType;
 		/// <summary>
-		/// æˆäº¤ä»·æ¥æº
+		/// ³É½»¼ÛÀ´Ô´
 		/// </summary>
 		EnumPriceSourceType PriceSource;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// ç»“ç®—ä¼šå‘˜ç¼–å·
+		/// ½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
+		/// ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		/// åºå·
+		/// ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 	};
 
 	/// <summary>
-	/// æˆäº¤
+	/// ³É½»
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcTradeField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ¥å•å¼•ç”¨
+		/// ±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// æˆäº¤ç¼–å·
+		/// ³É½»±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TradeID;
 		/// <summary>
-		/// ä¹°å–æ–¹å‘
+		/// ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// äº¤æ˜“è§’è‰²
+		/// ½»Ò×½ÇÉ«
 		/// </summary>
 		EnumTradingRoleType TradingRole;
 		/// <summary>
-		/// åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// å¼€å¹³æ ‡å¿—
+		/// ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType OffsetFlag;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// ä»·æ ¼
+		/// ¼Û¸ñ
 		/// </summary>
 		double Price;
 		/// <summary>
-		/// æ•°é‡
+		/// ÊıÁ¿
 		/// </summary>
 		int Volume;
 		/// <summary>
-		/// æˆäº¤æ—¶æœŸ
+		/// ³É½»Ê±ÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		/// æˆäº¤æ—¶é—´
+		/// ³É½»Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		/// æˆäº¤ç±»å‹
+		/// ³É½»ÀàĞÍ
 		/// </summary>
 		EnumTradeTypeType TradeType;
 		/// <summary>
-		/// æˆäº¤ä»·æ¥æº
+		/// ³É½»¼ÛÀ´Ô´
 		/// </summary>
 		EnumPriceSourceType PriceSource;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		/// æœ¬åœ°æŠ¥å•ç¼–å·
+		/// ±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		/// ç»“ç®—ä¼šå‘˜ç¼–å·
+		/// ½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
+		/// ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		/// åºå·
+		/// ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		/// ç»çºªå…¬å¸æŠ¥å•ç¼–å·
+		/// ¾­¼Í¹«Ë¾±¨µ¥±àºÅ
 		/// </summary>
 		int BrokerOrderSeq;
 	};
 
 	/// <summary>
-	/// ç”¨æˆ·ä¼šè¯
+	/// ÓÃ»§»á»°
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcUserSessionField
 	{
 		/// <summary>
-		/// å‰ç½®ç¼–å·
+		/// Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		/// ä¼šè¯ç¼–å·
+		/// »á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// ç™»å½•æ—¥æœŸ
+		/// µÇÂ¼ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LoginDate;
 		/// <summary>
-		/// ç™»å½•æ—¶é—´
+		/// µÇÂ¼Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ LoginTime;
 		/// <summary>
-		/// IPåœ°å€
+		/// IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ IPAddress;
 		/// <summary>
-		/// ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		/// ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ UserProductInfo;
 		/// <summary>
-		/// æ¥å£ç«¯äº§å“ä¿¡æ¯
+		/// ½Ó¿Ú¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ InterfaceProductInfo;
 		/// <summary>
-		/// åè®®ä¿¡æ¯
+		/// Ğ­ÒéĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ProtocolInfo;
 		/// <summary>
-		/// Macåœ°å€
+		/// MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MacAddress;
 		/// <summary>
-		///ç™»å½•å¤‡æ³¨
+		///µÇÂ¼±¸×¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^	LoginRemark;
 	};
 
 	/// <summary>
-	/// æŸ¥è¯¢æœ€å¤§æŠ¥å•æ•°é‡
+	/// ²éÑ¯×î´ó±¨µ¥ÊıÁ¿
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcQueryMaxOrderVolumeField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// ä¹°å–æ–¹å‘
+		/// ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// å¼€å¹³æ ‡å¿—
+		/// ¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType OffsetFlag;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// æœ€å¤§å…è®¸æŠ¥å•æ•°é‡
+		/// ×î´óÔÊĞí±¨µ¥ÊıÁ¿
 		/// </summary>
 		int MaxVolume;
 	};
 
 	/// <summary>
-	/// æŠ•èµ„è€…ç»“ç®—ç»“æœç¡®è®¤ä¿¡æ¯
+	/// Í¶×ÊÕß½áËã½á¹ûÈ·ÈÏĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSettlementInfoConfirmField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// ç¡®è®¤æ—¥æœŸ
+		/// È·ÈÏÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ConfirmDate;
 		/// <summary>
-		/// ç¡®è®¤æ—¶é—´
+		/// È·ÈÏÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ConfirmTime;
 	};
 
 	/// <summary>
-	/// å‡ºå…¥é‡‘åŒæ­¥
+	/// ³öÈë½ğÍ¬²½
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncDepositField
 	{
 		/// <summary>
-		/// å‡ºå…¥é‡‘æµæ°´å·
+		/// ³öÈë½ğÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 15)]
 		String^ DepositSeqNo;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// å…¥é‡‘é‡‘é¢
+		/// Èë½ğ½ğ¶î
 		/// </summary>
 		double Deposit;
 		/// <summary>
-		/// æ˜¯å¦å¼ºåˆ¶è¿›è¡Œ
+		/// ÊÇ·ñÇ¿ÖÆ½øĞĞ
 		/// </summary>
 		int IsForce;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	CurrencyID;
 	};
 	///<summary>
-	///è´§å¸è´¨æŠ¼åŒæ­¥
+	///»õ±ÒÖÊÑºÍ¬²½
 	///</summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcSyncFundMortgageField
+	public ref struct ThostFtdcSyncFundMortgageField
 	{
 		///<summary>
-		///è´§å¸è´¨æŠ¼æµæ°´å·
+		///»õ±ÒÖÊÑºÁ÷Ë®ºÅ
 		///</summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 15)]
 		String^	MortgageSeqNo;
 		///<summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		///</summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	BrokerID;
 		///<summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	InvestorID;
 		///<summary>
-		///æºå¸ç§
+		///Ô´±ÒÖÖ
 		///</summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	FromCurrencyID;
 		///<summary>
-		///è´¨æŠ¼é‡‘é¢
+		///ÖÊÑº½ğ¶î
 		///</summary>
 		double	MortgageAmount;
 		///<summary>
-		///ç›®æ ‡å¸ç§
+		///Ä¿±ê±ÒÖÖ
 		///</summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	ToCurrencyID;
 	};
 
 	/// <summary>
-	/// ç»çºªå…¬å¸åŒæ­¥
+	/// ¾­¼Í¹«Ë¾Í¬²½
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcBrokerSyncField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 	};
 
 	/// <summary>
-	/// æ­£åœ¨åŒæ­¥ä¸­çš„æŠ•èµ„è€…
+	/// ÕıÔÚÍ¬²½ÖĞµÄÍ¶×ÊÕß
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncingInvestorField
 	{
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…åˆ†ç»„ä»£ç 
+		/// Í¶×ÊÕß·Ö×é´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorGroupID;
 		/// <summary>
-		/// æŠ•èµ„è€…åç§°
+		/// Í¶×ÊÕßÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ InvestorName;
 		/// <summary>
-		/// è¯ä»¶ç±»å‹
+		/// Ö¤¼şÀàĞÍ
 		/// </summary>
 		EnumIdCardTypeType IdentifiedCardType;
 		/// <summary>
-		/// è¯ä»¶å·ç 
+		/// Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 		/// <summary>
-		/// è”ç³»ç”µè¯
+		/// ÁªÏµµç»°
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		/// é€šè®¯åœ°å€
+		/// Í¨Ñ¶µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		/// å¼€æˆ·æ—¥æœŸ
+		/// ¿ª»§ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ OpenDate;
 		/// <summary>
-		/// æ‰‹æœº
+		/// ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Mobile;
 		/// <summary>
-		///æ‰‹ç»­è´¹ç‡æ¨¡æ¿ä»£ç 
+		///ÊÖĞø·ÑÂÊÄ£°å´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	CommModelID;
 		/// <summary>
-		///ä¿è¯é‡‘ç‡æ¨¡æ¿ä»£ç 
+		///±£Ö¤½ğÂÊÄ£°å´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	MarginModelID;
 	};
 
 	/// <summary>
-	/// æ­£åœ¨åŒæ­¥ä¸­çš„äº¤æ˜“ä»£ç 
+	/// ÕıÔÚÍ¬²½ÖĞµÄ½»Ò×´úÂë
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncingTradingCodeField
 	{
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// æ˜¯å¦æ´»è·ƒ
+		/// ÊÇ·ñ»îÔ¾
 		/// </summary>
 		int IsActive;
 		/// <summary>
-		/// äº¤æ˜“ç¼–ç ç±»å‹
+		/// ½»Ò×±àÂëÀàĞÍ
 		/// </summary>
 		EnumClientIDTypeType ClientIDType;
 	};
 
 	/// <summary>
-	/// æ­£åœ¨åŒæ­¥ä¸­çš„æŠ•èµ„è€…åˆ†ç»„
+	/// ÕıÔÚÍ¬²½ÖĞµÄÍ¶×ÊÕß·Ö×é
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncingInvestorGroupField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…åˆ†ç»„ä»£ç 
+		/// Í¶×ÊÕß·Ö×é´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorGroupID;
 		/// <summary>
-		/// æŠ•èµ„è€…åˆ†ç»„åç§°
+		/// Í¶×ÊÕß·Ö×éÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ InvestorGroupName;
 	};
 
 	/// <summary>
-	/// æ­£åœ¨åŒæ­¥ä¸­çš„äº¤æ˜“è´¦å·
+	/// ÕıÔÚÍ¬²½ÖĞµÄ½»Ò×ÕËºÅ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncingTradingAccountField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…å¸å·
+		/// Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		/// ä¸Šæ¬¡è´¨æŠ¼é‡‘é¢
+		/// ÉÏ´ÎÖÊÑº½ğ¶î
 		/// </summary>
 		double PreMortgage;
 		/// <summary>
-		/// ä¸Šæ¬¡ä¿¡ç”¨é¢åº¦
+		/// ÉÏ´ÎĞÅÓÃ¶î¶È
 		/// </summary>
 		double PreCredit;
 		/// <summary>
-		/// ä¸Šæ¬¡å­˜æ¬¾é¢
+		/// ÉÏ´Î´æ¿î¶î
 		/// </summary>
 		double PreDeposit;
 		/// <summary>
-		/// ä¸Šæ¬¡ç»“ç®—å‡†å¤‡é‡‘
+		/// ÉÏ´Î½áËã×¼±¸½ğ
 		/// </summary>
 		double PreBalance;
 		/// <summary>
-		/// ä¸Šæ¬¡å ç”¨çš„ä¿è¯é‡‘
+		/// ÉÏ´ÎÕ¼ÓÃµÄ±£Ö¤½ğ
 		/// </summary>
 		double PreMargin;
 		/// <summary>
-		/// åˆ©æ¯åŸºæ•°
+		/// ÀûÏ¢»ùÊı
 		/// </summary>
 		double InterestBase;
 		/// <summary>
-		/// åˆ©æ¯æ”¶å…¥
+		/// ÀûÏ¢ÊÕÈë
 		/// </summary>
 		double Interest;
 		/// <summary>
-		/// å…¥é‡‘é‡‘é¢
+		/// Èë½ğ½ğ¶î
 		/// </summary>
 		double Deposit;
 		/// <summary>
-		/// å‡ºé‡‘é‡‘é¢
+		/// ³ö½ğ½ğ¶î
 		/// </summary>
 		double Withdraw;
 		/// <summary>
-		/// å†»ç»“çš„ä¿è¯é‡‘
+		/// ¶³½áµÄ±£Ö¤½ğ
 		/// </summary>
 		double FrozenMargin;
 		/// <summary>
-		/// å†»ç»“çš„èµ„é‡‘
+		/// ¶³½áµÄ×Ê½ğ
 		/// </summary>
 		double FrozenCash;
 		/// <summary>
-		/// å†»ç»“çš„æ‰‹ç»­è´¹
+		/// ¶³½áµÄÊÖĞø·Ñ
 		/// </summary>
 		double FrozenCommission;
 		/// <summary>
-		/// å½“å‰ä¿è¯é‡‘æ€»é¢
+		/// µ±Ç°±£Ö¤½ğ×Ü¶î
 		/// </summary>
 		double CurrMargin;
 		/// <summary>
-		/// èµ„é‡‘å·®é¢
+		/// ×Ê½ğ²î¶î
 		/// </summary>
 		double CashIn;
 		/// <summary>
-		/// æ‰‹ç»­è´¹
+		/// ÊÖĞø·Ñ
 		/// </summary>
 		double Commission;
 		/// <summary>
-		/// å¹³ä»“ç›ˆäº
+		/// Æ½²ÖÓ¯¿÷
 		/// </summary>
 		double CloseProfit;
 		/// <summary>
-		/// æŒä»“ç›ˆäº
+		/// ³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double PositionProfit;
 		/// <summary>
-		/// æœŸè´§ç»“ç®—å‡†å¤‡é‡‘
+		/// ÆÚ»õ½áËã×¼±¸½ğ
 		/// </summary>
 		double Balance;
 		/// <summary>
-		/// å¯ç”¨èµ„é‡‘
+		/// ¿ÉÓÃ×Ê½ğ
 		/// </summary>
 		double Available;
 		/// <summary>
-		/// å¯å–èµ„é‡‘
+		/// ¿ÉÈ¡×Ê½ğ
 		/// </summary>
 		double WithdrawQuota;
 		/// <summary>
-		/// åŸºæœ¬å‡†å¤‡é‡‘
+		/// »ù±¾×¼±¸½ğ
 		/// </summary>
 		double Reserve;
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		/// ä¿¡ç”¨é¢åº¦
+		/// ĞÅÓÃ¶î¶È
 		/// </summary>
 		double Credit;
 		/// <summary>
-		/// è´¨æŠ¼é‡‘é¢
+		/// ÖÊÑº½ğ¶î
 		/// </summary>
 		double Mortgage;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä¿è¯é‡‘
+		/// ½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double ExchangeMargin;
 		/// <summary>
-		/// æŠ•èµ„è€…äº¤å‰²ä¿è¯é‡‘
+		/// Í¶×ÊÕß½»¸î±£Ö¤½ğ
 		/// </summary>
 		double DeliveryMargin;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤å‰²ä¿è¯é‡‘
+		/// ½»Ò×Ëù½»¸î±£Ö¤½ğ
 		/// </summary>
 		double ExchangeDeliveryMargin;
 		/// <summary>
-		///ä¿åº•æœŸè´§ç»“ç®—å‡†å¤‡é‡‘
+		///±£µ×ÆÚ»õ½áËã×¼±¸½ğ
 		/// </summary>
 		double	ReserveBalance;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	CurrencyID;
 		/// <summary>
-		///ä¸Šæ¬¡è´§å¸è´¨å…¥é‡‘é¢
+		///ÉÏ´Î»õ±ÒÖÊÈë½ğ¶î
 		/// </summary>
 		double	PreFundMortgageIn;
 		/// <summary>
-		///ä¸Šæ¬¡è´§å¸è´¨å‡ºé‡‘é¢
+		///ÉÏ´Î»õ±ÒÖÊ³ö½ğ¶î
 		/// </summary>
 		double	PreFundMortgageOut;
 		/// <summary>
-		///è´§å¸è´¨å…¥é‡‘é¢
+		///»õ±ÒÖÊÈë½ğ¶î
 		/// </summary>
 		double	FundMortgageIn;
 		/// <summary>
-		///è´§å¸è´¨å‡ºé‡‘é¢
+		///»õ±ÒÖÊ³ö½ğ¶î
 		/// </summary>
 		double	FundMortgageOut;
 		/// <summary>
-		///è´§å¸è´¨æŠ¼ä½™é¢
+		///»õ±ÒÖÊÑºÓà¶î
 		/// </summary>
 		double	FundMortgageAvailable;
 		/// <summary>
-		///å¯è´¨æŠ¼è´§å¸é‡‘é¢
+		///¿ÉÖÊÑº»õ±Ò½ğ¶î
 		/// </summary>
 		double	MortgageableFund;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“å ç”¨ä¿è¯é‡‘
+		///ÌØÊâ²úÆ·Õ¼ÓÃ±£Ö¤½ğ
 		/// </summary>
 		double	SpecProductMargin;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“å†»ç»“ä¿è¯é‡‘		
+		///ÌØÊâ²úÆ·¶³½á±£Ö¤½ğ		
 		/// </summary>
 		double	SpecProductFrozenMargin;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“æ‰‹ç»­è´¹
+		///ÌØÊâ²úÆ·ÊÖĞø·Ñ
 		/// </summary>
 		double	SpecProductCommission;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“å†»ç»“æ‰‹ç»­è´¹
+		///ÌØÊâ²úÆ·¶³½áÊÖĞø·Ñ
 		/// </summary>
 		double	SpecProductFrozenCommission;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“æŒä»“ç›ˆäº
+		///ÌØÊâ²úÆ·³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double	SpecProductPositionProfit;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“å¹³ä»“ç›ˆäº
+		///ÌØÊâ²úÆ·Æ½²ÖÓ¯¿÷
 		/// </summary>
 		double	SpecProductCloseProfit;
 		/// <summary>
-		///æ ¹æ®æŒä»“ç›ˆäºç®—æ³•è®¡ç®—çš„ç‰¹æ®Šäº§å“æŒä»“ç›ˆäº
+		///¸ù¾İ³Ö²ÖÓ¯¿÷Ëã·¨¼ÆËãµÄÌØÊâ²úÆ·³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double	SpecProductPositionProfitByAlg;
 		/// <summary>
-		///ç‰¹æ®Šäº§å“äº¤æ˜“æ‰€ä¿è¯é‡‘
+		///ÌØÊâ²úÆ·½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double	SpecProductExchangeMargin;
 	};
 
 	/// <summary>
-	/// æ­£åœ¨åŒæ­¥ä¸­çš„æŠ•èµ„è€…æŒä»“
+	/// ÕıÔÚÍ¬²½ÖĞµÄÍ¶×ÊÕß³Ö²Ö
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncingInvestorPositionField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// æŒä»“å¤šç©ºæ–¹å‘
+		/// ³Ö²Ö¶à¿Õ·½Ïò
 		/// </summary>
 		EnumPosiDirectionType PosiDirection;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// æŒä»“æ—¥æœŸ
+		/// ³Ö²ÖÈÕÆÚ
 		/// </summary>
 		EnumPositionDateType PositionDate;
 		/// <summary>
-		/// ä¸Šæ—¥æŒä»“
+		/// ÉÏÈÕ³Ö²Ö
 		/// </summary>
 		int YdPosition;
 		/// <summary>
-		/// ä»Šæ—¥æŒä»“
+		/// ½ñÈÕ³Ö²Ö
 		/// </summary>
 		int Position;
 		/// <summary>
-		/// å¤šå¤´å†»ç»“
+		/// ¶àÍ·¶³½á
 		/// </summary>
 		int LongFrozen;
 		/// <summary>
-		/// ç©ºå¤´å†»ç»“
+		/// ¿ÕÍ·¶³½á
 		/// </summary>
 		int ShortFrozen;
 		/// <summary>
-		/// å¼€ä»“å†»ç»“é‡‘é¢
+		/// ¿ª²Ö¶³½á½ğ¶î
 		/// </summary>
 		double LongFrozenAmount;
 		/// <summary>
-		/// å¼€ä»“å†»ç»“é‡‘é¢
+		/// ¿ª²Ö¶³½á½ğ¶î
 		/// </summary>
 		double ShortFrozenAmount;
 		/// <summary>
-		/// å¼€ä»“é‡
+		/// ¿ª²ÖÁ¿
 		/// </summary>
 		int OpenVolume;
 		/// <summary>
-		/// å¹³ä»“é‡
+		/// Æ½²ÖÁ¿
 		/// </summary>
 		int CloseVolume;
 		/// <summary>
-		/// å¼€ä»“é‡‘é¢
+		/// ¿ª²Ö½ğ¶î
 		/// </summary>
 		double OpenAmount;
 		/// <summary>
-		/// å¹³ä»“é‡‘é¢
+		/// Æ½²Ö½ğ¶î
 		/// </summary>
 		double CloseAmount;
 		/// <summary>
-		/// æŒä»“æˆæœ¬
+		/// ³Ö²Ö³É±¾
 		/// </summary>
 		double PositionCost;
 		/// <summary>
-		/// ä¸Šæ¬¡å ç”¨çš„ä¿è¯é‡‘
+		/// ÉÏ´ÎÕ¼ÓÃµÄ±£Ö¤½ğ
 		/// </summary>
 		double PreMargin;
 		/// <summary>
-		/// å ç”¨çš„ä¿è¯é‡‘
+		/// Õ¼ÓÃµÄ±£Ö¤½ğ
 		/// </summary>
 		double UseMargin;
 		/// <summary>
-		/// å†»ç»“çš„ä¿è¯é‡‘
+		/// ¶³½áµÄ±£Ö¤½ğ
 		/// </summary>
 		double FrozenMargin;
 		/// <summary>
-		/// å†»ç»“çš„èµ„é‡‘
+		/// ¶³½áµÄ×Ê½ğ
 		/// </summary>
 		double FrozenCash;
 		/// <summary>
-		/// å†»ç»“çš„æ‰‹ç»­è´¹
+		/// ¶³½áµÄÊÖĞø·Ñ
 		/// </summary>
 		double FrozenCommission;
 		/// <summary>
-		/// èµ„é‡‘å·®é¢
+		/// ×Ê½ğ²î¶î
 		/// </summary>
 		double CashIn;
 		/// <summary>
-		/// æ‰‹ç»­è´¹
+		/// ÊÖĞø·Ñ
 		/// </summary>
 		double Commission;
 		/// <summary>
-		/// å¹³ä»“ç›ˆäº
+		/// Æ½²ÖÓ¯¿÷
 		/// </summary>
 		double CloseProfit;
 		/// <summary>
-		/// æŒä»“ç›ˆäº
+		/// ³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double PositionProfit;
 		/// <summary>
-		/// ä¸Šæ¬¡ç»“ç®—ä»·
+		/// ÉÏ´Î½áËã¼Û
 		/// </summary>
 		double PreSettlementPrice;
 		/// <summary>
-		/// æœ¬æ¬¡ç»“ç®—ä»·
+		/// ±¾´Î½áËã¼Û
 		/// </summary>
 		double SettlementPrice;
 		/// <summary>
-		/// äº¤æ˜“æ—¥
+		/// ½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		/// ç»“ç®—ç¼–å·
+		/// ½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		/// å¼€ä»“æˆæœ¬
+		/// ¿ª²Ö³É±¾
 		/// </summary>
 		double OpenCost;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä¿è¯é‡‘
+		/// ½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double ExchangeMargin;
 		/// <summary>
-		/// ç»„åˆæˆäº¤å½¢æˆçš„æŒä»“
+		/// ×éºÏ³É½»ĞÎ³ÉµÄ³Ö²Ö
 		/// </summary>
 		int CombPosition;
 		/// <summary>
-		/// ç»„åˆå¤šå¤´å†»ç»“
+		/// ×éºÏ¶àÍ·¶³½á
 		/// </summary>
 		int CombLongFrozen;
 		/// <summary>
-		/// ç»„åˆç©ºå¤´å†»ç»“
+		/// ×éºÏ¿ÕÍ·¶³½á
 		/// </summary>
 		int CombShortFrozen;
 		/// <summary>
-		/// é€æ—¥ç›¯å¸‚å¹³ä»“ç›ˆäº
+		/// ÖğÈÕ¶¢ÊĞÆ½²ÖÓ¯¿÷
 		/// </summary>
 		double CloseProfitByDate;
 		/// <summary>
-		/// é€ç¬”å¯¹å†²å¹³ä»“ç›ˆäº
+		/// Öğ±Ê¶Ô³åÆ½²ÖÓ¯¿÷
 		/// </summary>
 		double CloseProfitByTrade;
 		/// <summary>
-		/// ä»Šæ—¥æŒä»“
+		/// ½ñÈÕ³Ö²Ö
 		/// </summary>
 		int TodayPosition;
 		/// <summary>
-		/// ä¿è¯é‡‘ç‡
+		/// ±£Ö¤½ğÂÊ
 		/// </summary>
 		double MarginRateByMoney;
 		/// <summary>
-		/// ä¿è¯é‡‘ç‡(æŒ‰æ‰‹æ•°)
+		/// ±£Ö¤½ğÂÊ(°´ÊÖÊı)
 		/// </summary>
 		double MarginRateByVolume;
 		/// <summary>
-		///æ‰§è¡Œå†»ç»“
+		///Ö´ĞĞ¶³½á
 		/// </summary>
 		int	StrikeFrozen;
 		/// <summary>
-		///æ‰§è¡Œå†»ç»“é‡‘é¢
+		///Ö´ĞĞ¶³½á½ğ¶î
 		/// </summary>
 		double	StrikeFrozenAmount;
 		/// <summary>
-		///æ”¾å¼ƒæ‰§è¡Œå†»ç»“
+		///·ÅÆúÖ´ĞĞ¶³½á
 		/// </summary>
 		int	AbandonFrozen;
 	};
 
 	/// <summary>
-	/// æ­£åœ¨åŒæ­¥ä¸­çš„åˆçº¦ä¿è¯é‡‘ç‡
+	/// ÕıÔÚÍ¬²½ÖĞµÄºÏÔ¼±£Ö¤½ğÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncingInstrumentMarginRateField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
+		/// Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		/// Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘ç‡
+		/// ¶àÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double LongMarginRatioByMoney;
 		/// <summary>
-		/// å¤šå¤´ä¿è¯é‡‘è´¹
+		/// ¶àÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double LongMarginRatioByVolume;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘ç‡
+		/// ¿ÕÍ·±£Ö¤½ğÂÊ
 		/// </summary>
 		double ShortMarginRatioByMoney;
 		/// <summary>
-		/// ç©ºå¤´ä¿è¯é‡‘è´¹
+		/// ¿ÕÍ·±£Ö¤½ğ·Ñ
 		/// </summary>
 		double ShortMarginRatioByVolume;
 		/// <summary>
-		/// æ˜¯å¦ç›¸å¯¹äº¤æ˜“æ‰€æ”¶å–
+		/// ÊÇ·ñÏà¶Ô½»Ò×ËùÊÕÈ¡
 		/// </summary>
 		int IsRelative;
 	};
 
 	/// <summary>
-	/// æ­£åœ¨åŒæ­¥ä¸­çš„åˆçº¦æ‰‹ç»­è´¹ç‡
+	/// ÕıÔÚÍ¬²½ÖĞµÄºÏÔ¼ÊÖĞø·ÑÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncingInstrumentCommissionRateField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
+		/// Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// å¼€ä»“æ‰‹ç»­è´¹ç‡
+		/// ¿ª²ÖÊÖĞø·ÑÂÊ
 		/// </summary>
 		double OpenRatioByMoney;
 		/// <summary>
-		/// å¼€ä»“æ‰‹ç»­è´¹
+		/// ¿ª²ÖÊÖĞø·Ñ
 		/// </summary>
 		double OpenRatioByVolume;
 		/// <summary>
-		/// å¹³ä»“æ‰‹ç»­è´¹ç‡
+		/// Æ½²ÖÊÖĞø·ÑÂÊ
 		/// </summary>
 		double CloseRatioByMoney;
 		/// <summary>
-		/// å¹³ä»“æ‰‹ç»­è´¹
+		/// Æ½²ÖÊÖĞø·Ñ
 		/// </summary>
 		double CloseRatioByVolume;
 		/// <summary>
-		/// å¹³ä»Šæ‰‹ç»­è´¹ç‡
+		/// Æ½½ñÊÖĞø·ÑÂÊ
 		/// </summary>
 		double CloseTodayRatioByMoney;
 		/// <summary>
-		/// å¹³ä»Šæ‰‹ç»­è´¹
+		/// Æ½½ñÊÖĞø·Ñ
 		/// </summary>
 		double CloseTodayRatioByVolume;
 	};
 
 	/// <summary>
-	/// æ­£åœ¨åŒæ­¥ä¸­çš„åˆçº¦äº¤æ˜“æƒé™
+	/// ÕıÔÚÍ¬²½ÖĞµÄºÏÔ¼½»Ò×È¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcSyncingInstrumentTradingRightField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
+		/// Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// äº¤æ˜“æƒé™
+		/// ½»Ò×È¨ÏŞ
 		/// </summary>
 		EnumTradingRightType TradingRight;
 	};
+	/// <summary>
+	/// ²éÑ¯Í¶×ÊÕß³Ö²Ö
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryInvestorPositionField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+	};
 
 	/// <summary>
-	/// æŸ¥è¯¢æŠ¥å•
+	/// ²éÑ¯×Ê½ğÕË»§
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryTradingAccountField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯Í¶×ÊÕß
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryInvestorField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×±àÂë
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryTradingCodeField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+		/// <summary>
+		/// ¿Í»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ClientID;
+		/// <summary>
+		/// ½»Ò×±àÂëÀàĞÍ
+		/// </summary>
+		EnumClientIDTypeType ClientIDType;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×±àÂë
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryInvestorGroupField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×±àÂë
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryInstrumentMarginRateField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		/// Í¶»úÌ×±£±êÖ¾
+		/// </summary>
+		EnumHedgeFlagType HedgeFlag;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×±àÂë
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryInstrumentCommissionRateField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×±àÂë
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryInstrumentTradingRightField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯¾­¼Í¹«Ë¾
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryBrokerField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×Ô±
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryTraderField
+	{
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+		/// <summary>
+		/// »áÔ±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ParticipantID;
+		/// <summary>
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ TraderID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯¾­¼Í¹«Ë¾»áÔ±´úÂë
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryPartBrokerField
+	{
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// »áÔ±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ParticipantID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯¹ÜÀíÓÃ»§¹¦ÄÜÈ¨ÏŞ
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQrySuperUserFunctionField
+	{
+		/// <summary>
+		/// ÓÃ»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯ÓÃ»§»á»°
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryUserSessionField
+	{
+		/// <summary>
+		/// Ç°ÖÃ±àºÅ
+		/// </summary>
+		int FrontID;
+		/// <summary>
+		/// »á»°±àºÅ
+		/// </summary>
+		int SessionID;
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// ÓÃ»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯Ç°ÖÃ×´Ì¬
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryFrontStatusField
+	{
+		/// <summary>
+		/// Ç°ÖÃ±àºÅ
+		/// </summary>
+		int FrontID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×Ëù±¨µ¥
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryExchangeOrderField
+	{
+		/// <summary>
+		/// »áÔ±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ParticipantID;
+		/// <summary>
+		/// ¿Í»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ClientID;
+		/// <summary>
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+		/// <summary>
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ TraderID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯±¨µ¥²Ù×÷
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryOrderActionField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×Ëù±¨µ¥²Ù×÷
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryExchangeOrderActionField
+	{
+		/// <summary>
+		/// »áÔ±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ParticipantID;
+		/// <summary>
+		/// ¿Í»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ClientID;
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+		/// <summary>
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ TraderID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯¹ÜÀíÓÃ»§
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQrySuperUserField
+	{
+		/// <summary>
+		/// ÓÃ»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×Ëù
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryExchangeField
+	{
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯²úÆ·
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryProductField
+	{
+		/// <summary>
+		/// ²úÆ·´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ProductID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯ºÏÔ¼
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryInstrumentField
+	{
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+		/// <summary>
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ExchangeInstID;
+		/// <summary>
+		/// ²úÆ·´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ProductID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯ĞĞÇé
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryDepthMarketDataField
+	{
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯¾­¼Í¹«Ë¾ÓÃ»§
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryBrokerUserField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// ÓÃ»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯¾­¼Í¹«Ë¾ÓÃ»§È¨ÏŞ
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryBrokerUserFunctionField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// ÓÃ»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯½»Ò×Ô±±¨ÅÌ»ú
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryTraderOfferField
+	{
+		/// <summary>
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+		/// <summary>
+		/// »áÔ±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ParticipantID;
+		/// <summary>
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ TraderID;
+	};
+
+	/// <summary>
+	/// ²éÑ¯³öÈë½ğÁ÷Ë®
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQrySyncDepositField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// ³öÈë½ğÁ÷Ë®ºÅ
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 15)]
+		String^ DepositSeqNo;
+	};
+
+	/// <summary>
+	/// ²éÑ¯Í¶×ÊÕß½áËã½á¹û
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQrySettlementInfoField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ½»Ò×ÈÕ
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
+	};
+	/// <summary>
+	/// ²éÑ¯±¨µ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcQryOrderField
 	{
 		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// æŠ¥å•ç¼–å·
+		/// ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		/// å¼€å§‹æ—¶é—´
+		/// ¿ªÊ¼Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeStart;
 		/// <summary>
-		/// ç»“æŸæ—¶é—´
+		/// ½áÊøÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeEnd;
 	};
 	/// <summary>
-	///å½“å‰æœŸæƒåˆçº¦æœ€å°ä¿è¯é‡‘
+	///²éÑ¯³É½»
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcOptionInstrMiniMarginField
+	public ref struct ThostFtdcQryTradeField
 	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^ InstrumentID;
-		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
-		/// </summary>
-		EnumInvestorRangeType InvestorRange;
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^ InvestorID;
-		/// <summary>
-		///å•ä½ï¼ˆæ‰‹ï¼‰æœŸæƒåˆçº¦æœ€å°ä¿è¯é‡‘
-		/// </summary>
-		double	MinMargin;
-		/// <summary>
-		///å–å€¼æ–¹å¼
-		/// </summary>
-		EnumValueMethodType	ValueMethod;
-		/// <summary>
-		///æ˜¯å¦è·Ÿéšäº¤æ˜“æ‰€æ”¶å–
-		/// </summary>
-		int	IsRelative;
-	};
-	/// <summary>
-	///å½“å‰æœŸæƒåˆçº¦ä¿è¯é‡‘è°ƒæ•´ç³»æ•°	
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcOptionInstrMarginAdjustField
-	{
-		/// <summary>
-		///åˆçº¦ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^	InstrumentID;
-		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
-		/// </summary>
-		EnumInvestorRangeType	InvestorRange;
-		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	InvestorID;
 		/// <summary>
-		///æŠ•æœºç©ºå¤´ä¿è¯é‡‘è°ƒæ•´ç³»æ•°
-		/// </summary>
-		double	SShortMarginRatioByMoney;
-		/// <summary>
-		///æŠ•æœºç©ºå¤´ä¿è¯é‡‘è°ƒæ•´ç³»æ•°
-		/// </summary>
-		double	SShortMarginRatioByVolume;
-		/// <summary>
-		///ä¿å€¼ç©ºå¤´ä¿è¯é‡‘è°ƒæ•´ç³»æ•°
-		/// </summary>
-		double	HShortMarginRatioByMoney;
-		/// <summary>
-		///ä¿å€¼ç©ºå¤´ä¿è¯é‡‘è°ƒæ•´ç³»æ•°
-		/// </summary>
-		double	HShortMarginRatioByVolume;
-		/// <summary>
-		///å¥—åˆ©ç©ºå¤´ä¿è¯é‡‘è°ƒæ•´ç³»æ•°
-		/// </summary>
-		double	AShortMarginRatioByMoney;
-		/// <summary>
-		///å¥—åˆ©ç©ºå¤´ä¿è¯é‡‘è°ƒæ•´ç³»æ•°
-		/// </summary>
-		double	AShortMarginRatioByVolume;
-		/// <summary>
-		///æ˜¯å¦è·Ÿéšäº¤æ˜“æ‰€æ”¶å–
-		/// </summary>
-		int	IsRelative;
-		/// <summary>
-		///åšå¸‚å•†ç©ºå¤´ä¿è¯é‡‘è°ƒæ•´ç³»æ•°
-		/// </summary>
-		double	MShortMarginRatioByMoney;
-		/// <summary>
-		///åšå¸‚å•†ç©ºå¤´ä¿è¯é‡‘è°ƒæ•´ç³»æ•°
-		/// </summary>
-		double	MShortMarginRatioByVolume;
-	};
-	/// <summary>
-	///å½“å‰æœŸæƒåˆçº¦æ‰‹ç»­è´¹çš„è¯¦ç»†å†…å®¹
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcOptionInstrCommRateField
-	{
-		/// <summary>
-		/// åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^ InstrumentID;
+		String^	InstrumentID;
 		/// <summary>
-		/// æŠ•èµ„è€…èŒƒå›´
-		/// </summary>
-		EnumInvestorRangeType InvestorRange;
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		double OpenRatioByMoney;
-		/// <summary>
-		/// å¼€ä»“æ‰‹ç»­è´¹
-		/// </summary>
-		double OpenRatioByVolume;
-		/// <summary>
-		/// å¹³ä»“æ‰‹ç»­è´¹ç‡
-		/// </summary>
-		double CloseRatioByMoney;
-		/// <summary>
-		/// å¹³ä»“æ‰‹ç»­è´¹
-		/// </summary>
-		double CloseRatioByVolume;
-		/// <summary>
-		/// å¹³ä»Šæ‰‹ç»­è´¹ç‡
-		/// </summary>
-		double CloseTodayRatioByMoney;
-		/// <summary>
-		/// å¹³ä»Šæ‰‹ç»­è´¹
-		/// </summary>
-		double CloseTodayRatioByVolume;
-		/// <summary>
-		///æ‰§è¡Œæ‰‹ç»­è´¹ç‡
-		/// </summary>
-		double	StrikeRatioByMoney;
-		/// <summary>
-		///æ‰§è¡Œæ‰‹ç»­è´¹
-		/// </summary>
-		double	StrikeRatioByVolume;
-	};
-	/// <summary>
-	///æœŸæƒäº¤æ˜“æˆæœ¬
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcOptionInstrTradeCostField
-	{
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^ InvestorID;
-		/// <summary>
-		/// åˆçº¦ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^ InstrumentID;
-		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
-		/// </summary>
-		EnumHedgeFlagType HedgeFlag;
-		/// <summary>
-		///æœŸæƒåˆçº¦ä¿è¯é‡‘ä¸å˜éƒ¨åˆ†
-		/// </summary>
-		double	FixedMargin;
-		/// <summary>
-		///æœŸæƒåˆçº¦æœ€å°ä¿è¯é‡‘
-		/// </summary>
-		double	MiniMargin;
-		/// <summary>
-		///æœŸæƒåˆçº¦æƒåˆ©é‡‘
-		/// </summary>
-		double	Royalty;
-		/// <summary>
-		///äº¤æ˜“æ‰€æœŸæƒåˆçº¦ä¿è¯é‡‘ä¸å˜éƒ¨åˆ†
-		/// </summary>
-		double	ExchFixedMargin;
-		/// <summary>
-		///äº¤æ˜“æ‰€æœŸæƒåˆçº¦æœ€å°ä¿è¯é‡‘
-		/// </summary>
-		double	ExchMiniMargin;
-	};
-	/// <summary>
-	///æœŸæƒäº¤æ˜“æˆæœ¬æŸ¥è¯¢
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryOptionInstrTradeCostField
-	{
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^ InvestorID;
-		/// <summary>
-		/// åˆçº¦ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^ InstrumentID;
-		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
-		/// </summary>
-		EnumHedgeFlagType HedgeFlag;
-		/// <summary>
-		///æœŸæƒåˆçº¦æŠ¥ä»·
-		/// </summary>
-		double	InputPrice;
-		/// <summary>
-		///æ ‡çš„ä»·æ ¼,å¡«0åˆ™ç”¨æ˜¨ç»“ç®—ä»·
-		/// </summary>
-		double	UnderlyingPrice;
-	};
-	/// <summary>
-	///æœŸæƒæ‰‹ç»­è´¹ç‡æŸ¥è¯¢
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryOptionInstrCommRateField
-	{
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^ InvestorID;
-		/// <summary>
-		/// åˆçº¦ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^ InstrumentID;
-	};
-	/// <summary>
-	///è‚¡æŒ‡ç°è´§æŒ‡æ•°
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcIndexPriceField
-	{
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		/// åˆçº¦ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^ InstrumentID;
-		/// <summary>
-		///æŒ‡æ•°ç°è´§æ”¶ç›˜ä»·
-		/// </summary>
-		double	ClosePrice;
-	};
-	/// <summary>
-	///è¾“å…¥çš„æ‰§è¡Œå®£å‘Š
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInputExecOrderField
-	{
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^ InvestorID;
-		/// <summary>
-		/// åˆçº¦ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^ InstrumentID;
-		/// <summary>
-		///æ‰§è¡Œå®£å‘Šå¼•ç”¨
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^	ExecOrderRef;
-		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
-		String^ UserID;
-		/// <summary>
-		///æ•°é‡
-		/// </summary>
-		int	Volume;
-		int SessionID;
-		/// <summary>
-		/// è¯·æ±‚ç¼–å·
-		/// </summary>
-		int RequestID;
-		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ BusinessUnit;
-		/// <summary>
-		///å¼€å¹³æ ‡å¿—
-		/// </summary>
-		EnumOffsetFlagType	OffsetFlag;
-		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
-		/// </summary>
-		EnumHedgeFlagType	HedgeFlag;
-		/// <summary>
-		///æ‰§è¡Œç±»å‹
-		/// </summary>
-		EnumActionTypeType	ActionType;
-		/// <summary>
-		///ä¿ç•™å¤´å¯¸ç”³è¯·çš„æŒä»“æ–¹å‘
-		/// </summary>
-		EnumPosiDirectionType	PosiDirection;
-		/// <summary>
-		///æœŸæƒè¡Œæƒåæ˜¯å¦ä¿ç•™æœŸè´§å¤´å¯¸çš„æ ‡è®°
-		/// </summary>
-		EnumExecOrderPositionFlagType	ReservePositionFlag;
-		/// <summary>
-		///æœŸæƒè¡Œæƒåç”Ÿæˆçš„å¤´å¯¸æ˜¯å¦è‡ªåŠ¨å¹³ä»“
-		/// </summary>
-		EnumExecOrderCloseFlagType	CloseFlag;
-		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
-		String^ ExchangeID;
-		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
-		String^	InvestUnitID;
-		/// <summary>
-		///èµ„é‡‘è´¦å·
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^	AccountID;
-		/// <summary>
-		///å¸ç§ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
-		String^	CurrencyID;
-		/// <summary>
-		///äº¤æ˜“ç¼–ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^	ClientID;
-		/// <summary>
-		///IPåœ°å€
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
-		String^	IPAddress;
-		/// <summary>
-		///Macåœ°å€
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^	MacAddress;
-	};
-	/// <summary>
-	///è¾“å…¥æ‰§è¡Œå®£å‘Šæ“ä½œ
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInputExecOrderActionField
-	{
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^ InvestorID;
-		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæ“ä½œå¼•ç”¨
-		/// </summary>
-		int	ExecOrderActionRef;
-		/// <summary>
-		///æ‰§è¡Œå®£å‘Šå¼•ç”¨
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		String^	ExecOrderRef;
-		/// <summary>
-		/// ä¼šè¯ç¼–å·
-		/// </summary>
-		int SessionID;
-		/// <summary>
-		/// è¯·æ±‚ç¼–å·
-		/// </summary>
-		int RequestID;
-		/// <summary>
-		///å‰ç½®ç¼–å·
-		/// </summary>
-		int	FrontID;
-		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	ExchangeID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæ“ä½œç¼–å·
+		///³É½»±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^	ExecOrderSysID;
+		String^	TradeID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///¿ªÊ¼Ê±¼ä
 		/// </summary>
-		EnumActionFlagType	ActionFlag;
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	TradeTimeStart;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		///½áÊøÊ±¼ä
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
-		String^ UserID;
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	TradeTimeEnd;
+	};
+	/// <summary>
+	///µ±Ç°ÆÚÈ¨ºÏÔ¼×îĞ¡±£Ö¤½ğ
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcOptionInstrMiniMarginField
+	{
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		/// Í¶×ÊÕß·¶Î§
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
-		String^	InvestUnitID;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///IPåœ°å€
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
-		String^	IPAddress;
-		/// <summary>
-		///Macåœ°å€
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^	MacAddress;
-	};
-	/// <summary>
-	///æ‰§è¡Œå®£å‘Š
-	/// </summary>
-	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcExecOrderField
-	{
-		/// <summary>
-		/// ç»çºªå…¬å¸ä»£ç 
+		/// ¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		/// æŠ•èµ„è€…ä»£ç 
+		/// Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		/// åˆçº¦ä»£ç 
+		///µ¥Î»£¨ÊÖ£©ÆÚÈ¨ºÏÔ¼×îĞ¡±£Ö¤½ğ
+		/// </summary>
+		double	MinMargin;
+		/// <summary>
+		///È¡Öµ·½Ê½
+		/// </summary>
+		EnumValueMethodType	ValueMethod;
+		/// <summary>
+		///ÊÇ·ñ¸úËæ½»Ò×ËùÊÕÈ¡
+		/// </summary>
+		int	IsRelative;
+	};
+	/// <summary>
+	///µ±Ç°ÆÚÈ¨ºÏÔ¼±£Ö¤½ğµ÷ÕûÏµÊı	
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcOptionInstrMarginAdjustField
+	{
+		/// <summary>
+		///ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^	InstrumentID;
+		/// <summary>
+		///Í¶×ÊÕß·¶Î§
+		/// </summary>
+		EnumInvestorRangeType	InvestorRange;
+		/// <summary>
+		///¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^	BrokerID;
+		/// <summary>
+		///Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	InvestorID;
+		/// <summary>
+		///Í¶»ú¿ÕÍ·±£Ö¤½ğµ÷ÕûÏµÊı
+		/// </summary>
+		double	SShortMarginRatioByMoney;
+		/// <summary>
+		///Í¶»ú¿ÕÍ·±£Ö¤½ğµ÷ÕûÏµÊı
+		/// </summary>
+		double	SShortMarginRatioByVolume;
+		/// <summary>
+		///±£Öµ¿ÕÍ·±£Ö¤½ğµ÷ÕûÏµÊı
+		/// </summary>
+		double	HShortMarginRatioByMoney;
+		/// <summary>
+		///±£Öµ¿ÕÍ·±£Ö¤½ğµ÷ÕûÏµÊı
+		/// </summary>
+		double	HShortMarginRatioByVolume;
+		/// <summary>
+		///Ì×Àû¿ÕÍ·±£Ö¤½ğµ÷ÕûÏµÊı
+		/// </summary>
+		double	AShortMarginRatioByMoney;
+		/// <summary>
+		///Ì×Àû¿ÕÍ·±£Ö¤½ğµ÷ÕûÏµÊı
+		/// </summary>
+		double	AShortMarginRatioByVolume;
+		/// <summary>
+		///ÊÇ·ñ¸úËæ½»Ò×ËùÊÕÈ¡
+		/// </summary>
+		int	IsRelative;
+		/// <summary>
+		///×öÊĞÉÌ¿ÕÍ·±£Ö¤½ğµ÷ÕûÏµÊı
+		/// </summary>
+		double	MShortMarginRatioByMoney;
+		/// <summary>
+		///×öÊĞÉÌ¿ÕÍ·±£Ö¤½ğµ÷ÕûÏµÊı
+		/// </summary>
+		double	MShortMarginRatioByVolume;
+	};
+	/// <summary>
+	///µ±Ç°ÆÚÈ¨ºÏÔ¼ÊÖĞø·ÑµÄÏêÏ¸ÄÚÈİ
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcOptionInstrCommRateField
+	{
+		/// <summary>
+		/// ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šå¼•ç”¨
+		/// Í¶×ÊÕß·¶Î§
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		double OpenRatioByMoney;
+		/// <summary>
+		/// ¿ª²ÖÊÖĞø·Ñ
+		/// </summary>
+		double OpenRatioByVolume;
+		/// <summary>
+		/// Æ½²ÖÊÖĞø·ÑÂÊ
+		/// </summary>
+		double CloseRatioByMoney;
+		/// <summary>
+		/// Æ½²ÖÊÖĞø·Ñ
+		/// </summary>
+		double CloseRatioByVolume;
+		/// <summary>
+		/// Æ½½ñÊÖĞø·ÑÂÊ
+		/// </summary>
+		double CloseTodayRatioByMoney;
+		/// <summary>
+		/// Æ½½ñÊÖĞø·Ñ
+		/// </summary>
+		double CloseTodayRatioByVolume;
+		/// <summary>
+		///Ö´ĞĞÊÖĞø·ÑÂÊ
+		/// </summary>
+		double	StrikeRatioByMoney;
+		/// <summary>
+		///Ö´ĞĞÊÖĞø·Ñ
+		/// </summary>
+		double	StrikeRatioByVolume;
+	};
+	/// <summary>
+	///ÆÚÈ¨½»Ò×³É±¾
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcOptionInstrTradeCostField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		/// Í¶»úÌ×±£±êÖ¾
+		/// </summary>
+		EnumHedgeFlagType HedgeFlag;
+		/// <summary>
+		///ÆÚÈ¨ºÏÔ¼±£Ö¤½ğ²»±ä²¿·Ö
+		/// </summary>
+		double	FixedMargin;
+		/// <summary>
+		///ÆÚÈ¨ºÏÔ¼×îĞ¡±£Ö¤½ğ
+		/// </summary>
+		double	MiniMargin;
+		/// <summary>
+		///ÆÚÈ¨ºÏÔ¼È¨Àû½ğ
+		/// </summary>
+		double	Royalty;
+		/// <summary>
+		///½»Ò×ËùÆÚÈ¨ºÏÔ¼±£Ö¤½ğ²»±ä²¿·Ö
+		/// </summary>
+		double	ExchFixedMargin;
+		/// <summary>
+		///½»Ò×ËùÆÚÈ¨ºÏÔ¼×îĞ¡±£Ö¤½ğ
+		/// </summary>
+		double	ExchMiniMargin;
+	};
+	/// <summary>
+	///ÆÚÈ¨½»Ò×³É±¾²éÑ¯
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryOptionInstrTradeCostField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		/// Í¶»úÌ×±£±êÖ¾
+		/// </summary>
+		EnumHedgeFlagType HedgeFlag;
+		/// <summary>
+		///ÆÚÈ¨ºÏÔ¼±¨¼Û
+		/// </summary>
+		double	InputPrice;
+		/// <summary>
+		///±êµÄ¼Û¸ñ,Ìî0ÔòÓÃ×ò½áËã¼Û
+		/// </summary>
+		double	UnderlyingPrice;
+	};
+	/// <summary>
+	///ÆÚÈ¨ÊÖĞø·ÑÂÊ²éÑ¯
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcQryOptionInstrCommRateField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+	};
+	/// <summary>
+	///¹ÉÖ¸ÏÖ»õÖ¸Êı
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcIndexPriceField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		///Ö¸ÊıÏÖ»õÊÕÅÌ¼Û
+		/// </summary>
+		double	ClosePrice;
+	};
+	/// <summary>
+	///ÊäÈëµÄÖ´ĞĞĞû¸æ
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcInputExecOrderField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		///Ö´ĞĞĞû¸æÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	ExecOrderRef;
 		/// <summary>
-		/// ç”¨æˆ·ä»£ç 
+		/// ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		/// æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
-		int VolumeTotalOriginal;
+		int	Volume;
+		int SessionID;
 		/// <summary>
-		/// è¯·æ±‚ç¼–å·
+		/// ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		/// ä¸šåŠ¡å•å…ƒ
+		/// ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		/// å¼€å¹³æ ‡å¿—
+		///¿ªÆ½±êÖ¾
 		/// </summary>
-		EnumOffsetFlagType OffsetFlag;
+		EnumOffsetFlagType	OffsetFlag;
 		/// <summary>
-		/// æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
-		EnumHedgeFlagType HedgeFlag;
+		EnumHedgeFlagType	HedgeFlag;
 		/// <summary>
-		///æ‰§è¡Œç±»å‹
+		///Ö´ĞĞÀàĞÍ
 		/// </summary>
 		EnumActionTypeType	ActionType;
 		/// <summary>
-		///ä¿ç•™å¤´å¯¸ç”³è¯·çš„æŒä»“æ–¹å‘
+		///±£ÁôÍ·´çÉêÇëµÄ³Ö²Ö·½Ïò
 		/// </summary>
 		EnumPosiDirectionType	PosiDirection;
 		/// <summary>
-		///æœŸæƒè¡Œæƒåæ˜¯å¦ä¿ç•™æœŸè´§å¤´å¯¸çš„æ ‡è®°
+		///ÆÚÈ¨ĞĞÈ¨ºóÊÇ·ñ±£ÁôÆÚ»õÍ·´çµÄ±ê¼Ç
 		/// </summary>
 		EnumExecOrderPositionFlagType	ReservePositionFlag;
 		/// <summary>
-		///æœŸæƒè¡Œæƒåç”Ÿæˆçš„å¤´å¯¸æ˜¯å¦è‡ªåŠ¨å¹³ä»“
+		///ÆÚÈ¨ĞĞÈ¨ºóÉú³ÉµÄÍ·´çÊÇ·ñ×Ô¶¯Æ½²Ö
 		/// </summary>
 		EnumExecOrderCloseFlagType	CloseFlag;
 		/// <summary>
-		///æœ¬åœ°æ‰§è¡Œå®£å‘Šç¼–å·
+		/// ½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ExchangeID;
+		/// <summary>
+		///Í¶×Êµ¥Ôª´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^	InvestUnitID;
+		/// <summary>
+		///×Ê½ğÕËºÅ
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	AccountID;
+		/// <summary>
+		///±ÒÖÖ´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
+		String^	CurrencyID;
+		/// <summary>
+		///½»Ò×±àÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^	ClientID;
+		/// <summary>
+		///IPµØÖ·
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^	IPAddress;
+		/// <summary>
+		///MacµØÖ·
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	MacAddress;
+	};
+	/// <summary>
+	///ÊäÈëÖ´ĞĞĞû¸æ²Ù×÷
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcInputExecOrderActionField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		///Ö´ĞĞĞû¸æ²Ù×÷ÒıÓÃ
+		/// </summary>
+		int	ExecOrderActionRef;
+		/// <summary>
+		///Ö´ĞĞĞû¸æÒıÓÃ
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	ExecOrderRef;
+		/// <summary>
+		/// »á»°±àºÅ
+		/// </summary>
+		int SessionID;
+		/// <summary>
+		/// ÇëÇó±àºÅ
+		/// </summary>
+		int RequestID;
+		/// <summary>
+		///Ç°ÖÃ±àºÅ
+		/// </summary>
+		int	FrontID;
+		/// <summary>
+		///½»Ò×Ëù´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	ExchangeID;
+		/// <summary>
+		///Ö´ĞĞĞû¸æ²Ù×÷±àºÅ
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	ExecOrderSysID;
+		/// <summary>
+		///²Ù×÷±êÖ¾
+		/// </summary>
+		EnumActionFlagType	ActionFlag;
+		/// <summary>
+		/// ÓÃ»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		///Í¶×Êµ¥Ôª´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^	InvestUnitID;
+		/// <summary>
+		///IPµØÖ·
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^	IPAddress;
+		/// <summary>
+		///MacµØÖ·
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	MacAddress;
+	};
+	/// <summary>
+	///Ö´ĞĞĞû¸æ
+	/// </summary>
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct ThostFtdcExecOrderField
+	{
+		/// <summary>
+		/// ¾­¼Í¹«Ë¾´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ BrokerID;
+		/// <summary>
+		/// Í¶×ÊÕß´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ InvestorID;
+		/// <summary>
+		/// ºÏÔ¼´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ InstrumentID;
+		/// <summary>
+		///Ö´ĞĞĞû¸æÒıÓÃ
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	ExecOrderRef;
+		/// <summary>
+		/// ÓÃ»§´úÂë
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
+		/// <summary>
+		/// ÊıÁ¿
+		/// </summary>
+		int VolumeTotalOriginal;
+		/// <summary>
+		/// ÇëÇó±àºÅ
+		/// </summary>
+		int RequestID;
+		/// <summary>
+		/// ÒµÎñµ¥Ôª
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ BusinessUnit;
+		/// <summary>
+		/// ¿ªÆ½±êÖ¾
+		/// </summary>
+		EnumOffsetFlagType OffsetFlag;
+		/// <summary>
+		/// Í¶»úÌ×±£±êÖ¾
+		/// </summary>
+		EnumHedgeFlagType HedgeFlag;
+		/// <summary>
+		///Ö´ĞĞÀàĞÍ
+		/// </summary>
+		EnumActionTypeType	ActionType;
+		/// <summary>
+		///±£ÁôÍ·´çÉêÇëµÄ³Ö²Ö·½Ïò
+		/// </summary>
+		EnumPosiDirectionType	PosiDirection;
+		/// <summary>
+		///ÆÚÈ¨ĞĞÈ¨ºóÊÇ·ñ±£ÁôÆÚ»õÍ·´çµÄ±ê¼Ç
+		/// </summary>
+		EnumExecOrderPositionFlagType	ReservePositionFlag;
+		/// <summary>
+		///ÆÚÈ¨ĞĞÈ¨ºóÉú³ÉµÄÍ·´çÊÇ·ñ×Ô¶¯Æ½²Ö
+		/// </summary>
+		EnumExecOrderCloseFlagType	CloseFlag;
+		/// <summary>
+		///±¾µØÖ´ĞĞĞû¸æ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	ExecOrderLocalID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€ä»£ç 
+		/// ½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// ä¼šå‘˜ä»£ç 
+		/// »áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// å®¢æˆ·ä»£ç 
+		/// ¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		/// åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		/// ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæäº¤çŠ¶æ€
+		///Ö´ĞĞĞû¸æÌá½»×´Ì¬
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		///äº¤æ˜“æ—¥
+		///½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šç¼–å·
+		///Ö´ĞĞĞû¸æ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ExecOrderSysID;
 		/// <summary>
-		///æŠ¥å•æ—¥æœŸ
+		///±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		///æ’å…¥æ—¶é—´
+		///²åÈëÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		///æ’¤é”€æ—¶é—´
+		///³·ÏúÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CancelTime;
 		/// <summary>
-		///æ‰§è¡Œç»“æœ
+		///Ö´ĞĞ½á¹û
 		/// </summary>
 		EnumExecResultType ExecResult;
 		/// <summary>
-		///ç»“ç®—ä¼šå‘˜ç¼–å·
+		///½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		///åºå·
+		///ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		///ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ UserProductInfo;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		///æ“ä½œç”¨æˆ·ä»£ç 
+		///²Ù×÷ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ ActiveUserID;
-		///ç»çºªå…¬å¸æŠ¥å•ç¼–å·
+		///¾­¼Í¹«Ë¾±¨µ¥±àºÅ
 		TThostFtdcSequenceNoType	BrokerExecOrderSeq;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///èµ„é‡‘è´¦å·
+		///×Ê½ğÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 	/// <summary>
-	///æ‰§è¡Œå®£å‘Šæ“ä½œ
+	///Ö´ĞĞĞû¸æ²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcExecOrderActionField
+	public ref struct ThostFtdcExecOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæ“ä½œå¼•ç”¨
+		///Ö´ĞĞĞû¸æ²Ù×÷ÒıÓÃ
 		/// </summary>
 		int ExecOrderActionRef;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šå¼•ç”¨
+		///Ö´ĞĞĞû¸æÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ExecOrderRef;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæ“ä½œç¼–å·
+		///Ö´ĞĞĞû¸æ²Ù×÷±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ExecOrderSysID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		///æ“ä½œæ—¥æœŸ
+		///²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		///æ“ä½œæ—¶é—´
+		///²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœ¬åœ°æ‰§è¡Œå®£å‘Šç¼–å·
+		///±¾µØÖ´ĞĞĞû¸æ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ExecOrderLocalID;
 		/// <summary>
-		///æ“ä½œæœ¬åœ°ç¼–å·
+		///²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///æŠ¥å•æ“ä½œçŠ¶æ€
+		///±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ‰§è¡Œç±»å‹
+		///Ö´ĞĞÀàĞÍ
 		/// </summary>
 		EnumActionTypeType ActionType;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 	/// <summary>
-	///æ‰§è¡Œå®£å‘ŠæŸ¥è¯¢
+	///Ö´ĞĞĞû¸æ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryExecOrderField
+	public ref struct ThostFtdcQryExecOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-///æ‰§è¡Œå®£å‘Šç¼–å·
-/// </summary>
+		///Ö´ĞĞĞû¸æ±àºÅ
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ExecOrderSysID;
 		/// <summary>
-		///å¼€å§‹æ—¶é—´
+		///¿ªÊ¼Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeStart;
 		/// <summary>
-		///ç»“æŸæ—¶é—´
+		///½áÊøÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeEnd;
 	};
 	/// <summary>
-	///äº¤æ˜“æ‰€æ‰§è¡Œå®£å‘Šä¿¡æ¯
+	///½»Ò×ËùÖ´ĞĞĞû¸æĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcExchangeExecOrderField
+	public ref struct ThostFtdcExchangeExecOrderField
 	{
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///å¼€å¹³æ ‡å¿—
+		///¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagEnType OffsetFlag;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		///æ‰§è¡Œç±»å‹
+		///Ö´ĞĞÀàĞÍ
 		/// </summary>
 		EnumActionTypeType ActionType;
 		/// <summary>
-		///ä¿ç•™å¤´å¯¸ç”³è¯·çš„æŒä»“æ–¹å‘
+		///±£ÁôÍ·´çÉêÇëµÄ³Ö²Ö·½Ïò
 		/// </summary>
 		EnumPosiDirectionType PosiDirection;
 		/// <summary>
-		///æœŸæƒè¡Œæƒåæ˜¯å¦ä¿ç•™æœŸè´§å¤´å¯¸çš„æ ‡è®°
+		///ÆÚÈ¨ĞĞÈ¨ºóÊÇ·ñ±£ÁôÆÚ»õÍ·´çµÄ±ê¼Ç
 		/// </summary>
 		EnumExecOrderPositionFlagType ReservePositionFlag;
 		/// <summary>
-		///æœŸæƒè¡Œæƒåç”Ÿæˆçš„å¤´å¯¸æ˜¯å¦è‡ªåŠ¨å¹³ä»“
+		///ÆÚÈ¨ĞĞÈ¨ºóÉú³ÉµÄÍ·´çÊÇ·ñ×Ô¶¯Æ½²Ö
 		/// </summary>
 		EnumExecOrderCloseFlagType CloseFlag;
 		/// <summary>
-		///æœ¬åœ°æ‰§è¡Œå®£å‘Šç¼–å·
+		///±¾µØÖ´ĞĞĞû¸æ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ExecOrderLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæäº¤çŠ¶æ€
+		///Ö´ĞĞĞû¸æÌá½»×´Ì¬
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		///äº¤æ˜“æ—¥
+		///½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šç¼–å·
+		///Ö´ĞĞĞû¸æ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ExecOrderSysID;
 		/// <summary>
-		///æŠ¥å•æ—¥æœŸ
+		///±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		///æ’å…¥æ—¶é—´
+		///²åÈëÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		///æ’¤é”€æ—¶é—´
+		///³·ÏúÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CancelTime;
 		/// <summary>
-		///æ‰§è¡Œç»“æœ
+		///Ö´ĞĞ½á¹û
 		/// </summary>
 		EnumExecResultType ExecResult;
 		/// <summary>
-		///ç»“ç®—ä¼šå‘˜ç¼–å·
+		///½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		///åºå·
+		///ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 	/// <summary>
-	///äº¤æ˜“æ‰€æ‰§è¡Œå®£å‘ŠæŸ¥è¯¢
+	///½»Ò×ËùÖ´ĞĞĞû¸æ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryExchangeExecOrderField
+	public ref struct  ThostFtdcQryExchangeExecOrderField
 	{
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 	};
 	/// <summary>
-	///æ‰§è¡Œå®£å‘Šæ“ä½œæŸ¥è¯¢
+	///Ö´ĞĞĞû¸æ²Ù×÷²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryExecOrderActionField
+	public ref struct  ThostFtdcQryExecOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 	/// <summary>
-	///äº¤æ˜“æ‰€æ‰§è¡Œå®£å‘Šæ“ä½œ
+	///½»Ò×ËùÖ´ĞĞĞû¸æ²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcExchangeExecOrderActionField
+	public ref struct  ThostFtdcExchangeExecOrderActionField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæ“ä½œç¼–å·
+		///Ö´ĞĞĞû¸æ²Ù×÷±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ExecOrderSysID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		///æ“ä½œæ—¥æœŸ
+		///²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		///æ“ä½œæ—¶é—´
+		///²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœ¬åœ°æ‰§è¡Œå®£å‘Šç¼–å·
+		///±¾µØÖ´ĞĞĞû¸æ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ExecOrderLocalID;
 		/// <summary>
-		///æ“ä½œæœ¬åœ°ç¼–å·
+		///²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///æŠ¥å•æ“ä½œçŠ¶æ€
+		///±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ‰§è¡Œç±»å‹
+		///Ö´ĞĞÀàĞÍ
 		/// </summary>
 		EnumActionTypeType ActionType;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 	/// <summary>
-	///äº¤æ˜“æ‰€æ‰§è¡Œå®£å‘Šæ“ä½œæŸ¥è¯¢
+	///½»Ò×ËùÖ´ĞĞĞû¸æ²Ù×÷²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryExchangeExecOrderActionField
+	public ref struct  ThostFtdcQryExchangeExecOrderActionField
 	{
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 	};
 	/// <summary>
-	///é”™è¯¯æ‰§è¡Œå®£å‘Š
+	///´íÎóÖ´ĞĞĞû¸æ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcErrExecOrderField
+	public ref struct  ThostFtdcErrExecOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šå¼•ç”¨
+		///Ö´ĞĞĞû¸æÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ExecOrderRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///å¼€å¹³æ ‡å¿—
+		///¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagEnType OffsetFlag;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		///æ‰§è¡Œç±»å‹
+		///Ö´ĞĞÀàĞÍ
 		/// </summary>
 		EnumActionTypeType ActionType;
 		/// <summary>
-		///ä¿ç•™å¤´å¯¸ç”³è¯·çš„æŒä»“æ–¹å‘
+		///±£ÁôÍ·´çÉêÇëµÄ³Ö²Ö·½Ïò
 		/// </summary>
 		EnumPosiDirectionType PosiDirection;
 		/// <summary>
-		///æœŸæƒè¡Œæƒåæ˜¯å¦ä¿ç•™æœŸè´§å¤´å¯¸çš„æ ‡è®°
+		///ÆÚÈ¨ĞĞÈ¨ºóÊÇ·ñ±£ÁôÆÚ»õÍ·´çµÄ±ê¼Ç
 		/// </summary>
 		EnumExecOrderPositionFlagType ReservePositionFlag;
 		/// <summary>
-		///æœŸæƒè¡Œæƒåç”Ÿæˆçš„å¤´å¯¸æ˜¯å¦è‡ªåŠ¨å¹³ä»“
+		///ÆÚÈ¨ĞĞÈ¨ºóÉú³ÉµÄÍ·´çÊÇ·ñ×Ô¶¯Æ½²Ö
 		/// </summary>
 		EnumExecOrderCloseFlagType CloseFlag;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///èµ„é‡‘è´¦å·
+		///×Ê½ğÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///äº¤æ˜“ç¼–ç 
+		///½»Ò×±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 	/// <summary>
-	///æŸ¥è¯¢é”™è¯¯æ‰§è¡Œå®£å‘Š
+	///²éÑ¯´íÎóÖ´ĞĞĞû¸æ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryErrExecOrderField
+	public ref struct  ThostFtdcQryErrExecOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
 	/// <summary>
-	///é”™è¯¯æ‰§è¡Œå®£å‘Šæ“ä½œ
+	///´íÎóÖ´ĞĞĞû¸æ²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcErrExecOrderActionField
+	public ref struct  ThostFtdcErrExecOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæ“ä½œå¼•ç”¨
+		///Ö´ĞĞĞû¸æ²Ù×÷ÒıÓÃ
 		/// </summary>
 		int ExecOrderActionRef;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šå¼•ç”¨
+		///Ö´ĞĞĞû¸æÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ExecOrderRef;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæ“ä½œç¼–å·
+		///Ö´ĞĞĞû¸æ²Ù×÷±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ExecOrderSysID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢é”™è¯¯æ‰§è¡Œå®£å‘Šæ“ä½œ
+	///²éÑ¯´íÎóÖ´ĞĞĞû¸æ²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryErrExecOrderActionField
+	public ref struct  ThostFtdcQryErrExecOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
 	/// <summary>
-	///æŠ•èµ„è€…æœŸæƒåˆçº¦äº¤æ˜“æƒé™
+	///Í¶×ÊÕßÆÚÈ¨ºÏÔ¼½»Ò×È¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcOptionInstrTradingRightField
+	public ref struct  ThostFtdcOptionInstrTradingRightField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		///äº¤æ˜“æƒé™
+		///½»Ò×È¨ÏŞ
 		/// </summary>
 		EnumTradingRightType TradingRight;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢æœŸæƒåˆçº¦äº¤æ˜“æƒé™
+	///²éÑ¯ÆÚÈ¨ºÏÔ¼½»Ò×È¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryOptionInstrTradingRightField
+	public ref struct  ThostFtdcQryOptionInstrTradingRightField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 	};
 
 	/// <summary>
-	///è¾“å…¥çš„è¯¢ä»·
+	///ÊäÈëµÄÑ¯¼Û
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcInputForQuoteField
+	public ref struct  ThostFtdcInputForQuoteField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///è¯¢ä»·å¼•ç”¨
+		///Ñ¯¼ÛÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ForQuoteRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///è¯¢ä»·
+	///Ñ¯¼Û
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcForQuoteField
+	public ref struct  ThostFtdcForQuoteField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///è¯¢ä»·å¼•ç”¨
+		///Ñ¯¼ÛÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ForQuoteRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æœ¬åœ°è¯¢ä»·ç¼–å·
+		///±¾µØÑ¯¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ForQuoteLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æŠ¥å•æ—¥æœŸ
+		///±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		///æ’å…¥æ—¶é—´
+		///²åÈëÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		///è¯¢ä»·çŠ¶æ€
+		///Ñ¯¼Û×´Ì¬
 		/// </summary>
 		EnumForQuoteStatusType ForQuoteStatus;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		///æ“ä½œç”¨æˆ·ä»£ç 
+		///²Ù×÷ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ ActiveUserID;
 		/// <summary>
-		///ç»çºªå…¬å¸è¯¢ä»·ç¼–å·
+		///¾­¼Í¹«Ë¾Ñ¯¼Û±àºÅ
 		/// </summary>
 		int BrokerForQutoSeq;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///è¯¢ä»·æŸ¥è¯¢
+	///Ñ¯¼Û²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryForQuoteField
+	public ref struct  ThostFtdcQryForQuoteField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///å¼€å§‹æ—¶é—´
+		///¿ªÊ¼Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeStart;
 		/// <summary>
-		///ç»“æŸæ—¶é—´
+		///½áÊøÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeEnd;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€è¯¢ä»·ä¿¡æ¯
+	///½»Ò×ËùÑ¯¼ÛĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcExchangeForQuoteField
+	public ref struct  ThostFtdcExchangeForQuoteField
 	{
 		/// <summary>
-		///æœ¬åœ°è¯¢ä»·ç¼–å·
+		///±¾µØÑ¯¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ForQuoteLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æŠ¥å•æ—¥æœŸ
+		///±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		///æ’å…¥æ—¶é—´
+		///²åÈëÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		///è¯¢ä»·çŠ¶æ€
+		///Ñ¯¼Û×´Ì¬
 		/// </summary>
 		EnumForQuoteStatusType ForQuoteStatus;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€è¯¢ä»·æŸ¥è¯¢
+	///½»Ò×ËùÑ¯¼Û²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryExchangeForQuoteField
+	public ref struct  ThostFtdcQryExchangeForQuoteField
 	{
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 	};
 
 	/// <summary>
-	///è¾“å…¥çš„æŠ¥ä»·
+	///ÊäÈëµÄ±¨¼Û
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcInputQuoteField
+	public ref struct  ThostFtdcInputQuoteField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ¥ä»·å¼•ç”¨
+		///±¨¼ÛÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ QuoteRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///å–ä»·æ ¼
+		///Âô¼Û¸ñ
 		/// </summary>
 		double AskPrice;
 		/// <summary>
-		///ä¹°ä»·æ ¼
+		///Âò¼Û¸ñ
 		/// </summary>
 		double BidPrice;
 		/// <summary>
-		///å–æ•°é‡
+		///ÂôÊıÁ¿
 		/// </summary>
 		int AskVolume;
 		/// <summary>
-		///ä¹°æ•°é‡
+		///ÂòÊıÁ¿
 		/// </summary>
 		int BidVolume;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///å–å¼€å¹³æ ‡å¿—
+		///Âô¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType AskOffsetFlag;
 		/// <summary>
-		///ä¹°å¼€å¹³æ ‡å¿—
+		///Âò¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType BidOffsetFlag;
 		/// <summary>
-		///å–æŠ•æœºå¥—ä¿æ ‡å¿—
+		///ÂôÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType AskHedgeFlag;
 		/// <summary>
-		///ä¹°æŠ•æœºå¥—ä¿æ ‡å¿—
+		///ÂòÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType BidHedgeFlag;
 		/// <summary>
-		///è¡ç”Ÿå–æŠ¥å•å¼•ç”¨
+		///ÑÜÉúÂô±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AskOrderRef;
 		/// <summary>
-		///è¡ç”Ÿä¹°æŠ¥å•å¼•ç”¨
+		///ÑÜÉúÂò±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BidOrderRef;
 		/// <summary>
-		///åº”ä»·ç¼–å·
+		///Ó¦¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ForQuoteSysID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///äº¤æ˜“ç¼–ç 
+		///½»Ò×±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///è¾“å…¥æŠ¥ä»·æ“ä½œ
+	///ÊäÈë±¨¼Û²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInputQuoteActionField
+	public ref struct ThostFtdcInputQuoteActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///æŠ¥ä»·æ“ä½œå¼•ç”¨
+		///±¨¼Û²Ù×÷ÒıÓÃ
 		TThostFtdcOrderActionRefType	QuoteActionRef;
 		/// <summary>
-		///æŠ¥ä»·å¼•ç”¨
+		///±¨¼ÛÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ QuoteRef;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ¥ä»·æ“ä½œç¼–å·
+		///±¨¼Û²Ù×÷±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ QuoteSysID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///äº¤æ˜“ç¼–ç 
+		///½»Ò×±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///æŠ¥ä»·
+	///±¨¼Û
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQuoteField
+	public ref struct ThostFtdcQuoteField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ¥ä»·å¼•ç”¨
+		///±¨¼ÛÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ QuoteRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///å–ä»·æ ¼
+		///Âô¼Û¸ñ
 		/// </summary>
 		double AskPrice;
 		/// <summary>
-		///ä¹°ä»·æ ¼
+		///Âò¼Û¸ñ
 		/// </summary>
 		double BidPrice;
 		/// <summary>
-		///å–æ•°é‡
+		///ÂôÊıÁ¿
 		/// </summary>
 		int AskVolume;
 		/// <summary>
-		///ä¹°æ•°é‡
+		///ÂòÊıÁ¿
 		/// </summary>
 		int BidVolume;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///å–å¼€å¹³æ ‡å¿—
+		///Âô¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType AskOffsetFlag;
 		/// <summary>
-		///ä¹°å¼€å¹³æ ‡å¿—
+		///Âò¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType BidOffsetFlag;
 		/// <summary>
-		///å–æŠ•æœºå¥—ä¿æ ‡å¿—
+		///ÂôÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType AskHedgeFlag;
 		/// <summary>
-		///ä¹°æŠ•æœºå¥—ä¿æ ‡å¿—
+		///ÂòÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType BidHedgeFlag;
 		/// <summary>
-		///æœ¬åœ°æŠ¥ä»·ç¼–å·
+		///±¾µØ±¨¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ QuoteLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæäº¤çŠ¶æ€
+		///Ö´ĞĞĞû¸æÌá½»×´Ì¬
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		///äº¤æ˜“æ—¥
+		///½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///æŠ¥ä»·ç¼–å·
+		///±¨¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ QuoteSysID;
 		/// <summary>
-		///æŠ¥å•æ—¥æœŸ
+		///±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		///æ’å…¥æ—¶é—´
+		///²åÈëÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		///æ’¤é”€æ—¶é—´
+		///³·ÏúÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CancelTime;
-		///æŠ¥ä»·çŠ¶æ€
+		///±¨¼Û×´Ì¬
 		TThostFtdcOrderStatusType	QuoteStatus;
 		/// <summary>
-		///ç»“ç®—ä¼šå‘˜ç¼–å·
+		///½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		///åºå·
+		///ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///å–æ–¹æŠ¥å•ç¼–å·
+		///Âô·½±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ AskOrderSysID;
 		/// <summary>
-		///ä¹°æ–¹æŠ¥å•ç¼–å·
+		///Âò·½±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BidOrderSysID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		///ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ UserProductInfo;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		///æ“ä½œç”¨æˆ·ä»£ç 
+		///²Ù×÷ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ ActiveUserID;
 		/// <summary>
-		///ç»çºªå…¬å¸æŠ¥ä»·ç¼–å·
+		///¾­¼Í¹«Ë¾±¨¼Û±àºÅ
 		/// </summary>
 		int BrokerQuoteSeq;
 		/// <summary>
-		///è¡ç”Ÿå–æŠ¥å•å¼•ç”¨
+		///ÑÜÉúÂô±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AskOrderRef;
 		/// <summary>
-		///è¡ç”Ÿä¹°æŠ¥å•å¼•ç”¨
+		///ÑÜÉúÂò±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BidOrderRef;
 		/// <summary>
-		///åº”ä»·ç¼–å·
+		///Ó¦¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ForQuoteSysID;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///èµ„é‡‘è´¦å·
+		///×Ê½ğÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///æŠ¥ä»·æ“ä½œ
+	///±¨¼Û²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQuoteActionField
+	public ref struct ThostFtdcQuoteActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///æŠ¥ä»·æ“ä½œå¼•ç”¨
+		///±¨¼Û²Ù×÷ÒıÓÃ
 		TThostFtdcOrderActionRefType	QuoteActionRef;
 		/// <summary>
-		///æŠ¥ä»·å¼•ç”¨
+		///±¨¼ÛÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ QuoteRef;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ¥ä»·æ“ä½œç¼–å·
+		///±¨¼Û²Ù×÷±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ QuoteSysID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		///æ“ä½œæ—¥æœŸ
+		///²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		///æ“ä½œæ—¶é—´
+		///²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœ¬åœ°æŠ¥ä»·ç¼–å·
+		///±¾µØ±¨¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ QuoteLocalID;
 		/// <summary>
-		///æ“ä½œæœ¬åœ°ç¼–å·
+		///²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///æŠ¥å•æ“ä½œçŠ¶æ€
+		///±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///æŠ¥ä»·æŸ¥è¯¢
+	///±¨¼Û²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryQuoteField
+	public ref struct ThostFtdcQryQuoteField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ¥ä»·ç¼–å·
+		///±¨¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ QuoteSysID;
 		/// <summary>
-		///å¼€å§‹æ—¶é—´
+		///¿ªÊ¼Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeStart;
 		/// <summary>
-		///ç»“æŸæ—¶é—´
+		///½áÊøÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTimeEnd;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€æŠ¥ä»·ä¿¡æ¯
+	///½»Ò×Ëù±¨¼ÛĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcExchangeQuoteField
+	public ref struct ThostFtdcExchangeQuoteField
 	{
 		/// <summary>
-		///å–ä»·æ ¼
+		///Âô¼Û¸ñ
 		/// </summary>
 		double AskPrice;
 		/// <summary>
-		///ä¹°ä»·æ ¼
+		///Âò¼Û¸ñ
 		/// </summary>
 		double BidPrice;
 		/// <summary>
-		///å–æ•°é‡
+		///ÂôÊıÁ¿
 		/// </summary>
 		int AskVolume;
 		/// <summary>
-		///ä¹°æ•°é‡
+		///ÂòÊıÁ¿
 		/// </summary>
 		int BidVolume;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///å–å¼€å¹³æ ‡å¿—
+		///Âô¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType AskOffsetFlag;
 		/// <summary>
-		///ä¹°å¼€å¹³æ ‡å¿—
+		///Âò¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagType BidOffsetFlag;
 		/// <summary>
-		///å–æŠ•æœºå¥—ä¿æ ‡å¿—
+		///ÂôÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType AskHedgeFlag;
 		/// <summary>
-		///ä¹°æŠ•æœºå¥—ä¿æ ‡å¿—
+		///ÂòÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType BidHedgeFlag;
 		/// <summary>
-		///æœ¬åœ°æŠ¥ä»·ç¼–å·
+		///±¾µØ±¨¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ QuoteLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æ‰§è¡Œå®£å‘Šæäº¤çŠ¶æ€
+		///Ö´ĞĞĞû¸æÌá½»×´Ì¬
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		///äº¤æ˜“æ—¥
+		///½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///æŠ¥ä»·ç¼–å·
+		///±¨¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ QuoteSysID;
 		/// <summary>
-		///æŠ¥å•æ—¥æœŸ
+		///±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		///æ’å…¥æ—¶é—´
+		///²åÈëÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		///æ’¤é”€æ—¶é—´
+		///³·ÏúÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CancelTime;
-		///æŠ¥ä»·çŠ¶æ€
+		///±¨¼Û×´Ì¬
 		TThostFtdcOrderStatusType	QuoteStatus;
 		/// <summary>
-		///ç»“ç®—ä¼šå‘˜ç¼–å·
+		///½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		///åºå·
+		///ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///å–æ–¹æŠ¥å•ç¼–å·
+		///Âô·½±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ AskOrderSysID;
 		/// <summary>
-		///ä¹°æ–¹æŠ¥å•ç¼–å·
+		///Âò·½±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BidOrderSysID;
 		/// <summary>
-		///åº”ä»·ç¼–å·
+		///Ó¦¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ForQuoteSysID;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€æŠ¥ä»·æŸ¥è¯¢
+	///½»Ò×Ëù±¨¼Û²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryExchangeQuoteField
+	public ref struct ThostFtdcQryExchangeQuoteField
 	{
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 	};
 
-	///æŠ¥ä»·æ“ä½œæŸ¥è¯¢
+	///±¨¼Û²Ù×÷²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryQuoteActionField
+	public ref struct ThostFtdcQryQuoteActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€æŠ¥ä»·æ“ä½œ
+	///½»Ò×Ëù±¨¼Û²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcExchangeQuoteActionField
+	public ref struct ThostFtdcExchangeQuoteActionField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ¥ä»·æ“ä½œç¼–å·
+		///±¨¼Û²Ù×÷±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ QuoteSysID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		///æ“ä½œæ—¥æœŸ
+		///²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		///æ“ä½œæ—¶é—´
+		///²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœ¬åœ°æŠ¥ä»·ç¼–å·
+		///±¾µØ±¨¼Û±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ QuoteLocalID;
 		/// <summary>
-		///æ“ä½œæœ¬åœ°ç¼–å·
+		///²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///æŠ¥å•æ“ä½œçŠ¶æ€
+		///±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-	///IPåœ°å€
-	/// </summary>
+		///IPµØÖ·
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€æŠ¥ä»·æ“ä½œæŸ¥è¯¢
+	///½»Ò×Ëù±¨¼Û²Ù×÷²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryExchangeQuoteActionField
+	public ref struct ThostFtdcQryExchangeQuoteActionField
 	{
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 	};
 
 	/// <summary>
-	///æœŸæƒåˆçº¦deltaå€¼
+	///ÆÚÈ¨ºÏÔ¼deltaÖµ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcOptionInstrDeltaField
+	public ref struct ThostFtdcOptionInstrDeltaField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///Deltaå€¼
+		///DeltaÖµ
 		double	Delta;
 	};
 
-	///å‘ç»™åšå¸‚å•†çš„è¯¢ä»·è¯·æ±‚
+	/*///·¢¸ø×öÊĞÉÌµÄÑ¯¼ÛÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcForQuoteRspField
+	public ref struct ThostFtdcForQuoteRspField
 	{
-		/// <summary>
-///æŠ¥å•æç¤ºåºå·
-/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ OrderSubmitStatus;
-		/// <summary>
-		///åˆçº¦ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
-		String^ InstrumentID;
-		/// <summary>
-		///è¯¢ä»·ç¼–å·
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ ForQuoteSysID;
-		/// <summary>
-		///è¯¢ä»·æ—¶é—´
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
-		String^ ForQuoteTime;
-		/// <summary>
-		///ä¸šåŠ¡æ—¥æœŸ
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
-		String^ ActionDay;
-		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
-		String^ ExchangeID;
-	};
-
 	/// <summary>
-	///å½“å‰æœŸæƒåˆçº¦æ‰§è¡Œåç§»å€¼çš„è¯¦ç»†å†…å®¹
+	///±¨µ¥ÌáÊ¾ĞòºÅ
+	/// </summary>
+	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+	String^ OrderSubmitStatus;
+	/// <summary>
+	///ºÏÔ¼´úÂë
+	/// </summary>
+	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+	String^ InstrumentID;
+	/// <summary>
+	///Ñ¯¼Û±àºÅ
+	/// </summary>
+	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+	String^ ForQuoteSysID;
+	/// <summary>
+	///Ñ¯¼ÛÊ±¼ä
+	/// </summary>
+	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+	String^ ForQuoteTime;
+	/// <summary>
+	///ÒµÎñÈÕÆÚ
+	/// </summary>
+	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+	String^ ActionDay;
+	/// <summary>
+	///½»Ò×Ëù´úÂë
+	/// </summary>
+	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+	String^ ExchangeID;
+	};
+	*/
+	/// <summary>
+	///µ±Ç°ÆÚÈ¨ºÏÔ¼Ö´ĞĞÆ«ÒÆÖµµÄÏêÏ¸ÄÚÈİ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcStrikeOffsetField
+	public ref struct ThostFtdcStrikeOffsetField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///æ‰§è¡Œåç§»å€¼
+		///Ö´ĞĞÆ«ÒÆÖµ
 		double	Offset;
-		///æ‰§è¡Œåç§»ç±»å‹
+		///Ö´ĞĞÆ«ÒÆÀàĞÍ
 		TThostFtdcStrikeOffsetTypeType	OffsetType;
 	};
 
 	/// <summary>
-	///æœŸæƒæ‰§è¡Œåç§»å€¼æŸ¥è¯¢
+	///ÆÚÈ¨Ö´ĞĞÆ«ÒÆÖµ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryStrikeOffsetField
+	public ref struct ThostFtdcQryStrikeOffsetField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///è¾“å…¥æ‰¹é‡æŠ¥å•æ“ä½œ
+	///ÊäÈëÅúÁ¿±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInputBatchOrderActionField
+	public ref struct ThostFtdcInputBatchOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///æŠ¥å•æ“ä½œå¼•ç”¨
+		///±¨µ¥²Ù×÷ÒıÓÃ
 		TThostFtdcOrderActionRefType	OrderActionRef;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///æ‰¹é‡æŠ¥å•æ“ä½œ
+	///ÅúÁ¿±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcBatchOrderActionField
+	public ref struct ThostFtdcBatchOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///æŠ¥å•æ“ä½œå¼•ç”¨
+		///±¨µ¥²Ù×÷ÒıÓÃ
 		TThostFtdcOrderActionRefType	OrderActionRef;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æ“ä½œæ—¥æœŸ
+		///²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		///æ“ä½œæ—¶é—´
+		///²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æ“ä½œæœ¬åœ°ç¼–å·
+		///²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///æŠ¥å•æ“ä½œçŠ¶æ€
+		///±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€æ‰¹é‡æŠ¥å•æ“ä½œ
+	///½»Ò×ËùÅúÁ¿±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcExchangeBatchOrderActionField
+	public ref struct ThostFtdcExchangeBatchOrderActionField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æ“ä½œæ—¥æœŸ
+		///²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		///æ“ä½œæ—¶é—´
+		///²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æ“ä½œæœ¬åœ°ç¼–å·
+		///²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///æŠ¥å•æ“ä½œçŠ¶æ€
+		///±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢æ‰¹é‡æŠ¥å•æ“ä½œ
+	///²éÑ¯ÅúÁ¿±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryBatchOrderActionField
+	public ref struct ThostFtdcQryBatchOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///ç»„åˆåˆçº¦å®‰å…¨ç³»æ•°
+	///×éºÏºÏÔ¼°²È«ÏµÊı
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcCombInstrumentGuardField
+	public ref struct ThostFtdcCombInstrumentGuardField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///å®˜æ–¹apiä¹Ÿæ²¡æœ‰æ³¨é‡Šï¼Œæˆ‘çŒœè¿™æ˜¯æ¯”ä¾‹
+		///¹Ù·½apiÒ²Ã»ÓĞ×¢ÊÍ£¬ÎÒ²ÂÕâÊÇ±ÈÀı
 		/// </summary>
 		double	GuarantRatio;
 	};
 
 	/// <summary>
-	///ç»„åˆåˆçº¦å®‰å…¨ç³»æ•°æŸ¥è¯¢
+	///×éºÏºÏÔ¼°²È«ÏµÊı²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryCombInstrumentGuardField
+	public ref struct ThostFtdcQryCombInstrumentGuardField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///è¾“å…¥çš„ç”³è¯·ç»„åˆ
+	///ÊäÈëµÄÉêÇë×éºÏ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInputCombActionField
+	public ref struct ThostFtdcInputCombActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///ç»„åˆå¼•ç”¨
+		///×éºÏÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ CombActionRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
 		/// <summary>
-		///ç»„åˆæŒ‡ä»¤æ–¹å‘
+		///×éºÏÖ¸Áî·½Ïò
 		/// </summary>
 		EnumCombDirectionType CombDirection;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///ç”³è¯·ç»„åˆ
+	///ÉêÇë×éºÏ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcCombActionField
+	public ref struct ThostFtdcCombActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///ç»„åˆå¼•ç”¨
+		///×éºÏÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ CombActionRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
 		/// <summary>
-		///ç»„åˆæŒ‡ä»¤æ–¹å‘
+		///×éºÏÖ¸Áî·½Ïò
 		/// </summary>
 		EnumCombDirectionType CombDirection;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		///æœ¬åœ°ç”³è¯·ç»„åˆç¼–å·
+		///±¾µØÉêÇë×éºÏ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-	/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
-	/// </summary>
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///ç»„åˆçŠ¶æ€
+		///×éºÏ×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType ActionStatus;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		///äº¤æ˜“æ—¥
+		///½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///åºå·
+		///ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		///ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ UserProductInfo;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///ç”³è¯·ç»„åˆæŸ¥è¯¢
+	///ÉêÇë×éºÏ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryCombActionField
+	public ref struct ThostFtdcQryCombActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€ç”³è¯·ç»„åˆä¿¡æ¯
+	///½»Ò×ËùÉêÇë×éºÏĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcExchangeCombActionField
+	public ref struct ThostFtdcExchangeCombActionField
 	{
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
 		/// <summary>
-		///ç»„åˆæŒ‡ä»¤æ–¹å‘
+		///×éºÏÖ¸Áî·½Ïò
 		/// </summary>
 		EnumCombDirectionType CombDirection;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		///æœ¬åœ°ç”³è¯·ç»„åˆç¼–å·
+		///±¾µØÉêÇë×éºÏ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///ç»„åˆçŠ¶æ€
+		///×éºÏ×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType ActionStatus;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		///äº¤æ˜“æ—¥
+		///½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///åºå·
+		///ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€ç”³è¯·ç»„åˆæŸ¥è¯¢
+	///½»Ò×ËùÉêÇë×éºÏ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryExchangeCombActionField
+	public ref struct ThostFtdcQryExchangeCombActionField
 	{
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 	};
 
 	/// <summary>
-	///äº§å“æŠ¥ä»·æ±‡ç‡
+	///²úÆ·±¨¼Û»ãÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcProductExchRateField
+	public ref struct ThostFtdcProductExchRateField
 	{
 		/// <summary>
-		///äº§å“ä»£ç 
+		///²úÆ·´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ProductID;
 		/// <summary>
-		///æŠ¥ä»·å¸ç§ç±»å‹
+		///±¨¼Û±ÒÖÖÀàĞÍ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	QuoteCurrencyID;
 		/// <summary>
-		///æ±‡ç‡
+		///»ãÂÊ
 		/// </summary>
 		double	ExchangeRate;
 	};
 
 	/// <summary>
-	///äº§å“æŠ¥ä»·æ±‡ç‡æŸ¥è¯¢
+	///²úÆ·±¨¼Û»ãÂÊ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryProductExchRateField
+	public ref struct ThostFtdcQryProductExchRateField
 	{
 		/// <summary>
-		///äº§å“ä»£ç 
+		///²úÆ·´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ProductID;
 	};
 	/// <summary>
-	///æŸ¥è¯¢è¯¢ä»·ä»·å·®å‚æ•°
+	///²éÑ¯Ñ¯¼Û¼Û²î²ÎÊı
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryForQuoteParamField
+	public ref struct ThostFtdcQryForQuoteParamField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 	/// <summary>
-	///è¯¢ä»·ä»·å·®å‚æ•°
+	///Ñ¯¼Û¼Û²î²ÎÊı
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcForQuoteParamField
+	public ref struct ThostFtdcForQuoteParamField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
-		///æœ€æ–°ä»·
+		///×îĞÂ¼Û
 		double	LastPrice;
-		///ä»·å·®
+		///¼Û²î
 		double	PriceInterval;
 	};
 
 	/// <summary>
-	///å½“å‰åšå¸‚å•†æœŸæƒåˆçº¦æ‰‹ç»­è´¹çš„è¯¦ç»†å†…å®¹
+	///µ±Ç°×öÊĞÉÌÆÚÈ¨ºÏÔ¼ÊÖĞø·ÑµÄÏêÏ¸ÄÚÈİ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMMOptionInstrCommRateField
+	public ref struct ThostFtdcMMOptionInstrCommRateField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///å¼€ä»“æ‰‹ç»­è´¹ç‡
+		///¿ª²ÖÊÖĞø·ÑÂÊ
 		/// </summary>
 		double OpenRatioByMoney;
 		/// <summary>
-		///å¼€ä»“æ‰‹ç»­è´¹
+		///¿ª²ÖÊÖĞø·Ñ
 		/// </summary>
 		double OpenRatioByVolume;
 		/// <summary>
-		///å¹³ä»“æ‰‹ç»­è´¹ç‡
+		///Æ½²ÖÊÖĞø·ÑÂÊ
 		/// </summary>
 		double CloseRatioByMoney;
 		/// <summary>
-		///å¹³ä»“æ‰‹ç»­è´¹
+		///Æ½²ÖÊÖĞø·Ñ
 		/// </summary>
 		double CloseRatioByVolume;
 		/// <summary>
-		///å¹³ä»Šæ‰‹ç»­è´¹ç‡
+		///Æ½½ñÊÖĞø·ÑÂÊ
 		/// </summary>
 		double CloseTodayRatioByMoney;
 		/// <summary>
-		///å¹³ä»Šæ‰‹ç»­è´¹
+		///Æ½½ñÊÖĞø·Ñ
 		/// </summary>
 		double CloseTodayRatioByVolume;
-		///æ‰§è¡Œæ‰‹ç»­è´¹ç‡
+		///Ö´ĞĞÊÖĞø·ÑÂÊ
 		double	StrikeRatioByMoney;
-		///æ‰§è¡Œæ‰‹ç»­è´¹
+		///Ö´ĞĞÊÖĞø·Ñ
 		double	StrikeRatioByVolume;
 	};
 
 	/// <summary>
-	///åšå¸‚å•†æœŸæƒæ‰‹ç»­è´¹ç‡æŸ¥è¯¢
+	///×öÊĞÉÌÆÚÈ¨ÊÖĞø·ÑÂÊ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryMMOptionInstrCommRateField
+	public ref struct ThostFtdcQryMMOptionInstrCommRateField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///åšå¸‚å•†åˆçº¦æ‰‹ç»­è´¹ç‡
+	///×öÊĞÉÌºÏÔ¼ÊÖĞø·ÑÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMMInstrumentCommissionRateField
+	public ref struct ThostFtdcMMInstrumentCommissionRateField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///å¼€ä»“æ‰‹ç»­è´¹ç‡
+		///¿ª²ÖÊÖĞø·ÑÂÊ
 		/// </summary>
 		double OpenRatioByMoney;
 		/// <summary>
-		///å¼€ä»“æ‰‹ç»­è´¹
+		///¿ª²ÖÊÖĞø·Ñ
 		/// </summary>
 		double OpenRatioByVolume;
 		/// <summary>
-		///å¹³ä»“æ‰‹ç»­è´¹ç‡
+		///Æ½²ÖÊÖĞø·ÑÂÊ
 		/// </summary>
 		double CloseRatioByMoney;
 		/// <summary>
-		///å¹³ä»“æ‰‹ç»­è´¹
+		///Æ½²ÖÊÖĞø·Ñ
 		/// </summary>
 		double CloseRatioByVolume;
 		/// <summary>
-		///å¹³ä»Šæ‰‹ç»­è´¹ç‡
+		///Æ½½ñÊÖĞø·ÑÂÊ
 		/// </summary>
 		double CloseTodayRatioByMoney;
 		/// <summary>
-		///å¹³ä»Šæ‰‹ç»­è´¹
+		///Æ½½ñÊÖĞø·Ñ
 		/// </summary>
 		double CloseTodayRatioByVolume;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢åšå¸‚å•†åˆçº¦æ‰‹ç»­è´¹ç‡
+	///²éÑ¯×öÊĞÉÌºÏÔ¼ÊÖĞø·ÑÂÊ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryMMInstrumentCommissionRateField
+	public ref struct ThostFtdcQryMMInstrumentCommissionRateField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///å½“å‰æŠ¥å•æ‰‹ç»­è´¹çš„è¯¦ç»†å†…å®¹
+	///µ±Ç°±¨µ¥ÊÖĞø·ÑµÄÏêÏ¸ÄÚÈİ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInstrumentOrderCommRateField
+	public ref struct ThostFtdcInstrumentOrderCommRateField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		///æŠ¥å•æ‰‹ç»­è´¹
+		///±¨µ¥ÊÖĞø·Ñ
 		/// </summary>
 		double	OrderCommByVolume;
 		/// <summary>
-		///æ’¤å•æ‰‹ç»­è´¹
+		///³·µ¥ÊÖĞø·Ñ
 		/// </summary>
 		double	OrderActionCommByVolume;
 	};
 
 	/// <summary>
-	///æŠ¥å•æ‰‹ç»­è´¹ç‡æŸ¥è¯¢
+	///±¨µ¥ÊÖĞø·ÑÂÊ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryInstrumentOrderCommRateField
+	public ref struct ThostFtdcQryInstrumentOrderCommRateField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///å¸‚åœºè¡Œæƒ…
+	///ÊĞ³¡ĞĞÇé
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataField
+	public ref struct ThostFtdcMarketDataField
 	{
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
-		///æœ€æ–°ä»·
+		///×îĞÂ¼Û
 		double	LastPrice;
-		///ä¸Šæ¬¡ç»“ç®—ä»·
+		///ÉÏ´Î½áËã¼Û
 		double	PreSettlementPrice;
-		///æ˜¨æ”¶ç›˜
+		///×òÊÕÅÌ
 		double	PreClosePrice;
-		///æ˜¨æŒä»“é‡
+		///×ò³Ö²ÖÁ¿
 		double	PreOpenInterest;
-		///ä»Šå¼€ç›˜
+		///½ñ¿ªÅÌ
 		double	OpenPrice;
-		///æœ€é«˜ä»·
+		///×î¸ß¼Û
 		double	HighestPrice;
-		///æœ€ä½ä»·
+		///×îµÍ¼Û
 		double	LowestPrice;
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
-		///æˆäº¤é‡‘é¢
+		///³É½»½ğ¶î
 		double	Turnover;
-		///æŒä»“é‡
+		///³Ö²ÖÁ¿
 		double	OpenInterest;
-		///ä»Šæ”¶ç›˜
+		///½ñÊÕÅÌ
 		double	ClosePrice;
-		///æœ¬æ¬¡ç»“ç®—ä»·
+		///±¾´Î½áËã¼Û
 		double	SettlementPrice;
-		///æ¶¨åœæ¿ä»·
+		///ÕÇÍ£°å¼Û
 		double	UpperLimitPrice;
-		///è·Œåœæ¿ä»·
+		///µøÍ£°å¼Û
 		double	LowerLimitPrice;
-		///æ˜¨è™šå®åº¦
+		///×òĞéÊµ¶È
 		double	PreDelta;
-		///ä»Šè™šå®åº¦
+		///½ñĞéÊµ¶È
 		double	CurrDelta;
 		/// <summary>
-		///æœ€åä¿®æ”¹æ—¶é—´
+		///×îºóĞŞ¸ÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ UpdateTime;
-		///æœ€åä¿®æ”¹æ¯«ç§’
+		///×îºóĞŞ¸ÄºÁÃë
 		int	UpdateMillisec;
 		/// <summary>
-		///ä¸šåŠ¡æ—¥æœŸ
+		///ÒµÎñÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDay;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…åŸºç¡€å±æ€§
+	///ĞĞÇé»ù´¡ÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataBaseField
+	public ref struct ThostFtdcMarketDataBaseField
 	{
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
-		///ä¸Šæ¬¡ç»“ç®—ä»·
+		///ÉÏ´Î½áËã¼Û
 		double	PreSettlementPrice;
-		///æ˜¨æ”¶ç›˜
+		///×òÊÕÅÌ
 		double	PreClosePrice;
-		///æ˜¨æŒä»“é‡
+		///×ò³Ö²ÖÁ¿
 		double	PreOpenInterest;
-		///æ˜¨è™šå®åº¦
+		///×òĞéÊµ¶È
 		double	PreDelta;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…é™æ€å±æ€§
+	///ĞĞÇé¾²Ì¬ÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataStaticField
+	public ref struct ThostFtdcMarketDataStaticField
 	{
-		///ä»Šå¼€ç›˜
+		///½ñ¿ªÅÌ
 		double	OpenPrice;
-		///æœ€é«˜ä»·
+		///×î¸ß¼Û
 		double	HighestPrice;
-		///æœ€ä½ä»·
+		///×îµÍ¼Û
 		double	LowestPrice;
-		///ä»Šæ”¶ç›˜
+		///½ñÊÕÅÌ
 		double	ClosePrice;
-		///æ¶¨åœæ¿ä»·
+		///ÕÇÍ£°å¼Û
 		double	UpperLimitPrice;
-		///è·Œåœæ¿ä»·
+		///µøÍ£°å¼Û
 		double	LowerLimitPrice;
-		///æœ¬æ¬¡ç»“ç®—ä»·
+		///±¾´Î½áËã¼Û
 		double	SettlementPrice;
-		///ä»Šè™šå®åº¦
+		///½ñĞéÊµ¶È
 		double	CurrDelta;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…æœ€æ–°æˆäº¤å±æ€§
+	///ĞĞÇé×îĞÂ³É½»ÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataLastMatchField
+	public ref struct ThostFtdcMarketDataLastMatchField
 	{
-		///æœ€æ–°ä»·
+		///×îĞÂ¼Û
 		double	LastPrice;
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
-		///æˆäº¤é‡‘é¢
+		///³É½»½ğ¶î
 		double	Turnover;
-		///æŒä»“é‡
+		///³Ö²ÖÁ¿
 		double	OpenInterest;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…æœ€ä¼˜ä»·å±æ€§
+	///ĞĞÇé×îÓÅ¼ÛÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataBestPriceField
+	public ref struct ThostFtdcMarketDataBestPriceField
 	{
-		///ç”³ä¹°ä»·ä¸€
+		///ÉêÂò¼ÛÒ»
 		double	BidPrice1;
-		///ç”³ä¹°é‡ä¸€
+		///ÉêÂòÁ¿Ò»
 		int	BidVolume1;
-		///ç”³å–ä»·ä¸€
+		///ÉêÂô¼ÛÒ»
 		double	AskPrice1;
-		///ç”³å–é‡ä¸€
+		///ÉêÂôÁ¿Ò»
 		int	AskVolume1;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…ç”³ä¹°äºŒã€ä¸‰å±æ€§
+	///ĞĞÇéÉêÂò¶ş¡¢ÈıÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataBid23Field
+	public ref struct ThostFtdcMarketDataBid23Field
 	{
-		///ç”³ä¹°ä»·äºŒ
+		///ÉêÂò¼Û¶ş
 		double	BidPrice2;
-		///ç”³ä¹°é‡äºŒ
+		///ÉêÂòÁ¿¶ş
 		int	BidVolume2;
-		///ç”³ä¹°ä»·ä¸‰
+		///ÉêÂò¼ÛÈı
 		double	BidPrice3;
-		///ç”³ä¹°é‡ä¸‰
+		///ÉêÂòÁ¿Èı
 		int	BidVolume3;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…ç”³å–äºŒã€ä¸‰å±æ€§
+	///ĞĞÇéÉêÂô¶ş¡¢ÈıÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataAsk23Field
+	public ref struct ThostFtdcMarketDataAsk23Field
 	{
-		///ç”³å–ä»·äºŒ
+		///ÉêÂô¼Û¶ş
 		double	AskPrice2;
-		///ç”³å–é‡äºŒ
+		///ÉêÂôÁ¿¶ş
 		int	AskVolume2;
-		///ç”³å–ä»·ä¸‰
+		///ÉêÂô¼ÛÈı
 		double	AskPrice3;
-		///ç”³å–é‡ä¸‰
+		///ÉêÂôÁ¿Èı
 		int	AskVolume3;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…ç”³ä¹°å››ã€äº”å±æ€§
+	///ĞĞÇéÉêÂòËÄ¡¢ÎåÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataBid45Field
+	public ref struct ThostFtdcMarketDataBid45Field
 	{
-		///ç”³ä¹°ä»·å››
+		///ÉêÂò¼ÛËÄ
 		double	BidPrice4;
-		///ç”³ä¹°é‡å››
+		///ÉêÂòÁ¿ËÄ
 		int	BidVolume4;
-		///ç”³ä¹°ä»·äº”
+		///ÉêÂò¼ÛÎå
 		double	BidPrice5;
-		///ç”³ä¹°é‡äº”
+		///ÉêÂòÁ¿Îå
 		int	BidVolume5;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…ç”³å–å››ã€äº”å±æ€§
+	///ĞĞÇéÉêÂôËÄ¡¢ÎåÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataAsk45Field
+	public ref struct ThostFtdcMarketDataAsk45Field
 	{
-		///ç”³å–ä»·å››
+		///ÉêÂô¼ÛËÄ
 		double	AskPrice4;
-		///ç”³å–é‡å››
+		///ÉêÂôÁ¿ËÄ
 		int	AskVolume4;
-		///ç”³å–ä»·äº”
+		///ÉêÂô¼ÛÎå
 		double	AskPrice5;
-		///ç”³å–é‡äº”
+		///ÉêÂôÁ¿Îå
 		int	AskVolume5;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…æ›´æ–°æ—¶é—´å±æ€§
+	///ĞĞÇé¸üĞÂÊ±¼äÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataUpdateTimeField
+	public ref struct ThostFtdcMarketDataUpdateTimeField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æœ€åä¿®æ”¹æ—¶é—´
+		///×îºóĞŞ¸ÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ UpdateTime;
-		///æœ€åä¿®æ”¹æ¯«ç§’
+		///×îºóĞŞ¸ÄºÁÃë
 		int	UpdateMillisec;
 		/// <summary>
-		///ä¸šåŠ¡æ—¥æœŸ
+		///ÒµÎñÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDay;
 	};
 
 	/// <summary>
-	///è¡Œæƒ…äº¤æ˜“æ‰€ä»£ç å±æ€§
+	///ĞĞÇé½»Ò×Ëù´úÂëÊôĞÔ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMarketDataExchangeField
+	public ref struct ThostFtdcMarketDataExchangeField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///æŒ‡å®šçš„åˆçº¦
+	///Ö¸¶¨µÄºÏÔ¼
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcSpecificInstrumentField
+	public ref struct ThostFtdcSpecificInstrumentField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///åˆçº¦çŠ¶æ€
+	///ºÏÔ¼×´Ì¬
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInstrumentStatusField
+	public ref struct ThostFtdcInstrumentStatusField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		///ç»“ç®—ç»„ä»£ç 
+		///½áËã×é´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ SettlementGroupID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///åˆçº¦äº¤æ˜“çŠ¶æ€
+		///ºÏÔ¼½»Ò××´Ì¬
 		/// </summary>
 		EnumInstrumentStatusType InstrumentStatus;
 		/// <summary>
-		///äº¤æ˜“é˜¶æ®µç¼–å·
+		///½»Ò×½×¶Î±àºÅ
 		/// </summary>
 		int TradingSegmentSN;
 		/// <summary>
-		///è¿›å…¥æœ¬çŠ¶æ€æ—¶é—´
+		///½øÈë±¾×´Ì¬Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ EnterTime;
 		/// <summary>
-		///è¿›å…¥æœ¬çŠ¶æ€åŸå› 
+		///½øÈë±¾×´Ì¬Ô­Òò
 		/// </summary>
 		EnumInstStatusEnterReasonType EnterReason;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢åˆçº¦çŠ¶æ€
+	///²éÑ¯ºÏÔ¼×´Ì¬
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryInstrumentStatusField
+	public ref struct ThostFtdcQryInstrumentStatusField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 	};
 
 	/// <summary>
-	///æŠ•èµ„è€…è´¦æˆ·
+	///Í¶×ÊÕßÕË»§
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInvestorAccountField
+	public ref struct ThostFtdcInvestorAccountField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 	};
 
 	/// <summary>
-	///æµ®åŠ¨ç›ˆäºç®—æ³•
+	///¸¡¶¯Ó¯¿÷Ëã·¨
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcPositionProfitAlgorithmField
+	public ref struct ThostFtdcPositionProfitAlgorithmField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///ç›ˆäºç®—æ³•
+		///Ó¯¿÷Ëã·¨
 		/// </summary>
 		EnumAlgorithmType Algorithm;
 		/// <summary>
-		///å¤‡æ³¨
+		///±¸×¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ Memo;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 	};
 
 	/// <summary>
-	///ä¼šå‘˜èµ„é‡‘æŠ˜æ‰£
+	///»áÔ±×Ê½ğÕÛ¿Û
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcDiscountField
+	public ref struct ThostFtdcDiscountField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///èµ„é‡‘æŠ˜æ‰£æ¯”ä¾‹
+		///×Ê½ğÕÛ¿Û±ÈÀı
 		/// </summary>
 		double Discount;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢è½¬å¸é“¶è¡Œ
+	///²éÑ¯×ªÕÊÒøĞĞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryTransferBankField
+	public ref struct ThostFtdcQryTransferBankField
 	{
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†ä¸­å¿ƒä»£ç 
+		///ÒøĞĞ·ÖÖĞĞÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBrchID;
 	};
 
 	/// <summary>
-	///è½¬å¸é“¶è¡Œ
+	///×ªÕÊÒøĞĞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcTransferBankField
+	public ref struct ThostFtdcTransferBankField
 	{
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†ä¸­å¿ƒä»£ç 
+		///ÒøĞĞ·ÖÖĞĞÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBrchID;
 		/// <summary>
-		///é“¶è¡Œåç§°
+		///ÒøĞĞÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ BankName;
-		///æ˜¯å¦æ´»è·ƒ
+		///ÊÇ·ñ»îÔ¾
 		TThostFtdcBoolType	IsActive;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢æŠ•èµ„è€…æŒä»“æ˜ç»†
+	///²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryInvestorPositionDetailField
+	public ref struct ThostFtdcQryInvestorPositionDetailField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///æŠ•èµ„è€…æŒä»“æ˜ç»†
+	///Í¶×ÊÕß³Ö²ÖÃ÷Ï¸
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcInvestorPositionDetailField
+	public ref struct ThostFtdcInvestorPositionDetailField
 	{
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
-		///ä¹°å–
+		///ÂòÂô
 		TThostFtdcDirectionType	Direction;
 		/// <summary>
-		///å¼€ä»“æ—¥æœŸ
+		///¿ª²ÖÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ OpenDate;
 		/// <summary>
-		///æˆäº¤ç¼–å·
+		///³É½»±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TradeID;
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
-		///å¼€ä»“ä»·
+		///¿ª²Ö¼Û
 		double	OpenPrice;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///æˆäº¤ç±»å‹
+		///³É½»ÀàĞÍ
 		/// </summary>
 		EnumTradeTypeType TradeType;
 		/// <summary>
-		///ç»„åˆåˆçº¦ä»£ç 
+		///×éºÏºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ CombInstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///é€æ—¥ç›¯å¸‚å¹³ä»“ç›ˆäº
+		///ÖğÈÕ¶¢ÊĞÆ½²ÖÓ¯¿÷
 		/// </summary>
 		double	CloseProfitByDate;
 		/// <summary>
-		///é€ç¬”å¯¹å†²å¹³ä»“ç›ˆäº
+		///Öğ±Ê¶Ô³åÆ½²ÖÓ¯¿÷
 		/// </summary>
 		double	CloseProfitByTrade;
 		/// <summary>
-		///é€æ—¥ç›¯å¸‚æŒä»“ç›ˆäº
+		///ÖğÈÕ¶¢ÊĞ³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double	PositionProfitByDate;
 		/// <summary>
-		///é€ç¬”å¯¹å†²æŒä»“ç›ˆäº
+		///Öğ±Ê¶Ô³å³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double	PositionProfitByTrade;
 		/// <summary>
-		///æŠ•èµ„è€…ä¿è¯é‡‘
+		///Í¶×ÊÕß±£Ö¤½ğ
 		/// </summary>
 		double	Margin;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä¿è¯é‡‘
+		///½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double	ExchMargin;
 		/// <summary>
-		///ä¿è¯é‡‘ç‡
+		///±£Ö¤½ğÂÊ
 		/// </summary>
 		double	MarginRateByMoney;
 		/// <summary>
-		///ä¿è¯é‡‘ç‡(æŒ‰æ‰‹æ•°)
+		///±£Ö¤½ğÂÊ(°´ÊÖÊı)
 		/// </summary>
 		double	MarginRateByVolume;
 		/// <summary>
-		///æ˜¨ç»“ç®—ä»·
+		///×ò½áËã¼Û
 		/// </summary>
 		double	LastSettlementPrice;
 		/// <summary>
-		///ç»“ç®—ä»·
+		///½áËã¼Û
 		/// </summary>
 		double	SettlementPrice;
 		/// <summary>
-		///å¹³ä»“é‡
+		///Æ½²ÖÁ¿
 		/// </summary>
 		int	CloseVolume;
 		/// <summary>
-		///å¹³ä»“é‡‘é¢
+		///Æ½²Ö½ğ¶î
 		/// </summary>
 		double	CloseAmount;
 	};
 
 	/// <summary>
-	///èµ„é‡‘è´¦æˆ·å£ä»¤åŸŸ
+	///×Ê½ğÕË»§¿ÚÁîÓò
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcTradingAccountPasswordField
+	public ref struct ThostFtdcTradingAccountPasswordField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¯†ç 
+		///ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€è¡Œæƒ…æŠ¥ç›˜æœº
+	///½»Ò×ËùĞĞÇé±¨ÅÌ»ú
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcMDTraderOfferField
+	public ref struct ThostFtdcMDTraderOfferField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å¯†ç 
+		///ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœ¬åœ°æŠ¥å•ç¼–å·
+		///±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€äº¤æ˜“å‘˜è¿æ¥çŠ¶æ€
+		///½»Ò×Ëù½»Ò×Ô±Á¬½Ó×´Ì¬
 		/// </summary>
 		EnumTraderConnectStatusType TraderConnectStatus;
 		/// <summary>
-		///å‘å‡ºè¿æ¥è¯·æ±‚çš„æ—¥æœŸ
+		///·¢³öÁ¬½ÓÇëÇóµÄÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ConnectRequestDate;
 		/// <summary>
-		///å‘å‡ºè¿æ¥è¯·æ±‚çš„æ—¶é—´
+		///·¢³öÁ¬½ÓÇëÇóµÄÊ±¼ä
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	ConnectRequestTime;
 		/// <summary>
-		///ä¸Šæ¬¡æŠ¥å‘Šæ—¥æœŸ
+		///ÉÏ´Î±¨¸æÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	LastReportDate;
 		/// <summary>
-		///ä¸Šæ¬¡æŠ¥å‘Šæ—¶é—´
+		///ÉÏ´Î±¨¸æÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	LastReportTime;
 		/// <summary>
-		///å®Œæˆè¿æ¥æ—¥æœŸ
+		///Íê³ÉÁ¬½ÓÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	ConnectDate;
 		/// <summary>
-		///å®Œæˆè¿æ¥æ—¶é—´
+		///Íê³ÉÁ¬½ÓÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	ConnectTime;
 		/// <summary>
-		///å¯åŠ¨æ—¥æœŸ
+		///Æô¶¯ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	StartDate;
 		/// <summary>
-		///å¯åŠ¨æ—¶é—´
+		///Æô¶¯Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	StartTime;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœ¬å¸­ä½æœ€å¤§æˆäº¤ç¼–å·
+		///±¾Ï¯Î»×î´ó³É½»±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MaxTradeID;
 		/// <summary>
-		///æœ¬å¸­ä½æœ€å¤§æŠ¥å•å¤‡æ‹·
+		///±¾Ï¯Î»×î´ó±¨µ¥±¸¿½
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^	MaxOrderMessageReference;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢è¡Œæƒ…æŠ¥ç›˜æœº
+	///²éÑ¯ĞĞÇé±¨ÅÌ»ú
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryMDTraderOfferField
+	public ref struct ThostFtdcQryMDTraderOfferField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢å®¢æˆ·é€šçŸ¥
+	///²éÑ¯¿Í»§Í¨Öª
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryNoticeField
+	public ref struct ThostFtdcQryNoticeField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 	};
 
 	/// <summary>
-	///å®¢æˆ·é€šçŸ¥
+	///¿Í»§Í¨Öª
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcNoticeField
+	public ref struct ThostFtdcNoticeField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æ¶ˆæ¯æ­£æ–‡
+		///ÏûÏ¢ÕıÎÄ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
 		String^ Content;
 		/// <summary>
-		///ç»çºªå…¬å¸é€šçŸ¥å†…å®¹åºåˆ—å·
+		///¾­¼Í¹«Ë¾Í¨ÖªÄÚÈİĞòÁĞºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
 		String^	SequenceLabel;
 	};
 
-	///ç”¨æˆ·æƒé™
+	///ÓÃ»§È¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcUserRightField
+	public ref struct ThostFtdcUserRightField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// </summary>
-		///å®¢æˆ·æƒé™ç±»å‹
+		///¿Í»§È¨ÏŞÀàĞÍ
 		/// <summary>
 		EnumUserRightTypeType	UserRightType;
 		/// <summary>
-		///æ˜¯å¦ç¦æ­¢
+		///ÊÇ·ñ½ûÖ¹
 		/// </summary>
 		int	IsForbidden;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»“ç®—ä¿¡æ¯ç¡®è®¤åŸŸ
+	///²éÑ¯½áËãĞÅÏ¢È·ÈÏÓò
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQrySettlementInfoConfirmField
+	public ref struct  ThostFtdcQrySettlementInfoConfirmField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
 	/// <summary>
-	///è£…è½½ç»“ç®—ä¿¡æ¯
+	///×°ÔØ½áËãĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcLoadSettlementInfoField
+	public ref struct  ThostFtdcLoadSettlementInfoField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 	};
 
 	/// <summary>
-	///ç»çºªå…¬å¸å¯æèµ„é‡‘ç®—æ³•è¡¨
+	///¾­¼Í¹«Ë¾¿ÉÌá×Ê½ğËã·¨±í
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcBrokerWithdrawAlgorithmField
+	public ref struct  ThostFtdcBrokerWithdrawAlgorithmField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///å¯æèµ„é‡‘ç®—æ³•
+		///¿ÉÌá×Ê½ğËã·¨
 		/// </summary>
 		EnumAlgorithmType WithdrawAlgorithm;
 		/// <summary>
-		///èµ„é‡‘ä½¿ç”¨ç‡
+		///×Ê½ğÊ¹ÓÃÂÊ
 		/// </summary>
 		double	UsingRatio;
 		/// <summary>
-		///å¯ææ˜¯å¦åŒ…å«å¹³ä»“ç›ˆåˆ©
+		///¿ÉÌáÊÇ·ñ°üº¬Æ½²ÖÓ¯Àû
 		/// </summary>
 		EnumIncludeCloseProfitType	IncludeCloseProfit;
 		/// <summary>
-		///æœ¬æ—¥æ— ä»“ä¸”æ— æˆäº¤å®¢æˆ·æ˜¯å¦å—å¯ææ¯”ä¾‹é™åˆ¶
+		///±¾ÈÕÎŞ²ÖÇÒÎŞ³É½»¿Í»§ÊÇ·ñÊÜ¿ÉÌá±ÈÀıÏŞÖÆ
 		/// </summary>
 		EnumAllWithoutTradeType	AllWithoutTrade;
 		/// <summary>
-		///å¯ç”¨æ˜¯å¦åŒ…å«å¹³ä»“ç›ˆåˆ©
+		///¿ÉÓÃÊÇ·ñ°üº¬Æ½²ÖÓ¯Àû
 		/// </summary>
 		EnumIncludeCloseProfitType	AvailIncludeCloseProfit;
 		/// <summary>
-		///æ˜¯å¦å¯ç”¨ç”¨æˆ·äº‹ä»¶
+		///ÊÇ·ñÆôÓÃÓÃ»§ÊÂ¼ş
 		/// </summary>
 		int	IsBrokerUserEvent;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///è´§å¸è´¨æŠ¼æ¯”ç‡
+		///»õ±ÒÖÊÑº±ÈÂÊ
 		/// </summary>
 		double FundMortgageRatio;
 		/// <summary>
-		///æƒç›Šç®—æ³•
+		///È¨ÒæËã·¨
 		/// </summary>
 		EnumBalanceAlgorithmType	BalanceAlgorithm;
 	};
 
 	/// <summary>
-	///èµ„é‡‘è´¦æˆ·å£ä»¤å˜æ›´åŸŸ
+	///×Ê½ğÕË»§¿ÚÁî±ä¸üÓò
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcTradingAccountPasswordUpdateV1Field
+	public ref struct  ThostFtdcTradingAccountPasswordUpdateV1Field
 	{
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åŸæ¥çš„å£ä»¤
+		///Ô­À´µÄ¿ÚÁî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ OldPassword;
 		/// <summary>
-		///æ–°çš„å£ä»¤
+		///ĞÂµÄ¿ÚÁî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ NewPassword;
 	};
 
 	/// <summary>
-	///èµ„é‡‘è´¦æˆ·å£ä»¤å˜æ›´åŸŸ
+	///×Ê½ğÕË»§¿ÚÁî±ä¸üÓò
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcTradingAccountPasswordUpdateField
+	public ref struct  ThostFtdcTradingAccountPasswordUpdateField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///åŸæ¥çš„å£ä»¤
+		///Ô­À´µÄ¿ÚÁî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ OldPassword;
 		/// <summary>
-		///æ–°çš„å£ä»¤
+		///ĞÂµÄ¿ÚÁî
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ NewPassword;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»„åˆåˆçº¦åˆ†è…¿
+	///²éÑ¯×éºÏºÏÔ¼·ÖÍÈ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryCombinationLegField
+	public ref struct  ThostFtdcQryCombinationLegField
 	{
 		/// <summary>
-		///ç»„åˆåˆçº¦ä»£ç 
+		///×éºÏºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ CombInstrumentID;
 		/// <summary>
-		///å•è…¿ç¼–å·
+		///µ¥ÍÈ±àºÅ
 		/// </summary>
 		int LegID;
 		/// <summary>
-		///å•è…¿åˆçº¦ä»£ç 
+		///µ¥ÍÈºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ LegInstrumentID;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»„åˆåˆçº¦åˆ†è…¿
+	///²éÑ¯×éºÏºÏÔ¼·ÖÍÈ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQrySyncStatusField
+	public ref struct  ThostFtdcQrySyncStatusField
 	{
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 	};
 
 	/// <summary>
-	///ç»„åˆäº¤æ˜“åˆçº¦çš„å•è…¿
+	///×éºÏ½»Ò×ºÏÔ¼µÄµ¥ÍÈ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcCombinationLegField
+	public ref struct  ThostFtdcCombinationLegField
 	{
 		/// <summary>
-		///ç»„åˆåˆçº¦ä»£ç 
+		///×éºÏºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ CombInstrumentID;
 		/// <summary>
-		///å•è…¿ç¼–å·
+		///µ¥ÍÈ±àºÅ
 		/// </summary>
 		int LegID;
 		/// <summary>
-		///å•è…¿åˆçº¦ä»£ç 
+		///µ¥ÍÈºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ LegInstrumentID;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		///å•è…¿ä¹˜æ•°
+		///µ¥ÍÈ³ËÊı
 		/// </summary>
 		int LegMultiple;
 		/// <summary>
-		///æ´¾ç”Ÿå±‚æ•°
+		///ÅÉÉú²ãÊı
 		/// </summary>
 		int ImplyLevel;
 	};
 
 	/// <summary>
-	///æ•°æ®åŒæ­¥çŠ¶æ€
+	///Êı¾İÍ¬²½×´Ì¬
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcSyncStatusField
+	public ref struct  ThostFtdcSyncStatusField
 	{
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-		///æ•°æ®åŒæ­¥çŠ¶æ€
+		///Êı¾İÍ¬²½×´Ì¬
 		/// </summary>
 		EnumDataSyncStatusType DataSyncStatus;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢è”ç³»äºº
+	///²éÑ¯ÁªÏµÈË
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryLinkManField
+	public ref struct  ThostFtdcQryLinkManField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
 	/// <summary>
-	///è”ç³»äºº
+	///ÁªÏµÈË
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcLinkManField
+	public ref struct  ThostFtdcLinkManField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///è”ç³»äººç±»å‹
+		///ÁªÏµÈËÀàĞÍ
 		/// </summary>
 		EnumPersonTypeType	PersonType;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 		EnumIdCardTypeType	IdentifiedCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///åç§°
+		///Ãû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^	PersonName;
 		/// <summary>
-		///è”ç³»ç”µè¯
+		///ÁªÏµµç»°
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^	Telephone;
-		///é€šè®¯åœ°å€
+		///Í¨Ñ¶µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^	Address;
 		/// <summary>
-		///é‚®æ”¿ç¼–ç 
+		///ÓÊÕş±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^	ZipCode;
 		/// <summary>
-		///ä¼˜å…ˆçº§
+		///ÓÅÏÈ¼¶
 		/// </summary>
 		int	Priority;
 		/// <summary>
-		///å¼€æˆ·é‚®æ”¿ç¼–ç 
+		///¿ª»§ÓÊÕş±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	UOAZipCode;
 		/// <summary>
-		///å…¨ç§°
+		///È«³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^	PersonFullName;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»çºªå…¬å¸ç”¨æˆ·äº‹ä»¶
+	///²éÑ¯¾­¼Í¹«Ë¾ÓÃ»§ÊÂ¼ş
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryBrokerUserEventField
+	public ref struct  ThostFtdcQryBrokerUserEventField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///ç”¨æˆ·äº‹ä»¶ç±»å‹
+		///ÓÃ»§ÊÂ¼şÀàĞÍ
 		/// </summary>
 		EnumUserEventTypeType UserEventType;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»çºªå…¬å¸ç”¨æˆ·äº‹ä»¶
+	///²éÑ¯¾­¼Í¹«Ë¾ÓÃ»§ÊÂ¼ş
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcBrokerUserEventField
+	public ref struct  ThostFtdcBrokerUserEventField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///ç”¨æˆ·äº‹ä»¶ç±»å‹
+		///ÓÃ»§ÊÂ¼şÀàĞÍ
 		/// </summary>
 		EnumUserEventTypeType UserEventType;
 		/// </summary>
-		///ç”¨æˆ·äº‹ä»¶åºå·
+		///ÓÃ»§ÊÂ¼şĞòºÅ
 		/// <summary>
 		int	EventSequenceNo;
 		/// <summary>
-		///äº‹ä»¶å‘ç”Ÿæ—¥æœŸ
+		///ÊÂ¼ş·¢ÉúÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	EventDate;
 		/// <summary>
-		///äº‹ä»¶å‘ç”Ÿæ—¶é—´		
+		///ÊÂ¼ş·¢ÉúÊ±¼ä		
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	EventTime;
 		/// <summary>
-		///ç”¨æˆ·äº‹ä»¶ä¿¡æ¯
+		///ÓÃ»§ÊÂ¼şĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 1025)]
 		String^	UserEventInfo;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç­¾çº¦é“¶è¡Œè¯·æ±‚
+	///²éÑ¯Ç©Ô¼ÒøĞĞÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryContractBankField
+	public ref struct  ThostFtdcQryContractBankField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†ä¸­å¿ƒä»£ç 
+		///ÒøĞĞ·ÖÖĞĞÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBrchID;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç­¾çº¦é“¶è¡Œå“åº”
+	///²éÑ¯Ç©Ô¼ÒøĞĞÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcContractBankField
+	public ref struct  ThostFtdcContractBankField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†ä¸­å¿ƒä»£ç 
+		///ÒøĞĞ·ÖÖĞĞÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBrchID;
 		/// <summary>
-		///é“¶è¡Œåç§°
+		///ÒøĞĞÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ BankName;
 	};
 
 	/// <summary>
-	///æŠ•èµ„è€…ç»„åˆæŒä»“æ˜ç»†
+	///Í¶×ÊÕß×éºÏ³Ö²ÖÃ÷Ï¸
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcInvestorPositionCombineDetailField
+	public ref struct  ThostFtdcInvestorPositionCombineDetailField
 	{
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-		///å¼€ä»“æ—¥æœŸ
+		///¿ª²ÖÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ OpenDate;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///ç»„åˆç¼–å·
+		///×éºÏ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ComTradeID;
 		/// <summary>
-		///æ’®åˆç¼–å·		
+		///´éºÏ±àºÅ		
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	TradeID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		///ä¹°å–
+		///ÂòÂô
 		/// </summary>
 		EnumDirectionType	Direction;
 		/// </summary>
-		///æŒä»“é‡
+		///³Ö²ÖÁ¿
 		/// <summary>
 		int	TotalAmt;
 		/// <summary>
-		///æŠ•èµ„è€…ä¿è¯é‡‘
+		///Í¶×ÊÕß±£Ö¤½ğ
 		/// </summary>
 		double	Margin;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä¿è¯é‡‘
+		///½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double	ExchMargin;
 		/// <summary>
-		///ä¿è¯é‡‘ç‡
+		///±£Ö¤½ğÂÊ
 		/// </summary>
 		double	MarginRateByMoney;
 		/// <summary>
-		///ä¿è¯é‡‘ç‡(æŒ‰æ‰‹æ•°)
+		///±£Ö¤½ğÂÊ(°´ÊÖÊı)
 		/// </summary>
 		double	MarginRateByVolume;
 		/// <summary>
-		///å•è…¿ç¼–å·
+		///µ¥ÍÈ±àºÅ
 		/// </summary>
 		int LegID;
 		/// <summary>
-		///å•è…¿ä¹˜æ•°
+		///µ¥ÍÈ³ËÊı
 		/// </summary>
 		int LegMultiple;
 		/// <summary>
-		///ç»„åˆæŒä»“åˆçº¦ç¼–ç 
+		///×éºÏ³Ö²ÖºÏÔ¼±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^	CombInstrumentID;
 		/// <summary>
-		///æˆäº¤ç»„å·
+		///³É½»×éºÅ
 		/// </summary>
 		int	TradeGroupID;
 	};
 
 	/// <summary>
-	///é¢„åŸ‹å•
+	///Ô¤Âñµ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcParkedOrderField
+	public ref struct  ThostFtdcParkedOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ¥å•å¼•ç”¨
+		///±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æŠ¥å•ä»·æ ¼æ¡ä»¶
+		///±¨µ¥¼Û¸ñÌõ¼ş
 		/// </summary>
 		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ CombOffsetFlag;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ CombHedgeFlag;
-		///ä»·æ ¼
+		///¼Û¸ñ
 		double	LimitPrice;
-		///æ•°é‡
+		///ÊıÁ¿
 		int	VolumeTotalOriginal;
-		///æœ‰æ•ˆæœŸç±»å‹
+		///ÓĞĞ§ÆÚÀàĞÍ
 		TThostFtdcTimeConditionType	TimeCondition;
 		/// <summary>
-		///GTDæ—¥æœŸ
+		///GTDÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	GTDDate;
-		///æˆäº¤é‡ç±»å‹
+		///³É½»Á¿ÀàĞÍ
 		TThostFtdcVolumeConditionType	VolumeCondition;
-		///æœ€å°æˆäº¤é‡
+		///×îĞ¡³É½»Á¿
 		int	MinVolume;
-		///è§¦å‘æ¡ä»¶
+		///´¥·¢Ìõ¼ş
 		TThostFtdcContingentConditionType	ContingentCondition;
-		///æ­¢æŸä»·
+		///Ö¹Ëğ¼Û
 		double	StopPrice;
-		///å¼ºå¹³åŸå› 
+		///Ç¿Æ½Ô­Òò
 		TThostFtdcForceCloseReasonType	ForceCloseReason;
-		///è‡ªåŠ¨æŒ‚èµ·æ ‡å¿—
+		///×Ô¶¯¹ÒÆğ±êÖ¾
 		TThostFtdcBoolType	IsAutoSuspend;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
-		///ç”¨æˆ·å¼ºè¯„æ ‡å¿—
+		///ÓÃ»§Ç¿ÆÀ±êÖ¾
 		TThostFtdcBoolType	UserForceClose;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///é¢„åŸ‹æŠ¥å•ç¼–å·
+		///Ô¤Âñ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	ParkedOrderID;
 		/// <summary>
-		///ç”¨æˆ·ç±»å‹
+		///ÓÃ»§ÀàĞÍ
 		/// </summary>
 		EnumUserTypeType	UserType;
 		/// <summary>
-		///é¢„åŸ‹å•çŠ¶æ€
+		///Ô¤Âñµ¥×´Ì¬
 		/// </summary>
 		EnumParkedOrderStatusType	Status;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
-		///äº’æ¢å•æ ‡å¿—
+		///»¥»»µ¥±êÖ¾
 		TThostFtdcBoolType	IsSwapOrder;
 		/// <summary>
-		///èµ„é‡‘è´¦å·
+		///×Ê½ğÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///äº¤æ˜“ç¼–ç 
+		///½»Ò×±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///è¾“å…¥é¢„åŸ‹å•æ“ä½œ
+	///ÊäÈëÔ¤Âñµ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcParkedOrderActionField
+	public ref struct  ThostFtdcParkedOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///æŠ¥å•æ“ä½œå¼•ç”¨
+		///±¨µ¥²Ù×÷ÒıÓÃ
 		TThostFtdcOrderActionRefType	OrderActionRef;
 		/// <summary>
-		///æŠ¥å•å¼•ç”¨
+		///±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ¥å•ç¼–å·
+		///±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	OrderSysID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		///ä»·æ ¼
+		///¼Û¸ñ
 		/// </summary>
 		double	LimitPrice;
 		/// <summary>
-		///æ•°é‡å˜åŒ–
+		///ÊıÁ¿±ä»¯
 		/// </summary>
 		int	VolumeChange;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///é¢„åŸ‹æ’¤å•å•ç¼–å·
+		///Ô¤Âñ³·µ¥µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	ParkedOrderActionID;
 		/// <summary>
-		///ç”¨æˆ·ç±»å‹
+		///ÓÃ»§ÀàĞÍ
 		/// </summary>
 		EnumUserTypeType	UserType;
 		/// <summary>
-		///é¢„åŸ‹æ’¤å•çŠ¶æ€
+		///Ô¤Âñ³·µ¥×´Ì¬
 		/// </summary>
 		EnumParkedOrderStatusType	Status;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢é¢„åŸ‹å•
+	///²éÑ¯Ô¤Âñµ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryParkedOrderField
+	public ref struct  ThostFtdcQryParkedOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢é¢„åŸ‹æ’¤å•
+	///²éÑ¯Ô¤Âñ³·µ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryParkedOrderActionField
+	public ref struct  ThostFtdcQryParkedOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///åˆ é™¤é¢„åŸ‹å•
+	///É¾³ıÔ¤Âñµ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRemoveParkedOrderField
+	public ref struct  ThostFtdcRemoveParkedOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///é¢„åŸ‹æŠ¥å•ç¼–å·
+		///Ô¤Âñ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	ParkedOrderID;
 	};
 
 	/// <summary>
-	///åˆ é™¤é¢„åŸ‹æ’¤å•
+	///É¾³ıÔ¤Âñ³·µ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRemoveParkedOrderActionField
+	public ref struct  ThostFtdcRemoveParkedOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///é¢„åŸ‹æ’¤å•ç¼–å·
+		///Ô¤Âñ³·µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	ParkedOrderActionID;
 	};
 
 	/// <summary>
-	///ç»çºªå…¬å¸å¯æèµ„é‡‘ç®—æ³•è¡¨
+	///¾­¼Í¹«Ë¾¿ÉÌá×Ê½ğËã·¨±í
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcInvestorWithdrawAlgorithmField
+	public ref struct  ThostFtdcInvestorWithdrawAlgorithmField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///å¯æèµ„é‡‘æ¯”ä¾‹
+		///¿ÉÌá×Ê½ğ±ÈÀı
 		double	UsingRatio;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///è´§å¸è´¨æŠ¼æ¯”ç‡
+		///»õ±ÒÖÊÑº±ÈÂÊ
 		/// </summary>
 		double FundMortgageRatio;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»„åˆæŒä»“æ˜ç»†
+	///²éÑ¯×éºÏ³Ö²ÖÃ÷Ï¸
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryInvestorPositionCombineDetailField
+	public ref struct  ThostFtdcQryInvestorPositionCombineDetailField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///ç»„åˆæŒä»“åˆçº¦ç¼–ç 
+		///×éºÏ³Ö²ÖºÏÔ¼±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^	CombInstrumentID;
 	};
 
 	/// <summary>
-	///æˆäº¤å‡ä»·
+	///³É½»¾ù¼Û
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcMarketDataAveragePriceField
+	public ref struct  ThostFtdcMarketDataAveragePriceField
 	{
-		///å½“æ—¥å‡ä»·
+		///µ±ÈÕ¾ù¼Û
 		double	AveragePrice;
 	};
 
 	/// <summary>
-	///æ ¡éªŒæŠ•èµ„è€…å¯†ç 
+	///Ğ£ÑéÍ¶×ÊÕßÃÜÂë
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcVerifyInvestorPasswordField
+	public ref struct  ThostFtdcVerifyInvestorPasswordField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///å¯†ç 
+		///ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 	};
 
 	/// <summary>
-	///ç”¨æˆ·IP
+	///ÓÃ»§IP
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcUserIPField
+	public ref struct  ThostFtdcUserIPField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 		/// <summary>
-		///IPåœ°å€æ©ç 
+		///IPµØÖ·ÑÚÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPMask;
 	};
 
 	/// <summary>
-	///ç”¨æˆ·äº‹ä»¶é€šçŸ¥ä¿¡æ¯
+	///ÓÃ»§ÊÂ¼şÍ¨ÖªĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcTradingNoticeInfoField
+	public ref struct  ThostFtdcTradingNoticeInfoField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///å‘é€æ—¶é—´
+		///·¢ËÍÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ SendTime;
 		/// <summary>
-		///æ¶ˆæ¯æ­£æ–‡
+		///ÏûÏ¢ÕıÎÄ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
 		String^ FieldContent;
 		/// <summary>
-		///åºåˆ—ç³»åˆ—å·
+		///ĞòÁĞÏµÁĞºÅ
 		/// </summary>
 		short SequenceSeries;
 		/// <summary>
-		///åºåˆ—å·
+		///ĞòÁĞºÅ
 		/// </summary>
 		int SequenceNo;
 	};
 
 	/// <summary>
-	///ç”¨æˆ·äº‹ä»¶é€šçŸ¥
+	///ÓÃ»§ÊÂ¼şÍ¨Öª
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcTradingNoticeField
+	public ref struct  ThostFtdcTradingNoticeField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…èŒƒå›´
+		///Í¶×ÊÕß·¶Î§
 		/// </summary>
 		EnumInvestorRangeType InvestorRange;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åºåˆ—ç³»åˆ—å·
+		///ĞòÁĞÏµÁĞºÅ
 		/// </summary>
 		short SequenceSeries;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///å‘é€æ—¶é—´
+		///·¢ËÍÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ SendTime;
 		/// <summary>
-		///åºåˆ—å·
+		///ĞòÁĞºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///æ¶ˆæ¯æ­£æ–‡
+		///ÏûÏ¢ÕıÎÄ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
 		String^ FieldContent;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢äº¤æ˜“äº‹ä»¶é€šçŸ¥
+	///²éÑ¯½»Ò×ÊÂ¼şÍ¨Öª
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryTradingNoticeField
+	public ref struct  ThostFtdcQryTradingNoticeField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢é”™è¯¯æŠ¥å•
+	///²éÑ¯´íÎó±¨µ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryErrOrderField
+	public ref struct  ThostFtdcQryErrOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
 	/// <summary>
-	///é”™è¯¯æŠ¥å•
+	///´íÎó±¨µ¥
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcErrOrderField
+	public ref struct  ThostFtdcErrOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ¥å•å¼•ç”¨
+		///±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æŠ¥å•ä»·æ ¼æ¡ä»¶
+		///±¨µ¥¼Û¸ñÌõ¼ş
 		/// </summary>
 		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ CombOffsetFlag;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ CombHedgeFlag;
-		///ä»·æ ¼
+		///¼Û¸ñ
 		double	LimitPrice;
-		///æ•°é‡
+		///ÊıÁ¿
 		int	VolumeTotalOriginal;
-		///æœ‰æ•ˆæœŸç±»å‹
+		///ÓĞĞ§ÆÚÀàĞÍ
 		TThostFtdcTimeConditionType	TimeCondition;
 		/// <summary>
-		///GTDæ—¥æœŸ
+		///GTDÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	GTDDate;
-		///æˆäº¤é‡ç±»å‹
+		///³É½»Á¿ÀàĞÍ
 		TThostFtdcVolumeConditionType	VolumeCondition;
-		///æœ€å°æˆäº¤é‡
+		///×îĞ¡³É½»Á¿
 		int	MinVolume;
-		///è§¦å‘æ¡ä»¶
+		///´¥·¢Ìõ¼ş
 		TThostFtdcContingentConditionType	ContingentCondition;
-		///æ­¢æŸä»·
+		///Ö¹Ëğ¼Û
 		double	StopPrice;
-		///å¼ºå¹³åŸå› 
+		///Ç¿Æ½Ô­Òò
 		TThostFtdcForceCloseReasonType	ForceCloseReason;
-		///è‡ªåŠ¨æŒ‚èµ·æ ‡å¿—
+		///×Ô¶¯¹ÒÆğ±êÖ¾
 		TThostFtdcBoolType	IsAutoSuspend;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
-		///ç”¨æˆ·å¼ºè¯„æ ‡å¿—
+		///ÓÃ»§Ç¿ÆÀ±êÖ¾
 		TThostFtdcBoolType	UserForceClose;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
-		///äº’æ¢å•æ ‡å¿—
+		///»¥»»µ¥±êÖ¾
 		TThostFtdcBoolType	IsSwapOrder;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///èµ„é‡‘è´¦å·
+		///×Ê½ğÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///äº¤æ˜“ç¼–ç 
+		///½»Ò×±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢é”™è¯¯æŠ¥å•æ“ä½œ
+	///²éÑ¯´íÎó±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcErrorConditionalOrderField
+	public ref struct  ThostFtdcErrorConditionalOrderField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///æŠ¥å•å¼•ç”¨
+		///±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æŠ¥å•ä»·æ ¼æ¡ä»¶
+		///±¨µ¥¼Û¸ñÌõ¼ş
 		/// </summary>
 		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		/// ç»„åˆå¼€å¹³æ ‡å¿—
+		/// ×éºÏ¿ªÆ½±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ CombOffsetFlag;
 		/// <summary>
-		/// ç»„åˆæŠ•æœºå¥—ä¿æ ‡å¿—
+		/// ×éºÏÍ¶»úÌ×±£±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ CombHedgeFlag;
-		///ä»·æ ¼
+		///¼Û¸ñ
 		double	LimitPrice;
-		///æ•°é‡
+		///ÊıÁ¿
 		int	VolumeTotalOriginal;
-		///æœ‰æ•ˆæœŸç±»å‹
+		///ÓĞĞ§ÆÚÀàĞÍ
 		TThostFtdcTimeConditionType	TimeCondition;
 		/// <summary>
-		///GTDæ—¥æœŸ
+		///GTDÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	GTDDate;
-		///æˆäº¤é‡ç±»å‹
+		///³É½»Á¿ÀàĞÍ
 		TThostFtdcVolumeConditionType	VolumeCondition;
-		///æœ€å°æˆäº¤é‡
+		///×îĞ¡³É½»Á¿
 		int	MinVolume;
-		///è§¦å‘æ¡ä»¶
+		///´¥·¢Ìõ¼ş
 		TThostFtdcContingentConditionType	ContingentCondition;
-		///æ­¢æŸä»·
+		///Ö¹Ëğ¼Û
 		double	StopPrice;
-		///å¼ºå¹³åŸå› 
+		///Ç¿Æ½Ô­Òò
 		TThostFtdcForceCloseReasonType	ForceCloseReason;
-		///è‡ªåŠ¨æŒ‚èµ·æ ‡å¿—
+		///×Ô¶¯¹ÒÆğ±êÖ¾
 		TThostFtdcBoolType	IsAutoSuspend;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///æœ¬åœ°æŠ¥å•ç¼–å·
+		///±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///åˆçº¦åœ¨äº¤æ˜“æ‰€çš„ä»£ç 
+		///ºÏÔ¼ÔÚ½»Ò×ËùµÄ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
-		///æŠ¥å•æäº¤çŠ¶æ€
+		///±¨µ¥Ìá½»×´Ì¬
 		TThostFtdcOrderSubmitStatusType	OrderSubmitStatus;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		int NotifySequence;
 		/// <summary>
-		///äº¤æ˜“æ—¥
+		///½»Ò×ÈÕ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///æŠ¥å•ç¼–å·
+		///±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
-		///æŠ¥å•æ¥æº
+		///±¨µ¥À´Ô´
 		TThostFtdcOrderSourceType	OrderSource;
-		///æŠ¥å•çŠ¶æ€
+		///±¨µ¥×´Ì¬
 		TThostFtdcOrderStatusType	OrderStatus;
-		///æŠ¥å•ç±»å‹
+		///±¨µ¥ÀàĞÍ
 		TThostFtdcOrderTypeType	OrderType;
-		///ä»Šæˆäº¤æ•°é‡
+		///½ñ³É½»ÊıÁ¿
 		int	VolumeTraded;
-		///å‰©ä½™æ•°é‡
+		///Ê£ÓàÊıÁ¿
 		int	VolumeTotal;
 		/// <summary>
-		///æŠ¥å•æ—¥æœŸ
+		///±¨µ¥ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
 		/// <summary>
-		///å§”æ‰˜æ—¶é—´
+		///Î¯ÍĞÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertTime;
 		/// <summary>
-		///æ¿€æ´»æ—¶é—´
+		///¼¤»îÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActiveTime;
 		/// <summary>
-		///æŒ‚èµ·æ—¶é—´
+		///¹ÒÆğÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ SuspendTime;
 		/// <summary>
-		///æœ€åä¿®æ”¹æ—¶é—´
+		///×îºóĞŞ¸ÄÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ UpdateTime;
 		/// <summary>
-		///æ’¤é”€æ—¶é—´
+		///³·ÏúÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CancelTime;
 		/// <summary>
-		///æœ€åä¿®æ”¹äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		///×îºóĞŞ¸Ä½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ActiveTraderID;
 		/// <summary>
-		///ç»“ç®—ä¼šå‘˜ç¼–å·
+		///½áËã»áÔ±±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClearingPartID;
 		/// <summary>
-		///åºå·
+		///ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///ç”¨æˆ·ç«¯äº§å“ä¿¡æ¯
+		///ÓÃ»§¶Ë²úÆ·ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ UserProductInfo;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
-		///ç”¨æˆ·å¼ºè¯„æ ‡å¿—
+		///ÓÃ»§Ç¿ÆÀ±êÖ¾
 		TThostFtdcBoolType	UserForceClose;
 		/// <summary>
-		///æ“ä½œç”¨æˆ·ä»£ç 
+		///²Ù×÷ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ ActiveUserID;
 		/// <summary>
-		///ç»çºªå…¬å¸æŠ¥å•ç¼–å·
+		///¾­¼Í¹«Ë¾±¨µ¥±àºÅ
 		int	BrokerOrderSeq;
 		/// <summary>
-		///ç›¸å…³æŠ¥å•
+		///Ïà¹Ø±¨µ¥
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	RelativeOrderSysID;
 		/// <summary>
-		///éƒ‘å•†æ‰€æˆäº¤æ•°é‡
+		///Ö£ÉÌËù³É½»ÊıÁ¿
 		/// </summary>
 		int	ZCETotalTradedVolume;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
-		///äº’æ¢å•æ ‡å¿—
+		///»¥»»µ¥±êÖ¾
 		TThostFtdcBoolType	IsSwapOrder;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///èµ„é‡‘è´¦å·
+		///×Ê½ğÕËºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢é”™è¯¯æŠ¥å•æ“ä½œ
+	///²éÑ¯´íÎó±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryErrOrderActionField
+	public ref struct  ThostFtdcQryErrOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
 	/// <summary>
-	///é”™è¯¯æŠ¥å•æ“ä½œ
+	///´íÎó±¨µ¥²Ù×÷
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcErrOrderActionField
+	public ref struct  ThostFtdcErrOrderActionField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///æŠ¥å•æ“ä½œå¼•ç”¨
+		///±¨µ¥²Ù×÷ÒıÓÃ
 		TThostFtdcOrderActionRefType	OrderActionRef;
 		/// <summary>
-		///æŠ¥å•å¼•ç”¨
+		///±¨µ¥ÒıÓÃ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderRef;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///å‰ç½®ç¼–å·
+		///Ç°ÖÃ±àºÅ
 		/// </summary>
 		int FrontID;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ¥å•ç¼–å·
+		///±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSysID;
 		/// <summary>
-		///æ“ä½œæ ‡å¿—
+		///²Ù×÷±êÖ¾
 		/// </summary>
 		EnumActionFlagType ActionFlag;
 		/// <summary>
-		///ä»·æ ¼
+		///¼Û¸ñ
 		/// </summary>
 		double	LimitPrice;
 		/// <summary>
-		///æ•°é‡å˜åŒ–
+		///ÊıÁ¿±ä»¯
 		/// </summary>
 		int	VolumeChange;
 		/// <summary>
-		///æ“ä½œæ—¥æœŸ
+		///²Ù×÷ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionDate;
 		/// <summary>
-		///æ“ä½œæ—¶é—´
+		///²Ù×÷Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ActionTime;
 		/// <summary>
-		/// äº¤æ˜“æ‰€äº¤æ˜“å‘˜ä»£ç 
+		/// ½»Ò×Ëù½»Ò×Ô±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ TraderID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœ¬åœ°æŠ¥å•ç¼–å·
+		///±¾µØ±¨µ¥±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ OrderLocalID;
 		/// <summary>
-		///æ“ä½œæœ¬åœ°ç¼–å·
+		///²Ù×÷±¾µØ±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ ActionLocalID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///å®¢æˆ·ä»£ç 
+		///¿Í»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ClientID;
 		/// <summary>
-		///ä¸šåŠ¡å•å…ƒ
+		///ÒµÎñµ¥Ôª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ BusinessUnit;
 		/// <summary>
-		///æŠ¥å•æ“ä½œçŠ¶æ€
+		///±¨µ¥²Ù×÷×´Ì¬
 		/// </summary>
 		EnumOrderActionStatusType OrderActionStatus;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///çŠ¶æ€ä¿¡æ¯
+		///×´Ì¬ĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ StatusMsg;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///è¥ä¸šéƒ¨ç¼–å·
+		///ÓªÒµ²¿±àºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ BranchID;
 		/// <summary>
-		///æŠ•èµ„å•å…ƒä»£ç 
+		///Í¶×Êµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ InvestUnitID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 		/// <summary>
-		///Macåœ°å€
+		///MacµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢äº¤æ˜“æ‰€çŠ¶æ€
+	///²éÑ¯½»Ò×Ëù×´Ì¬
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryExchangeSequenceField
+	public ref struct  ThostFtdcQryExchangeSequenceField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ‰€çŠ¶æ€
+	///½»Ò×Ëù×´Ì¬
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcExchangeSequenceField
+	public ref struct  ThostFtdcExchangeSequenceField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///åºå·
+		///ĞòºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///åˆçº¦äº¤æ˜“çŠ¶æ€
+		///ºÏÔ¼½»Ò××´Ì¬
 		/// </summary>
 		EnumInstrumentStatusType	MarketStatus;
 	};
 
 	/// <summary>
-	///æ ¹æ®ä»·æ ¼æŸ¥è¯¢æœ€å¤§æŠ¥å•æ•°é‡
+	///¸ù¾İ¼Û¸ñ²éÑ¯×î´ó±¨µ¥ÊıÁ¿
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQueryMaxOrderVolumeWithPriceField
+	public ref struct  ThostFtdcQueryMaxOrderVolumeWithPriceField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		///å¼€å¹³æ ‡å¿—
+		///¿ªÆ½±êÖ¾
 		/// </summary>
 		EnumOffsetFlagEnType OffsetFlag;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
-		///æœ€å¤§å…è®¸æŠ¥å•æ•°é‡
+		///×î´óÔÊĞí±¨µ¥ÊıÁ¿
 		int	MaxVolume;
-		///æŠ¥å•ä»·æ ¼
+		///±¨µ¥¼Û¸ñ
 		double	Price;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»çºªå…¬å¸äº¤æ˜“å‚æ•°
+	///²éÑ¯¾­¼Í¹«Ë¾½»Ò×²ÎÊı
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryBrokerTradingParamsField
+	public ref struct  ThostFtdcQryBrokerTradingParamsField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 	};
 
 	/// <summary>
-	///ç»çºªå…¬å¸äº¤æ˜“å‚æ•°
+	///¾­¼Í¹«Ë¾½»Ò×²ÎÊı
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcBrokerTradingParamsField
+	public ref struct  ThostFtdcBrokerTradingParamsField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///ä¿è¯é‡‘ä»·æ ¼ç±»å‹
+		///±£Ö¤½ğ¼Û¸ñÀàĞÍ
 		TThostFtdcMarginPriceTypeType	MarginPriceType;
 		/// <summary>
-		///ç›ˆäºç®—æ³•
+		///Ó¯¿÷Ëã·¨
 		/// </summary>
 		EnumAlgorithmType Algorithm;
-		///å¯ç”¨æ˜¯å¦åŒ…å«å¹³ä»“ç›ˆåˆ©
+		///¿ÉÓÃÊÇ·ñ°üº¬Æ½²ÖÓ¯Àû
 		TThostFtdcIncludeCloseProfitType	AvailIncludeCloseProfit;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
-		///æœŸæƒæƒåˆ©é‡‘ä»·æ ¼ç±»å‹
+		///ÆÚÈ¨È¨Àû½ğ¼Û¸ñÀàĞÍ
 		TThostFtdcOptionRoyaltyPriceTypeType	OptionRoyaltyPriceType;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»çºªå…¬å¸äº¤æ˜“ç®—æ³•
+	///²éÑ¯¾­¼Í¹«Ë¾½»Ò×Ëã·¨
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryBrokerTradingAlgosField
+	public ref struct  ThostFtdcQryBrokerTradingAlgosField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
 
 	/// <summary>
-	///ç»çºªå…¬å¸äº¤æ˜“ç®—æ³•
+	///¾­¼Í¹«Ë¾½»Ò×Ëã·¨
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcBrokerTradingAlgosField
+	public ref struct  ThostFtdcBrokerTradingAlgosField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
-		///æŒä»“å¤„ç†ç®—æ³•ç¼–å·
+		///³Ö²Ö´¦ÀíËã·¨±àºÅ
 		TThostFtdcHandlePositionAlgoIDType	HandlePositionAlgoID;
-		///å¯»æ‰¾ä¿è¯é‡‘ç‡ç®—æ³•ç¼–å·
+		///Ñ°ÕÒ±£Ö¤½ğÂÊËã·¨±àºÅ
 		TThostFtdcFindMarginRateAlgoIDType	FindMarginRateAlgoID;
-		///èµ„é‡‘å¤„ç†ç®—æ³•ç¼–å·
+		///×Ê½ğ´¦ÀíËã·¨±àºÅ
 		TThostFtdcHandleTradingAccountAlgoIDType	HandleTradingAccountAlgoID;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç»çºªå…¬å¸èµ„é‡‘
+	///²éÑ¯¾­¼Í¹«Ë¾×Ê½ğ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQueryBrokerDepositField
+	public ref struct  ThostFtdcQueryBrokerDepositField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///ç»çºªå…¬å¸èµ„é‡‘
+	///¾­¼Í¹«Ë¾×Ê½ğ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcBrokerDepositField
+	public ref struct  ThostFtdcBrokerDepositField
 	{
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ä¼šå‘˜ä»£ç 
+		///»áÔ±´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
-		///ä¸Šæ¬¡ç»“ç®—å‡†å¤‡é‡‘
+		///ÉÏ´Î½áËã×¼±¸½ğ
 		double	PreBalance;
-		///å½“å‰ä¿è¯é‡‘æ€»é¢
+		///µ±Ç°±£Ö¤½ğ×Ü¶î
 		double	CurrMargin;
-		///å¹³ä»“ç›ˆäº
+		///Æ½²ÖÓ¯¿÷
 		double	CloseProfit;
-		///æœŸè´§ç»“ç®—å‡†å¤‡é‡‘
+		///ÆÚ»õ½áËã×¼±¸½ğ
 		double	Balance;
-		///å…¥é‡‘é‡‘é¢
+		///Èë½ğ½ğ¶î
 		double	Deposit;
-		///å‡ºé‡‘é‡‘é¢
+		///³ö½ğ½ğ¶î
 		double	Withdraw;
-		///å¯æèµ„é‡‘
+		///¿ÉÌá×Ê½ğ
 		double	Available;
-		///åŸºæœ¬å‡†å¤‡é‡‘
+		///»ù±¾×¼±¸½ğ
 		double	Reserve;
-		///å†»ç»“çš„ä¿è¯é‡‘
+		///¶³½áµÄ±£Ö¤½ğ
 		double	FrozenMargin;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ä¿è¯é‡‘ç›‘ç®¡ç³»ç»Ÿç»çºªå…¬å¸å¯†é’¥
+	///²éÑ¯±£Ö¤½ğ¼à¹ÜÏµÍ³¾­¼Í¹«Ë¾ÃÜÔ¿
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryCFMMCBrokerKeyField
+	public ref struct  ThostFtdcQryCFMMCBrokerKeyField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 	};
 
 	/// <summary>
-	///ä¿è¯é‡‘ç›‘ç®¡ç³»ç»Ÿç»çºªå…¬å¸å¯†é’¥
+	///±£Ö¤½ğ¼à¹ÜÏµÍ³¾­¼Í¹«Ë¾ÃÜÔ¿
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcCFMMCBrokerKeyField
+	public ref struct  ThostFtdcCFMMCBrokerKeyField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç»çºªå…¬å¸ç»Ÿä¸€ç¼–ç 
+		///¾­¼Í¹«Ë¾Í³Ò»±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	ParticipantID;
 		/// <summary>
-		///å¯†é’¥ç”Ÿæˆæ—¥æœŸ
+		///ÃÜÔ¿Éú³ÉÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	CreateDate;
 		/// <summary>
-		///å¯†é’¥ç”Ÿæˆæ—¶é—´
+		///ÃÜÔ¿Éú³ÉÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	CreateTime;
 		/// <summary>
-		///å¯†é’¥ç¼–å·
+		///ÃÜÔ¿±àºÅ
 		/// </summary>
 		int	KeyID;
 		/// <summary>
-		///åŠ¨æ€å¯†é’¥
+		///¶¯Ì¬ÃÜÔ¿
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	CurrentKey;
 		/// <summary>
-		///åŠ¨æ€å¯†é’¥ç±»å‹
+		///¶¯Ì¬ÃÜÔ¿ÀàĞÍ
 		/// </summary>
 		EnumCFMMCKeyKindType	KeyKind;
 	};
 
 	/// <summary>
-	///ä¿è¯é‡‘ç›‘ç®¡ç³»ç»Ÿç»çºªå…¬å¸èµ„é‡‘è´¦æˆ·å¯†é’¥
+	///±£Ö¤½ğ¼à¹ÜÏµÍ³¾­¼Í¹«Ë¾×Ê½ğÕË»§ÃÜÔ¿
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcCFMMCTradingAccountKeyField
+	public ref struct  ThostFtdcCFMMCTradingAccountKeyField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç»çºªå…¬å¸ç»Ÿä¸€ç¼–ç 
+		///¾­¼Í¹«Ë¾Í³Ò»±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ ParticipantID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¯†é’¥ç¼–å·
+		///ÃÜÔ¿±àºÅ
 		/// </summary>
 		int	KeyID;
 		/// <summary>
-		///åŠ¨æ€å¯†é’¥
+		///¶¯Ì¬ÃÜÔ¿
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	CurrentKey;
 	};
 
 	/// <summary>
-	///è¯·æ±‚æŸ¥è¯¢ä¿è¯é‡‘ç›‘ç®¡ç³»ç»Ÿç»çºªå…¬å¸èµ„é‡‘è´¦æˆ·å¯†é’¥
+	///ÇëÇó²éÑ¯±£Ö¤½ğ¼à¹ÜÏµÍ³¾­¼Í¹«Ë¾×Ê½ğÕË»§ÃÜÔ¿
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryCFMMCTradingAccountKeyField
+	public ref struct ThostFtdcQryCFMMCTradingAccountKeyField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
-	///ç”¨æˆ·åŠ¨æ€ä»¤ç‰Œå‚æ•°
+	///ÓÃ»§¶¯Ì¬ÁîÅÆ²ÎÊı
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcBrokerUserOTPParamField
+	public ref struct  ThostFtdcBrokerUserOTPParamField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///åŠ¨æ€ä»¤ç‰Œæä¾›å•†
+		///¶¯Ì¬ÁîÅÆÌá¹©ÉÌ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 2)]
 		String^	OTPVendorsID;
 		/// <summary>
-		///åŠ¨æ€ä»¤ç‰Œåºåˆ—å·
+		///¶¯Ì¬ÁîÅÆĞòÁĞºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^	SerialNumber;
 		/// <summary>
-		///ä»¤ç‰Œå¯†é’¥
+		///ÁîÅÆÃÜÔ¿
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^	AuthKey;
 		/// <summary>
-		///æ¼‚ç§»å€¼
+		///Æ¯ÒÆÖµ
 		/// </summary>
 		int	LastDrift;
 		/// <summary>
-		///æˆåŠŸå€¼
+		///³É¹¦Öµ
 		/// </summary>
 		int	LastSuccess;
 		/// <summary>
-		///åŠ¨æ€ä»¤ç‰Œç±»å‹
+		///¶¯Ì¬ÁîÅÆÀàĞÍ
 		/// </summary>
 		EnumOTPTypeType	OTPType;
 	};
 
 	/// <summary>
-	///æ‰‹å·¥åŒæ­¥ç”¨æˆ·åŠ¨æ€ä»¤ç‰Œ
+	///ÊÖ¹¤Í¬²½ÓÃ»§¶¯Ì¬ÁîÅÆ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcManualSyncBrokerUserOTPField
+	public ref struct  ThostFtdcManualSyncBrokerUserOTPField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
-		///åŠ¨æ€ä»¤ç‰Œç±»å‹
+		///¶¯Ì¬ÁîÅÆÀàĞÍ
 		TThostFtdcOTPTypeType	OTPType;
 		/// <summary>
-		///ç¬¬ä¸€ä¸ªåŠ¨æ€å¯†ç 
+		///µÚÒ»¸ö¶¯Ì¬ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ FirstOTP;
 		/// <summary>
-		///ç¬¬äºŒä¸ªåŠ¨æ€å¯†ç 
+		///µÚ¶ş¸ö¶¯Ì¬ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ SecondOTP;
 	};
 
-	///æŠ•èµ„è€…æ‰‹ç»­è´¹ç‡æ¨¡æ¿
+	///Í¶×ÊÕßÊÖĞø·ÑÂÊÄ£°å
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcCommRateModelField
+	public ref struct  ThostFtdcCommRateModelField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æ‰‹ç»­è´¹ç‡æ¨¡æ¿ä»£ç 
+		///ÊÖĞø·ÑÂÊÄ£°å´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	CommModelID;
 		/// <summary>
-		///æ¨¡æ¿åç§°
+		///Ä£°åÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^	CommModelName;
 	};
 
 	/// <summary>
-	///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æ‰‹ç»­è´¹ç‡æ¨¡æ¿
+	///ÇëÇó²éÑ¯Í¶×ÊÕßÊÖĞø·ÑÂÊÄ£°å
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryCommRateModelField
+	public ref struct  ThostFtdcQryCommRateModelField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æ‰‹ç»­è´¹ç‡æ¨¡æ¿ä»£ç 
+		///ÊÖĞø·ÑÂÊÄ£°å´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	CommModelID;
 	};
 
 	/// <summary>
-	///æŠ•èµ„è€…ä¿è¯é‡‘ç‡æ¨¡æ¿
+	///Í¶×ÊÕß±£Ö¤½ğÂÊÄ£°å
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcMarginModelField
+	public ref struct  ThostFtdcMarginModelField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ä¿è¯é‡‘ç‡æ¨¡æ¿ä»£ç 
+		///±£Ö¤½ğÂÊÄ£°å´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	MarginModelID;
 		/// <summary>
-		///æ¨¡æ¿åç§°
+		///Ä£°åÃû³Æ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^	CommModelName;
 	};
 
 	/// <summary>
-	///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…ä¿è¯é‡‘ç‡æ¨¡æ¿
+	///ÇëÇó²éÑ¯Í¶×ÊÕß±£Ö¤½ğÂÊÄ£°å
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryMarginModelField
+	public ref struct  ThostFtdcQryMarginModelField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ä¿è¯é‡‘ç‡æ¨¡æ¿ä»£ç 
+		///±£Ö¤½ğÂÊÄ£°å´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	MarginModelID;
 	};
 
 	/// <summary>
-	///ä»“å•æŠ˜æŠµä¿¡æ¯
+	///²Öµ¥ÕÛµÖĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcEWarrantOffsetField
+	public ref struct  ThostFtdcEWarrantOffsetField
 	{
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 		/// <summary>
-		///ä¹°å–æ–¹å‘
+		///ÂòÂô·½Ïò
 		/// </summary>
 		EnumDirectionType Direction;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 		/// <summary>
-		///æ•°é‡
+		///ÊıÁ¿
 		/// </summary>
 		int Volume;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ä»“å•æŠ˜æŠµä¿¡æ¯
+	///²éÑ¯²Öµ¥ÕÛµÖĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryEWarrantOffsetField
+	public ref struct  ThostFtdcQryEWarrantOffsetField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///åˆçº¦ä»£ç 
+		///ºÏÔ¼´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
 	};
-
-	///æŸ¥è¯¢æŠ•èµ„è€…å“ç§/è·¨å“ç§ä¿è¯é‡‘
+	/// <summary>
+	///²éÑ¯Í¶×ÊÕßÆ·ÖÖ/¿çÆ·ÖÖ±£Ö¤½ğ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryInvestorProductGroupMarginField
+	public ref struct  ThostFtdcQryInvestorProductGroupMarginField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///å“ç§/è·¨å“ç§æ ‡ç¤º
+		///Æ·ÖÖ/¿çÆ·ÖÖ±êÊ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^	ProductGroupID;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 	};
 
 	/// <summary>
-	///æŠ•èµ„è€…å“ç§/è·¨å“ç§ä¿è¯é‡‘
+	///Í¶×ÊÕßÆ·ÖÖ/¿çÆ·ÖÖ±£Ö¤½ğ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcInvestorProductGroupMarginField
+	public ref struct  ThostFtdcInvestorProductGroupMarginField
 	{
 		/// <summary>
-		///å“ç§/è·¨å“ç§æ ‡ç¤º
+		///Æ·ÖÖ/¿çÆ·ÖÖ±êÊ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^	ProductGroupID;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-		///ç»“ç®—ç¼–å·
+		///½áËã±àºÅ
 		/// </summary>
 		int SettlementID;
 		/// <summary>
-		///å†»ç»“çš„ä¿è¯é‡‘
+		///¶³½áµÄ±£Ö¤½ğ
 		/// </summary>
 		double	FrozenMargin;
 		/// <summary>
-		///å¤šå¤´å†»ç»“çš„ä¿è¯é‡‘
+		///¶àÍ·¶³½áµÄ±£Ö¤½ğ
 		/// </summary>
 		double	LongFrozenMargin;
 		/// <summary>
-		///ç©ºå¤´å†»ç»“çš„ä¿è¯é‡‘
+		///¿ÕÍ·¶³½áµÄ±£Ö¤½ğ
 		/// </summary>
 		double	ShortFrozenMargin;
 		/// <summary>
-		///å ç”¨çš„ä¿è¯é‡‘
+		///Õ¼ÓÃµÄ±£Ö¤½ğ
 		/// </summary>
 		double	UseMargin;
 		/// <summary>
-		///å¤šå¤´ä¿è¯é‡‘
+		///¶àÍ·±£Ö¤½ğ
 		/// </summary>
 		double	LongUseMargin;
 		/// <summary>
-		///ç©ºå¤´ä¿è¯é‡‘
+		///¿ÕÍ·±£Ö¤½ğ
 		/// </summary>
 		double	ShortUseMargin;
-		///äº¤æ˜“æ‰€ä¿è¯é‡‘
+		///½»Ò×Ëù±£Ö¤½ğ
 		/// </summary>
 		double	ExchMargin;
-		///äº¤æ˜“æ‰€å¤šå¤´ä¿è¯é‡‘
+		///½»Ò×Ëù¶àÍ·±£Ö¤½ğ
 		/// </summary>
 		double	LongExchMargin;
 		/// <summary>
-		///äº¤æ˜“æ‰€ç©ºå¤´ä¿è¯é‡‘
+		///½»Ò×Ëù¿ÕÍ·±£Ö¤½ğ
 		/// </summary>
 		double	ShortExchMargin;
 		/// <summary>
-		///å¹³ä»“ç›ˆäº
+		///Æ½²ÖÓ¯¿÷
 		/// </summary>
 		double	CloseProfit;
 		/// <summary>
-		///å†»ç»“çš„æ‰‹ç»­è´¹
+		///¶³½áµÄÊÖĞø·Ñ
 		/// </summary>
 		double	FrozenCommission;
 		/// <summary>
-		///æ‰‹ç»­è´¹
+		///ÊÖĞø·Ñ
 		/// </summary>
 		double	Commission;
 		/// <summary>
-		///å†»ç»“çš„èµ„é‡‘
+		///¶³½áµÄ×Ê½ğ
 		/// </summary>
 		double	FrozenCash;
 		/// <summary>
-		///èµ„é‡‘å·®é¢
+		///×Ê½ğ²î¶î
 		/// </summary>
 		double	CashIn;
 		/// <summary>
-		///æŒä»“ç›ˆäº
+		///³Ö²ÖÓ¯¿÷
 		/// </summary>
 		double	PositionProfit;
 		/// <summary>
-		///æŠ˜æŠµæ€»é‡‘é¢
+		///ÕÛµÖ×Ü½ğ¶î
 		/// </summary>
 		double	OffsetAmount;
 		/// <summary>
-		///å¤šå¤´æŠ˜æŠµæ€»é‡‘é¢
+		///¶àÍ·ÕÛµÖ×Ü½ğ¶î
 		/// </summary>
 		double	LongOffsetAmount;
 		/// <summary>
-		///ç©ºå¤´æŠ˜æŠµæ€»é‡‘é¢
+		///¿ÕÍ·ÕÛµÖ×Ü½ğ¶î
 		/// </summary>
 		double	ShortOffsetAmount;
 		/// <summary>
-		///äº¤æ˜“æ‰€æŠ˜æŠµæ€»é‡‘é¢
+		///½»Ò×ËùÕÛµÖ×Ü½ğ¶î
 		/// </summary>
 		double	ExchOffsetAmount;
 		/// <summary>
-		///äº¤æ˜“æ‰€å¤šå¤´æŠ˜æŠµæ€»é‡‘é¢
+		///½»Ò×Ëù¶àÍ·ÕÛµÖ×Ü½ğ¶î
 		/// </summary>
 		double	LongExchOffsetAmount;
 		/// <summary>
-		///äº¤æ˜“æ‰€ç©ºå¤´æŠ˜æŠµæ€»é‡‘é¢
+		///½»Ò×Ëù¿ÕÍ·ÕÛµÖ×Ü½ğ¶î
 		/// </summary>
 		double	ShortExchOffsetAmount;
 		/// <summary>
-		///æŠ•æœºå¥—ä¿æ ‡å¿—
+		///Í¶»úÌ×±£±êÖ¾
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç›‘æ§ä¸­å¿ƒç”¨æˆ·ä»¤ç‰Œ
+	///²éÑ¯¼à¿ØÖĞĞÄÓÃ»§ÁîÅÆ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQueryCFMMCTradingAccountTokenField
+	public ref struct  ThostFtdcQueryCFMMCTradingAccountTokenField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 	};
 
-	///ç›‘æ§ä¸­å¿ƒç”¨æˆ·ä»¤ç‰Œ
+	///¼à¿ØÖĞĞÄÓÃ»§ÁîÅÆ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcCFMMCTradingAccountTokenField
+	public ref struct  ThostFtdcCFMMCTradingAccountTokenField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// </summary>
-		///ç»çºªå…¬å¸ç»Ÿä¸€ç¼–ç 
+		///¾­¼Í¹«Ë¾Í³Ò»±àÂë
 		/// <summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	ParticipantID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// </summary>
-		///å¯†é’¥ç¼–å·
+		///ÃÜÔ¿±àºÅ
 		/// <summary>
 		int	KeyID;
 		/// </summary>
-		///åŠ¨æ€ä»¤ç‰Œ
+		///¶¯Ì¬ÁîÅÆ
 		/// <summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	Token;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢äº§å“ç»„
+	///²éÑ¯²úÆ·×é
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryProductGroupField
+	public ref struct  ThostFtdcQryProductGroupField
 	{
 		/// <summary>
-		///äº§å“ä»£ç 
+		///²úÆ·´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ProductID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 	};
 
 	/// <summary>
-	///æŠ•èµ„è€…å“ç§/è·¨å“ç§ä¿è¯é‡‘äº§å“ç»„
+	///Í¶×ÊÕßÆ·ÖÖ/¿çÆ·ÖÖ±£Ö¤½ğ²úÆ·×é
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcProductGroupField
+	public ref struct  ThostFtdcProductGroupField
 	{
 		/// <summary>
-		///äº§å“ä»£ç 
+		///²úÆ·´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ProductID;
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///äº§å“ç»„ä»£ç 
+		///²úÆ·×é´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ProductGroupID;
 	};
 
-	///äº¤æ˜“æ‰€å…¬å‘Š
+	///½»Ò×Ëù¹«¸æ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcBulletinField
+	public ref struct  ThostFtdcBulletinField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-		///æŠ¥å•æç¤ºåºå·
+		///±¨µ¥ÌáÊ¾ĞòºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-		///å…¬å‘Šç¼–å·
+		///¹«¸æ±àºÅ
 		/// </summary>
 		int	BulletinID;
 		/// <summary>
-		///åºåˆ—å·
+		///ĞòÁĞºÅ
 		/// </summary>
 		int SequenceNo;
 		/// <summary>
-		///å…¬å‘Šç±»å‹
+		///¹«¸æÀàĞÍ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^	NewsType;
-		/////ç´§æ€¥ç¨‹åº¦
+		/////½ô¼±³Ì¶È
 		//TThostFtdcNewsUrgencyType	NewsUrgency;
 
 		/// <summary>
-		///ç´§æ€¥ç¨‹åº¦ï¼Œæ€€ç–‘å®˜æ–¹apiæœ‰é—®é¢˜,å¹¶æ²¡æœ‰å®šä¹‰ä»»ä½•ç´§æ€¥ç¨‹åº¦
+		///½ô¼±³Ì¶È£¬»³ÒÉ¹Ù·½apiÓĞÎÊÌâ,²¢Ã»ÓĞ¶¨ÒåÈÎºÎ½ô¼±³Ì¶È
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 1)]
 		String^ NewsUrgency;
 		/// <summary>
-		///å‘é€æ—¶é—´
+		///·¢ËÍÊ±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ SendTime;
 		/// <summary>
-		///æ¶ˆæ¯æ‘˜è¦
+		///ÏûÏ¢ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ Abstract;
 		/// <summary>
-		///æ¶ˆæ¯æ¥æº
+		///ÏûÏ¢À´Ô´
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ ComeFrom;
 		/// <summary>
-		///æ¶ˆæ¯æ­£æ–‡
+		///ÏûÏ¢ÕıÎÄ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
 		String^ Content;
 		/// <summary>
-		///WEBåœ°å€
+		///WEBµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 201)]
 		String^	URLLink;
 		/// <summary>
-		///å¸‚åœºä»£ç 
+		///ÊĞ³¡´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^	MarketID;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢äº¤æ˜“æ‰€å…¬å‘Š
+	///²éÑ¯½»Ò×Ëù¹«¸æ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryBulletinField
+	public ref struct ThostFtdcQryBulletinField
 	{
 		/// <summary>
-		///äº¤æ˜“æ‰€ä»£ç 
+		///½»Ò×Ëù´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
-		///å…¬å‘Šç¼–å·
+		///¹«¸æ±àºÅ
 		TThostFtdcBulletinIDType	BulletinID;
 		/// <summary>
-		///åºåˆ—å·
+		///ĞòÁĞºÅ
 		/// </summary>
 		int SequenceNo;
-		///å…¬å‘Šç±»å‹
+		///¹«¸æÀàĞÍ
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^	NewsType;
-		///ç´§æ€¥ç¨‹åº¦
+		///½ô¼±³Ì¶È
 		TThostFtdcNewsUrgencyType	NewsUrgency;
 	};
 
 	/// <summary>
-	///è½¬å¸å¼€æˆ·è¯·æ±‚
+	///×ªÕÊ¿ª»§ÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqOpenAccountField
+	public ref struct  ThostFtdcReqOpenAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///æ€§åˆ«
+		///ĞÔ±ğ
 		/// </summary>
 		EnumGenderType Gender;
 		/// <summary>
-		///å›½å®¶ä»£ç 
+		///¹ú¼Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CountryCode;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///åœ°å€
+		///µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		///é‚®ç¼–
+		///ÓÊ±à
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ ZipCode;
 		/// <summary>
-		///ç”µè¯å·ç 
+		///µç»°ºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		///æ‰‹æœº
+		///ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MobilePhone;
 		/// <summary>
-		///ä¼ çœŸ
+		///´«Õæ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Fax;
 		/// <summary>
-		///ç”µå­é‚®ä»¶
+		///µç×ÓÓÊ¼ş
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ EMail;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·çŠ¶æ€
+		///×Ê½ğÕË»§×´Ì¬
 		/// </summary>
 		EnumMoneyAccountStatusType MoneyAccountStatus;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
-		///æ±‡é’æ ‡å¿—
+		///»ã³®±êÖ¾
 		TThostFtdcCashExchangeCodeType	CashExchangeCode;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///è½¬å¸é”€æˆ·è¯·æ±‚
+	///×ªÕÊÏú»§ÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqCancelAccountField
+	public ref struct  ThostFtdcReqCancelAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///æ€§åˆ«
+		///ĞÔ±ğ
 		/// </summary>
 		EnumGenderType Gender;
 		/// <summary>
-		///å›½å®¶ä»£ç 
+		///¹ú¼Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CountryCode;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///åœ°å€
+		///µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		///é‚®ç¼–
+		///ÓÊ±à
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ ZipCode;
 		/// <summary>
-		///ç”µè¯å·ç 
+		///µç»°ºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		///æ‰‹æœº
+		///ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MobilePhone;
 		/// <summary>
-		///ä¼ çœŸ
+		///´«Õæ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Fax;
 		/// <summary>
-		///ç”µå­é‚®ä»¶
+		///µç×ÓÓÊ¼ş
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ EMail;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·çŠ¶æ€
+		///×Ê½ğÕË»§×´Ì¬
 		/// </summary>
 		EnumMoneyAccountStatusType MoneyAccountStatus;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
-		///æ±‡é’æ ‡å¿—
+		///»ã³®±êÖ¾
 		TThostFtdcCashExchangeCodeType	CashExchangeCode;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///å˜æ›´é“¶è¡Œè´¦æˆ·è¯·æ±‚
+	///±ä¸üÒøĞĞÕË»§ÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqChangeAccountField
+	public ref struct  ThostFtdcReqChangeAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///æ€§åˆ«
+		///ĞÔ±ğ
 		/// </summary>
 		EnumGenderType Gender;
 		/// <summary>
-		///å›½å®¶ä»£ç 
+		///¹ú¼Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CountryCode;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///åœ°å€
+		///µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		///é‚®ç¼–
+		///ÓÊ±à
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ ZipCode;
 		/// <summary>
-		///ç”µè¯å·ç 
+		///µç»°ºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		///æ‰‹æœº
+		///ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MobilePhone;
 		/// <summary>
-		///ä¼ çœŸ
+		///´«Õæ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Fax;
 		/// <summary>
-		///ç”µå­é‚®ä»¶
+		///µç×ÓÓÊ¼ş
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ EMail;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·çŠ¶æ€
+		///×Ê½ğÕË»§×´Ì¬
 		/// </summary>
 		EnumMoneyAccountStatusType MoneyAccountStatus;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æ–°é“¶è¡Œå¸å·
+		///ĞÂÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^	NewBankAccount;
 		/// <summary>
-		///æ–°é“¶è¡Œå¯†ç 
+		///ĞÂÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ NewBankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///è½¬è´¦è¯·æ±‚
+	///×ªÕËÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqTransferField
+	public ref struct  ThostFtdcReqTransferField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœŸè´§å…¬å¸æµæ°´å·
+		///ÆÚ»õ¹«Ë¾Á÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///è½¬å¸é‡‘é¢
+		///×ªÕÊ½ğ¶î
 		/// </summary>
 		double TradeAmount;
 		/// <summary>
-		///æœŸè´§å¯å–é‡‘é¢
+		///ÆÚ»õ¿ÉÈ¡½ğ¶î
 		/// </summary>
 		double FutureFetchAmount;
 		/// <summary>
-		///è´¹ç”¨æ”¯ä»˜æ ‡å¿—
+		///·ÑÓÃÖ§¸¶±êÖ¾
 		/// </summary>
 		EnumFeePayFlagType FeePayFlag;
 		/// <summary>
-		///åº”æ”¶å®¢æˆ·è´¹ç”¨
+		///Ó¦ÊÕ¿Í»§·ÑÓÃ
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		///åº”æ”¶æœŸè´§å…¬å¸è´¹ç”¨
+		///Ó¦ÊÕÆÚ»õ¹«Ë¾·ÑÓÃ
 		/// </summary>
 		double BrokerFee;
 		/// <summary>
-		///å‘é€æ–¹ç»™æ¥æ”¶æ–¹çš„æ¶ˆæ¯
+		///·¢ËÍ·½¸ø½ÓÊÕ·½µÄÏûÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ Message;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
-		///è½¬è´¦äº¤æ˜“çŠ¶æ€
+		///×ªÕË½»Ò××´Ì¬
 		TThostFtdcTransferStatusType	TransferStatus;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///é“¶è¡Œå‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§å“åº”
+	///ÒøĞĞ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRspTransferField
+	public ref struct  ThostFtdcRspTransferField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœŸè´§å…¬å¸æµæ°´å·
+		///ÆÚ»õ¹«Ë¾Á÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///è½¬å¸é‡‘é¢
+		///×ªÕÊ½ğ¶î
 		/// </summary>
 		double TradeAmount;
 		/// <summary>
-		///æœŸè´§å¯å–é‡‘é¢
+		///ÆÚ»õ¿ÉÈ¡½ğ¶î
 		/// </summary>
 		double FutureFetchAmount;
 		/// <summary>
-		///è´¹ç”¨æ”¯ä»˜æ ‡å¿—
+		///·ÑÓÃÖ§¸¶±êÖ¾
 		/// </summary>
 		EnumFeePayFlagType FeePayFlag;
 		/// <summary>
-		///åº”æ”¶å®¢æˆ·è´¹ç”¨
+		///Ó¦ÊÕ¿Í»§·ÑÓÃ
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		///åº”æ”¶æœŸè´§å…¬å¸è´¹ç”¨
+		///Ó¦ÊÕÆÚ»õ¹«Ë¾·ÑÓÃ
 		/// </summary>
 		double BrokerFee;
 		/// <summary>
-		///å‘é€æ–¹ç»™æ¥æ”¶æ–¹çš„æ¶ˆæ¯
+		///·¢ËÍ·½¸ø½ÓÊÕ·½µÄÏûÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ Message;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
-		///è½¬è´¦äº¤æ˜“çŠ¶æ€
+		///×ªÕË½»Ò××´Ì¬
 		TThostFtdcTransferStatusType	TransferStatus;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///å†²æ­£è¯·æ±‚
+	///³åÕıÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqRepealField
+	public ref struct  ThostFtdcReqRepealField
 	{
 		/// <summary>
-		///å†²æ­£æ—¶é—´é—´éš”
+		///³åÕıÊ±¼ä¼ä¸ô
 		/// </summary>
 		int	RepealTimeInterval;
 		/// </summary>
-		///å·²ç»å†²æ­£æ¬¡æ•°
+		///ÒÑ¾­³åÕı´ÎÊı
 		/// </summary>
 		int	RepealedTimes;
 		/// </summary>
-		///é“¶è¡Œå†²æ­£æ ‡å¿—
+		///ÒøĞĞ³åÕı±êÖ¾
 		/// </summary>
 		EnumBankRepealFlagType	BankRepealFlag;
 		/// </summary>
-		///æœŸå•†å†²æ­£æ ‡å¿—
+		///ÆÚÉÌ³åÕı±êÖ¾
 		/// </summary>
 		EnumBrokerRepealFlagType	BrokerRepealFlag;
 		/// </summary>
-		///è¢«å†²æ­£å¹³å°æµæ°´å·
+		///±»³åÕıÆ½Ì¨Á÷Ë®ºÅ
 		/// </summary>
 		int	PlateRepealSerial;
 		/// </summary>
-		///è¢«å†²æ­£é“¶è¡Œæµæ°´å·
+		///±»³åÕıÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	BankRepealSerial;
 		/// <summary>
-		///è¢«å†²æ­£æœŸè´§æµæ°´å·
+		///±»³åÕıÆÚ»õÁ÷Ë®ºÅ
 		/// </summary>
 		int FutureRepealSerial;
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœŸè´§å…¬å¸æµæ°´å·
+		///ÆÚ»õ¹«Ë¾Á÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///è½¬å¸é‡‘é¢
+		///×ªÕÊ½ğ¶î
 		/// </summary>
 		double TradeAmount;
 		/// <summary>
-		///æœŸè´§å¯å–é‡‘é¢
+		///ÆÚ»õ¿ÉÈ¡½ğ¶î
 		/// </summary>
 		double FutureFetchAmount;
 		/// <summary>
-		///è´¹ç”¨æ”¯ä»˜æ ‡å¿—
+		///·ÑÓÃÖ§¸¶±êÖ¾
 		/// </summary>
 		EnumFeePayFlagType FeePayFlag;
 		/// <summary>
-		///åº”æ”¶å®¢æˆ·è´¹ç”¨
+		///Ó¦ÊÕ¿Í»§·ÑÓÃ
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		///åº”æ”¶æœŸè´§å…¬å¸è´¹ç”¨
+		///Ó¦ÊÕÆÚ»õ¹«Ë¾·ÑÓÃ
 		/// </summary>
 		double BrokerFee;
 		/// <summary>
-		///å‘é€æ–¹ç»™æ¥æ”¶æ–¹çš„æ¶ˆæ¯
+		///·¢ËÍ·½¸ø½ÓÊÕ·½µÄÏûÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ Message;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
-		///è½¬è´¦äº¤æ˜“çŠ¶æ€
+		///×ªÕË½»Ò××´Ì¬
 		TThostFtdcTransferStatusType	TransferStatus;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///å†²æ­£å“åº”
+	///³åÕıÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRspRepealField
+	public ref struct  ThostFtdcRspRepealField
 	{
 		/// <summary>
-		///å†²æ­£æ—¶é—´é—´éš”
+		///³åÕıÊ±¼ä¼ä¸ô
 		/// </summary>
 		int	RepealTimeInterval;
 		/// </summary>
-		///å·²ç»å†²æ­£æ¬¡æ•°
+		///ÒÑ¾­³åÕı´ÎÊı
 		/// </summary>
 		int	RepealedTimes;
 		/// </summary>
-		///é“¶è¡Œå†²æ­£æ ‡å¿—
+		///ÒøĞĞ³åÕı±êÖ¾
 		/// </summary>
 		EnumBankRepealFlagType	BankRepealFlag;
 		/// </summary>
-		///æœŸå•†å†²æ­£æ ‡å¿—
+		///ÆÚÉÌ³åÕı±êÖ¾
 		/// </summary>
 		EnumBrokerRepealFlagType	BrokerRepealFlag;
 		/// </summary>
-		///è¢«å†²æ­£å¹³å°æµæ°´å·
+		///±»³åÕıÆ½Ì¨Á÷Ë®ºÅ
 		/// </summary>
 		int	PlateRepealSerial;
 		/// </summary>
-		///è¢«å†²æ­£é“¶è¡Œæµæ°´å·
+		///±»³åÕıÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	BankRepealSerial;
 		/// <summary>
-		///è¢«å†²æ­£æœŸè´§æµæ°´å·
+		///±»³åÕıÆÚ»õÁ÷Ë®ºÅ
 		/// </summary>
 		int FutureRepealSerial;
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///æœŸè´§å…¬å¸æµæ°´å·
+		///ÆÚ»õ¹«Ë¾Á÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///è½¬å¸é‡‘é¢
+		///×ªÕÊ½ğ¶î
 		/// </summary>
 		double TradeAmount;
 		/// <summary>
-		///æœŸè´§å¯å–é‡‘é¢
+		///ÆÚ»õ¿ÉÈ¡½ğ¶î
 		/// </summary>
 		double FutureFetchAmount;
 		/// <summary>
-		///è´¹ç”¨æ”¯ä»˜æ ‡å¿—
+		///·ÑÓÃÖ§¸¶±êÖ¾
 		/// </summary>
 		EnumFeePayFlagType FeePayFlag;
 		/// <summary>
-		///åº”æ”¶å®¢æˆ·è´¹ç”¨
+		///Ó¦ÊÕ¿Í»§·ÑÓÃ
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		///åº”æ”¶æœŸè´§å…¬å¸è´¹ç”¨
+		///Ó¦ÊÕÆÚ»õ¹«Ë¾·ÑÓÃ
 		/// </summary>
 		double BrokerFee;
 		/// <summary>
-		///å‘é€æ–¹ç»™æ¥æ”¶æ–¹çš„æ¶ˆæ¯
+		///·¢ËÍ·½¸ø½ÓÊÕ·½µÄÏûÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ Message;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
-		///è½¬è´¦äº¤æ˜“çŠ¶æ€
+		///×ªÕË½»Ò××´Ì¬
 		TThostFtdcTransferStatusType	TransferStatus;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢è´¦æˆ·ä¿¡æ¯è¯·æ±‚
+	///²éÑ¯ÕË»§ĞÅÏ¢ÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqQueryAccountField
+	public ref struct  ThostFtdcReqQueryAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///æœŸè´§å…¬å¸æµæ°´å·
+		///ÆÚ»õ¹«Ë¾Á÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢è´¦æˆ·ä¿¡æ¯å“åº”
+	///²éÑ¯ÕË»§ĞÅÏ¢ÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRspQueryAccountField
+	public ref struct  ThostFtdcRspQueryAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///æœŸè´§å…¬å¸æµæ°´å·
+		///ÆÚ»õ¹«Ë¾Á÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
-		///é“¶è¡Œå¯ç”¨é‡‘é¢
+		///ÒøĞĞ¿ÉÓÃ½ğ¶î
 		TThostFtdcTradeAmountType	BankUseAmount;
-		///é“¶è¡Œå¯å–é‡‘é¢
+		///ÒøĞĞ¿ÉÈ¡½ğ¶î
 		TThostFtdcTradeAmountType	BankFetchAmount;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///æœŸå•†ç­¾åˆ°ç­¾é€€
+	///ÆÚÉÌÇ©µ½Ç©ÍË
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcFutureSignIOField
+	public ref struct  ThostFtdcFutureSignIOField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 	};
 
 	/// <summary>
-	///æœŸå•†ç­¾åˆ°å“åº”
+	///ÆÚÉÌÇ©µ½ÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRspFutureSignInField
+	public ref struct  ThostFtdcRspFutureSignInField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///PINå¯†é’¥
+		///PINÃÜÔ¿
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^	PinKey;
 		/// <summary>
-		///MACå¯†é’¥
+		///MACÃÜÔ¿
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^	MacKey;
 	};
 
 	/// <summary>
-	///æœŸå•†ç­¾é€€è¯·æ±‚
+	///ÆÚÉÌÇ©ÍËÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqFutureSignOutField
+	public ref struct  ThostFtdcReqFutureSignOutField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 	};
 
 	/// <summary>
-	///æœŸå•†ç­¾é€€å“åº”
+	///ÆÚÉÌÇ©ÍËÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRspFutureSignOutField
+	public ref struct  ThostFtdcRspFutureSignOutField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢æŒ‡å®šæµæ°´å·çš„äº¤æ˜“ç»“æœè¯·æ±‚
+	///²éÑ¯Ö¸¶¨Á÷Ë®ºÅµÄ½»Ò×½á¹ûÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqQueryTradeResultBySerialField
+	public ref struct  ThostFtdcReqQueryTradeResultBySerialField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///æµæ°´å·
+		///Á÷Ë®ºÅ
 		/// </summary>
 		int	Reference;
 		/// <summary>
-		///æœ¬æµæ°´å·å‘å¸ƒè€…çš„æœºæ„ç±»å‹
+		///±¾Á÷Ë®ºÅ·¢²¼ÕßµÄ»ú¹¹ÀàĞÍ
 		/// </summary>
 		EnumInstitutionTypeType	RefrenceIssureType;
 		/// <summary>
-		///æœ¬æµæ°´å·å‘å¸ƒè€…æœºæ„ç¼–ç 
+		///±¾Á÷Ë®ºÅ·¢²¼Õß»ú¹¹±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^	RefrenceIssure;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///è½¬å¸é‡‘é¢
+		///×ªÕÊ½ğ¶î
 		/// </summary>
 		double TradeAmount;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢æŒ‡å®šæµæ°´å·çš„äº¤æ˜“ç»“æœå“åº”
+	///²éÑ¯Ö¸¶¨Á÷Ë®ºÅµÄ½»Ò×½á¹ûÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRspQueryTradeResultBySerialField
+	public ref struct  ThostFtdcRspQueryTradeResultBySerialField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///æµæ°´å·
+		///Á÷Ë®ºÅ
 		/// </summary>
 		int	Reference;
 		/// <summary>
-		///æœ¬æµæ°´å·å‘å¸ƒè€…çš„æœºæ„ç±»å‹
+		///±¾Á÷Ë®ºÅ·¢²¼ÕßµÄ»ú¹¹ÀàĞÍ
 		/// </summary>
 		EnumInstitutionTypeType	RefrenceIssureType;
 		/// <summary>
-		///æœ¬æµæ°´å·å‘å¸ƒè€…æœºæ„ç¼–ç 
+		///±¾Á÷Ë®ºÅ·¢²¼Õß»ú¹¹±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ RefrenceIssure;
 		/// <summary>
-		///åŸå§‹è¿”å›ä»£ç 
+		///Ô­Ê¼·µ»Ø´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ OriginReturnCode;
 		/// <summary>
-		///åŸå§‹è¿”å›ç æè¿°
+		///Ô­Ê¼·µ»ØÂëÃèÊö
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ OriginDescrInfoForReturnCode;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///è½¬å¸é‡‘é¢
+		///×ªÕÊ½ğ¶î
 		/// </summary>
 		double TradeAmount;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 	};
 
 	/// <summary>
-	///æ—¥ç»ˆæ–‡ä»¶å°±ç»ªè¯·æ±‚
+	///ÈÕÖÕÎÄ¼ş¾ÍĞ÷ÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqDayEndFileReadyField
+	public ref struct  ThostFtdcReqDayEndFileReadyField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
-		///æ–‡ä»¶ä¸šåŠ¡åŠŸèƒ½
+		///ÎÄ¼şÒµÎñ¹¦ÄÜ
 		TThostFtdcFileBusinessCodeType	FileBusinessCode;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 	};
 
 	/// <summary>
-	///è¿”å›ç»“æœ
+	///·µ»Ø½á¹û
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReturnResultField
+	public ref struct  ThostFtdcReturnResultField
 	{
 		/// <summary>
-		///è¿”å›ä»£ç 
+		///·µ»Ø´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^	ReturnCode;
 		/// <summary>
-		///è¿”å›ç æè¿°
+		///·µ»ØÂëÃèÊö
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^		DescrInfoForReturnCode;
 	};
 
 	/// <summary>
-	///éªŒè¯æœŸè´§èµ„é‡‘å¯†ç 
+	///ÑéÖ¤ÆÚ»õ×Ê½ğÃÜÂë
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcVerifyFuturePasswordField
+	public ref struct  ThostFtdcVerifyFuturePasswordField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 	};
 
 	/// <summary>
-	///éªŒè¯å®¢æˆ·ä¿¡æ¯
+	///ÑéÖ¤¿Í»§ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcVerifyCustInfoField
+	public ref struct  ThostFtdcVerifyCustInfoField
 	{
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///éªŒè¯æœŸè´§èµ„é‡‘å¯†ç å’Œå®¢æˆ·ä¿¡æ¯
+	///ÑéÖ¤ÆÚ»õ×Ê½ğÃÜÂëºÍ¿Í»§ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcVerifyFuturePasswordAndCustInfoField
+	public ref struct  ThostFtdcVerifyFuturePasswordAndCustInfoField
 	{
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///éªŒè¯æœŸè´§èµ„é‡‘å¯†ç å’Œå®¢æˆ·ä¿¡æ¯
+	///ÑéÖ¤ÆÚ»õ×Ê½ğÃÜÂëºÍ¿Í»§ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcDepositResultInformField
+	public ref struct  ThostFtdcDepositResultInformField
 	{
 		/// <summary>
-		///å‡ºå…¥é‡‘æµæ°´å·ï¼Œè¯¥æµæ°´å·ä¸ºé“¶æœŸæŠ¥ç›˜è¿”å›çš„æµæ°´å·
+		///³öÈë½ğÁ÷Ë®ºÅ£¬¸ÃÁ÷Ë®ºÅÎªÒøÆÚ±¨ÅÌ·µ»ØµÄÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 15)]
 		String^	DepositSeqNo;
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
-		///å…¥é‡‘é‡‘é¢
+		///Èë½ğ½ğ¶î
 		double	Deposit;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///è¿”å›ä»£ç 
+		///·µ»Ø´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^	ReturnCode;
 		/// <summary>
-		///è¿”å›ç æè¿°
+		///·µ»ØÂëÃèÊö
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^		DescrInfoForReturnCode;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ ¸å¿ƒå‘é“¶æœŸæŠ¥ç›˜å‘å‡ºå¯†é’¥åŒæ­¥è¯·æ±‚
+	///½»Ò×ºËĞÄÏòÒøÆÚ±¨ÅÌ·¢³öÃÜÔ¿Í¬²½ÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReqSyncKeyField
+	public ref struct  ThostFtdcReqSyncKeyField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///äº¤æ˜“æ ¸å¿ƒç»™é“¶æœŸæŠ¥ç›˜çš„æ¶ˆæ¯
+		///½»Ò×ºËĞÄ¸øÒøÆÚ±¨ÅÌµÄÏûÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^	Message;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ ¸å¿ƒå‘é“¶æœŸæŠ¥ç›˜å‘å‡ºå¯†é’¥åŒæ­¥å“åº”
+	///½»Ò×ºËĞÄÏòÒøÆÚ±¨ÅÌ·¢³öÃÜÔ¿Í¬²½ÏìÓ¦
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcRspSyncKeyField
+	public ref struct  ThostFtdcRspSyncKeyField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///äº¤æ˜“æ ¸å¿ƒç»™é“¶æœŸæŠ¥ç›˜çš„æ¶ˆæ¯
+		///½»Ò×ºËĞÄ¸øÒøÆÚ±¨ÅÌµÄÏûÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^	Message;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢è´¦æˆ·ä¿¡æ¯é€šçŸ¥
+	///²éÑ¯ÕË»§ĞÅÏ¢Í¨Öª
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcNotifyQueryAccountField
+	public ref struct  ThostFtdcNotifyQueryAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///æœŸè´§å…¬å¸æµæ°´å·
+		///ÆÚ»õ¹«Ë¾Á÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
-		///é“¶è¡Œå¯ç”¨é‡‘é¢
+		///ÒøĞĞ¿ÉÓÃ½ğ¶î
 		TThostFtdcTradeAmountType	BankUseAmount;
-		///é“¶è¡Œå¯å–é‡‘é¢
+		///ÒøĞĞ¿ÉÈ¡½ğ¶î
 		TThostFtdcTradeAmountType	BankFetchAmount;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///é“¶æœŸè½¬è´¦äº¤æ˜“æµæ°´è¡¨
+	///ÒøÆÚ×ªÕË½»Ò×Á÷Ë®±í
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcTransferSerialField
+	public ref struct  ThostFtdcTransferSerialField
 	{
 		/// <summary>
-		///å¹³å°æµæ°´å·
+		///Æ½Ì¨Á÷Ë®ºÅ
 		/// </summary>
 		int	PlateSerial;
 		/// <summary>
-		///äº¤æ˜“å‘èµ·æ–¹æ—¥æœŸ
+		///½»Ò×·¢Æğ·½ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	TradingDay;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		/// äº¤æ˜“ä»£ç 
+		/// ½»Ò×´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///ä¼šè¯ç¼–å·
+		///»á»°±àºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///é“¶è¡Œç¼–ç 
+		///ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ç¼–ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///æœŸè´§å…¬å¸ç¼–ç 
+		///ÆÚ»õ¹«Ë¾±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
-		///æœŸè´§å…¬å¸å¸å·ç±»å‹
+		///ÆÚ»õ¹«Ë¾ÕÊºÅÀàĞÍ
 		TThostFtdcFutureAccTypeType	FutureAccType;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æŠ•èµ„è€…ä»£ç 
+		///Í¶×ÊÕß´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
 		/// <summary>
-		///æœŸè´§å…¬å¸æµæ°´å·
+		///ÆÚ»õ¹«Ë¾Á÷Ë®ºÅ
 		/// </summary>
 		int FutureSerial;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///äº¤æ˜“é‡‘é¢
+		///½»Ò×½ğ¶î
 		/// </summary>
 		double	TradeAmount;
 		/// <summary>
-		///åº”æ”¶å®¢æˆ·è´¹ç”¨
+		///Ó¦ÊÕ¿Í»§·ÑÓÃ
 		/// </summary>
 		double	CustFee;
 		/// <summary>
-		///åº”æ”¶æœŸè´§å…¬å¸è´¹ç”¨
+		///Ó¦ÊÕÆÚ»õ¹«Ë¾·ÑÓÃ
 		/// </summary>
 		double	BrokerFee;
 		/// <summary>
-		///æœ‰æ•ˆæ ‡å¿—
+		///ÓĞĞ§±êÖ¾
 		/// </summary>
 		EnumAvailabilityFlagType	AvailabilityFlag;
 		/// <summary>
-		///æ“ä½œå‘˜
+		///²Ù×÷Ô±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^	OperatorCode;
 		/// <summary>
-		///æ–°é“¶è¡Œå¸å·
+		///ĞÂÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^	BankNewAccount;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	///è¯·æ±‚æŸ¥è¯¢è½¬å¸æµæ°´
+	///ÇëÇó²éÑ¯×ªÕÊÁ÷Ë®
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcQryTransferSerialField
+	public ref struct ThostFtdcQryTransferSerialField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///é“¶è¡Œç¼–ç 
+		///ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 	};
 
 	/// <summary>
-	///æœŸå•†ç­¾åˆ°é€šçŸ¥
+	///ÆÚÉÌÇ©µ½Í¨Öª
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct CThostFtdcNotifyFutureSignInField
+	public ref struct ThostFtdcNotifyFutureSignInField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///PINå¯†é’¥
+		///PINÃÜÔ¿
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ 	PinKey;
 		/// <summary>
-		///MACå¯†é’¥
+		///MACÃÜÔ¿
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^ 	MacKey;
 	};
 
 	/// <summary>
-	///æœŸå•†ç­¾é€€é€šçŸ¥
+	///ÆÚÉÌÇ©ÍËÍ¨Öª
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcNotifyFutureSignOutField
+	public ref struct  ThostFtdcNotifyFutureSignOutField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	///äº¤æ˜“æ ¸å¿ƒå‘é“¶æœŸæŠ¥ç›˜å‘å‡ºå¯†é’¥åŒæ­¥å¤„ç†ç»“æœçš„é€šçŸ¥
+	///½»Ò×ºËĞÄÏòÒøÆÚ±¨ÅÌ·¢³öÃÜÔ¿Í¬²½´¦Àí½á¹ûµÄÍ¨Öª
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcNotifySyncKeyField
+	public ref struct  ThostFtdcNotifySyncKeyField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///äº¤æ˜“æ ¸å¿ƒç»™é“¶æœŸæŠ¥ç›˜çš„æ¶ˆæ¯
+		///½»Ò×ºËĞÄ¸øÒøÆÚ±¨ÅÌµÄÏûÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
 		String^	Message;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///è¯·æ±‚ç¼–å·
+		///ÇëÇó±àºÅ
 		/// </summary>
 		int RequestID;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	///è¯·æ±‚æŸ¥è¯¢é“¶æœŸç­¾çº¦å…³ç³»
+	///ÇëÇó²éÑ¯ÒøÆÚÇ©Ô¼¹ØÏµ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryAccountregisterField
+	public ref struct  ThostFtdcQryAccountregisterField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///é“¶è¡Œç¼–ç 
+		///ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ç¼–ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 	};
 
 	/// <summary>
-	///å®¢æˆ·å¼€é”€æˆ·ä¿¡æ¯è¡¨
+	///¿Í»§¿ªÏú»§ĞÅÏ¢±í
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcAccountregisterField
+	public ref struct  ThostFtdcAccountregisterField
 	{
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDay;
 		/// <summary>
-		///é“¶è¡Œç¼–ç 
+		///ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ç¼–ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///æœŸè´§å…¬å¸ç¼–ç 
+		///ÆÚ»õ¹«Ë¾±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸè´§å…¬å¸åˆ†æ”¯æœºæ„ç¼–ç 
+		///ÆÚ»õ¹«Ë¾·ÖÖ§»ú¹¹±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^	BrokerBranchID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///å¼€é”€æˆ·ç±»åˆ«
+		///¿ªÏú»§Àà±ğ
 		/// </summary>
 		EnumOpenOrDestroyType	OpenOrDestroy;
 		/// </summary>
-		///ç­¾çº¦æ—¥æœŸ
+		///Ç©Ô¼ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	RegDate;
 		/// </summary>
-		///è§£çº¦æ—¥æœŸ
+		///½âÔ¼ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	OutDate;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///é“¶æœŸå¼€æˆ·ä¿¡æ¯
+	///ÒøÆÚ¿ª»§ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcOpenAccountField
+	public ref struct  ThostFtdcOpenAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///æ€§åˆ«
+		///ĞÔ±ğ
 		/// </summary>
 		EnumGenderType Gender;
 		/// <summary>
-		///å›½å®¶ä»£ç 
+		///¹ú¼Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CountryCode;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///åœ°å€
+		///µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		///é‚®ç¼–
+		///ÓÊ±à
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ ZipCode;
 		/// <summary>
-		///ç”µè¯å·ç 
+		///µç»°ºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		///æ‰‹æœº
+		///ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MobilePhone;
 		/// <summary>
-		///ä¼ çœŸ
+		///´«Õæ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Fax;
 		/// <summary>
-		///ç”µå­é‚®ä»¶
+		///µç×ÓÓÊ¼ş
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ EMail;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·çŠ¶æ€
+		///×Ê½ğÕË»§×´Ì¬
 		/// </summary>
 		EnumMoneyAccountStatusType MoneyAccountStatus;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
-		///æ±‡é’æ ‡å¿—
+		///»ã³®±êÖ¾
 		TThostFtdcCashExchangeCodeType	CashExchangeCode;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///é“¶æœŸé”€æˆ·ä¿¡æ¯
+	///ÒøÆÚÏú»§ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcCancelAccountField
+	public ref struct  ThostFtdcCancelAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///æ€§åˆ«
+		///ĞÔ±ğ
 		/// </summary>
 		EnumGenderType Gender;
 		/// <summary>
-		///å›½å®¶ä»£ç 
+		///¹ú¼Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CountryCode;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///åœ°å€
+		///µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		///é‚®ç¼–
+		///ÓÊ±à
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ ZipCode;
 		/// <summary>
-		///ç”µè¯å·ç 
+		///µç»°ºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		///æ‰‹æœº
+		///ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MobilePhone;
 		/// <summary>
-		///ä¼ çœŸ
+		///´«Õæ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Fax;
 		/// <summary>
-		///ç”µå­é‚®ä»¶
+		///µç×ÓÓÊ¼ş
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ EMail;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·çŠ¶æ€
+		///×Ê½ğÕË»§×´Ì¬
 		/// </summary>
 		EnumMoneyAccountStatusType MoneyAccountStatus;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
-		///æ±‡é’æ ‡å¿—
+		///»ã³®±êÖ¾
 		TThostFtdcCashExchangeCodeType	CashExchangeCode;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æ¸ é“æ ‡å¿—
+		///ÇşµÀ±êÖ¾
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·ç±»å‹
+		///ÆÚ»õµ¥Î»ÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankSecuAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///æœŸè´§å•ä½å¸å·
+		///ÆÚ»õµ¥Î»ÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankSecuAcc;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
 		String^ OperNo;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///äº¤æ˜“æŸœå‘˜
+		///½»Ò×¹ñÔ±
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///é“¶æœŸå˜æ›´é“¶è¡Œè´¦å·ä¿¡æ¯
+	///ÒøÆÚ±ä¸üÒøĞĞÕËºÅĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcChangeAccountField
+	public ref struct  ThostFtdcChangeAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///æ€§åˆ«
+		///ĞÔ±ğ
 		/// </summary>
 		EnumGenderType Gender;
 		/// <summary>
-		///å›½å®¶ä»£ç 
+		///¹ú¼Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CountryCode;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///åœ°å€
+		///µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		///é‚®ç¼–
+		///ÓÊ±à
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ ZipCode;
 		/// <summary>
-		///ç”µè¯å·ç 
+		///µç»°ºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		///æ‰‹æœº
+		///ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MobilePhone;
 		/// <summary>
-		///ä¼ çœŸ
+		///´«Õæ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Fax;
 		/// <summary>
-		///ç”µå­é‚®ä»¶
+		///µç×ÓÓÊ¼ş
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ EMail;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·çŠ¶æ€
+		///×Ê½ğÕË»§×´Ì¬
 		/// </summary>
 		EnumMoneyAccountStatusType MoneyAccountStatus;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///æ–°é“¶è¡Œå¸å·
+		///ĞÂÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^	NewBankAccount;
 		/// <summary>
-		///æ–°é“¶è¡Œå¯†ç 
+		///ĞÂÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^	NewBankPassWord;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///é“¶è¡Œå¯†ç æ ‡å¿—
+		///ÒøĞĞÃÜÂë±êÖ¾
 		/// </summary>
 		EnumPwdFlagType BankPwdFlag;
 		/// <summary>
-		///æœŸè´§èµ„é‡‘å¯†ç æ ¸å¯¹æ ‡å¿—
+		///ÆÚ»õ×Ê½ğÃÜÂëºË¶Ô±êÖ¾
 		/// </summary>
 		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 		/// <summary>
-		///é•¿å®¢æˆ·å§“å
+		///³¤¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ LongCustomerName;
 	};
 
 	/// <summary>
-	///äºŒçº§ä»£ç†æ“ä½œå‘˜é“¶æœŸæƒé™
+	///¶ş¼¶´úÀí²Ù×÷Ô±ÒøÆÚÈ¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcSecAgentACIDMapField
+	public ref struct  ThostFtdcSecAgentACIDMapField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·
+		///×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///å¸ç§
+		///±ÒÖÖ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^	CurrencyID;
 		/// <summary>
-		///å¢ƒå¤–ä¸­ä»‹æœºæ„èµ„é‡‘å¸å·
+		///¾³ÍâÖĞ½é»ú¹¹×Ê½ğÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	BrokerSecAgentID;
 	};
 
 	/// <summary>
-	///äºŒçº§ä»£ç†æ“ä½œå‘˜é“¶æœŸæƒé™æŸ¥è¯¢
+	///¶ş¼¶´úÀí²Ù×÷Ô±ÒøÆÚÈ¨ÏŞ²éÑ¯
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQrySecAgentACIDMapField
+	public ref struct  ThostFtdcQrySecAgentACIDMapField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·
+		///×Ê½ğÕË»§
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		/// å¸ç§ï¼šRMB-äººæ°‘å¸ USD-ç¾åœ† HKD-æ¸¯å…ƒ
+		/// ±ÒÖÖ£ºRMB-ÈËÃñ±Ò USD-ÃÀÔ² HKD-¸ÛÔª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
 	};
 
 	/// <summary>
-	///ç¾å¤‡ä¸­å¿ƒäº¤æ˜“æƒé™
+	///ÔÖ±¸ÖĞĞÄ½»Ò×È¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcUserRightsAssignField
+	public ref struct  ThostFtdcUserRightsAssignField
 	{
 		/// <summary>
-		///åº”ç”¨å•å…ƒä»£ç 
+		///Ó¦ÓÃµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
-		///äº¤æ˜“ä¸­å¿ƒä»£ç 
+		///½»Ò×ÖĞĞÄ´úÂë
 		int	DRIdentityID;
 	};
 
 	/// <summary>
-	///ç»æµå…¬å¸æ˜¯å¦æœ‰åœ¨æœ¬æ ‡ç¤ºçš„äº¤æ˜“æƒé™
+	///¾­¼Ã¹«Ë¾ÊÇ·ñÓĞÔÚ±¾±êÊ¾µÄ½»Ò×È¨ÏŞ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcBrokerUserRightAssignField
+	public ref struct  ThostFtdcBrokerUserRightAssignField
 	{
 		/// <summary>
-		///åº”ç”¨å•å…ƒä»£ç 
+		///Ó¦ÓÃµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
-		///äº¤æ˜“ä¸­å¿ƒä»£ç 
+		///½»Ò×ÖĞĞÄ´úÂë
 		int	DRIdentityID;
-		///èƒ½å¦äº¤æ˜“
+		///ÄÜ·ñ½»Ò×
 		TThostFtdcBoolType	Tradeable;
 	};
 
 	/// <summary>
-	///ç¾å¤‡äº¤æ˜“è½¬æ¢æŠ¥æ–‡
+	///ÔÖ±¸½»Ò××ª»»±¨ÎÄ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcDRTransferField
+	public ref struct  ThostFtdcDRTransferField
 	{
-		///åŸäº¤æ˜“ä¸­å¿ƒä»£ç 
+		///Ô­½»Ò×ÖĞĞÄ´úÂë
 		int	OrigDRIdentityID;
-		///ç›®æ ‡äº¤æ˜“ä¸­å¿ƒä»£ç 
+		///Ä¿±ê½»Ò×ÖĞĞÄ´úÂë
 		int	DestDRIdentityID;
 		/// <summary>
-		///åŸåº”ç”¨å•å…ƒä»£ç 
+		///Ô­Ó¦ÓÃµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	OrigBrokerID;
 		/// <summary>
-		///ç›®æ ‡æ˜“ç”¨å•å…ƒä»£ç 
+		///Ä¿±êÒ×ÓÃµ¥Ôª´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	DestBrokerID;
 	};
-
+	/*
 	/// <summary>
-	///Fensç”¨æˆ·ä¿¡æ¯
+	///FensÓÃ»§ĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcFensUserInfoField
+	public ref struct  ThostFtdcFensUserInfoField
 	{
-		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
-		String^ BrokerID;
-		/// <summary>
-		///ç”¨æˆ·ä»£ç 
-		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
-		String^ UserID;
-		///ç™»å½•æ¨¡å¼
-		TThostFtdcLoginModeType	LoginMode;
-	};
+	/// <summary>
+	///¾­¼Í¹«Ë¾´úÂë
+	/// </summary>
+	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+	String^ BrokerID;
+	/// <summary>
+	///ÓÃ»§´úÂë
+	/// </summary>
+	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+	String^ UserID;
+	///µÇÂ¼Ä£Ê½
+	TThostFtdcLoginModeType	LoginMode;
+	};*/
 
 	/// <summary>
-	///å½“å‰é“¶æœŸæ‰€å±äº¤æ˜“ä¸­å¿ƒ
+	///µ±Ç°ÒøÆÚËùÊô½»Ò×ÖĞĞÄ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcCurrTransferIdentityField
+	public ref struct  ThostFtdcCurrTransferIdentityField
 	{
-		///äº¤æ˜“ä¸­å¿ƒä»£ç 
+		///½»Ò×ÖĞĞÄ´úÂë
 		int	IdentityID;
 	};
 
 	/// <summary>
-	///ç¦æ­¢ç™»å½•ç”¨æˆ·
+	///½ûÖ¹µÇÂ¼ÓÃ»§
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcLoginForbiddenUserField
+	public ref struct  ThostFtdcLoginForbiddenUserField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 		/// <summary>
-		///IPåœ°å€
+		///IPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	IPAddress;
 	};
 
 	/// <summary>
-	///æŸ¥è¯¢ç¦æ­¢ç™»å½•ç”¨æˆ·
+	///²éÑ¯½ûÖ¹µÇÂ¼ÓÃ»§
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcQryLoginForbiddenUserField
+	public ref struct  ThostFtdcQryLoginForbiddenUserField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///ç”¨æˆ·ä»£ç 
+		///ÓÃ»§´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
 	};
 
 	/// <summary>
-	///UDPç»„æ’­ç»„ä¿¡æ¯
+	///UDP×é²¥×éĞÅÏ¢
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcMulticastGroupInfoField
+	public ref struct  ThostFtdcMulticastGroupInfoField
 	{
 		/// <summary>
-		///ç»„æ’­ç»„IPåœ°å€
+		///×é²¥×éIPµØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	GroupIP;
 		/// <summary>
-		///ç»„æ’­ç»„IPç«¯å£
+		///×é²¥×éIP¶Ë¿Ú
 		/// </summary>
 		int	GroupPort;
 		/// <summary>
-		///æºåœ°å€
+		///Ô´µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^	SourceIP;
 	};
 
 	/// <summary>
-	///èµ„é‡‘è´¦æˆ·åŸºæœ¬å‡†å¤‡é‡‘
+	///×Ê½ğÕË»§»ù±¾×¼±¸½ğ
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcTradingAccountReserveField
+	public ref struct  ThostFtdcTradingAccountReserveField
 	{
 		/// <summary>
-		///ç»çºªå…¬å¸ä»£ç 
+		///¾­¼Í¹«Ë¾´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
-		///åŸºæœ¬å‡†å¤‡é‡‘
+		///»ù±¾×¼±¸½ğ
 		double	Reserve;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 	};
 
 	/// <summary>
-	///é“¶æœŸé¢„çº¦å¼€æˆ·ç¡®è®¤è¯·æ±‚
+	///ÒøÆÚÔ¤Ô¼¿ª»§È·ÈÏÇëÇó
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReserveOpenAccountConfirmField
+	public ref struct  ThostFtdcReserveOpenAccountConfirmField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///æ€§åˆ«
+		///ĞÔ±ğ
 		/// </summary>
 		EnumGenderType Gender;
 		/// <summary>
-		///å›½å®¶ä»£ç 
+		///¹ú¼Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CountryCode;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///åœ°å€
+		///µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		///é‚®ç¼–
+		///ÓÊ±à
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ ZipCode;
 		/// <summary>
-		///ç”µè¯å·ç 
+		///µç»°ºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		///æ‰‹æœº
+		///ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MobilePhone;
 		/// <summary>
-		///ä¼ çœŸ
+		///´«Õæ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Fax;
 		/// <summary>
-		///ç”µå­é‚®ä»¶
+		///µç×ÓÓÊ¼ş
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ EMail;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·çŠ¶æ€
+		///×Ê½ğÕË»§×´Ì¬
 		/// </summary>
 		EnumMoneyAccountStatusType MoneyAccountStatus;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^ BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///æŠ•èµ„è€…å¸å·
+		///Í¶×ÊÕßÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
 		/// <summary>
-		///æœŸè´§å¯†ç 
+		///ÆÚ»õÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
 		/// <summary>
-		///é¢„çº¦å¼€æˆ·é“¶è¡Œæµæ°´å·
+		///Ô¤Ô¼¿ª»§ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	BankReserveOpenSeq;
 		/// <summary>
-		///é¢„çº¦å¼€æˆ·æ—¥æœŸ
+		///Ô¤Ô¼¿ª»§ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	BookDate;
 		/// <summary>
-		///é¢„çº¦å¼€æˆ·éªŒè¯å¯†ç 
+		///Ô¤Ô¼¿ª»§ÑéÖ¤ÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^	BookPsw;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
 	};
 
 	/// <summary>
-	///é“¶æœŸé¢„çº¦å¼€æˆ·
+	///ÒøÆÚÔ¤Ô¼¿ª»§
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
-	public ref struct  CThostFtdcReserveOpenAccountField
+	public ref struct  ThostFtdcReserveOpenAccountField
 	{
 		/// <summary>
-		///ä¸šåŠ¡åŠŸèƒ½ç 
+		///ÒµÎñ¹¦ÄÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ TradeCode;
 		/// <summary>
-		///é“¶è¡Œä»£ç 
+		///ÒøĞĞ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ BankID;
 		/// <summary>
-		///é“¶è¡Œåˆ†æ”¯æœºæ„ä»£ç 
+		///ÒøĞĞ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
 		String^ BankBranchID;
 		/// <summary>
-		///æœŸå•†ä»£ç 
+		///ÆÚÉÌ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
 		/// <summary>
-		///æœŸå•†åˆ†æ”¯æœºæ„ä»£ç 
+		///ÆÚÉÌ·ÖÖ§»ú¹¹´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ BrokerBranchID;
 		/// <summary>
-		///äº¤æ˜“æ—¥æœŸ
+		///½»Ò×ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeDate;
 		/// <summary>
-		///äº¤æ˜“æ—¶é—´
+		///½»Ò×Ê±¼ä
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradeTime;
 		/// <summary>
-		///é“¶è¡Œæµæ°´å·
+		///ÒøĞĞÁ÷Ë®ºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ BankSerial;
 		/// <summary>
-		///äº¤æ˜“ç³»ç»Ÿæ—¥æœŸ
+		///½»Ò×ÏµÍ³ÈÕÆÚ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ TradingDay;
 		/// <summary>
-		///é“¶æœŸå¹³å°æ¶ˆæ¯æµæ°´å·
+		///ÒøÆÚÆ½Ì¨ÏûÏ¢Á÷Ë®ºÅ
 		/// </summary>
 		int PlateSerial;
 		/// <summary>
-		///æœ€ååˆ†ç‰‡æ ‡å¿—
+		///×îºó·ÖÆ¬±êÖ¾
 		/// </summary>
 		EnumLastFragmentType LastFragment;
 		/// <summary>
-		///ä¼šè¯å·
+		///»á»°ºÅ
 		/// </summary>
 		int SessionID;
 		/// <summary>
-		///å®¢æˆ·å§“å
+		///¿Í»§ĞÕÃû
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
 		String^ CustomerName;
 		/// <summary>
-		///è¯ä»¶ç±»å‹
+		///Ö¤¼şÀàĞÍ
 		/// </summary>
 
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
-		///è¯ä»¶å·ç 
+		///Ö¤¼şºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
 		/// <summary>
-		///æ€§åˆ«
+		///ĞÔ±ğ
 		/// </summary>
 		EnumGenderType Gender;
 		/// <summary>
-		///å›½å®¶ä»£ç 
+		///¹ú¼Ò´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ CountryCode;
 		/// <summary>
-		///å®¢æˆ·ç±»å‹
+		///¿Í»§ÀàĞÍ
 		/// </summary>
 		EnumCustTypeType CustType;
 		/// <summary>
-		///åœ°å€
+		///µØÖ·
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
 		String^ Address;
 		/// <summary>
-		///é‚®ç¼–
+		///ÓÊ±à
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
 		String^ ZipCode;
 		/// <summary>
-		///ç”µè¯å·ç 
+		///µç»°ºÅÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Telephone;
 		/// <summary>
-		///æ‰‹æœº
+		///ÊÖ»ú
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ MobilePhone;
 		/// <summary>
-		///ä¼ çœŸ
+		///´«Õæ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Fax;
 		/// <summary>
-		///ç”µå­é‚®ä»¶
+		///µç×ÓÓÊ¼ş
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ EMail;
 		/// <summary>
-		///èµ„é‡‘è´¦æˆ·çŠ¶æ€
+		///×Ê½ğÕË»§×´Ì¬
 		/// </summary>
 		EnumMoneyAccountStatusType MoneyAccountStatus;
 		/// <summary>
-		///é“¶è¡Œå¸å·
+		///ÒøĞĞÕÊºÅ
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankAccount;
 		/// <summary>
-		///é“¶è¡Œå¯†ç 
+		///ÒøĞĞÃÜÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ BankPassWord;
 		/// <summary>
-		///å®‰è£…ç¼–å·
+		///°²×°±àºÅ
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///éªŒè¯å®¢æˆ·è¯ä»¶å·ç æ ‡å¿—
+		///ÑéÖ¤¿Í»§Ö¤¼şºÅÂë±êÖ¾
 		/// </summary>
 		EnumYesNoIndicatorType VerifyCertNoFlag;
 		/// <summary>
-		///å¸ç§ä»£ç 
+		///±ÒÖÖ´úÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
 		/// <summary>
-		///æ‘˜è¦
+		///ÕªÒª
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
 		String^ Digest;
 		/// <summary>
-		///é“¶è¡Œå¸å·ç±»å‹
+		///ÒøĞĞÕÊºÅÀàĞÍ
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
 		/// <summary>
-		///æœŸè´§å…¬å¸é“¶è¡Œç¼–ç 
+		///ÆÚ»õ¹«Ë¾ÒøĞĞ±àÂë
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
 		String^	BrokerIDByBank;
 		/// <summary>
-		///äº¤æ˜“ID
+		///½»Ò×ID
 		/// </summary>
 		int TID;
 		/// <summary>
-		///é¢„çº¦å¼€æˆ·çŠ¶æ€
+		///Ô¤Ô¼¿ª»§×´Ì¬
 		/// </summary>
 		EnumReserveOpenAccStasType	ReserveOpenAccStas;
 		/// <summary>
-		///é”™è¯¯ä»£ç 
+		///´íÎó´úÂë
 		/// </summary>
 		int ErrorID;
 		/// <summary>
-		///é”™è¯¯ä¿¡æ¯
+		///´íÎóĞÅÏ¢
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
