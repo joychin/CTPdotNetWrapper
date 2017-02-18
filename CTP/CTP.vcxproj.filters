@@ -23,19 +23,19 @@
     <ClInclude Include="Struct.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ThostFtdcMdApi.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ThostFtdcTraderApi.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ThostFtdcUserApiDataType.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ThostFtdcUserApiStruct.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="DataType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tradeapi\ThostFtdcMdApi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tradeapi\ThostFtdcTraderApi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tradeapi\ThostFtdcUserApiDataType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tradeapi\ThostFtdcUserApiStruct.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

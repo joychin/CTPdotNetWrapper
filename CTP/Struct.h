@@ -440,7 +440,7 @@ namespace CTP
 		/// </summary>
 		double CustFee;
 		/// <summary>
-		/// 币种
+		/// 币种：RMB-人民币 USD-美圆 HKD-港元
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyCode;
@@ -1592,7 +1592,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -1643,7 +1643,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -1884,7 +1884,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -2122,7 +2122,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -4654,7 +4654,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -4705,7 +4705,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -4756,7 +4756,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -4829,7 +4829,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -4867,7 +4867,7 @@ namespace CTP
 		/// <summary>
 		///投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType	InvestorRange;
+		EnumInvestorRangeType	InvestorRange;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -4929,7 +4929,7 @@ namespace CTP
 		/// <summary>
 		/// 投资者范围
 		/// </summary>
-		EnumInvestorRangeTypeType InvestorRange;
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		/// 经纪公司代码
 		/// </summary>
@@ -5383,12 +5383,12 @@ namespace CTP
 		/// <summary>
 		///报单提示序号
 		/// </summary>
-		int OrderSubmitStatus;
+		int NotifySequence;
 		/// <summary>
-		///报单提示序号
+		///交易日
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ OrderSubmitStatus;
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
 		///结算编号
 		/// </summary>
@@ -5747,12 +5747,12 @@ namespace CTP
 		/// <summary>
 		///报单提示序号
 		/// </summary>
-		int OrderSubmitStatus;
+		int NotifySequence;
 		/// <summary>
-		///报单提示序号
+		///交易日
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ OrderSubmitStatus;
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
 		///结算编号
 		/// </summary>
@@ -6227,8 +6227,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -6886,18 +6888,18 @@ namespace CTP
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///报价提示序号
-		/// </summary>
-		int NotifySequence;
-		/// <summary>
-		///报价提交状态
+		///执行宣告提交状态
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
 		///报单提示序号
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ OrderSubmitStatus;
+		int NotifySequence;
+		/// <summary>
+		///交易日
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
 		///结算编号
 		/// </summary>
@@ -7276,18 +7278,18 @@ namespace CTP
 		/// </summary>
 		int	InstallID;
 		/// <summary>
-		///报价提示序号
-		/// </summary>
-		int NotifySequence;
-		/// <summary>
-		///报价提交状态
+		///执行宣告提交状态
 		/// </summary>
 		EnumOrderSubmitStatusType OrderSubmitStatus;
 		/// <summary>
 		///报单提示序号
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ OrderSubmitStatus;
+		int NotifySequence;
+		/// <summary>
+		///交易日
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
 		///结算编号
 		/// </summary>
@@ -7534,8 +7536,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -7598,8 +7602,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -8087,12 +8093,12 @@ namespace CTP
 		/// <summary>
 		///报单提示序号
 		/// </summary>
-		int OrderSubmitStatus;
+		int NotifySequence;
 		/// <summary>
-		///报单提示序号
+		///交易日
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ OrderSubmitStatus;
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
 		///结算编号
 		/// </summary>
@@ -8222,12 +8228,12 @@ namespace CTP
 		/// <summary>
 		///报单提示序号
 		/// </summary>
-		int OrderSubmitStatus;
+		int NotifySequence;
 		/// <summary>
-		///报单提示序号
+		///交易日
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ OrderSubmitStatus;
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
 		///结算编号
 		/// </summary>
@@ -8375,8 +8381,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -8420,9 +8428,8 @@ namespace CTP
 	/// <summary>
 	///做市商期权手续费率查询
 	/// </summary>
-	[StructLay
-		/// <summary>out(LayoutKind::Sequential)]
-		public ref struct CThostFtdcQryMMOptionInstrCommRateField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryMMOptionInstrCommRateField
 	{
 		/// <summary>
 		///经纪公司代码
@@ -8452,8 +8459,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -8524,8 +8533,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -8857,21 +8868,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ ExchangeInstID;
+		/// <summary>
 		///结算组代码
-		TThostFtdcSettlementGroupIDType	SettlementGroupID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ SettlementGroupID;
 		/// <summary>
 		///合约代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///合约交易状态
-		TThostFtdcInstrumentStatusType	InstrumentStatus;
+		/// </summary>
+		EnumInstrumentStatusType InstrumentStatus;
+		/// <summary>
 		///交易阶段编号
-		TThostFtdcTradingSegmentSNType	TradingSegmentSN;
+		/// </summary>
+		int TradingSegmentSN;
+		/// <summary>
 		///进入本状态时间
-		TThostFtdcTimeType	EnterTime;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ EnterTime;
+		/// <summary>
 		///进入本状态原因
-		TThostFtdcInstStatusEnterReasonType	EnterReason;
+		/// </summary>
+		EnumInstStatusEnterReasonType EnterReason;
 	};
 
 	/// <summary>
@@ -8936,10 +8959,15 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
+		/// <summary>
 		///盈亏算法
-		TThostFtdcAlgorithmType	Algorithm;
+		/// </summary>
+		EnumAlgorithmType Algorithm;
+		/// <summary>
 		///备注
-		TThostFtdcMemoType	Memo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
+		String^ Memo;
 		/// <summary>
 		///币种代码
 		/// </summary>
@@ -8958,21 +8986,26 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///投资者代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///资金折扣比例
-		double	Discount;
+		/// </summary>
+		double Discount;
 	};
 
 	/// <summary>
 	///查询转帐银行
 	/// </summary>
-	struct CThostFtdcQryTransferBankField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct CThostFtdcQryTransferBankField
 	{
 		/// <summary>
 		///银行代码
@@ -9078,13 +9111,13 @@ namespace CTP
 		///开仓价
 		double	OpenPrice;
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
-///结算编号
-/// </summary>
+		///结算编号
+		/// </summary>
 		int SettlementID;
 		/// <summary>
 		///成交类型
@@ -9100,29 +9133,53 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///逐日盯市平仓盈亏
+		/// </summary>
 		double	CloseProfitByDate;
+		/// <summary>
 		///逐笔对冲平仓盈亏
+		/// </summary>
 		double	CloseProfitByTrade;
+		/// <summary>
 		///逐日盯市持仓盈亏
+		/// </summary>
 		double	PositionProfitByDate;
+		/// <summary>
 		///逐笔对冲持仓盈亏
+		/// </summary>
 		double	PositionProfitByTrade;
+		/// <summary>
 		///投资者保证金
+		/// </summary>
 		double	Margin;
+		/// <summary>
 		///交易所保证金
+		/// </summary>
 		double	ExchMargin;
+		/// <summary>
 		///保证金率
+		/// </summary>
 		double	MarginRateByMoney;
+		/// <summary>
 		///保证金率(按手数)
+		/// </summary>
 		double	MarginRateByVolume;
+		/// <summary>
 		///昨结算价
+		/// </summary>
 		double	LastSettlementPrice;
+		/// <summary>
 		///结算价
+		/// </summary>
 		double	SettlementPrice;
+		/// <summary>
 		///平仓量
+		/// </summary>
 		int	CloseVolume;
+		/// <summary>
 		///平仓金额
+		/// </summary>
 		double	CloseAmount;
 	};
 
@@ -9184,29 +9241,57 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///本地报单编号
-		TThostFtdcOrderLocalIDType	OrderLocalID;
-		///交易所交易员连接状态
-		TThostFtdcTraderConnectStatusType	TraderConnectStatus;
-		///发出连接请求的日期
-		TThostFtdcDateType	ConnectRequestDate;
-		///发出连接请求的时间
-		TThostFtdcTimeType	ConnectRequestTime;
-		///上次报告日期
-		TThostFtdcDateType	LastReportDate;
-		///上次报告时间
-		TThostFtdcTimeType	LastReportTime;
-		///完成连接日期
-		TThostFtdcDateType	ConnectDate;
-		///完成连接时间
-		TThostFtdcTimeType	ConnectTime;
-		///启动日期
-		TThostFtdcDateType	StartDate;
-		///启动时间
-		TThostFtdcTimeType	StartTime;
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///本地报单编号
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ OrderLocalID;
+		/// <summary>
+		///交易所交易员连接状态
+		/// </summary>
+		EnumTraderConnectStatusType TraderConnectStatus;
+		/// <summary>
+		///发出连接请求的日期
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ConnectRequestDate;
+		/// <summary>
+		///发出连接请求的时间
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	ConnectRequestTime;
+		/// <summary>
+		///上次报告日期
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	LastReportDate;
+		/// <summary>
+		///上次报告时间
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	LastReportTime;
+		/// <summary>
+		///完成连接日期
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	ConnectDate;
+		/// <summary>
+		///完成连接时间
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	ConnectTime;
+		/// <summary>
+		///启动日期
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	StartDate;
+		/// <summary>
+		///启动时间
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	StartTime;
+		/// <summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
@@ -9214,10 +9299,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///本席位最大成交编号
-		TThostFtdcTradeIDType	MaxTradeID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	MaxTradeID;
+		/// <summary>
 		///本席位最大报单备拷
-		TThostFtdcReturnCodeType	MaxOrderMessageReference;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
+		String^	MaxOrderMessageReference;
 	};
 
 	/// <summary>
@@ -9267,10 +9358,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///消息正文
-		TThostFtdcContentType	Content;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
+		String^ Content;
+		/// <summary>
 		///经纪公司通知内容序列号
-		TThostFtdcSequenceLabelType	SequenceLabel;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
+		String^	SequenceLabel;
 	};
 
 	///用户权限
@@ -9288,10 +9385,14 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
+		/// </summary>
 		///客户权限类型
-		TThostFtdcUserRightTypeType	UserRightType;
+		/// <summary>
+		EnumUserRightTypeType	UserRightType;
+		/// <summary>
 		///是否禁止
-		TThostFtdcBoolType	IsForbidden;
+		/// </summary>
+		int	IsForbidden;
 	};
 
 	/// <summary>
@@ -9569,20 +9670,39 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 51)]
 		String^ IdentifiedCardNo;
+		/// <summary>
 		///名称
-		TThostFtdcPartyNameType	PersonName;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^	PersonName;
+		/// <summary>
 		///联系电话
-		TThostFtdcTelephoneType	Telephone;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^	Telephone;
 		///通讯地址
-		TThostFtdcAddressType	Address;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
+		String^	Address;
+		/// <summary>
 		///邮政编码
-		TThostFtdcZipCodeType	ZipCode;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 7)]
+		String^	ZipCode;
+		/// <summary>
 		///优先级
-		TThostFtdcPriorityType	Priority;
+		/// </summary>
+		int	Priority;
+		/// <summary>
 		///开户邮政编码
-		TThostFtdcUOAZipCodeType	UOAZipCode;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^	UOAZipCode;
+		/// <summary>
 		///全称
-		TThostFtdcInvestorFullNameType	PersonFullName;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
+		String^	PersonFullName;
 	};
 
 	/// <summary>
@@ -9716,8 +9836,8 @@ namespace CTP
 	public ref struct  CThostFtdcInvestorPositionCombineDetailField
 	{
 		/// <summary>
-///报单提示序号
-/// </summary>
+		///报单提示序号
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
 		/// <summary>
@@ -9731,8 +9851,8 @@ namespace CTP
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
 		/// <summary>
-///结算编号
-/// </summary>
+		///结算编号
+		/// </summary>
 		int SettlementID;
 		/// <summary>
 		///经纪公司代码
@@ -9763,17 +9883,29 @@ namespace CTP
 		///投机套保标志
 		/// </summary>
 		EnumHedgeFlagType HedgeFlag;
+		/// <summary>
 		///买卖
-		TThostFtdcDirectionType	Direction;
+		/// </summary>
+		EnumDirectionType	Direction;
+		/// </summary>
 		///持仓量
+		/// <summary>
 		int	TotalAmt;
+		/// <summary>
 		///投资者保证金
+		/// </summary>
 		double	Margin;
+		/// <summary>
 		///交易所保证金
+		/// </summary>
 		double	ExchMargin;
+		/// <summary>
 		///保证金率
+		/// </summary>
 		double	MarginRateByMoney;
+		/// <summary>
 		///保证金率(按手数)
+		/// </summary>
 		double	MarginRateByVolume;
 		/// <summary>
 		///单腿编号
@@ -9815,31 +9947,45 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///报单引用
-		TThostFtdcOrderRefType	OrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ OrderRef;
 		/// <summary>
 		///用户代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
+		/// <summary>
 		///报单价格条件
-		TThostFtdcOrderPriceTypeType	OrderPriceType;
+		/// </summary>
+		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
 		///买卖方向
 		/// </summary>
 		EnumDirectionType Direction;
-		///组合开平标志
-		TThostFtdcCombOffsetFlagType	CombOffsetFlag;
-		///组合投机套保标志
-		TThostFtdcCombHedgeFlagType	CombHedgeFlag;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;
 		///价格
 		double	LimitPrice;
 		///数量
 		int	VolumeTotalOriginal;
 		///有效期类型
 		TThostFtdcTimeConditionType	TimeCondition;
+		/// <summary>
 		///GTD日期
-		TThostFtdcDateType	GTDDate;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	GTDDate;
 		///成交量类型
 		TThostFtdcVolumeConditionType	VolumeCondition;
 		///最小成交量
@@ -9868,12 +10014,19 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///预埋报单编号
-		TThostFtdcParkedOrderIDType	ParkedOrderID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	ParkedOrderID;
+		/// <summary>
 		///用户类型
-		TThostFtdcUserTypeType	UserType;
+		/// </summary>
+		EnumUserTypeType	UserType;
+		/// <summary>
 		///预埋单状态
-		TThostFtdcParkedOrderStatusType	Status;
+		/// </summary>
+		EnumParkedOrderStatusType	Status;
 		/// <summary>
 		///错误代码
 		/// </summary>
@@ -9935,8 +10088,11 @@ namespace CTP
 		String^ InvestorID;
 		///报单操作引用
 		TThostFtdcOrderActionRefType	OrderActionRef;
+		/// <summary>
 		///报单引用
-		TThostFtdcOrderRefType	OrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ OrderRef;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -9954,15 +10110,22 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///报单编号
-		TThostFtdcOrderSysIDType	OrderSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	OrderSysID;
 		/// <summary>
 		///操作标志
 		/// </summary>
 		EnumActionFlagType ActionFlag;
+		/// <summary>
 		///价格
+		/// </summary>
 		double	LimitPrice;
+		/// <summary>
 		///数量变化
+		/// </summary>
 		int	VolumeChange;
 		/// <summary>
 		///用户代码
@@ -9974,12 +10137,19 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///预埋撤单单编号
-		TThostFtdcParkedOrderActionIDType	ParkedOrderActionID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	ParkedOrderActionID;
+		/// <summary>
 		///用户类型
-		TThostFtdcUserTypeType	UserType;
+		/// </summary>
+		EnumUserTypeType	UserType;
+		/// <summary>
 		///预埋撤单状态
-		TThostFtdcParkedOrderStatusType	Status;
+		/// </summary>
+		EnumParkedOrderStatusType	Status;
 		/// <summary>
 		///错误代码
 		/// </summary>
@@ -10078,8 +10248,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///预埋报单编号
-		TThostFtdcParkedOrderIDType	ParkedOrderID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	ParkedOrderID;
 	};
 
 	/// <summary>
@@ -10098,8 +10271,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///预埋撤单编号
-		TThostFtdcParkedOrderActionIDType	ParkedOrderActionID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	ParkedOrderActionID;
 	};
 
 	/// <summary>
@@ -10113,8 +10289,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///投资者代码
 		/// </summary>
@@ -10149,15 +10327,18 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///组合持仓合约编码
-		TThostFtdcInstrumentIDType	CombInstrumentID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^	CombInstrumentID;
 	};
 
 	/// <summary>
 	///成交均价
 	/// </summary>
-	[Str
-		public ref struct  CThostFtdcMarketDataAveragePriceField
+	[StructLayout(LayoutKind::Sequential)]
+	public ref struct  CThostFtdcMarketDataAveragePriceField
 	{
 		///当日均价
 		double	AveragePrice;
@@ -10212,8 +10393,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	MacAddress;
+		/// <summary>
 		///IP地址掩码
-		TThostFtdcIPAddressType	IPMask;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^	IPMask;
 	};
 
 	/// <summary>
@@ -10232,14 +10416,24 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///发送时间
-		TThostFtdcTimeType	SendTime;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ SendTime;
+		/// <summary>
 		///消息正文
-		TThostFtdcContentType	FieldContent;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
+		String^ FieldContent;
+		/// <summary>
 		///序列系列号
-		TThostFtdcSequenceSeriesType	SequenceSeries;
+		/// </summary>
+		short SequenceSeries;
+		/// <summary>
 		///序列号
-		TThostFtdcSequenceNoType	SequenceNo;
+		/// </summary>
+		int SequenceNo;
 	};
 
 	/// <summary>
@@ -10253,26 +10447,38 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///投资者范围
-		TThostFtdcInvestorRangeType	InvestorRange;
+		/// </summary>
+		EnumInvestorRangeType InvestorRange;
 		/// <summary>
 		///投资者代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///序列系列号
-		TThostFtdcSequenceSeriesType	SequenceSeries;
+		/// </summary>
+		short SequenceSeries;
 		/// <summary>
 		///用户代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
+		/// <summary>
 		///发送时间
-		TThostFtdcTimeType	SendTime;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ SendTime;
+		/// <summary>
 		///序列号
-		TThostFtdcSequenceNoType	SequenceNo;
+		/// </summary>
+		int SequenceNo;
+		/// <summary>
 		///消息正文
-		TThostFtdcContentType	FieldContent;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
+		String^ FieldContent;
 	};
 
 	/// <summary>
@@ -10332,31 +10538,45 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///报单引用
-		TThostFtdcOrderRefType	OrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ OrderRef;
 		/// <summary>
 		///用户代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
+		/// <summary>
 		///报单价格条件
-		TThostFtdcOrderPriceTypeType	OrderPriceType;
+		/// </summary>
+		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
 		///买卖方向
 		/// </summary>
 		EnumDirectionType Direction;
-		///组合开平标志
-		TThostFtdcCombOffsetFlagType	CombOffsetFlag;
-		///组合投机套保标志
-		TThostFtdcCombHedgeFlagType	CombHedgeFlag;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;
 		///价格
 		double	LimitPrice;
 		///数量
 		int	VolumeTotalOriginal;
 		///有效期类型
 		TThostFtdcTimeConditionType	TimeCondition;
+		/// <summary>
 		///GTD日期
-		TThostFtdcDateType	GTDDate;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	GTDDate;
 		///成交量类型
 		TThostFtdcVolumeConditionType	VolumeCondition;
 		///最小成交量
@@ -10449,31 +10669,45 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
 		String^ InstrumentID;
+		/// <summary>
 		///报单引用
-		TThostFtdcOrderRefType	OrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ OrderRef;
 		/// <summary>
 		///用户代码
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
+		/// <summary>
 		///报单价格条件
-		TThostFtdcOrderPriceTypeType	OrderPriceType;
+		/// </summary>
+		EnumOrderPriceTypeType OrderPriceType;
 		/// <summary>
 		///买卖方向
 		/// </summary>
 		EnumDirectionType Direction;
-		///组合开平标志
-		TThostFtdcCombOffsetFlagType	CombOffsetFlag;
-		///组合投机套保标志
-		TThostFtdcCombHedgeFlagType	CombHedgeFlag;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;
 		///价格
 		double	LimitPrice;
 		///数量
 		int	VolumeTotalOriginal;
 		///有效期类型
 		TThostFtdcTimeConditionType	TimeCondition;
+		/// <summary>
 		///GTD日期
-		TThostFtdcDateType	GTDDate;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	GTDDate;
 		///成交量类型
 		TThostFtdcVolumeConditionType	VolumeCondition;
 		///最小成交量
@@ -10495,8 +10729,11 @@ namespace CTP
 		///请求编号
 		/// </summary>
 		int RequestID;
+		/// <summary>
 		///本地报单编号
-		TThostFtdcOrderLocalIDType	OrderLocalID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ OrderLocalID;
 		/// <summary>
 		///交易所代码
 		/// </summary>
@@ -10529,20 +10766,23 @@ namespace CTP
 		///报单提交状态
 		TThostFtdcOrderSubmitStatusType	OrderSubmitStatus;
 		/// <summary>
-///报单提示序号
-/// </summary>
-		int OrderSubmitStatus;
+		///报单提示序号
+		/// </summary>
+		int NotifySequence;
 		/// <summary>
-///报单提示序号
-/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
-		String^ OrderSubmitStatus;
+		///交易日
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
-///结算编号
-/// </summary>
+		///结算编号
+		/// </summary>
 		int SettlementID;
+		/// <summary>
 		///报单编号
-		TThostFtdcOrderSysIDType	OrderSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ OrderSysID;
 		///报单来源
 		TThostFtdcOrderSourceType	OrderSource;
 		///报单状态
@@ -10558,12 +10798,21 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ InsertDate;
+		/// <summary>
 		///委托时间
-		TThostFtdcTimeType	InsertTime;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ InsertTime;
+		/// <summary>
 		///激活时间
-		TThostFtdcTimeType	ActiveTime;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ ActiveTime;
+		/// <summary>
 		///挂起时间
-		TThostFtdcTimeType	SuspendTime;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ SuspendTime;
 		/// <summary>
 		///最后修改时间
 		/// </summary>
@@ -10574,8 +10823,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ CancelTime;
+		/// <summary>
 		///最后修改交易所交易员代码
-		TThostFtdcTraderIDType	ActiveTraderID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ ActiveTraderID;
 		/// <summary>
 		///结算会员编号
 		/// </summary>
@@ -10610,11 +10862,17 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ ActiveUserID;
+		/// <summary>
 		///经纪公司报单编号
-		TThostFtdcSequenceNoType	BrokerOrderSeq;
+		int	BrokerOrderSeq;
+		/// <summary>
 		///相关报单
-		TThostFtdcOrderSysIDType	RelativeOrderSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	RelativeOrderSysID;
+		/// <summary>
 		///郑商所成交数量
+		/// </summary>
 		int	ZCETotalTradedVolume;
 		/// <summary>
 		///错误代码
@@ -10695,8 +10953,11 @@ namespace CTP
 		String^ InvestorID;
 		///报单操作引用
 		TThostFtdcOrderActionRefType	OrderActionRef;
+		/// <summary>
 		///报单引用
-		TThostFtdcOrderRefType	OrderRef;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ OrderRef;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -10714,15 +10975,22 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///报单编号
-		TThostFtdcOrderSysIDType	OrderSysID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ OrderSysID;
 		/// <summary>
 		///操作标志
 		/// </summary>
 		EnumActionFlagType ActionFlag;
+		/// <summary>
 		///价格
+		/// </summary>
 		double	LimitPrice;
+		/// <summary>
 		///数量变化
+		/// </summary>
 		int	VolumeChange;
 		/// <summary>
 		///操作日期
@@ -10743,8 +11011,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
+		/// <summary>
 		///本地报单编号
-		TThostFtdcOrderLocalIDType	OrderLocalID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^ OrderLocalID;
 		/// <summary>
 		///操作本地编号
 		/// </summary>
@@ -10843,8 +11114,10 @@ namespace CTP
 		///序号
 		/// </summary>
 		int SequenceNo;
+		/// <summary>
 		///合约交易状态
-		TThostFtdcInstrumentStatusType	MarketStatus;
+		/// </summary>
+		EnumInstrumentStatusType	MarketStatus;
 	};
 
 	/// <summary>
@@ -10927,8 +11200,10 @@ namespace CTP
 		String^ InvestorID;
 		///保证金价格类型
 		TThostFtdcMarginPriceTypeType	MarginPriceType;
+		/// <summary>
 		///盈亏算法
-		TThostFtdcAlgorithmType	Algorithm;
+		/// </summary>
+		EnumAlgorithmType Algorithm;
 		///可用是否包含平仓盈利
 		TThostFtdcIncludeCloseProfitType	AvailIncludeCloseProfit;
 		/// <summary>
@@ -11016,8 +11291,11 @@ namespace CTP
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct  CThostFtdcBrokerDepositField
 	{
+		/// <summary>
 		///交易日期
-		TThostFtdcTradeDateType	TradingDay;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -11077,18 +11355,34 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///经纪公司统一编码
-		TThostFtdcParticipantIDType	ParticipantID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^	ParticipantID;
+		/// <summary>
 		///密钥生成日期
-		TThostFtdcDateType	CreateDate;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	CreateDate;
+		/// <summary>
 		///密钥生成时间
-		TThostFtdcTimeType	CreateTime;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	CreateTime;
+		/// <summary>
 		///密钥编号
-		TThostFtdcSequenceNoType	KeyID;
+		/// </summary>
+		int	KeyID;
+		/// <summary>
 		///动态密钥
-		TThostFtdcCFMMCKeyType	CurrentKey;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	CurrentKey;
+		/// <summary>
 		///动态密钥类型
-		TThostFtdcCFMMCKeyKindType	KeyKind;
+		/// </summary>
+		EnumCFMMCKeyKindType	KeyKind;
 	};
 
 	/// <summary>
@@ -11102,17 +11396,25 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///经纪公司统一编码
-		TThostFtdcParticipantIDType	ParticipantID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^ ParticipantID;
 		/// <summary>
 		///投资者帐号
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
+		/// <summary>
 		///密钥编号
-		TThostFtdcSequenceNoType	KeyID;
+		/// </summary>
+		int	KeyID;
+		/// <summary>
 		///动态密钥
-		TThostFtdcCFMMCKeyType	CurrentKey;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	CurrentKey;
 	};
 
 	/// <summary>
@@ -11148,18 +11450,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
+		/// <summary>
 		///动态令牌提供商
-		TThostFtdcOTPVendorsIDType	OTPVendorsID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 2)]
+		String^	OTPVendorsID;
+		/// <summary>
 		///动态令牌序列号
-		TThostFtdcSerialNumberType	SerialNumber;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^	SerialNumber;
+		/// <summary>
 		///令牌密钥
-		TThostFtdcAuthKeyType	AuthKey;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^	AuthKey;
+		/// <summary>
 		///漂移值
-		TThostFtdcLastDriftType	LastDrift;
+		/// </summary>
+		int	LastDrift;
+		/// <summary>
 		///成功值
-		TThostFtdcLastSuccessType	LastSuccess;
+		/// </summary>
+		int	LastSuccess;
+		/// <summary>
 		///动态令牌类型
-		TThostFtdcOTPTypeType	OTPType;
+		/// </summary>
+		EnumOTPTypeType	OTPType;
 	};
 
 	/// <summary>
@@ -11202,10 +11519,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///手续费率模板代码
-		TThostFtdcInvestorIDType	CommModelID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	CommModelID;
+		/// <summary>
 		///模板名称
-		TThostFtdcCommModelNameType	CommModelName;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
+		String^	CommModelName;
 	};
 
 	/// <summary>
@@ -11219,8 +11542,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///手续费率模板代码
-		TThostFtdcInvestorIDType	CommModelID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	CommModelID;
 	};
 
 	/// <summary>
@@ -11234,10 +11560,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///保证金率模板代码
-		TThostFtdcInvestorIDType	MarginModelID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	MarginModelID;
+		/// <summary>
 		///模板名称
-		TThostFtdcCommModelNameType	MarginModelName;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 161)]
+		String^	CommModelName;
 	};
 
 	/// <summary>
@@ -11251,8 +11583,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///保证金率模板代码
-		TThostFtdcInvestorIDType	MarginModelID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	MarginModelID;
 	};
 
 	/// <summary>
@@ -11261,8 +11596,11 @@ namespace CTP
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct  CThostFtdcEWarrantOffsetField
 	{
+		/// <summary>
 		///交易日期
-		TThostFtdcTradeDateType	TradingDay;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradingDay;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -11340,8 +11678,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ InvestorID;
+		/// <summary>
 		///品种/跨品种标示
-		TThostFtdcInstrumentIDType	ProductGroupID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^	ProductGroupID;
 		/// <summary>
 		///投机套保标志
 		/// </summary>
@@ -11354,8 +11695,11 @@ namespace CTP
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct  CThostFtdcInvestorProductGroupMarginField
 	{
+		/// <summary>
 		///品种/跨品种标示
-		TThostFtdcInstrumentIDType	ProductGroupID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^	ProductGroupID;
 		/// <summary>
 		///经纪公司代码
 		/// </summary>
@@ -11375,47 +11719,87 @@ namespace CTP
 		///结算编号
 		/// </summary>
 		int SettlementID;
+		/// <summary>
 		///冻结的保证金
+		/// </summary>
 		double	FrozenMargin;
+		/// <summary>
 		///多头冻结的保证金
+		/// </summary>
 		double	LongFrozenMargin;
+		/// <summary>
 		///空头冻结的保证金
+		/// </summary>
 		double	ShortFrozenMargin;
+		/// <summary>
 		///占用的保证金
+		/// </summary>
 		double	UseMargin;
+		/// <summary>
 		///多头保证金
+		/// </summary>
 		double	LongUseMargin;
+		/// <summary>
 		///空头保证金
+		/// </summary>
 		double	ShortUseMargin;
 		///交易所保证金
+		/// </summary>
 		double	ExchMargin;
 		///交易所多头保证金
+		/// </summary>
 		double	LongExchMargin;
+		/// <summary>
 		///交易所空头保证金
+		/// </summary>
 		double	ShortExchMargin;
+		/// <summary>
 		///平仓盈亏
+		/// </summary>
 		double	CloseProfit;
+		/// <summary>
 		///冻结的手续费
+		/// </summary>
 		double	FrozenCommission;
+		/// <summary>
 		///手续费
+		/// </summary>
 		double	Commission;
+		/// <summary>
 		///冻结的资金
+		/// </summary>
 		double	FrozenCash;
+		/// <summary>
 		///资金差额
+		/// </summary>
 		double	CashIn;
+		/// <summary>
 		///持仓盈亏
+		/// </summary>
 		double	PositionProfit;
+		/// <summary>
 		///折抵总金额
+		/// </summary>
 		double	OffsetAmount;
+		/// <summary>
 		///多头折抵总金额
+		/// </summary>
 		double	LongOffsetAmount;
+		/// <summary>
 		///空头折抵总金额
+		/// </summary>
 		double	ShortOffsetAmount;
+		/// <summary>
 		///交易所折抵总金额
+		/// </summary>
 		double	ExchOffsetAmount;
+		/// <summary>
 		///交易所多头折抵总金额
+		/// </summary>
 		double	LongExchOffsetAmount;
+		/// <summary>
 		///交易所空头折抵总金额
+		/// </summary>
 		double	ShortExchOffsetAmount;
 		/// <summary>
 		///投机套保标志
@@ -11451,17 +11835,25 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// </summary>
 		///经纪公司统一编码
-		TThostFtdcParticipantIDType	ParticipantID;
+		/// <summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
+		String^	ParticipantID;
 		/// <summary>
 		///投资者帐号
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
+		/// </summary>
 		///密钥编号
-		TThostFtdcSequenceNoType	KeyID;
+		/// <summary>
+		int	KeyID;
+		/// </summary>
 		///动态令牌
-		TThostFtdcCFMMCTokenType	Token;
+		/// <summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^	Token;
 	};
 
 	/// <summary>
@@ -11498,8 +11890,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^ ExchangeID;
+		/// <summary>
 		///产品组代码
-		TThostFtdcInstrumentIDType	ProductGroupID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^ ProductGroupID;
 	};
 
 	///交易所公告
@@ -11517,26 +11912,57 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^ OrderSubmitStatus;
+		/// <summary>
 		///公告编号
-		TThostFtdcBulletinIDType	BulletinID;
+		/// </summary>
+		int	BulletinID;
+		/// <summary>
 		///序列号
-		TThostFtdcSequenceNoType	SequenceNo;
+		/// </summary>
+		int SequenceNo;
+		/// <summary>
 		///公告类型
-		TThostFtdcNewsTypeType	NewsType;
-		///紧急程度
-		TThostFtdcNewsUrgencyType	NewsUrgency;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
+		String^	NewsType;
+		/////紧急程度
+		//TThostFtdcNewsUrgencyType	NewsUrgency;
+
+		/// <summary>
+		///紧急程度，怀疑官方api有问题,并没有定义任何紧急程度
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 1)]
+		String^ NewsUrgency;
+		/// <summary>
 		///发送时间
-		TThostFtdcTimeType	SendTime;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ SendTime;
+		/// <summary>
 		///消息摘要
-		TThostFtdcAbstractType	Abstract;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
+		String^ Abstract;
+		/// <summary>
 		///消息来源
-		TThostFtdcComeFromType	ComeFrom;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
+		String^ ComeFrom;
+		/// <summary>
 		///消息正文
-		TThostFtdcContentType	Content;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 501)]
+		String^ Content;
+		/// <summary>
 		///WEB地址
-		TThostFtdcURLLinkType	URLLink;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 201)]
+		String^	URLLink;
+		/// <summary>
 		///市场代码
-		TThostFtdcMarketIDType	MarketID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^	MarketID;
 	};
 
 	/// <summary>
@@ -11552,10 +11978,13 @@ namespace CTP
 		String^ ExchangeID;
 		///公告编号
 		TThostFtdcBulletinIDType	BulletinID;
+		/// <summary>
 		///序列号
-		TThostFtdcSequenceNoType	SequenceNo;
+		/// </summary>
+		int SequenceNo;
 		///公告类型
-		TThostFtdcNewsTypeType	NewsType;
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
+		String^	NewsType;
 		///紧急程度
 		TThostFtdcNewsUrgencyType	NewsUrgency;
 	};
@@ -11733,24 +12162,42 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///交易ID
 		/// </summary>
 		int TID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///长客户姓名
 		/// </summary>
@@ -11932,24 +12379,42 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///交易ID
 		/// </summary>
 		int TID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///长客户姓名
 		/// </summary>
@@ -12096,7 +12561,7 @@ namespace CTP
 		///新银行帐号
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
-		TThostFtdcBankAccountType	NewBankAccount;
+		String^	NewBankAccount;
 		/// <summary>
 		///新银行密码
 		/// </summary>
@@ -12129,12 +12594,19 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
 		///交易ID
 		/// </summary>
@@ -12261,8 +12733,11 @@ namespace CTP
 		///期货公司流水号
 		/// </summary>
 		int FutureSerial;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///验证客户证件号码标志
 		/// </summary>
@@ -12272,18 +12747,31 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///转帐金额
-		TThostFtdcTradeAmountType	TradeAmount;
+		/// </summary>
+		double TradeAmount;
+		/// <summary>
 		///期货可取金额
-		TThostFtdcTradeAmountType	FutureFetchAmount;
+		/// </summary>
+		double FutureFetchAmount;
+		/// <summary>
 		///费用支付标志
-		TThostFtdcFeePayFlagType	FeePayFlag;
+		/// </summary>
+		EnumFeePayFlagType FeePayFlag;
+		/// <summary>
 		///应收客户费用
-		TThostFtdcCustFeeType	CustFee;
+		/// </summary>
+		double CustFee;
+		/// <summary>
 		///应收期货公司费用
-		TThostFtdcFutureFeeType	BrokerFee;
+		/// </summary>
+		double BrokerFee;
+		/// <summary>
 		///发送方给接收方的消息
-		TThostFtdcAddInfoType	Message;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
+		String^ Message;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -12298,18 +12786,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -12437,8 +12940,11 @@ namespace CTP
 		///期货公司流水号
 		/// </summary>
 		int FutureSerial;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///验证客户证件号码标志
 		/// </summary>
@@ -12448,18 +12954,31 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///转帐金额
-		TThostFtdcTradeAmountType	TradeAmount;
+		/// </summary>
+		double TradeAmount;
+		/// <summary>
 		///期货可取金额
-		TThostFtdcTradeAmountType	FutureFetchAmount;
+		/// </summary>
+		double FutureFetchAmount;
+		/// <summary>
 		///费用支付标志
-		TThostFtdcFeePayFlagType	FeePayFlag;
+		/// </summary>
+		EnumFeePayFlagType FeePayFlag;
+		/// <summary>
 		///应收客户费用
-		TThostFtdcCustFeeType	CustFee;
+		/// </summary>
+		double CustFee;
+		/// <summary>
 		///应收期货公司费用
-		TThostFtdcFutureFeeType	BrokerFee;
+		/// </summary>
+		double BrokerFee;
+		/// <summary>
 		///发送方给接收方的消息
-		TThostFtdcAddInfoType	Message;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
+		String^ Message;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -12474,18 +12993,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -12542,7 +13076,7 @@ namespace CTP
 		///被冲正银行流水号
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		TThostFtdcBankSerialType	BankRepealSerial;
+		String^	BankRepealSerial;
 		/// <summary>
 		///被冲正期货流水号
 		/// </summary>
@@ -12651,8 +13185,11 @@ namespace CTP
 		///期货公司流水号
 		/// </summary>
 		int FutureSerial;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///验证客户证件号码标志
 		/// </summary>
@@ -12662,18 +13199,31 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///转帐金额
-		TThostFtdcTradeAmountType	TradeAmount;
+		/// </summary>
+		double TradeAmount;
+		/// <summary>
 		///期货可取金额
-		TThostFtdcTradeAmountType	FutureFetchAmount;
+		/// </summary>
+		double FutureFetchAmount;
+		/// <summary>
 		///费用支付标志
-		TThostFtdcFeePayFlagType	FeePayFlag;
+		/// </summary>
+		EnumFeePayFlagType FeePayFlag;
+		/// <summary>
 		///应收客户费用
-		TThostFtdcCustFeeType	CustFee;
+		/// </summary>
+		double CustFee;
+		/// <summary>
 		///应收期货公司费用
-		TThostFtdcFutureFeeType	BrokerFee;
+		/// </summary>
+		double BrokerFee;
+		/// <summary>
 		///发送方给接收方的消息
-		TThostFtdcAddInfoType	Message;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
+		String^ Message;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -12688,18 +13238,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -12747,7 +13312,7 @@ namespace CTP
 		///被冲正银行流水号
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		TThostFtdcBankSerialType	BankRepealSerial
+		String^	BankRepealSerial;
 		/// <summary>
 		///被冲正期货流水号
 		/// </summary>
@@ -12856,8 +13421,11 @@ namespace CTP
 		///期货公司流水号
 		/// </summary>
 		int FutureSerial;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///验证客户证件号码标志
 		/// </summary>
@@ -12867,18 +13435,31 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///转帐金额
-		TThostFtdcTradeAmountType	TradeAmount;
+		/// </summary>
+		double TradeAmount;
+		/// <summary>
 		///期货可取金额
-		TThostFtdcTradeAmountType	FutureFetchAmount;
+		/// </summary>
+		double FutureFetchAmount;
+		/// <summary>
 		///费用支付标志
-		TThostFtdcFeePayFlagType	FeePayFlag;
+		/// </summary>
+		EnumFeePayFlagType FeePayFlag;
+		/// <summary>
 		///应收客户费用
-		TThostFtdcCustFeeType	CustFee;
+		/// </summary>
+		double CustFee;
+		/// <summary>
 		///应收期货公司费用
-		TThostFtdcFutureFeeType	BrokerFee;
+		/// </summary>
+		double BrokerFee;
+		/// <summary>
 		///发送方给接收方的消息
-		TThostFtdcAddInfoType	Message;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
+		String^ Message;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -12893,18 +13474,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -13041,8 +13637,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///验证客户证件号码标志
 		/// </summary>
@@ -13066,18 +13665,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -13203,8 +13817,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///验证客户证件号码标志
 		/// </summary>
@@ -13228,18 +13845,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -13326,8 +13958,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -13343,10 +13978,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -13424,8 +14065,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -13441,10 +14085,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -13462,10 +14112,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 81)]
 		String^ ErrorMsg;
+		/// <summary>
 		///PIN密钥
-		TThostFtdcPasswordKeyType	PinKey;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
+		String^	PinKey;
+		/// <summary>
 		///MAC密钥
-		TThostFtdcPasswordKeyType	MacKey;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 129)]
+		String^	MacKey;
 	};
 
 	/// <summary>
@@ -13535,8 +14191,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -13552,10 +14211,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -13633,8 +14298,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -13650,10 +14318,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -13736,12 +14410,19 @@ namespace CTP
 		///会话号
 		/// </summary>
 		int SessionID;
+		/// <summary>
 		///流水号
-		TThostFtdcSerialType	Reference;
+		/// </summary>
+		int	Reference;
+		/// <summary>
 		///本流水号发布者的机构类型
-		TThostFtdcInstitutionTypeType	RefrenceIssureType;
+		/// </summary>
+		EnumInstitutionTypeType	RefrenceIssureType;
+		/// <summary>
 		///本流水号发布者机构编码
-		TThostFtdcOrganCodeType	RefrenceIssure;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 36)]
+		String^	RefrenceIssure;
 		/// <summary>
 		///客户姓名
 		/// </summary>
@@ -13786,8 +14467,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///转帐金额
-		TThostFtdcTradeAmountType	TradeAmount;
+		/// </summary>
+		double TradeAmount;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -13907,8 +14590,10 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///转帐金额
-		TThostFtdcTradeAmountType	TradeAmount;
+		/// </summary>
+		double TradeAmount;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -14274,8 +14959,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		///交易核心给银期报盘的消息
 		TThostFtdcAddInfoType	Message;
 		/// <summary>
@@ -14283,10 +14971,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -14364,8 +15058,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		///交易核心给银期报盘的消息
 		TThostFtdcAddInfoType	Message;
 		/// <summary>
@@ -14373,10 +15070,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -14506,8 +15209,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///验证客户证件号码标志
 		/// </summary>
@@ -14531,18 +15237,33 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -14594,8 +15315,11 @@ namespace CTP
 		///会话编号
 		/// </summary>
 		int SessionID;
+		/// <summary>
 		///银行编码
-		TThostFtdcBankIDType	BankID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
+		String^ BankID;
 		/// <summary>
 		///银行分支机构编码
 		/// </summary>
@@ -14656,18 +15380,32 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///交易金额
-		TThostFtdcTradeAmountType	TradeAmount;
+		/// </summary>
+		double	TradeAmount;
+		/// <summary>
 		///应收客户费用
-		TThostFtdcCustFeeType	CustFee;
+		/// </summary>
+		double	CustFee;
+		/// <summary>
 		///应收期货公司费用
-		TThostFtdcFutureFeeType	BrokerFee;
+		/// </summary>
+		double	BrokerFee;
+		/// <summary>
 		///有效标志
-		TThostFtdcAvailabilityFlagType	AvailabilityFlag;
+		/// </summary>
+		EnumAvailabilityFlagType	AvailabilityFlag;
+		/// <summary>
 		///操作员
-		TThostFtdcOperatorCodeType	OperatorCode;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^	OperatorCode;
+		/// <summary>
 		///新银行帐号
-		TThostFtdcBankAccountType	BankNewAccount;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^	BankNewAccount;
 		/// <summary>
 		///错误代码
 		/// </summary>
@@ -14695,8 +15433,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
+		/// <summary>
 		///银行编码
-		TThostFtdcBankIDType	BankID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
+		String^ BankID;
 		/// <summary>
 		///币种代码
 		/// </summary>
@@ -14771,8 +15512,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -14788,10 +15532,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -14882,8 +15632,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///摘要
 		/// </summary>
@@ -14899,10 +15652,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -14989,8 +15748,11 @@ namespace CTP
 		///安装编号
 		/// </summary>
 		int	InstallID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		///交易核心给银期报盘的消息
 		TThostFtdcAddInfoType	Message;
 		/// <summary>
@@ -14998,10 +15760,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///请求编号
 		/// </summary>
@@ -15037,8 +15805,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
+		/// <summary>
 		///银行编码
-		TThostFtdcBankIDType	BankID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
+		String^ BankID;
 		/// <summary>
 		///银行分支机构编码
 		/// </summary>
@@ -15057,10 +15828,16 @@ namespace CTP
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct  CThostFtdcAccountregisterField
 	{
+		/// <summary>
 		///交易日期
-		TThostFtdcTradeDateType	TradeDay;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^ TradeDay;
+		/// <summary>
 		///银行编码
-		TThostFtdcBankIDType	BankID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
+		String^ BankID;
 		/// <summary>
 		///银行分支机构编码
 		/// </summary>
@@ -15076,8 +15853,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
+		/// <summary>
 		///期货公司分支机构编码
-		TThostFtdcFutureBranchIDType	BrokerBranchID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 31)]
+		String^	BrokerBranchID;
 		/// <summary>
 		///投资者帐号
 		/// </summary>
@@ -15103,12 +15883,20 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///开销户类别
-		TThostFtdcOpenOrDestroyType	OpenOrDestroy;
+		/// </summary>
+		EnumOpenOrDestroyType	OpenOrDestroy;
+		/// </summary>
 		///签约日期
-		TThostFtdcTradeDateType	RegDate;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	RegDate;
+		/// </summary>
 		///解约日期
-		TThostFtdcTradeDateType	OutDate;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	OutDate;
 		/// <summary>
 		///交易ID
 		/// </summary>
@@ -15302,24 +16090,42 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///交易ID
 		/// </summary>
 		int TID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///错误代码
 		/// </summary>
@@ -15510,24 +16316,42 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 3)]
 		String^ DeviceID;
+		/// <summary>
 		///期货单位帐号类型
-		TThostFtdcBankAccTypeType	BankSecuAccType;
+		/// </summary>
+		EnumBankAccTypeType BankSecuAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///期货单位帐号
-		TThostFtdcBankAccountType	BankSecuAcc;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^ BankSecuAcc;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
+		/// <summary>
 		///交易柜员
-		TThostFtdcOperNoType	OperNo;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 17)]
+		String^ OperNo;
 		/// <summary>
 		///交易ID
 		/// </summary>
 		int TID;
-		///用户标识
-		TThostFtdcUserIDType	UserID;
+		/// <summary>
+		///交易柜员
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^ UserID;
 		/// <summary>
 		///错误代码
 		/// </summary>
@@ -15710,12 +16534,19 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
 		String^ CurrencyID;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
+		/// <summary>
 		///银行密码标志
-		TThostFtdcPwdFlagType	BankPwdFlag;
+		/// </summary>
+		EnumPwdFlagType BankPwdFlag;
+		/// <summary>
 		///期货资金密码核对标志
-		TThostFtdcPwdFlagType	SecuPwdFlag;
+		/// </summary>
+		EnumPwdFlagType SecuPwdFlag;
 		/// <summary>
 		///交易ID
 		/// </summary>
@@ -15762,13 +16593,16 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
+		/// <summary>
 		///币种
-		TThostFtdcCurrencyIDType	CurrencyID;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
+		String^	CurrencyID;
 		/// <summary>
 		///境外中介机构资金帐号
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
-		TThostFtdcAccountIDType	BrokerSecAgentID;
+		String^	BrokerSecAgentID;
 	};
 
 	/// <summary>
@@ -15792,8 +16626,11 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
-		///币种
-		TThostFtdcCurrencyIDType	CurrencyID;
+		/// <summary>
+		/// 币种：RMB-人民币 USD-美圆 HKD-港元
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 4)]
+		String^ CurrencyCode;
 	};
 
 	/// <summary>
@@ -15932,12 +16769,20 @@ namespace CTP
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct  CThostFtdcMulticastGroupInfoField
 	{
+		/// <summary>
 		///组播组IP地址
-		TThostFtdcIPAddressType	GroupIP;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^	GroupIP;
+		/// <summary>
 		///组播组IP端口
-		TThostFtdcIPPortType	GroupPort;
+		/// </summary>
+		int	GroupPort;
+		/// <summary>
 		///源地址
-		TThostFtdcIPAddressType	SourceIP;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
+		String^	SourceIP;
 	};
 
 	/// <summary>
@@ -16122,8 +16967,11 @@ namespace CTP
 		///银行帐号类型
 		/// </summary>
 		EnumBankAccTypeType BankAccType;
+		/// <summary>
 		///期货公司银行编码
-		TThostFtdcBankCodingForFutureType	BrokerIDByBank;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 33)]
+		String^ BrokerIDByBank;
 		/// <summary>
 		///交易ID
 		/// </summary>
@@ -16138,12 +16986,21 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^ Password;
+		/// <summary>
 		///预约开户银行流水号
-		TThostFtdcBankSerialType	BankReserveOpenSeq;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
+		String^	BankReserveOpenSeq;
+		/// <summary>
 		///预约开户日期
-		TThostFtdcTradeDateType	BookDate;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
+		String^	BookDate;
+		/// <summary>
 		///预约开户验证密码
-		TThostFtdcPasswordType	BookPsw;
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
+		String^	BookPsw;
 		/// <summary>
 		///错误代码
 		/// </summary>

@@ -127,7 +127,7 @@ namespace CTP
 	/// <summary>
 	/// TFtdcInvestorRangeType是一个投资者范围类型
 	/// </summary>
-	public enum struct EnumInvestorRangeTypeType : Byte
+	public enum struct EnumInvestorRangeType : Byte
 	{
 		/// <summary>
 		/// 所有
@@ -946,7 +946,7 @@ namespace CTP
 		/// <summary>
 		/// 做市商
 		/// </summary>
-		Hedge = (Byte)'5'
+		MarketMaker = (Byte)'5'
 	};
 
 	/// <summary>
@@ -1049,7 +1049,11 @@ namespace CTP
 		/// <summary>
 		/// 买一价浮动上浮3个ticks
 		/// </summary>
-		BidPrice1PlusThreeTicks = (Byte)'F'
+		BidPrice1PlusThreeTicks = (Byte)'F',
+		/// <summary>
+		/// 五档价
+		/// </summary>
+		FiveLevelPrice = (Byte)'G'
 	};
 
 	/// <summary>
@@ -2112,23 +2116,6 @@ namespace CTP
 		/// </summary>
 		Out = (Byte)'2'
 	};
-
-	/// <summary>
-	/// TFtdcFundStatusType是一个资金状态类型
-	/// </summary>
-	public enum struct EnumLoginModeType : Byte
-	{
-		/// <summary>
-		/// 交易
-		/// </summary>
-		Trade = (Byte)'0',
-
-		/// <summary>
-		/// 转账
-		/// </summary>
-		Transfer = (Byte)'1',
-	};
-
 	/// <summary>
 	/// TFtdcFundStatusType是一个资金状态类型
 	/// </summary>
@@ -3127,20 +3114,20 @@ namespace CTP
 		/// </summary>
 		BankBankToFuture_102001 = (Byte)'1',//'102001',
 
-											/// <summary>
-											/// 银行发起期货资金转银行
-											/// </summary>
-											BankFutureToBank_102002 = (Byte)'2',//'102002',
+		/// <summary>
+		/// 银行发起期货资金转银行
+		/// </summary>
+		BankFutureToBank_102002 = (Byte)'2',//'102002',
 
-																				/// <summary>
-																				/// 期货发起银行资金转期货
-																				/// </summary>
-																				FutureBankToFuture_202001 = (Byte)'3',//'202001',
+		/// <summary>
+		/// 期货发起银行资金转期货
+		/// </summary>
+		FutureBankToFuture_202001 = (Byte)'3',//'202001',
 
-																													  /// <summary>
-																													  /// 期货发起期货资金转银行
-																													  /// </summary>
-																													  FutureFutureToBank_202002 = (Byte)'4'//'202002'
+		/// <summary>
+		/// 期货发起期货资金转银行
+		/// </summary>
+		FutureFutureToBank_202002 = (Byte)'4'//'202002'
 	};
 
 	/// <summary>
@@ -6494,24 +6481,6 @@ namespace CTP
 		///计算期权市值亏损
 		///</summary>
 		IncludeOptValLost = (Byte) '2'
-	};
-	///<summary>
-	///TFtdcGenderType是一个性别类型
-	///</summary>
-	public enum struct EnumGenderType : Byte
-	{
-		///<summary>
-		///未知状态
-	///</summary>
-		Unknown = (Byte) '0',
-		///<summary>
-				///男
-			///</summary>
-			Male = (Byte) '1',
-			///<summary>
-					///女
-				///</summary>
-				Female = (Byte) '2'
 	};
 	///<summary>
 	///TFtdcReserveOpenAccStasType是一个预约开户状态类型

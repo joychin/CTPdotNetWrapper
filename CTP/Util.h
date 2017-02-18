@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ThostFtdcTraderApi.h"
-#include "ThostFtdcMdApi.h"
+#include "..\tradeapi\ThostFtdcTraderApi.h"
+#include "..\tradeapi\ThostFtdcMdApi.h"
 #include "Struct.h"
 //#include "Delegates.h"
 

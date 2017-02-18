@@ -92,7 +92,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>thostmduserapi.lib;thosttraderapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\tradeapi\thostmduserapi.lib;..\tradeapi\thosttraderapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,14 +132,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\tradeapi\ThostFtdcMdApi.h" />
+    <ClInclude Include="..\tradeapi\ThostFtdcTraderApi.h" />
+    <ClInclude Include="..\tradeapi\ThostFtdcUserApiDataType.h" />
+    <ClInclude Include="..\tradeapi\ThostFtdcUserApiStruct.h" />
     <ClInclude Include="CTP.h" />
     <ClInclude Include="DataType.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Struct.h" />
-    <ClInclude Include="ThostFtdcMdApi.h" />
-    <ClInclude Include="ThostFtdcTraderApi.h" />
-    <ClInclude Include="ThostFtdcUserApiDataType.h" />
-    <ClInclude Include="ThostFtdcUserApiStruct.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
