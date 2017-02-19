@@ -2895,7 +2895,7 @@ namespace CTP
 		///交易成功
 		/// </summary>
 		Trading = (Byte) '3',
-		/// </summary>
+		/// <summary>
 		///交易失败
 		/// </summary>
 		TradingError = (Byte) '4',
@@ -6306,31 +6306,31 @@ namespace CTP
 	{
 		///<summary>
 		///Position Opening
-		///<summary>
+		///</summary>
 		Open = (Byte)  '0',
 		///<summary>
 		///Position Close
-		///<summary>
+		///</summary>
 		Close = (Byte)  '1',
 		///<summary>
 		///Forced Liquidation
-		///<summary>
+		///</summary>
 		ForceClose = (Byte) '2',
 		///<summary>
 		///Close Today
-		///<summary>
+		///</summary>
 		CloseToday = (Byte) '3',
 		///<summary>
 		///Close Prev.
-		///<summary>
+		///</summary>
 		CloseYesterday = (Byte)  '4',
 		///<summary>
 		///Forced Reduction
-		///<summary>
+		///</summary>
 		ForceOff = (Byte) '5',
 		///<summary>
 		///Local Forced Liquidation
-		///<summary>
+		///</summary>
 		LocalForceClose = (Byte) '6'
 	};
 	///<summary>
@@ -6401,6 +6401,7 @@ namespace CTP
 		NoExec = (Byte) 'n',
 		///<summary>
 		///已经取消
+		/// </summary>
 		Canceled = (Byte) 'c',
 		///<summary>
 		///执行成功
@@ -6440,6 +6441,7 @@ namespace CTP
 		NoEnoughHistoryTrade = (Byte) '9',
 		///<summary>
 		//未知
+		///</summary>
 		Unknown = (Byte) 'a'
 	};
 
@@ -7410,6 +7412,7 @@ namespace CTP
 		double ShortMarginRatio;
 		/// <summary>
 		///是否使用大额单边保证金算法
+		/// </summary>
 		EnumMaxMarginSideAlgorithmTypeType	MaxMarginSideAlgorithm;
 		/// <summary>
 		///基础商品代码
@@ -10568,6 +10571,7 @@ namespace CTP
 		String^	BrokerID;
 		///<summary>
 		///投资者代码
+		///</summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^	InvestorID;
 		///<summary>
@@ -14450,6 +14454,7 @@ namespace CTP
 		String^ TraderID;
 	};
 
+	/// <summary>
 	///报价操作查询
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
@@ -16317,6 +16322,7 @@ namespace CTP
 		String^ ConnectRequestDate;
 		/// <summary>
 		///发出连接请求的时间
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	ConnectRequestTime;
 		/// <summary>
@@ -16430,6 +16436,7 @@ namespace CTP
 		String^	SequenceLabel;
 	};
 
+	/// <summary>
 	///用户权限
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
@@ -16445,9 +16452,9 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 16)]
 		String^ UserID;
-		/// </summary>
-		///客户权限类型
 		/// <summary>
+		///客户权限类型
+		/// </summary>
 		EnumUserRightTypeType	UserRightType;
 		/// <summary>
 		///是否禁止
@@ -16740,6 +16747,7 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 41)]
 		String^	Telephone;
+		/// <summary>
 		///通讯地址
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 101)]
@@ -16807,9 +16815,9 @@ namespace CTP
 		///用户事件类型
 		/// </summary>
 		EnumUserEventTypeType UserEventType;
-		/// </summary>
-		///用户事件序号
 		/// <summary>
+		///用户事件序号
+		/// </summary>
 		int	EventSequenceNo;
 		/// <summary>
 		///事件发生日期
@@ -16947,9 +16955,9 @@ namespace CTP
 		///买卖
 		/// </summary>
 		EnumDirectionType	Direction;
-		/// </summary>
-		///持仓量
 		/// <summary>
+		///持仓量
+		/// </summary>
 		int	TotalAmt;
 		/// <summary>
 		///投资者保证金
@@ -17924,6 +17932,7 @@ namespace CTP
 		String^ ActiveUserID;
 		/// <summary>
 		///经纪公司报单编号
+		///</summary>
 		int	BrokerOrderSeq;
 		/// <summary>
 		///相关报单
@@ -18495,6 +18504,7 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///用户动态令牌参数
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
@@ -18569,6 +18579,7 @@ namespace CTP
 		String^ SecondOTP;
 	};
 
+	/// <summary>
 	///投资者手续费率模板
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
@@ -18803,9 +18814,11 @@ namespace CTP
 		///空头保证金
 		/// </summary>
 		double	ShortUseMargin;
+		/// <summary>
 		///交易所保证金
 		/// </summary>
 		double	ExchMargin;
+		/// <summary>
 		///交易所多头保证金
 		/// </summary>
 		double	LongExchMargin;
@@ -18885,6 +18898,7 @@ namespace CTP
 		String^ InvestorID;
 	};
 
+	/// <summary>
 	///监控中心用户令牌
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
@@ -18895,9 +18909,9 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^ BrokerID;
-		/// </summary>
-		///经纪公司统一编码
 		/// <summary>
+		///经纪公司统一编码
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 11)]
 		String^	ParticipantID;
 		/// <summary>
@@ -18905,13 +18919,13 @@ namespace CTP
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
 		String^ AccountID;
-		/// </summary>
+		/// <summary>
 		///密钥编号
-		/// <summary>
-		int	KeyID;
 		/// </summary>
-		///动态令牌
+		int	KeyID;
 		/// <summary>
+		///动态令牌
+		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 21)]
 		String^	Token;
 	};
@@ -18957,6 +18971,7 @@ namespace CTP
 		String^ ProductGroupID;
 	};
 
+	/// <summary>
 	///交易所公告
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
@@ -20116,23 +20131,23 @@ namespace CTP
 		///冲正时间间隔
 		/// </summary>
 		int	RepealTimeInterval;
-		/// </summary>
+		/// <summary>
 		///已经冲正次数
 		/// </summary>
 		int	RepealedTimes;
-		/// </summary>
+		/// <summary>
 		///银行冲正标志
 		/// </summary>
 		EnumBankRepealFlagType	BankRepealFlag;
-		/// </summary>
+		/// <summary>
 		///期商冲正标志
 		/// </summary>
 		EnumBrokerRepealFlagType	BrokerRepealFlag;
-		/// </summary>
+		/// <summary>
 		///被冲正平台流水号
 		/// </summary>
 		int	PlateRepealSerial;
-		/// </summary>
+		/// <summary>
 		///被冲正银行流水号
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
@@ -20206,7 +20221,6 @@ namespace CTP
 		/// <summary>
 		///证件类型
 		/// </summary>
-
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
 		///证件号码
@@ -20352,23 +20366,23 @@ namespace CTP
 		///冲正时间间隔
 		/// </summary>
 		int	RepealTimeInterval;
-		/// </summary>
+		/// <summary>
 		///已经冲正次数
 		/// </summary>
 		int	RepealedTimes;
-		/// </summary>
+		/// <summary>
 		///银行冲正标志
 		/// </summary>
 		EnumBankRepealFlagType	BankRepealFlag;
-		/// </summary>
+		/// <summary>
 		///期商冲正标志
 		/// </summary>
 		EnumBrokerRepealFlagType	BrokerRepealFlag;
-		/// </summary>
+		/// <summary>
 		///被冲正平台流水号
 		/// </summary>
 		int	PlateRepealSerial;
-		/// </summary>
+		/// <summary>
 		///被冲正银行流水号
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 13)]
@@ -20442,7 +20456,6 @@ namespace CTP
 		/// <summary>
 		///证件类型
 		/// </summary>
-
 		EnumIdCardTypeType	IdCardType;
 		/// <summary>
 		///证件号码
@@ -23001,12 +23014,12 @@ namespace CTP
 		///开销户类别
 		/// </summary>
 		EnumOpenOrDestroyType	OpenOrDestroy;
-		/// </summary>
+		/// <summary>
 		///签约日期
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 		String^	RegDate;
-		/// </summary>
+		/// <summary>
 		///解约日期
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
