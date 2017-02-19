@@ -12,7 +12,7 @@
 
 using namespace Native;
 
-namespace  Native{
+namespace  Native {
 	class CTraderSpi;
 };
 
@@ -327,14 +327,14 @@ namespace CTP {
 		/// 当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
 		/// </summary>
 		event FrontConnected^ OnFrontConnected {
-			void add(FrontConnected^ handler ) {
+			void add(FrontConnected^ handler) {
 				FrontConnected_delegate += handler;
 			}
 			void remove(FrontConnected^ handler) {
 				FrontConnected_delegate -= handler;
 			}
 			void raise() {
-				if(FrontConnected_delegate)
+				if (FrontConnected_delegate)
 					FrontConnected_delegate();
 			}
 		}
@@ -349,14 +349,14 @@ namespace CTP {
 		/// 0x2003 收到错误报文
 		/// </summary>
 		event FrontDisconnected^ OnFrontDisconnected {
-			void add(FrontDisconnected^ handler ) {
+			void add(FrontDisconnected^ handler) {
 				FrontDisconnected_delegate += handler;
 			}
 			void remove(FrontDisconnected^ handler) {
 				FrontDisconnected_delegate -= handler;
 			}
 			void raise(int nReason) {
-				if(FrontDisconnected_delegate)
+				if (FrontDisconnected_delegate)
 					FrontDisconnected_delegate(nReason);
 			}
 		}
@@ -366,14 +366,14 @@ namespace CTP {
 		///@param nTimeLapse 距离上次接收报文的时间
 		/// </summary>
 		event HeartBeatWarning^ OnHeartBeatWarning {
-			void add(HeartBeatWarning^ handler ) {
+			void add(HeartBeatWarning^ handler) {
 				HeartBeatWarning_delegate += handler;
 			}
 			void remove(HeartBeatWarning^ handler) {
 				HeartBeatWarning_delegate -= handler;
 			}
 			void raise(int nTimeLapse) {
-				if(HeartBeatWarning_delegate)
+				if (HeartBeatWarning_delegate)
 					HeartBeatWarning_delegate(nTimeLapse);
 			}
 		}
@@ -382,14 +382,14 @@ namespace CTP {
 		/// 登录请求响应
 		/// </summary>
 		event RspUserLogin^ OnRspUserLogin {
-			void add(RspUserLogin^ handler ) {
+			void add(RspUserLogin^ handler) {
 				RspUserLogin_delegate += handler;
 			}
 			void remove(RspUserLogin^ handler) {
 				RspUserLogin_delegate -= handler;
 			}
-			void raise(ThostFtdcRspUserLoginField^ pRspUserLogin, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
-				if(RspUserLogin_delegate)
+			void raise(ThostFtdcRspUserLoginField^ pRspUserLogin, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspUserLogin_delegate)
 					RspUserLogin_delegate(pRspUserLogin, pRspInfo, nRequestID, bIsLast);
 			}
 		}
@@ -398,340 +398,341 @@ namespace CTP {
 		/// 登出请求响应
 		/// </summary>
 		event RspUserLogout^ OnRspUserLogout {
-			void add(RspUserLogout^ handler ) {RspUserLogout_delegate += handler;}
-			void remove(RspUserLogout^ handler) {RspUserLogout_delegate -= handler;}
-			void raise(ThostFtdcUserLogoutField^ pUserLogout, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
-				if(RspUserLogout_delegate) RspUserLogout_delegate(pUserLogout, pRspInfo, nRequestID, bIsLast); }
+			void add(RspUserLogout^ handler) { RspUserLogout_delegate += handler; }
+			void remove(RspUserLogout^ handler) { RspUserLogout_delegate -= handler; }
+			void raise(ThostFtdcUserLogoutField^ pUserLogout, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspUserLogout_delegate) RspUserLogout_delegate(pUserLogout, pRspInfo, nRequestID, bIsLast);
+			}
 		}
 
 
 		/// <summary>
 		/// 客户端认证响应
 		/// </summary>
-		event RspAuthenticate^ OnRspAuthenticate{
+		event RspAuthenticate^ OnRspAuthenticate {
 			void add(RspAuthenticate^ handler) { RspAuthenticate_delegate += handler; }
 			void remove(RspAuthenticate^ handler) { RspAuthenticate_delegate -= handler; }
 			void raise(ThostFtdcRspAuthenticateField^ pRspAuthenticateField, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspAuthenticate_delegate) RspAuthenticate_delegate(pRspAuthenticateField, pRspInfo, nRequestID, bIsLast);
+				if (RspAuthenticate_delegate) RspAuthenticate_delegate(pRspAuthenticateField, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 用户口令更新请求响应
 		/// </summary>
-		event RspUserPasswordUpdate^ OnRspUserPasswordUpdate{
+		event RspUserPasswordUpdate^ OnRspUserPasswordUpdate {
 			void add(RspUserPasswordUpdate^ handler) { RspUserPasswordUpdate_delegate += handler; }
 			void remove(RspUserPasswordUpdate^ handler) { RspUserPasswordUpdate_delegate -= handler; }
 			void raise(ThostFtdcUserPasswordUpdateField^ pUserPasswordUpdate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspUserPasswordUpdate_delegate) RspUserPasswordUpdate_delegate(pUserPasswordUpdate, pRspInfo, nRequestID, bIsLast);
+				if (RspUserPasswordUpdate_delegate) RspUserPasswordUpdate_delegate(pUserPasswordUpdate, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 资金账户口令更新请求响应
 		/// </summary>
-		event RspTradingAccountPasswordUpdate^ OnRspTradingAccountPasswordUpdate{
+		event RspTradingAccountPasswordUpdate^ OnRspTradingAccountPasswordUpdate {
 			void add(RspTradingAccountPasswordUpdate^ handler) { RspTradingAccountPasswordUpdate_delegate += handler; }
 			void remove(RspTradingAccountPasswordUpdate^ handler) { RspTradingAccountPasswordUpdate_delegate -= handler; }
 			void raise(ThostFtdcTradingAccountPasswordUpdateField^ pTradingAccountPasswordUpdate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspTradingAccountPasswordUpdate_delegate) RspTradingAccountPasswordUpdate_delegate(pTradingAccountPasswordUpdate, pRspInfo, nRequestID, bIsLast);
+				if (RspTradingAccountPasswordUpdate_delegate) RspTradingAccountPasswordUpdate_delegate(pTradingAccountPasswordUpdate, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 报单录入请求响应
 		/// </summary>
-		event RspOrderInsert^ OnRspOrderInsert{
+		event RspOrderInsert^ OnRspOrderInsert {
 			void add(RspOrderInsert^ handler) { RspOrderInsert_delegate += handler; }
 			void remove(RspOrderInsert^ handler) { RspOrderInsert_delegate -= handler; }
 			void raise(ThostFtdcInputOrderField^ pInputOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspOrderInsert_delegate) RspOrderInsert_delegate(pInputOrder, pRspInfo, nRequestID, bIsLast);
+				if (RspOrderInsert_delegate) RspOrderInsert_delegate(pInputOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 预埋单录入请求响应
 		/// </summary>
-		event RspParkedOrderInsert^ OnRspParkedOrderInsert{
+		event RspParkedOrderInsert^ OnRspParkedOrderInsert {
 			void add(RspParkedOrderInsert^ handler) { RspParkedOrderInsert_delegate += handler; }
 			void remove(RspParkedOrderInsert^ handler) { RspParkedOrderInsert_delegate -= handler; }
 			void raise(ThostFtdcParkedOrderField^ pParkedOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspParkedOrderInsert_delegate) RspParkedOrderInsert_delegate(pParkedOrder, pRspInfo, nRequestID, bIsLast);
+				if (RspParkedOrderInsert_delegate) RspParkedOrderInsert_delegate(pParkedOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 预埋撤单录入请求响应
 		/// </summary>
-		event RspParkedOrderAction^ OnRspParkedOrderAction{
+		event RspParkedOrderAction^ OnRspParkedOrderAction {
 			void add(RspParkedOrderAction^ handler) { RspParkedOrderAction_delegate += handler; }
 			void remove(RspParkedOrderAction^ handler) { RspParkedOrderAction_delegate -= handler; }
 			void raise(ThostFtdcParkedOrderActionField^ pParkedOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspParkedOrderAction_delegate) RspParkedOrderAction_delegate(pParkedOrderAction, pRspInfo, nRequestID, bIsLast);
+				if (RspParkedOrderAction_delegate) RspParkedOrderAction_delegate(pParkedOrderAction, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 报单操作请求响应
 		/// </summary>
-		event RspOrderAction^ OnRspOrderAction{
+		event RspOrderAction^ OnRspOrderAction {
 			void add(RspOrderAction^ handler) { RspOrderAction_delegate += handler; }
 			void remove(RspOrderAction^ handler) { RspOrderAction_delegate -= handler; }
 			void raise(ThostFtdcInputOrderActionField^ pInputOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspOrderAction_delegate) RspOrderAction_delegate(pInputOrderAction, pRspInfo, nRequestID, bIsLast);
+				if (RspOrderAction_delegate) RspOrderAction_delegate(pInputOrderAction, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 查询最大报单数量响应
 		/// </summary>
-		event RspQueryMaxOrderVolume^ OnRspQueryMaxOrderVolume{
+		event RspQueryMaxOrderVolume^ OnRspQueryMaxOrderVolume {
 			void add(RspQueryMaxOrderVolume^ handler) { RspQueryMaxOrderVolume_delegate += handler; }
 			void remove(RspQueryMaxOrderVolume^ handler) { RspQueryMaxOrderVolume_delegate -= handler; }
 			void raise(ThostFtdcQueryMaxOrderVolumeField^ pQueryMaxOrderVolume, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQueryMaxOrderVolume_delegate) RspQueryMaxOrderVolume_delegate(pQueryMaxOrderVolume, pRspInfo, nRequestID, bIsLast);
+				if (RspQueryMaxOrderVolume_delegate) RspQueryMaxOrderVolume_delegate(pQueryMaxOrderVolume, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 投资者结算结果确认响应
 		/// </summary>
-		event RspSettlementInfoConfirm^ OnRspSettlementInfoConfirm{
+		event RspSettlementInfoConfirm^ OnRspSettlementInfoConfirm {
 			void add(RspSettlementInfoConfirm^ handler) { RspSettlementInfoConfirm_delegate += handler; }
 			void remove(RspSettlementInfoConfirm^ handler) { RspSettlementInfoConfirm_delegate -= handler; }
 			void raise(ThostFtdcSettlementInfoConfirmField^ pSettlementInfoConfirm, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspSettlementInfoConfirm_delegate) RspSettlementInfoConfirm_delegate(pSettlementInfoConfirm, pRspInfo, nRequestID, bIsLast);
+				if (RspSettlementInfoConfirm_delegate) RspSettlementInfoConfirm_delegate(pSettlementInfoConfirm, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
 		/// 删除预埋单响应
 		/// </summary>
-		event RspRemoveParkedOrder^ OnRspRemoveParkedOrder{
+		event RspRemoveParkedOrder^ OnRspRemoveParkedOrder {
 			void add(RspRemoveParkedOrder^ handler) { RspRemoveParkedOrder_delegate += handler; }
 			void remove(RspRemoveParkedOrder^ handler) { RspRemoveParkedOrder_delegate -= handler; }
 			void raise(ThostFtdcRemoveParkedOrderField^ pRemoveParkedOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspRemoveParkedOrder_delegate) RspRemoveParkedOrder_delegate(pRemoveParkedOrder, pRspInfo, nRequestID, bIsLast);
+				if (RspRemoveParkedOrder_delegate) RspRemoveParkedOrder_delegate(pRemoveParkedOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 删除预埋撤单响应
 		/// </summary>
-		event RspRemoveParkedOrderAction^ OnRspRemoveParkedOrderAction{
+		event RspRemoveParkedOrderAction^ OnRspRemoveParkedOrderAction {
 			void add(RspRemoveParkedOrderAction^ handler) { RspRemoveParkedOrderAction_delegate += handler; }
 			void remove(RspRemoveParkedOrderAction^ handler) { RspRemoveParkedOrderAction_delegate -= handler; }
 			void raise(ThostFtdcRemoveParkedOrderActionField^ pRemoveParkedOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspRemoveParkedOrderAction_delegate) RspRemoveParkedOrderAction_delegate(pRemoveParkedOrderAction, pRspInfo, nRequestID, bIsLast);
+				if (RspRemoveParkedOrderAction_delegate) RspRemoveParkedOrderAction_delegate(pRemoveParkedOrderAction, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询报单响应
 		/// </summary>
-		event RspQryOrder^ OnRspQryOrder{
+		event RspQryOrder^ OnRspQryOrder {
 			void add(RspQryOrder^ handler) { RspQryOrder_delegate += handler; }
 			void remove(RspQryOrder^ handler) { RspQryOrder_delegate -= handler; }
 			void raise(ThostFtdcOrderField^ pOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryOrder_delegate) RspQryOrder_delegate(pOrder, pRspInfo, nRequestID, bIsLast);
+				if (RspQryOrder_delegate) RspQryOrder_delegate(pOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询成交响应
 		/// </summary>
-		event RspQryTrade^ OnRspQryTrade{
+		event RspQryTrade^ OnRspQryTrade {
 			void add(RspQryTrade^ handler) { RspQryTrade_delegate += handler; }
 			void remove(RspQryTrade^ handler) { RspQryTrade_delegate -= handler; }
 			void raise(ThostFtdcTradeField^ pTrade, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryTrade_delegate) RspQryTrade_delegate(pTrade, pRspInfo, nRequestID, bIsLast);
+				if (RspQryTrade_delegate) RspQryTrade_delegate(pTrade, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询投资者持仓响应
 		/// </summary>
-		event RspQryInvestorPosition^ OnRspQryInvestorPosition{
+		event RspQryInvestorPosition^ OnRspQryInvestorPosition {
 			void add(RspQryInvestorPosition^ handler) { RspQryInvestorPosition_delegate += handler; }
 			void remove(RspQryInvestorPosition^ handler) { RspQryInvestorPosition_delegate -= handler; }
 			void raise(ThostFtdcInvestorPositionField^ pInvestorPosition, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryInvestorPosition_delegate) RspQryInvestorPosition_delegate(pInvestorPosition, pRspInfo, nRequestID, bIsLast);
+				if (RspQryInvestorPosition_delegate) RspQryInvestorPosition_delegate(pInvestorPosition, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询资金账户响应
 		/// </summary>
-		event RspQryTradingAccount^ OnRspQryTradingAccount{
+		event RspQryTradingAccount^ OnRspQryTradingAccount {
 			void add(RspQryTradingAccount^ handler) { RspQryTradingAccount_delegate += handler; }
 			void remove(RspQryTradingAccount^ handler) { RspQryTradingAccount_delegate -= handler; }
 			void raise(ThostFtdcTradingAccountField^ pTradingAccount, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryTradingAccount_delegate) RspQryTradingAccount_delegate(pTradingAccount, pRspInfo, nRequestID, bIsLast);
+				if (RspQryTradingAccount_delegate) RspQryTradingAccount_delegate(pTradingAccount, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询投资者响应
 		/// </summary>
-		event RspQryInvestor^ OnRspQryInvestor{
+		event RspQryInvestor^ OnRspQryInvestor {
 			void add(RspQryInvestor^ handler) { RspQryInvestor_delegate += handler; }
 			void remove(RspQryInvestor^ handler) { RspQryInvestor_delegate -= handler; }
 			void raise(ThostFtdcInvestorField^ pInvestor, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryInvestor_delegate) RspQryInvestor_delegate(pInvestor, pRspInfo, nRequestID, bIsLast);
+				if (RspQryInvestor_delegate) RspQryInvestor_delegate(pInvestor, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询交易编码响应
 		/// </summary>
-		event RspQryTradingCode^ OnRspQryTradingCode{
+		event RspQryTradingCode^ OnRspQryTradingCode {
 			void add(RspQryTradingCode^ handler) { RspQryTradingCode_delegate += handler; }
 			void remove(RspQryTradingCode^ handler) { RspQryTradingCode_delegate -= handler; }
 			void raise(ThostFtdcTradingCodeField^ pTradingCode, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryTradingCode_delegate) RspQryTradingCode_delegate(pTradingCode, pRspInfo, nRequestID, bIsLast);
+				if (RspQryTradingCode_delegate) RspQryTradingCode_delegate(pTradingCode, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询合约保证金率响应
 		/// </summary>
-		event RspQryInstrumentMarginRate^ OnRspQryInstrumentMarginRate{
+		event RspQryInstrumentMarginRate^ OnRspQryInstrumentMarginRate {
 			void add(RspQryInstrumentMarginRate^ handler) { RspQryInstrumentMarginRate_delegate += handler; }
 			void remove(RspQryInstrumentMarginRate^ handler) { RspQryInstrumentMarginRate_delegate -= handler; }
 			void raise(ThostFtdcInstrumentMarginRateField^ pInstrumentMarginRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryInstrumentMarginRate_delegate) RspQryInstrumentMarginRate_delegate(pInstrumentMarginRate, pRspInfo, nRequestID, bIsLast);
+				if (RspQryInstrumentMarginRate_delegate) RspQryInstrumentMarginRate_delegate(pInstrumentMarginRate, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询合约手续费率响应
 		/// </summary>
-		event RspQryInstrumentCommissionRate^ OnRspQryInstrumentCommissionRate{
+		event RspQryInstrumentCommissionRate^ OnRspQryInstrumentCommissionRate {
 			void add(RspQryInstrumentCommissionRate^ handler) { RspQryInstrumentCommissionRate_delegate += handler; }
 			void remove(RspQryInstrumentCommissionRate^ handler) { RspQryInstrumentCommissionRate_delegate -= handler; }
 			void raise(ThostFtdcInstrumentCommissionRateField^ pInstrumentCommissionRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryInstrumentCommissionRate_delegate) RspQryInstrumentCommissionRate_delegate(pInstrumentCommissionRate, pRspInfo, nRequestID, bIsLast);
+				if (RspQryInstrumentCommissionRate_delegate) RspQryInstrumentCommissionRate_delegate(pInstrumentCommissionRate, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询交易所响应
 		/// </summary>
-		event RspQryExchange^ OnRspQryExchange{
+		event RspQryExchange^ OnRspQryExchange {
 			void add(RspQryExchange^ handler) { RspQryExchange_delegate += handler; }
 			void remove(RspQryExchange^ handler) { RspQryExchange_delegate -= handler; }
 			void raise(ThostFtdcExchangeField^ pExchange, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryExchange_delegate) RspQryExchange_delegate(pExchange, pRspInfo, nRequestID, bIsLast);
+				if (RspQryExchange_delegate) RspQryExchange_delegate(pExchange, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询合约响应
 		/// </summary>
-		event RspQryInstrument^ OnRspQryInstrument{
+		event RspQryInstrument^ OnRspQryInstrument {
 			void add(RspQryInstrument^ handler) { RspQryInstrument_delegate += handler; }
 			void remove(RspQryInstrument^ handler) { RspQryInstrument_delegate -= handler; }
 			void raise(ThostFtdcInstrumentField^ pInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryInstrument_delegate) RspQryInstrument_delegate(pInstrument, pRspInfo, nRequestID, bIsLast);
+				if (RspQryInstrument_delegate) RspQryInstrument_delegate(pInstrument, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询行情响应
 		/// </summary>
-		event RspQryDepthMarketData^ OnRspQryDepthMarketData{
+		event RspQryDepthMarketData^ OnRspQryDepthMarketData {
 			void add(RspQryDepthMarketData^ handler) { RspQryDepthMarketData_delegate += handler; }
 			void remove(RspQryDepthMarketData^ handler) { RspQryDepthMarketData_delegate -= handler; }
 			void raise(ThostFtdcDepthMarketDataField^ pDepthMarketData, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryDepthMarketData_delegate) RspQryDepthMarketData_delegate(pDepthMarketData, pRspInfo, nRequestID, bIsLast);
+				if (RspQryDepthMarketData_delegate) RspQryDepthMarketData_delegate(pDepthMarketData, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询投资者结算结果响应
 		/// </summary>
-		event RspQrySettlementInfo^ OnRspQrySettlementInfo{
+		event RspQrySettlementInfo^ OnRspQrySettlementInfo {
 			void add(RspQrySettlementInfo^ handler) { RspQrySettlementInfo_delegate += handler; }
 			void remove(RspQrySettlementInfo^ handler) { RspQrySettlementInfo_delegate -= handler; }
 			void raise(ThostFtdcSettlementInfoField^ pSettlementInfo, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQrySettlementInfo_delegate) RspQrySettlementInfo_delegate(pSettlementInfo, pRspInfo, nRequestID, bIsLast);
+				if (RspQrySettlementInfo_delegate) RspQrySettlementInfo_delegate(pSettlementInfo, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询转帐银行响应
 		/// </summary>
-		event RspQryTransferBank^ OnRspQryTransferBank{
+		event RspQryTransferBank^ OnRspQryTransferBank {
 			void add(RspQryTransferBank^ handler) { RspQryTransferBank_delegate += handler; }
 			void remove(RspQryTransferBank^ handler) { RspQryTransferBank_delegate -= handler; }
 			void raise(ThostFtdcTransferBankField^ pTransferBank, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryTransferBank_delegate) RspQryTransferBank_delegate(pTransferBank, pRspInfo, nRequestID, bIsLast);
+				if (RspQryTransferBank_delegate) RspQryTransferBank_delegate(pTransferBank, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询投资者持仓明细响应
 		/// </summary>
-		event RspQryInvestorPositionDetail^ OnRspQryInvestorPositionDetail{
+		event RspQryInvestorPositionDetail^ OnRspQryInvestorPositionDetail {
 			void add(RspQryInvestorPositionDetail^ handler) { RspQryInvestorPositionDetail_delegate += handler; }
 			void remove(RspQryInvestorPositionDetail^ handler) { RspQryInvestorPositionDetail_delegate -= handler; }
 			void raise(ThostFtdcInvestorPositionDetailField^ pInvestorPositionDetail, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryInvestorPositionDetail_delegate) RspQryInvestorPositionDetail_delegate(pInvestorPositionDetail, pRspInfo, nRequestID, bIsLast);
+				if (RspQryInvestorPositionDetail_delegate) RspQryInvestorPositionDetail_delegate(pInvestorPositionDetail, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询客户通知响应
 		/// </summary>
-		event RspQryNotice^ OnRspQryNotice{
+		event RspQryNotice^ OnRspQryNotice {
 			void add(RspQryNotice^ handler) { RspQryNotice_delegate += handler; }
 			void remove(RspQryNotice^ handler) { RspQryNotice_delegate -= handler; }
 			void raise(ThostFtdcNoticeField^ pNotice, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryNotice_delegate) RspQryNotice_delegate(pNotice, pRspInfo, nRequestID, bIsLast);
+				if (RspQryNotice_delegate) RspQryNotice_delegate(pNotice, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询结算信息确认响应
 		/// </summary>
-		event RspQrySettlementInfoConfirm^ OnRspQrySettlementInfoConfirm{
+		event RspQrySettlementInfoConfirm^ OnRspQrySettlementInfoConfirm {
 			void add(RspQrySettlementInfoConfirm^ handler) { RspQrySettlementInfoConfirm_delegate += handler; }
 			void remove(RspQrySettlementInfoConfirm^ handler) { RspQrySettlementInfoConfirm_delegate -= handler; }
 			void raise(ThostFtdcSettlementInfoConfirmField^ pSettlementInfoConfirm, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQrySettlementInfoConfirm_delegate) RspQrySettlementInfoConfirm_delegate(pSettlementInfoConfirm, pRspInfo, nRequestID, bIsLast);
+				if (RspQrySettlementInfoConfirm_delegate) RspQrySettlementInfoConfirm_delegate(pSettlementInfoConfirm, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询投资者持仓明细响应
 		/// </summary>
-		event RspQryInvestorPositionCombineDetail^ OnRspQryInvestorPositionCombineDetail{
+		event RspQryInvestorPositionCombineDetail^ OnRspQryInvestorPositionCombineDetail {
 			void add(RspQryInvestorPositionCombineDetail^ handler) { RspQryInvestorPositionCombineDetail_delegate += handler; }
 			void remove(RspQryInvestorPositionCombineDetail^ handler) { RspQryInvestorPositionCombineDetail_delegate -= handler; }
 			void raise(ThostFtdcInvestorPositionCombineDetailField^ pInvestorPositionCombineDetail, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryInvestorPositionCombineDetail_delegate) RspQryInvestorPositionCombineDetail_delegate(pInvestorPositionCombineDetail, pRspInfo, nRequestID, bIsLast);
+				if (RspQryInvestorPositionCombineDetail_delegate) RspQryInvestorPositionCombineDetail_delegate(pInvestorPositionCombineDetail, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 查询保证金监管系统经纪公司资金账户密钥响应
 		/// </summary>
-		event RspQryCFMMCTradingAccountKey^ OnRspQryCFMMCTradingAccountKey{
+		event RspQryCFMMCTradingAccountKey^ OnRspQryCFMMCTradingAccountKey {
 			void add(RspQryCFMMCTradingAccountKey^ handler) { RspQryCFMMCTradingAccountKey_delegate += handler; }
 			void remove(RspQryCFMMCTradingAccountKey^ handler) { RspQryCFMMCTradingAccountKey_delegate -= handler; }
 			void raise(ThostFtdcCFMMCTradingAccountKeyField^ pCFMMCTradingAccountKey, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryCFMMCTradingAccountKey_delegate) RspQryCFMMCTradingAccountKey_delegate(pCFMMCTradingAccountKey, pRspInfo, nRequestID, bIsLast);
+				if (RspQryCFMMCTradingAccountKey_delegate) RspQryCFMMCTradingAccountKey_delegate(pCFMMCTradingAccountKey, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询仓单折抵信息响应
 		/// </summary>
-		event RspQryEWarrantOffset^ OnRspQryEWarrantOffset{
+		event RspQryEWarrantOffset^ OnRspQryEWarrantOffset {
 			void add(RspQryEWarrantOffset^ handler) { RspQryEWarrantOffset_delegate += handler; }
 			void remove(RspQryEWarrantOffset^ handler) { RspQryEWarrantOffset_delegate -= handler; }
 			void raise(ThostFtdcEWarrantOffsetField^ pEWarrantOffset, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryEWarrantOffset_delegate) RspQryEWarrantOffset_delegate(pEWarrantOffset, pRspInfo, nRequestID, bIsLast);
+				if (RspQryEWarrantOffset_delegate) RspQryEWarrantOffset_delegate(pEWarrantOffset, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询转帐流水响应
 		/// </summary>
-		event RspQryTransferSerial^ OnRspQryTransferSerial{
+		event RspQryTransferSerial^ OnRspQryTransferSerial {
 			void add(RspQryTransferSerial^ handler) { RspQryTransferSerial_delegate += handler; }
 			void remove(RspQryTransferSerial^ handler) { RspQryTransferSerial_delegate -= handler; }
 			void raise(ThostFtdcTransferSerialField^ pTransferSerial, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryTransferSerial_delegate) RspQryTransferSerial_delegate(pTransferSerial, pRspInfo, nRequestID, bIsLast);
+				if (RspQryTransferSerial_delegate) RspQryTransferSerial_delegate(pTransferSerial, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询银期签约关系响应
 		/// </summary>
-		event RspQryAccountregister^ OnRspQryAccountregister{
+		event RspQryAccountregister^ OnRspQryAccountregister {
 			void add(RspQryAccountregister^ handler) { RspQryAccountregister_delegate += handler; }
 			void remove(RspQryAccountregister^ handler) { RspQryAccountregister_delegate -= handler; }
 			void raise(ThostFtdcAccountregisterField^ pAccountregister, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryAccountregister_delegate) RspQryAccountregister_delegate(pAccountregister, pRspInfo, nRequestID, bIsLast);
+				if (RspQryAccountregister_delegate) RspQryAccountregister_delegate(pAccountregister, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
@@ -739,361 +740,361 @@ namespace CTP {
 		/// 错误应答
 		/// </summary>
 		event RspError^ OnRspError {
-			void add(RspError^ handler ) { RspError_delegate += handler; }
-			void remove(RspError^ handler) {RspError_delegate -= handler; }
-			void raise(ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { if(RspError_delegate) RspError_delegate(pRspInfo, nRequestID, bIsLast); }
+			void add(RspError^ handler) { RspError_delegate += handler; }
+			void remove(RspError^ handler) { RspError_delegate -= handler; }
+			void raise(ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { if (RspError_delegate) RspError_delegate(pRspInfo, nRequestID, bIsLast); }
 		}
 		/// <summary>
 		/// 报单通知
 		/// </summary>
-		event RtnOrder^ OnRtnOrder{
+		event RtnOrder^ OnRtnOrder {
 			void add(RtnOrder^ handler) { RtnOrder_delegate += handler; }
 			void remove(RtnOrder^ handler) { RtnOrder_delegate -= handler; }
 			void raise(ThostFtdcOrderField^ pOrder) {
-				if(RtnOrder_delegate) RtnOrder_delegate(pOrder);
+				if (RtnOrder_delegate) RtnOrder_delegate(pOrder);
 			}
 		}
 		/// <summary>
 		/// 成交通知
 		/// </summary>
-		event RtnTrade^ OnRtnTrade{
+		event RtnTrade^ OnRtnTrade {
 			void add(RtnTrade^ handler) { RtnTrade_delegate += handler; }
 			void remove(RtnTrade^ handler) { RtnTrade_delegate -= handler; }
 			void raise(ThostFtdcTradeField^ pTrade) {
-				if(RtnTrade_delegate) RtnTrade_delegate(pTrade);
+				if (RtnTrade_delegate) RtnTrade_delegate(pTrade);
 			}
 		}
 		/// <summary>
 		/// 报单录入错误回报
 		/// </summary>
-		event ErrRtnOrderInsert^ OnErrRtnOrderInsert{
+		event ErrRtnOrderInsert^ OnErrRtnOrderInsert {
 			void add(ErrRtnOrderInsert^ handler) { ErrRtnOrderInsert_delegate += handler; }
 			void remove(ErrRtnOrderInsert^ handler) { ErrRtnOrderInsert_delegate -= handler; }
 			void raise(ThostFtdcInputOrderField^ pInputOrder, ThostFtdcRspInfoField^ pRspInfo) {
-				if(ErrRtnOrderInsert_delegate) ErrRtnOrderInsert_delegate(pInputOrder, pRspInfo);
+				if (ErrRtnOrderInsert_delegate) ErrRtnOrderInsert_delegate(pInputOrder, pRspInfo);
 			}
 		}
 		/// <summary>
 		/// 报单操作错误回报
 		/// </summary>
-		event ErrRtnOrderAction^ OnErrRtnOrderAction{
+		event ErrRtnOrderAction^ OnErrRtnOrderAction {
 			void add(ErrRtnOrderAction^ handler) { ErrRtnOrderAction_delegate += handler; }
 			void remove(ErrRtnOrderAction^ handler) { ErrRtnOrderAction_delegate -= handler; }
 			void raise(ThostFtdcOrderActionField^ pOrderAction, ThostFtdcRspInfoField^ pRspInfo) {
-				if(ErrRtnOrderAction_delegate) ErrRtnOrderAction_delegate(pOrderAction, pRspInfo);
+				if (ErrRtnOrderAction_delegate) ErrRtnOrderAction_delegate(pOrderAction, pRspInfo);
 			}
 		}
 		/// <summary>
 		/// 合约交易状态通知
 		/// </summary>
-		event RtnInstrumentStatus^ OnRtnInstrumentStatus{
+		event RtnInstrumentStatus^ OnRtnInstrumentStatus {
 			void add(RtnInstrumentStatus^ handler) { RtnInstrumentStatus_delegate += handler; }
 			void remove(RtnInstrumentStatus^ handler) { RtnInstrumentStatus_delegate -= handler; }
 			void raise(ThostFtdcInstrumentStatusField^ pInstrumentStatus) {
-				if(RtnInstrumentStatus_delegate) RtnInstrumentStatus_delegate(pInstrumentStatus);
+				if (RtnInstrumentStatus_delegate) RtnInstrumentStatus_delegate(pInstrumentStatus);
 			}
 		}
 		/// <summary>
 		/// 交易通知
 		/// </summary>
-		event RtnTradingNotice^ OnRtnTradingNotice{
+		event RtnTradingNotice^ OnRtnTradingNotice {
 			void add(RtnTradingNotice^ handler) { RtnTradingNotice_delegate += handler; }
 			void remove(RtnTradingNotice^ handler) { RtnTradingNotice_delegate -= handler; }
 			void raise(ThostFtdcTradingNoticeInfoField^ pTradingNoticeInfo) {
-				if(RtnTradingNotice_delegate) RtnTradingNotice_delegate(pTradingNoticeInfo);
+				if (RtnTradingNotice_delegate) RtnTradingNotice_delegate(pTradingNoticeInfo);
 			}
 		}
 		/// <summary>
 		/// 提示条件单校验错误
 		/// </summary>
-		event RtnErrorConditionalOrder^ OnRtnErrorConditionalOrder{
+		event RtnErrorConditionalOrder^ OnRtnErrorConditionalOrder {
 			void add(RtnErrorConditionalOrder^ handler) { RtnErrorConditionalOrder_delegate += handler; }
 			void remove(RtnErrorConditionalOrder^ handler) { RtnErrorConditionalOrder_delegate -= handler; }
 			void raise(ThostFtdcErrorConditionalOrderField^ pErrorConditionalOrder) {
-				if(RtnErrorConditionalOrder_delegate) RtnErrorConditionalOrder_delegate(pErrorConditionalOrder);
+				if (RtnErrorConditionalOrder_delegate) RtnErrorConditionalOrder_delegate(pErrorConditionalOrder);
 			}
 		}
 		/// <summary>
 		/// 请求查询签约银行响应
 		/// </summary>
-		event RspQryContractBank^ OnRspQryContractBank{
+		event RspQryContractBank^ OnRspQryContractBank {
 			void add(RspQryContractBank^ handler) { RspQryContractBank_delegate += handler; }
 			void remove(RspQryContractBank^ handler) { RspQryContractBank_delegate -= handler; }
 			void raise(ThostFtdcContractBankField^ pContractBank, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryContractBank_delegate) RspQryContractBank_delegate(pContractBank, pRspInfo, nRequestID, bIsLast);
+				if (RspQryContractBank_delegate) RspQryContractBank_delegate(pContractBank, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询预埋单响应
 		/// </summary>
-		event RspQryParkedOrder^ OnRspQryParkedOrder{
+		event RspQryParkedOrder^ OnRspQryParkedOrder {
 			void add(RspQryParkedOrder^ handler) { RspQryParkedOrder_delegate += handler; }
 			void remove(RspQryParkedOrder^ handler) { RspQryParkedOrder_delegate -= handler; }
 			void raise(ThostFtdcParkedOrderField^ pParkedOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryParkedOrder_delegate) RspQryParkedOrder_delegate(pParkedOrder, pRspInfo, nRequestID, bIsLast);
+				if (RspQryParkedOrder_delegate) RspQryParkedOrder_delegate(pParkedOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询预埋撤单响应
 		/// </summary>
-		event RspQryParkedOrderAction^ OnRspQryParkedOrderAction{
+		event RspQryParkedOrderAction^ OnRspQryParkedOrderAction {
 			void add(RspQryParkedOrderAction^ handler) { RspQryParkedOrderAction_delegate += handler; }
 			void remove(RspQryParkedOrderAction^ handler) { RspQryParkedOrderAction_delegate -= handler; }
 			void raise(ThostFtdcParkedOrderActionField^ pParkedOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryParkedOrderAction_delegate) RspQryParkedOrderAction_delegate(pParkedOrderAction, pRspInfo, nRequestID, bIsLast);
+				if (RspQryParkedOrderAction_delegate) RspQryParkedOrderAction_delegate(pParkedOrderAction, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询交易通知响应
 		/// </summary>
-		event RspQryTradingNotice^ OnRspQryTradingNotice{
+		event RspQryTradingNotice^ OnRspQryTradingNotice {
 			void add(RspQryTradingNotice^ handler) { RspQryTradingNotice_delegate += handler; }
 			void remove(RspQryTradingNotice^ handler) { RspQryTradingNotice_delegate -= handler; }
 			void raise(ThostFtdcTradingNoticeField^ pTradingNotice, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryTradingNotice_delegate) RspQryTradingNotice_delegate(pTradingNotice, pRspInfo, nRequestID, bIsLast);
+				if (RspQryTradingNotice_delegate) RspQryTradingNotice_delegate(pTradingNotice, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询经纪公司交易参数响应
 		/// </summary>
-		event RspQryBrokerTradingParams^ OnRspQryBrokerTradingParams{
+		event RspQryBrokerTradingParams^ OnRspQryBrokerTradingParams {
 			void add(RspQryBrokerTradingParams^ handler) { RspQryBrokerTradingParams_delegate += handler; }
 			void remove(RspQryBrokerTradingParams^ handler) { RspQryBrokerTradingParams_delegate -= handler; }
 			void raise(ThostFtdcBrokerTradingParamsField^ pBrokerTradingParams, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryBrokerTradingParams_delegate) RspQryBrokerTradingParams_delegate(pBrokerTradingParams, pRspInfo, nRequestID, bIsLast);
+				if (RspQryBrokerTradingParams_delegate) RspQryBrokerTradingParams_delegate(pBrokerTradingParams, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 请求查询经纪公司交易算法响应
 		/// </summary>
-		event RspQryBrokerTradingAlgos^ OnRspQryBrokerTradingAlgos{
+		event RspQryBrokerTradingAlgos^ OnRspQryBrokerTradingAlgos {
 			void add(RspQryBrokerTradingAlgos^ handler) { RspQryBrokerTradingAlgos_delegate += handler; }
 			void remove(RspQryBrokerTradingAlgos^ handler) { RspQryBrokerTradingAlgos_delegate -= handler; }
 			void raise(ThostFtdcBrokerTradingAlgosField^ pBrokerTradingAlgos, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQryBrokerTradingAlgos_delegate) RspQryBrokerTradingAlgos_delegate(pBrokerTradingAlgos, pRspInfo, nRequestID, bIsLast);
+				if (RspQryBrokerTradingAlgos_delegate) RspQryBrokerTradingAlgos_delegate(pBrokerTradingAlgos, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 银行发起银行资金转期货通知
 		/// </summary>
-		event RtnFromBankToFutureByBank^ OnRtnFromBankToFutureByBank{
+		event RtnFromBankToFutureByBank^ OnRtnFromBankToFutureByBank {
 			void add(RtnFromBankToFutureByBank^ handler) { RtnFromBankToFutureByBank_delegate += handler; }
 			void remove(RtnFromBankToFutureByBank^ handler) { RtnFromBankToFutureByBank_delegate -= handler; }
 			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
-				if(RtnFromBankToFutureByBank_delegate) RtnFromBankToFutureByBank_delegate(pRspTransfer);
+				if (RtnFromBankToFutureByBank_delegate) RtnFromBankToFutureByBank_delegate(pRspTransfer);
 			}
 		}
 		/// <summary>
 		/// 银行发起期货资金转银行通知
 		/// </summary>
-		event RtnFromFutureToBankByBank^ OnRtnFromFutureToBankByBank{
+		event RtnFromFutureToBankByBank^ OnRtnFromFutureToBankByBank {
 			void add(RtnFromFutureToBankByBank^ handler) { RtnFromFutureToBankByBank_delegate += handler; }
 			void remove(RtnFromFutureToBankByBank^ handler) { RtnFromFutureToBankByBank_delegate -= handler; }
 			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
-				if(RtnFromFutureToBankByBank_delegate) RtnFromFutureToBankByBank_delegate(pRspTransfer);
+				if (RtnFromFutureToBankByBank_delegate) RtnFromFutureToBankByBank_delegate(pRspTransfer);
 			}
 		}
 		/// <summary>
 		/// 银行发起冲正银行转期货通知
 		/// </summary>
-		event RtnRepealFromBankToFutureByBank^ OnRtnRepealFromBankToFutureByBank{
+		event RtnRepealFromBankToFutureByBank^ OnRtnRepealFromBankToFutureByBank {
 			void add(RtnRepealFromBankToFutureByBank^ handler) { RtnRepealFromBankToFutureByBank_delegate += handler; }
 			void remove(RtnRepealFromBankToFutureByBank^ handler) { RtnRepealFromBankToFutureByBank_delegate -= handler; }
 			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if(RtnRepealFromBankToFutureByBank_delegate) RtnRepealFromBankToFutureByBank_delegate(pRspRepeal);
+				if (RtnRepealFromBankToFutureByBank_delegate) RtnRepealFromBankToFutureByBank_delegate(pRspRepeal);
 			}
 		}
 		/// <summary>
 		/// 银行发起冲正期货转银行通知
 		/// </summary>
-		event RtnRepealFromFutureToBankByBank^ OnRtnRepealFromFutureToBankByBank{
+		event RtnRepealFromFutureToBankByBank^ OnRtnRepealFromFutureToBankByBank {
 			void add(RtnRepealFromFutureToBankByBank^ handler) { RtnRepealFromFutureToBankByBank_delegate += handler; }
 			void remove(RtnRepealFromFutureToBankByBank^ handler) { RtnRepealFromFutureToBankByBank_delegate -= handler; }
 			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if(RtnRepealFromFutureToBankByBank_delegate) RtnRepealFromFutureToBankByBank_delegate(pRspRepeal);
+				if (RtnRepealFromFutureToBankByBank_delegate) RtnRepealFromFutureToBankByBank_delegate(pRspRepeal);
 			}
 		}
 		/// <summary>
 		/// 期货发起银行资金转期货通知
 		/// </summary>
-		event RtnFromBankToFutureByFuture^ OnRtnFromBankToFutureByFuture{
+		event RtnFromBankToFutureByFuture^ OnRtnFromBankToFutureByFuture {
 			void add(RtnFromBankToFutureByFuture^ handler) { RtnFromBankToFutureByFuture_delegate += handler; }
 			void remove(RtnFromBankToFutureByFuture^ handler) { RtnFromBankToFutureByFuture_delegate -= handler; }
 			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
-				if(RtnFromBankToFutureByFuture_delegate) RtnFromBankToFutureByFuture_delegate(pRspTransfer);
+				if (RtnFromBankToFutureByFuture_delegate) RtnFromBankToFutureByFuture_delegate(pRspTransfer);
 			}
 		}
 		/// <summary>
 		/// 期货发起期货资金转银行通知
 		/// </summary>
-		event RtnFromFutureToBankByFuture^ OnRtnFromFutureToBankByFuture{
+		event RtnFromFutureToBankByFuture^ OnRtnFromFutureToBankByFuture {
 			void add(RtnFromFutureToBankByFuture^ handler) { RtnFromFutureToBankByFuture_delegate += handler; }
 			void remove(RtnFromFutureToBankByFuture^ handler) { RtnFromFutureToBankByFuture_delegate -= handler; }
 			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
-				if(RtnFromFutureToBankByFuture_delegate) RtnFromFutureToBankByFuture_delegate(pRspTransfer);
+				if (RtnFromFutureToBankByFuture_delegate) RtnFromFutureToBankByFuture_delegate(pRspTransfer);
 			}
 		}
 		/// <summary>
 		/// 系统运行时期货端手工发起冲正银行转期货请求，银行处理完毕后报盘发回的通知
 		/// </summary>
-		event RtnRepealFromBankToFutureByFutureManual^ OnRtnRepealFromBankToFutureByFutureManual{
+		event RtnRepealFromBankToFutureByFutureManual^ OnRtnRepealFromBankToFutureByFutureManual {
 			void add(RtnRepealFromBankToFutureByFutureManual^ handler) { RtnRepealFromBankToFutureByFutureManual_delegate += handler; }
 			void remove(RtnRepealFromBankToFutureByFutureManual^ handler) { RtnRepealFromBankToFutureByFutureManual_delegate -= handler; }
 			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if(RtnRepealFromBankToFutureByFutureManual_delegate) RtnRepealFromBankToFutureByFutureManual_delegate(pRspRepeal);
+				if (RtnRepealFromBankToFutureByFutureManual_delegate) RtnRepealFromBankToFutureByFutureManual_delegate(pRspRepeal);
 			}
 		}
 		/// <summary>
 		/// 系统运行时期货端手工发起冲正期货转银行请求，银行处理完毕后报盘发回的通知
 		/// </summary>
-		event RtnRepealFromFutureToBankByFutureManual^ OnRtnRepealFromFutureToBankByFutureManual{
+		event RtnRepealFromFutureToBankByFutureManual^ OnRtnRepealFromFutureToBankByFutureManual {
 			void add(RtnRepealFromFutureToBankByFutureManual^ handler) { RtnRepealFromFutureToBankByFutureManual_delegate += handler; }
 			void remove(RtnRepealFromFutureToBankByFutureManual^ handler) { RtnRepealFromFutureToBankByFutureManual_delegate -= handler; }
 			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if(RtnRepealFromFutureToBankByFutureManual_delegate) RtnRepealFromFutureToBankByFutureManual_delegate(pRspRepeal);
+				if (RtnRepealFromFutureToBankByFutureManual_delegate) RtnRepealFromFutureToBankByFutureManual_delegate(pRspRepeal);
 			}
 		}
 		/// <summary>
 		/// 期货发起查询银行余额通知
 		/// </summary>
-		event RtnQueryBankBalanceByFuture^ OnRtnQueryBankBalanceByFuture{
+		event RtnQueryBankBalanceByFuture^ OnRtnQueryBankBalanceByFuture {
 			void add(RtnQueryBankBalanceByFuture^ handler) { RtnQueryBankBalanceByFuture_delegate += handler; }
 			void remove(RtnQueryBankBalanceByFuture^ handler) { RtnQueryBankBalanceByFuture_delegate -= handler; }
 			void raise(ThostFtdcNotifyQueryAccountField^ pNotifyQueryAccount) {
-				if(RtnQueryBankBalanceByFuture_delegate) RtnQueryBankBalanceByFuture_delegate(pNotifyQueryAccount);
+				if (RtnQueryBankBalanceByFuture_delegate) RtnQueryBankBalanceByFuture_delegate(pNotifyQueryAccount);
 			}
 		}
 		/// <summary>
 		/// 期货发起银行资金转期货错误回报
 		/// </summary>
-		event ErrRtnBankToFutureByFuture^ OnErrRtnBankToFutureByFuture{
+		event ErrRtnBankToFutureByFuture^ OnErrRtnBankToFutureByFuture {
 			void add(ErrRtnBankToFutureByFuture^ handler) { ErrRtnBankToFutureByFuture_delegate += handler; }
 			void remove(ErrRtnBankToFutureByFuture^ handler) { ErrRtnBankToFutureByFuture_delegate -= handler; }
 			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo) {
-				if(ErrRtnBankToFutureByFuture_delegate) ErrRtnBankToFutureByFuture_delegate(pReqTransfer, pRspInfo);
+				if (ErrRtnBankToFutureByFuture_delegate) ErrRtnBankToFutureByFuture_delegate(pReqTransfer, pRspInfo);
 			}
 		}
 		/// <summary>
 		/// 期货发起期货资金转银行错误回报
 		/// </summary>
-		event ErrRtnFutureToBankByFuture^ OnErrRtnFutureToBankByFuture{
+		event ErrRtnFutureToBankByFuture^ OnErrRtnFutureToBankByFuture {
 			void add(ErrRtnFutureToBankByFuture^ handler) { ErrRtnFutureToBankByFuture_delegate += handler; }
 			void remove(ErrRtnFutureToBankByFuture^ handler) { ErrRtnFutureToBankByFuture_delegate -= handler; }
 			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo) {
-				if(ErrRtnFutureToBankByFuture_delegate) ErrRtnFutureToBankByFuture_delegate(pReqTransfer, pRspInfo);
+				if (ErrRtnFutureToBankByFuture_delegate) ErrRtnFutureToBankByFuture_delegate(pReqTransfer, pRspInfo);
 			}
 		}
 		/// <summary>
 		/// 系统运行时期货端手工发起冲正银行转期货错误回报
 		/// </summary>
-		event ErrRtnRepealBankToFutureByFutureManual^ OnErrRtnRepealBankToFutureByFutureManual{
+		event ErrRtnRepealBankToFutureByFutureManual^ OnErrRtnRepealBankToFutureByFutureManual {
 			void add(ErrRtnRepealBankToFutureByFutureManual^ handler) { ErrRtnRepealBankToFutureByFutureManual_delegate += handler; }
 			void remove(ErrRtnRepealBankToFutureByFutureManual^ handler) { ErrRtnRepealBankToFutureByFutureManual_delegate -= handler; }
 			void raise(ThostFtdcReqRepealField^ pReqRepeal, ThostFtdcRspInfoField^ pRspInfo) {
-				if(ErrRtnRepealBankToFutureByFutureManual_delegate) ErrRtnRepealBankToFutureByFutureManual_delegate(pReqRepeal, pRspInfo);
+				if (ErrRtnRepealBankToFutureByFutureManual_delegate) ErrRtnRepealBankToFutureByFutureManual_delegate(pReqRepeal, pRspInfo);
 			}
 		}
 		/// <summary>
 		/// 系统运行时期货端手工发起冲正期货转银行错误回报
 		/// </summary>
-		event ErrRtnRepealFutureToBankByFutureManual^ OnErrRtnRepealFutureToBankByFutureManual{
+		event ErrRtnRepealFutureToBankByFutureManual^ OnErrRtnRepealFutureToBankByFutureManual {
 			void add(ErrRtnRepealFutureToBankByFutureManual^ handler) { ErrRtnRepealFutureToBankByFutureManual_delegate += handler; }
 			void remove(ErrRtnRepealFutureToBankByFutureManual^ handler) { ErrRtnRepealFutureToBankByFutureManual_delegate -= handler; }
 			void raise(ThostFtdcReqRepealField^ pReqRepeal, ThostFtdcRspInfoField^ pRspInfo) {
-				if(ErrRtnRepealFutureToBankByFutureManual_delegate) ErrRtnRepealFutureToBankByFutureManual_delegate(pReqRepeal, pRspInfo);
+				if (ErrRtnRepealFutureToBankByFutureManual_delegate) ErrRtnRepealFutureToBankByFutureManual_delegate(pReqRepeal, pRspInfo);
 			}
 		}
 		/// <summary>
 		/// 期货发起查询银行余额错误回报
 		/// </summary>
-		event ErrRtnQueryBankBalanceByFuture^ OnErrRtnQueryBankBalanceByFuture{
+		event ErrRtnQueryBankBalanceByFuture^ OnErrRtnQueryBankBalanceByFuture {
 			void add(ErrRtnQueryBankBalanceByFuture^ handler) { ErrRtnQueryBankBalanceByFuture_delegate += handler; }
 			void remove(ErrRtnQueryBankBalanceByFuture^ handler) { ErrRtnQueryBankBalanceByFuture_delegate -= handler; }
 			void raise(ThostFtdcReqQueryAccountField^ pReqQueryAccount, ThostFtdcRspInfoField^ pRspInfo) {
-				if(ErrRtnQueryBankBalanceByFuture_delegate) ErrRtnQueryBankBalanceByFuture_delegate(pReqQueryAccount, pRspInfo);
+				if (ErrRtnQueryBankBalanceByFuture_delegate) ErrRtnQueryBankBalanceByFuture_delegate(pReqQueryAccount, pRspInfo);
 			}
 		}
 		/// <summary>
 		/// 期货发起冲正银行转期货请求，银行处理完毕后报盘发回的通知
 		/// </summary>
-		event RtnRepealFromBankToFutureByFuture^ OnRtnRepealFromBankToFutureByFuture{
+		event RtnRepealFromBankToFutureByFuture^ OnRtnRepealFromBankToFutureByFuture {
 			void add(RtnRepealFromBankToFutureByFuture^ handler) { RtnRepealFromBankToFutureByFuture_delegate += handler; }
 			void remove(RtnRepealFromBankToFutureByFuture^ handler) { RtnRepealFromBankToFutureByFuture_delegate -= handler; }
 			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if(RtnRepealFromBankToFutureByFuture_delegate) RtnRepealFromBankToFutureByFuture_delegate(pRspRepeal);
+				if (RtnRepealFromBankToFutureByFuture_delegate) RtnRepealFromBankToFutureByFuture_delegate(pRspRepeal);
 			}
 		}
 		/// <summary>
 		/// 期货发起冲正期货转银行请求，银行处理完毕后报盘发回的通知
 		/// </summary>
-		event RtnRepealFromFutureToBankByFuture^ OnRtnRepealFromFutureToBankByFuture{
+		event RtnRepealFromFutureToBankByFuture^ OnRtnRepealFromFutureToBankByFuture {
 			void add(RtnRepealFromFutureToBankByFuture^ handler) { RtnRepealFromFutureToBankByFuture_delegate += handler; }
 			void remove(RtnRepealFromFutureToBankByFuture^ handler) { RtnRepealFromFutureToBankByFuture_delegate -= handler; }
 			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if(RtnRepealFromFutureToBankByFuture_delegate) RtnRepealFromFutureToBankByFuture_delegate(pRspRepeal);
+				if (RtnRepealFromFutureToBankByFuture_delegate) RtnRepealFromFutureToBankByFuture_delegate(pRspRepeal);
 			}
 		}
 		/// <summary>
 		/// 期货发起银行资金转期货应答
 		/// </summary>
-		event RspFromBankToFutureByFuture^ OnRspFromBankToFutureByFuture{
+		event RspFromBankToFutureByFuture^ OnRspFromBankToFutureByFuture {
 			void add(RspFromBankToFutureByFuture^ handler) { RspFromBankToFutureByFuture_delegate += handler; }
 			void remove(RspFromBankToFutureByFuture^ handler) { RspFromBankToFutureByFuture_delegate -= handler; }
 			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspFromBankToFutureByFuture_delegate) RspFromBankToFutureByFuture_delegate(pReqTransfer, pRspInfo, nRequestID, bIsLast);
+				if (RspFromBankToFutureByFuture_delegate) RspFromBankToFutureByFuture_delegate(pReqTransfer, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 期货发起期货资金转银行应答
 		/// </summary>
-		event RspFromFutureToBankByFuture^ OnRspFromFutureToBankByFuture{
+		event RspFromFutureToBankByFuture^ OnRspFromFutureToBankByFuture {
 			void add(RspFromFutureToBankByFuture^ handler) { RspFromFutureToBankByFuture_delegate += handler; }
 			void remove(RspFromFutureToBankByFuture^ handler) { RspFromFutureToBankByFuture_delegate -= handler; }
 			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspFromFutureToBankByFuture_delegate) RspFromFutureToBankByFuture_delegate(pReqTransfer, pRspInfo, nRequestID, bIsLast);
+				if (RspFromFutureToBankByFuture_delegate) RspFromFutureToBankByFuture_delegate(pReqTransfer, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 期货发起查询银行余额应答
 		/// </summary>
-		event RspQueryBankAccountMoneyByFuture^ OnRspQueryBankAccountMoneyByFuture{
+		event RspQueryBankAccountMoneyByFuture^ OnRspQueryBankAccountMoneyByFuture {
 			void add(RspQueryBankAccountMoneyByFuture^ handler) { RspQueryBankAccountMoneyByFuture_delegate += handler; }
 			void remove(RspQueryBankAccountMoneyByFuture^ handler) { RspQueryBankAccountMoneyByFuture_delegate -= handler; }
 			void raise(ThostFtdcReqQueryAccountField^ pReqQueryAccount, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if(RspQueryBankAccountMoneyByFuture_delegate) RspQueryBankAccountMoneyByFuture_delegate(pReqQueryAccount, pRspInfo, nRequestID, bIsLast);
+				if (RspQueryBankAccountMoneyByFuture_delegate) RspQueryBankAccountMoneyByFuture_delegate(pReqQueryAccount, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
 		/// 银行发起银期开户通知
 		/// </summary>
-		event RtnOpenAccountByBank^ OnRtnOpenAccountByBank{
+		event RtnOpenAccountByBank^ OnRtnOpenAccountByBank {
 			void add(RtnOpenAccountByBank^ handler) { RtnOpenAccountByBank_delegate += handler; }
 			void remove(RtnOpenAccountByBank^ handler) { RtnOpenAccountByBank_delegate -= handler; }
 			void raise(ThostFtdcOpenAccountField^ pOpenAccount) {
-				if(RtnOpenAccountByBank_delegate) RtnOpenAccountByBank_delegate(pOpenAccount);
+				if (RtnOpenAccountByBank_delegate) RtnOpenAccountByBank_delegate(pOpenAccount);
 			}
 		}
 		/// <summary>
 		/// 银行发起银期销户通知
 		/// </summary>
-		event RtnCancelAccountByBank^ OnRtnCancelAccountByBank{
+		event RtnCancelAccountByBank^ OnRtnCancelAccountByBank {
 			void add(RtnCancelAccountByBank^ handler) { RtnCancelAccountByBank_delegate += handler; }
 			void remove(RtnCancelAccountByBank^ handler) { RtnCancelAccountByBank_delegate -= handler; }
 			void raise(ThostFtdcCancelAccountField^ pCancelAccount) {
-				if(RtnCancelAccountByBank_delegate) RtnCancelAccountByBank_delegate(pCancelAccount);
+				if (RtnCancelAccountByBank_delegate) RtnCancelAccountByBank_delegate(pCancelAccount);
 			}
 		}
 		/// <summary>
 		/// 银行发起变更银行账号通知
 		/// </summary>
-		event RtnChangeAccountByBank^ OnRtnChangeAccountByBank{
+		event RtnChangeAccountByBank^ OnRtnChangeAccountByBank {
 			void add(RtnChangeAccountByBank^ handler) { RtnChangeAccountByBank_delegate += handler; }
 			void remove(RtnChangeAccountByBank^ handler) { RtnChangeAccountByBank_delegate -= handler; }
 			void raise(ThostFtdcChangeAccountField^ pChangeAccount) {
-				if(RtnChangeAccountByBank_delegate) RtnChangeAccountByBank_delegate(pChangeAccount);
+				if (RtnChangeAccountByBank_delegate) RtnChangeAccountByBank_delegate(pChangeAccount);
 			}
 		}
-		
+
 		// delegates
 	private:
 		FrontConnected^ FrontConnected_delegate;

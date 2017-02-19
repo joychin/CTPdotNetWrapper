@@ -9,7 +9,7 @@
 
 using namespace Native;
 
-namespace  Native{
+namespace  Native {
 	class CMdSpi;
 };
 
@@ -90,7 +90,7 @@ namespace CTP {
 		/// <summary>
 		/// 用户登录请求
 		/// </summary>
-		int ReqUserLogin(ThostFtdcReqUserLoginField^ pReqUserLoginField,int nRequestID);
+		int ReqUserLogin(ThostFtdcReqUserLoginField^ pReqUserLoginField, int nRequestID);
 		/// <summary>
 		/// 登出请求
 		/// </summary>
@@ -102,14 +102,14 @@ namespace CTP {
 		/// 当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
 		/// </summary>
 		event FrontConnected^ OnFrontConnected {
-			void add(FrontConnected^ handler ) {
+			void add(FrontConnected^ handler) {
 				OnFrontConnected_delegate += handler;
 			}
 			void remove(FrontConnected^ handler) {
 				OnFrontConnected_delegate -= handler;
 			}
 			void raise() {
-				if(OnFrontConnected_delegate)
+				if (OnFrontConnected_delegate)
 					OnFrontConnected_delegate();
 			}
 		}
@@ -124,14 +124,14 @@ namespace CTP {
 		/// 0x2003 收到错误报文
 		/// </summary>
 		event FrontDisconnected^ OnFrontDisconnected {
-			void add(FrontDisconnected^ handler ) {
+			void add(FrontDisconnected^ handler) {
 				OnFrontDisconnected_delegate += handler;
 			}
 			void remove(FrontDisconnected^ handler) {
 				OnFrontDisconnected_delegate -= handler;
 			}
 			void raise(int nReason) {
-				if(OnFrontDisconnected_delegate)
+				if (OnFrontDisconnected_delegate)
 					OnFrontDisconnected_delegate(nReason);
 			}
 		}
@@ -141,14 +141,14 @@ namespace CTP {
 		///@param nTimeLapse 距离上次接收报文的时间
 		/// </summary>
 		event HeartBeatWarning^ OnHeartBeatWarning {
-			void add(HeartBeatWarning^ handler ) {
+			void add(HeartBeatWarning^ handler) {
 				OnHeartBeatWarning_delegate += handler;
 			}
 			void remove(HeartBeatWarning^ handler) {
 				OnHeartBeatWarning_delegate -= handler;
 			}
 			void raise(int nTimeLapse) {
-				if(OnHeartBeatWarning_delegate)
+				if (OnHeartBeatWarning_delegate)
 					OnHeartBeatWarning_delegate(nTimeLapse);
 			}
 		}
@@ -157,14 +157,14 @@ namespace CTP {
 		/// 登录请求响应
 		/// </summary>
 		event RspUserLogin^ OnRspUserLogin {
-			void add(RspUserLogin^ handler ) {
+			void add(RspUserLogin^ handler) {
 				OnRspUserLogin_delegate += handler;
 			}
 			void remove(RspUserLogin^ handler) {
 				OnRspUserLogin_delegate -= handler;
 			}
-			void raise(ThostFtdcRspUserLoginField^ pRspUserLogin, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
-				if(OnRspUserLogin_delegate)
+			void raise(ThostFtdcRspUserLoginField^ pRspUserLogin, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (OnRspUserLogin_delegate)
 					OnRspUserLogin_delegate(pRspUserLogin, pRspInfo, nRequestID, bIsLast);
 			}
 		}
@@ -173,14 +173,14 @@ namespace CTP {
 		/// 登出请求响应
 		/// </summary>
 		event RspUserLogout^ OnRspUserLogout {
-			void add(RspUserLogout^ handler ) {
+			void add(RspUserLogout^ handler) {
 				OnRspUserLogout_delegate += handler;
 			}
 			void remove(RspUserLogout^ handler) {
 				OnRspUserLogout_delegate -= handler;
 			}
-			void raise(ThostFtdcUserLogoutField^ pUserLogout, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
-				if(OnRspUserLogout_delegate)
+			void raise(ThostFtdcUserLogoutField^ pUserLogout, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (OnRspUserLogout_delegate)
 					OnRspUserLogout_delegate(pUserLogout, pRspInfo, nRequestID, bIsLast);
 			}
 		}
@@ -189,14 +189,14 @@ namespace CTP {
 		/// 错误应答
 		/// </summary>
 		event RspError^ OnRspError {
-			void add(RspError^ handler ) {
+			void add(RspError^ handler) {
 				OnRspError_delegate += handler;
 			}
 			void remove(RspError^ handler) {
 				OnRspError_delegate -= handler;
 			}
-			void raise(ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
-				if(OnRspError_delegate)
+			void raise(ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (OnRspError_delegate)
 					OnRspError_delegate(pRspInfo, nRequestID, bIsLast);
 			}
 		}
@@ -205,14 +205,14 @@ namespace CTP {
 		/// 订阅行情应答
 		/// </summary>
 		event RspSubMarketData^ OnRspSubMarketData {
-			void add(RspSubMarketData^ handler ) {
+			void add(RspSubMarketData^ handler) {
 				OnRspSubMarketData_delegate += handler;
 			}
 			void remove(RspSubMarketData^ handler) {
 				OnRspSubMarketData_delegate -= handler;
 			}
-			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
-				if(OnRspSubMarketData_delegate)
+			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (OnRspSubMarketData_delegate)
 					OnRspSubMarketData_delegate(pSpecificInstrument, pRspInfo, nRequestID, bIsLast);
 			}
 		}
@@ -220,14 +220,14 @@ namespace CTP {
 		/// 取消订阅行情应答
 		/// </summary>
 		event RspUnSubMarketData^ OnRspUnSubMarketData {
-			void add(RspUnSubMarketData^ handler ) {
+			void add(RspUnSubMarketData^ handler) {
 				OnRspUnSubMarketData_delegate += handler;
 			}
 			void remove(RspUnSubMarketData^ handler) {
 				OnRspUnSubMarketData_delegate -= handler;
 			}
-			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
-				if(OnRspUnSubMarketData_delegate)
+			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (OnRspUnSubMarketData_delegate)
 					OnRspUnSubMarketData_delegate(pSpecificInstrument, pRspInfo, nRequestID, bIsLast);
 			}
 		}
@@ -235,14 +235,14 @@ namespace CTP {
 		/// 深度行情通知
 		/// </summary>
 		event RtnDepthMarketData^ OnRtnDepthMarketData {
-			void add(RtnDepthMarketData^ handler ) {
+			void add(RtnDepthMarketData^ handler) {
 				OnRtnDepthMarketData_delegate += handler;
 			}
 			void remove(RtnDepthMarketData^ handler) {
 				OnRtnDepthMarketData_delegate -= handler;
 			}
-			void raise(ThostFtdcDepthMarketDataField^ pDepthMarketData) { 
-				if(OnRtnDepthMarketData_delegate)
+			void raise(ThostFtdcDepthMarketDataField^ pDepthMarketData) {
+				if (OnRtnDepthMarketData_delegate)
 					OnRtnDepthMarketData_delegate(pDepthMarketData);
 			}
 		}
@@ -272,7 +272,7 @@ namespace CTP {
 		void cbk_OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData);
 		// 将所有回调函数地址传递给SPI
-		void RegisterCallbacks();	
+		void RegisterCallbacks();
 #endif
 
 	};

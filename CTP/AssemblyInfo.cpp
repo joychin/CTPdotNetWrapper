@@ -14,20 +14,20 @@ using namespace System::Security::Permissions;
 
 #ifdef __CTP_MA__
 [assembly:AssemblyTitleAttribute("CTP  MA°æ")];
-[assembly:AssemblyDescriptionAttribute("CTP C++ ==> .Net Adapter MA°æ")];
+[assembly:AssemblyDescriptionAttribute("CTP C++ ==> .Net Adapter MA°æ¸ÐÐ»shawn666.liu@gmail.com 2012")];
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("")];
 [assembly:AssemblyProductAttribute("CTP  MA°æ")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) shawn666.liu@gmail.com 2012")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) chenzhuo9302@gmail.com2")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 #else
 [assembly:AssemblyTitleAttribute("CTP")];
-[assembly:AssemblyDescriptionAttribute("CTP C++ ==> .Net Adapter")];
+[assembly:AssemblyDescriptionAttribute("CTP C++ ==> .Net Adapter ¸ÐÐ»shawn666.liu@gmail.com 2012")];
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("")];
 [assembly:AssemblyProductAttribute("CTP")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) shawn666.liu@gmail.com 2012")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) chenzhuo9302@gmail.com")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 #endif
