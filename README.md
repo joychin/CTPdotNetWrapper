@@ -11,15 +11,6 @@ Struct.h头文件修改自海风版C#的Struct.cs文件，非常感谢！
 
 ThostTraderApi目录为上期CTP C++库
 
-
-CTP.VS2008
-为VS2008版本
-
-CTP.VS2010
-为VS2010版本，包含四个项目
-CTP.Net3.5，TargetFrameworkVersion为3.5 (VS2010编译.net3.5 C++/CLI项目可能需要同时安装VS2008)
-CTP.Net4.0，TargetFrameworkVersion为4.0
-
 CTPMA 
 为对应的各Multiple AppDomain版本
 
