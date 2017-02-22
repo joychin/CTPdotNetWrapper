@@ -122,6 +122,7 @@
     <ClInclude Include="CTP.h" />
     <ClInclude Include="CTPMDAdapter.h" />
     <ClInclude Include="CTPTraderAdapter.h" />
+    <ClInclude Include="DataType.h" />
     <ClInclude Include="Delegates.h" />
     <ClInclude Include="MdSpi.h" />
     <ClInclude Include="Stdafx.h" />
