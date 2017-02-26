@@ -1,15 +1,16 @@
-/////////////////////////////////////////////////////////////////////////
-/// ÉÏÆÚ¼¼Êõ CTP C++ ==> .Net Framework Adapter
-/// Author:	shawn666.liu@gmail.com
+ï»¿/////////////////////////////////////////////////////////////////////////
+/// ä¸ŠæœŸæŠ€æœ¯ CTP C++ ==> .Net Framework Adapter
+/// Author:	shawn666.liu@hotmail.com
 /// Date: 20120420
 /////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include "Util.h"
 
-using namespace Native;
+#include "CTPMDAdapterBase.h"
+#include "Delegates.h"
 
-namespace  Native {
+
+namespace  Native{
 	class CMdSpi;
 };
 
@@ -17,233 +18,212 @@ namespace  Native {
 namespace CTP {
 
 	/// <summary>
-	/// ÍĞ¹ÜÀà,Marcket Data Adapter
+	/// æ‰˜ç®¡ç±»,Marcket Data Adapter
 	/// </summary>
-	public ref class CTPMDAdapter
+	public ref class CTPMDAdapter : public CTPMDAdapterBase
 	{
 	public:
 		/// <summary>
-		///´´½¨CTPMDAdapter
-		///´æÖü¶©ÔÄĞÅÏ¢ÎÄ¼şµÄÄ¿Â¼£¬Ä¬ÈÏÎªµ±Ç°Ä¿Â¼
+		///åˆ›å»ºCTPMDAdapter
+		///å­˜è´®è®¢é˜…ä¿¡æ¯æ–‡ä»¶çš„ç›®å½•ï¼Œé»˜è®¤ä¸ºå½“å‰ç›®å½•
 		/// </summary>
-		CTPMDAdapter(void);
-		/// <summary>
-		///´´½¨CTPMDAdapter
-		/// </summary>
-		/// <param name="pszFlowPath">´æÖü¶©ÔÄĞÅÏ¢ÎÄ¼şµÄÄ¿Â¼£¬Ä¬ÈÏÎªµ±Ç°Ä¿Â¼</param>
-		/// <param name="bIsUsingUdp">ÊÇ·ñÊ¹ÓÃUDPĞ­Òé</param>
+		CTPMDAdapter();
 		CTPMDAdapter(String^ pszFlowPath, bool bIsUsingUdp);
-	private:
-		~CTPMDAdapter(void);
-		CThostFtdcMdApi* m_pApi;
-		CMdSpi* m_pSpi;
-	public:
-		/// <summary>
-		///É¾³ı½Ó¿Ú¶ÔÏó±¾Éí
-		///@remark ²»ÔÙÊ¹ÓÃ±¾½Ó¿Ú¶ÔÏóÊ±,µ÷ÓÃ¸Ãº¯ÊıÉ¾³ı½Ó¿Ú¶ÔÏó
-		/// </summary>
-		void Release(void);
-		/// <summary>
-		///³õÊ¼»¯
-		///@remark ³õÊ¼»¯ÔËĞĞ»·¾³,Ö»ÓĞµ÷ÓÃºó,½Ó¿Ú²Å¿ªÊ¼¹¤×÷
-		/// </summary>
-		void Init(void);
-		/// <summary>
-		///µÈ´ı½Ó¿ÚÏß³Ì½áÊøÔËĞĞ
-		///@return Ïß³ÌÍË³ö´úÂë
-		/// </summary>
-		void Join(void);
-		/// <summary>
-		///»ñÈ¡µ±Ç°½»Ò×ÈÕ
-		///@remark Ö»ÓĞµÇÂ¼³É¹¦ºó,²ÅÄÜµÃµ½ÕıÈ·µÄ½»Ò×ÈÕ
-		/// </summary>
-		/// <returns>»ñÈ¡µ½µÄ½»Ò×ÈÕ</returns>
-		String^ GetTradingDay();
-		/// <summary>
-		///×¢²áÇ°ÖÃ»úÍøÂçµØÖ·
-		/// </summary>
-		/// <param name="pszFrontAddress">
-		/// Ç°ÖÃ»úÍøÂçµØÖ·
-		/// ÍøÂçµØÖ·µÄ¸ñÊ½Îª£º¡°protocol://ipaddress:port¡±£¬Èç£º¡±tcp://127.0.0.1:17001¡±¡£
-		/// ¡°tcp¡±´ú±í´«ÊäĞ­Òé£¬¡°127.0.0.1¡±´ú±í·şÎñÆ÷µØÖ·¡£¡±17001¡±´ú±í·şÎñÆ÷¶Ë¿ÚºÅ¡£
-		/// </param>
-		void RegisterFront(String^  pszFrontAddress);
-		/// <summary>
-		///×¢²áÃû×Ö·şÎñÆ÷ÍøÂçµØÖ·
-		/// </summary>
-		/// <param name="pszNsAddress">Ãû×Ö·şÎñÆ÷ÍøÂçµØÖ·¡£
-		///@remark ÍøÂçµØÖ·µÄ¸ñÊ½Îª£º¡°protocol://ipaddress:port¡±£¬Èç£º¡±tcp://127.0.0.1:12001¡±¡£ 
-		///@remark ¡°tcp¡±´ú±í´«ÊäĞ­Òé£¬¡°127.0.0.1¡±´ú±í·şÎñÆ÷µØÖ·¡£¡±12001¡±´ú±í·şÎñÆ÷¶Ë¿ÚºÅ¡£
-		///@remark RegisterNameServerÓÅÏÈÓÚRegisterFront
-		/// </param>
-		void RegisterNameServer(String^ pszNsAddress);
-		/// <summary>
-		///¶©ÔÄĞĞÇé¡£
-		/// </summary>
-		/// <param name="ppInstrumentID">ºÏÔ¼ID</param>
-		int SubscribeMarketData(array<String^>^ ppInstrumentID);
-		/// <summary>
-		///	ÍË¶©ĞĞÇé¡£
-		/// </summary>
-		/// <param name="ppInstrumentID">ºÏÔ¼ID</param>
-		int UnSubscribeMarketData(array<String^>^ ppInstrumentID);
-		/// <summary>
-		/// ÓÃ»§µÇÂ¼ÇëÇó
-		/// </summary>
-		int ReqUserLogin(ThostFtdcReqUserLoginField^ pReqUserLoginField, int nRequestID);
-		/// <summary>
-		/// µÇ³öÇëÇó
-		/// </summary>
-		int ReqUserLogout(ThostFtdcUserLogoutField^ pUserLogout, int nRequestID);
-
+		CTPMDAdapter(String^ pszFlowPath, bool bIsUsingUdp, bool bIsMulticast);
 		// Events
 	public:
 		/// <summary>
-		/// µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨½¨Á¢ÆğÍ¨ĞÅÁ¬½ÓÊ±£¨»¹Î´µÇÂ¼Ç°£©£¬¸Ã·½·¨±»µ÷ÓÃ¡£
+		/// å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°å»ºç«‹èµ·é€šä¿¡è¿æ¥æ—¶ï¼ˆè¿˜æœªç™»å½•å‰ï¼‰ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚
 		/// </summary>
 		event FrontConnected^ OnFrontConnected {
-			void add(FrontConnected^ handler) {
+			void add(FrontConnected^ handler ) {
 				OnFrontConnected_delegate += handler;
 			}
 			void remove(FrontConnected^ handler) {
 				OnFrontConnected_delegate -= handler;
 			}
 			void raise() {
-				if (OnFrontConnected_delegate)
+				if(OnFrontConnected_delegate)
 					OnFrontConnected_delegate();
 			}
 		}
 
 		/// <summary>
-		/// µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨Í¨ĞÅÁ¬½Ó¶Ï¿ªÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£µ±·¢ÉúÕâ¸öÇé¿öºó£¬API»á×Ô¶¯ÖØĞÂÁ¬½Ó£¬¿Í»§¶Ë¿É²»×ö´¦Àí¡£
-		/// ´íÎóÔ­Òò
-		/// 0x1001 ÍøÂç¶ÁÊ§°Ü
-		/// 0x1002 ÍøÂçĞ´Ê§°Ü
-		/// 0x2001 ½ÓÊÕĞÄÌø³¬Ê±
-		/// 0x2002 ·¢ËÍĞÄÌøÊ§°Ü
-		/// 0x2003 ÊÕµ½´íÎó±¨ÎÄ
+		/// å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°é€šä¿¡è¿æ¥æ–­å¼€æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚å½“å‘ç”Ÿè¿™ä¸ªæƒ…å†µåï¼ŒAPIä¼šè‡ªåŠ¨é‡æ–°è¿æ¥ï¼Œå®¢æˆ·ç«¯å¯ä¸åšå¤„ç†ã€‚
+		/// é”™è¯¯åŸå› 
+		/// 0x1001 ç½‘ç»œè¯»å¤±è´¥
+		/// 0x1002 ç½‘ç»œå†™å¤±è´¥
+		/// 0x2001 æ¥æ”¶å¿ƒè·³è¶…æ—¶
+		/// 0x2002 å‘é€å¿ƒè·³å¤±è´¥
+		/// 0x2003 æ”¶åˆ°é”™è¯¯æŠ¥æ–‡
 		/// </summary>
 		event FrontDisconnected^ OnFrontDisconnected {
-			void add(FrontDisconnected^ handler) {
+			void add(FrontDisconnected^ handler ) {
 				OnFrontDisconnected_delegate += handler;
 			}
 			void remove(FrontDisconnected^ handler) {
 				OnFrontDisconnected_delegate -= handler;
 			}
 			void raise(int nReason) {
-				if (OnFrontDisconnected_delegate)
+				if(OnFrontDisconnected_delegate)
 					OnFrontDisconnected_delegate(nReason);
 			}
 		}
 
 		/// <summary>
-		///ĞÄÌø³¬Ê±¾¯¸æ¡£µ±³¤Ê±¼äÎ´ÊÕµ½±¨ÎÄÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£
-		///@param nTimeLapse ¾àÀëÉÏ´Î½ÓÊÕ±¨ÎÄµÄÊ±¼ä
+		///å¿ƒè·³è¶…æ—¶è­¦å‘Šã€‚å½“é•¿æ—¶é—´æœªæ”¶åˆ°æŠ¥æ–‡æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚
+		///@param nTimeLapse è·ç¦»ä¸Šæ¬¡æ¥æ”¶æŠ¥æ–‡çš„æ—¶é—´
 		/// </summary>
 		event HeartBeatWarning^ OnHeartBeatWarning {
-			void add(HeartBeatWarning^ handler) {
+			void add(HeartBeatWarning^ handler ) {
 				OnHeartBeatWarning_delegate += handler;
 			}
 			void remove(HeartBeatWarning^ handler) {
 				OnHeartBeatWarning_delegate -= handler;
 			}
 			void raise(int nTimeLapse) {
-				if (OnHeartBeatWarning_delegate)
+				if(OnHeartBeatWarning_delegate)
 					OnHeartBeatWarning_delegate(nTimeLapse);
 			}
 		}
 
 		/// <summary>
-		/// µÇÂ¼ÇëÇóÏìÓ¦
+		/// ç™»å½•è¯·æ±‚å“åº”
 		/// </summary>
 		event RspUserLogin^ OnRspUserLogin {
-			void add(RspUserLogin^ handler) {
+			void add(RspUserLogin^ handler ) {
 				OnRspUserLogin_delegate += handler;
 			}
 			void remove(RspUserLogin^ handler) {
 				OnRspUserLogin_delegate -= handler;
 			}
-			void raise(ThostFtdcRspUserLoginField^ pRspUserLogin, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (OnRspUserLogin_delegate)
+			void raise(ThostFtdcRspUserLoginField^ pRspUserLogin, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
+				if(OnRspUserLogin_delegate)
 					OnRspUserLogin_delegate(pRspUserLogin, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// µÇ³öÇëÇóÏìÓ¦
+		/// ç™»å‡ºè¯·æ±‚å“åº”
 		/// </summary>
 		event RspUserLogout^ OnRspUserLogout {
-			void add(RspUserLogout^ handler) {
+			void add(RspUserLogout^ handler ) {
 				OnRspUserLogout_delegate += handler;
 			}
 			void remove(RspUserLogout^ handler) {
 				OnRspUserLogout_delegate -= handler;
 			}
-			void raise(ThostFtdcUserLogoutField^ pUserLogout, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (OnRspUserLogout_delegate)
+			void raise(ThostFtdcUserLogoutField^ pUserLogout, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
+				if(OnRspUserLogout_delegate)
 					OnRspUserLogout_delegate(pUserLogout, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// ´íÎóÓ¦´ğ
+		/// é”™è¯¯åº”ç­”
 		/// </summary>
 		event RspError^ OnRspError {
-			void add(RspError^ handler) {
+			void add(RspError^ handler ) {
 				OnRspError_delegate += handler;
 			}
 			void remove(RspError^ handler) {
 				OnRspError_delegate -= handler;
 			}
-			void raise(ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (OnRspError_delegate)
+			void raise(ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
+				if(OnRspError_delegate)
 					OnRspError_delegate(pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// ¶©ÔÄĞĞÇéÓ¦´ğ
+		/// è®¢é˜…è¡Œæƒ…åº”ç­”
 		/// </summary>
 		event RspSubMarketData^ OnRspSubMarketData {
-			void add(RspSubMarketData^ handler) {
+			void add(RspSubMarketData^ handler ) {
 				OnRspSubMarketData_delegate += handler;
 			}
 			void remove(RspSubMarketData^ handler) {
 				OnRspSubMarketData_delegate -= handler;
 			}
-			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (OnRspSubMarketData_delegate)
+			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
+				if(OnRspSubMarketData_delegate)
 					OnRspSubMarketData_delegate(pSpecificInstrument, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// È¡Ïû¶©ÔÄĞĞÇéÓ¦´ğ
+		/// å–æ¶ˆè®¢é˜…è¡Œæƒ…åº”ç­”
 		/// </summary>
 		event RspUnSubMarketData^ OnRspUnSubMarketData {
-			void add(RspUnSubMarketData^ handler) {
+			void add(RspUnSubMarketData^ handler ) {
 				OnRspUnSubMarketData_delegate += handler;
 			}
 			void remove(RspUnSubMarketData^ handler) {
 				OnRspUnSubMarketData_delegate -= handler;
 			}
-			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (OnRspUnSubMarketData_delegate)
+			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
+				if(OnRspUnSubMarketData_delegate)
 					OnRspUnSubMarketData_delegate(pSpecificInstrument, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// Éî¶ÈĞĞÇéÍ¨Öª
+		/// è®¢é˜…è¯¢ä»·åº”ç­”
+		/// </summary>
+		event RspSubForQuote^ OnRspSubForQuoteRsp {
+			void add(RspSubForQuote^ handler) {
+				OnRspSubForQuote_delegate += handler;
+			}
+			void remove(RspSubForQuote^ handler) {
+				OnRspSubForQuote_delegate -= handler;
+			}
+			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (OnRspSubForQuote_delegate)
+					OnRspSubForQuote_delegate(pSpecificInstrument, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// å–æ¶ˆè®¢é˜…è¯¢ä»·åº”ç­”
+		/// </summary>
+		event RspUnSubForQuote^ OnRspUnSubForQuoteRsp {
+			void add(RspUnSubForQuote^ handler) {
+				OnRspUnSubForQuote_delegate += handler;
+			}
+			void remove(RspUnSubForQuote^ handler) {
+				OnRspUnSubForQuote_delegate -= handler;
+			}
+			void raise(ThostFtdcSpecificInstrumentField^ pSpecificInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (OnRspUnSubForQuote_delegate)
+					OnRspUnSubForQuote_delegate(pSpecificInstrument, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// æ·±åº¦è¡Œæƒ…é€šçŸ¥
 		/// </summary>
 		event RtnDepthMarketData^ OnRtnDepthMarketData {
-			void add(RtnDepthMarketData^ handler) {
+			void add(RtnDepthMarketData^ handler ) {
 				OnRtnDepthMarketData_delegate += handler;
 			}
 			void remove(RtnDepthMarketData^ handler) {
 				OnRtnDepthMarketData_delegate -= handler;
 			}
-			void raise(ThostFtdcDepthMarketDataField^ pDepthMarketData) {
-				if (OnRtnDepthMarketData_delegate)
+			void raise(ThostFtdcDepthMarketDataField^ pDepthMarketData) { 
+				if(OnRtnDepthMarketData_delegate)
 					OnRtnDepthMarketData_delegate(pDepthMarketData);
+			}
+		}
+
+		/// <summary>
+		/// è¯¢ä»·é€šçŸ¥
+		/// </summary>
+		event RspRtnForQuote^ OnRtnForQuoteRsp {
+			void add(RspRtnForQuote^ handler) {
+				OnRspRtnForQuote_delegate += handler;
+			}
+			void remove(RspRtnForQuote^ handler) {
+				OnRspRtnForQuote_delegate -= handler;
+			}
+			void raise(ThostFtdcForQuoteRspField^ pForQuoteRsp) {
+				if (OnRspRtnForQuote_delegate)
+					OnRspRtnForQuote_delegate(pForQuoteRsp);
 			}
 		}
 
@@ -257,10 +237,13 @@ namespace CTP {
 		RspError^ OnRspError_delegate;
 		RspSubMarketData^ OnRspSubMarketData_delegate;
 		RspUnSubMarketData^ OnRspUnSubMarketData_delegate;
+		RspSubForQuote^ OnRspSubForQuote_delegate;
+		RspUnSubForQuote^ OnRspUnSubForQuote_delegate;
 		RtnDepthMarketData^ OnRtnDepthMarketData_delegate;
+		RspRtnForQuote^ OnRspRtnForQuote_delegate;
 
 #ifdef __CTP_MA__
-		// Callbacks for MA
+		// Callbacks for MA (Multiple AppDomain)
 	private:
 		void cbk_OnFrontConnected();
 		void cbk_OnFrontDisconnected(int nReason);
@@ -271,8 +254,9 @@ namespace CTP {
 		void cbk_OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData);
-		// ½«ËùÓĞ»Øµ÷º¯ÊıµØÖ·´«µİ¸øSPI
-		void RegisterCallbacks();
+	protected:
+		// å°†æ‰€æœ‰å›è°ƒå‡½æ•°åœ°å€ä¼ é€’ç»™SPI
+		virtual void RegisterCallbacks() override;	
 #endif
 
 	};

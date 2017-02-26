@@ -15384,8 +15384,8 @@ namespace CTP
 		///Delta值
 		double	Delta;
 	};
-
-	/*///发给做市商的询价请求
+	/// <summary>
+	///发给做市商的询价请求
 	/// </summary>
 	[StructLayout(LayoutKind::Sequential)]
 	public ref struct ThostFtdcForQuoteRspField
@@ -15421,7 +15421,7 @@ namespace CTP
 	[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 9)]
 	String^ ExchangeID;
 	};
-	*/
+	
 	/// <summary>
 	///当前期权合约执行偏移值的详细内容
 	/// </summary>
@@ -22607,9 +22607,9 @@ namespace CTP
 		///会话号
 		/// </summary>
 		int SessionID;
-		/// </summary>
-		///文件业务功能
 		/// <summary>
+		///文件业务功能
+		/// </summary>
 		EnumFileBusinessCodeType	FileBusinessCode;
 		/// <summary>
 		///摘要

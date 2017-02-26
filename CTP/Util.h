@@ -1,16 +1,19 @@
+ï»¿
+
+// V1,V2å…±äº«æ­¤æ–‡ä»¶
+
+
 #pragma once
 
-#include "..\thosttraderapi\ThostFtdcTraderApi.h"
-#include "..\thosttraderapi\ThostFtdcMdApi.h"
-#include "Struct.h"
-#include "Delegates.h"
 
+#include "Struct.h"
+#include "..\ThostTraderApi\ThostFtdcUserApiStruct.h"
 
 using namespace CTP;
 
 namespace Native
 {
-	/// ·ÇÍĞ¹ÜÀà,×Ô¶¯ÊÍ·Å×Ö·û´®Ö¸ÕëÄÚ´æ
+	/// éæ‰˜ç®¡ç±»,è‡ªåŠ¨é‡Šæ”¾å­—ç¬¦ä¸²æŒ‡é’ˆå†…å­˜
 	class CAutoStrPtr
 	{
 	public:
@@ -22,14 +25,14 @@ namespace Native
 	};
 
 
-	/// ·ÇÍĞ¹ÜÀà, ×Ô¶¯×ª»» Managed <==> Native 
+	/// éæ‰˜ç®¡ç±», è‡ªåŠ¨è½¬æ¢ Managed <==> Native 
 	// M: managed
 	// N: native
 	template<typename M, typename N> 
 	class MNConv
 	{
 	public:
-		// Ä£°æÀàµÄÊµÏÖ²¿·Ö±ØĞë·ÅÔÚÍ·ÎÄ¼şÀï£¬·ñÔòÁ´½Ó»á³ö´í
+		// æ¨¡ç‰ˆç±»çš„å®ç°éƒ¨åˆ†å¿…é¡»æ”¾åœ¨å¤´æ–‡ä»¶é‡Œï¼Œå¦åˆ™é“¾æ¥ä¼šå‡ºé”™
 		/// Native to Managed
 		static M N2M(N* pNative){
 			return safe_cast<M>(Marshal::PtrToStructure(IntPtr(pNative), M::typeid));
@@ -40,7 +43,7 @@ namespace Native
 		};
 	};
 
-	/// È«¾Öº¯Êı
+	/// å…¨å±€å‡½æ•°
 	ThostFtdcRspInfoField^ RspInfoField(CThostFtdcRspInfoField *pRspInfo);
 
 };

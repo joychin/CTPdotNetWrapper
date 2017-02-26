@@ -1,88 +1,70 @@
-/////////////////////////////////////////////////////////////////////////
-/// ÉÏÆÚ¼¼Êõ CTP C++ => .Net Framework Adapter
-/// Author:	shawn666.liu@gmail.com
+ï»¿/////////////////////////////////////////////////////////////////////////
+/// ä¸ŠæœŸæŠ€æœ¯ CTP C++ => .Net Framework Adapter
+/// Author:	shawn666.liu@hotmail.com
 /// Date: 20120420
 /////////////////////////////////////////////////////////////////////////
 
+
+// V1,V2å…±äº«æ­¤æ–‡ä»¶
+
+
 #pragma once
 
-#include <vcclr.h>
-#include "util.h"
-#include "Callbacks.h"
-#include "CTPMdAdapter.h"
 
+#include "MdSpiBase.h"
+#include "CTPMDAdapter.h"
 
 namespace Native
 {
-	/// ·ÇÍĞ¹ÜÀà
-	class CMdSpi : public CThostFtdcMdSpi
+	/// éæ‰˜ç®¡ç±»
+	class CMdSpi : public CMdSpiBase
 	{
 	public:
-		/// ¹¹Ôìº¯Êı
+		/// æ„é€ å‡½æ•°
 		CMdSpi(CTPMDAdapter^ pAdapter);
 
-		///µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨½¨Á¢ÆğÍ¨ĞÅÁ¬½ÓÊ±£¨»¹Î´µÇÂ¼Ç°£©£¬¸Ã·½·¨±»µ÷ÓÃ¡£
+		///å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°å»ºç«‹èµ·é€šä¿¡è¿æ¥æ—¶ï¼ˆè¿˜æœªç™»å½•å‰ï¼‰ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚
 		virtual void OnFrontConnected();
 
-		///µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨Í¨ĞÅÁ¬½Ó¶Ï¿ªÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£µ±·¢ÉúÕâ¸öÇé¿öºó£¬API»á×Ô¶¯ÖØĞÂÁ¬½Ó£¬¿Í»§¶Ë¿É²»×ö´¦Àí¡£
-		///@param nReason ´íÎóÔ­Òò
-		///        0x1001 ÍøÂç¶ÁÊ§°Ü
-		///        0x1002 ÍøÂçĞ´Ê§°Ü
-		///        0x2001 ½ÓÊÕĞÄÌø³¬Ê±
-		///        0x2002 ·¢ËÍĞÄÌøÊ§°Ü
-		///        0x2003 ÊÕµ½´íÎó±¨ÎÄ
+		///å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°é€šä¿¡è¿æ¥æ–­å¼€æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚å½“å‘ç”Ÿè¿™ä¸ªæƒ…å†µåï¼ŒAPIä¼šè‡ªåŠ¨é‡æ–°è¿æ¥ï¼Œå®¢æˆ·ç«¯å¯ä¸åšå¤„ç†ã€‚
+		///@param nReason é”™è¯¯åŸå› 
+		///        0x1001 ç½‘ç»œè¯»å¤±è´¥
+		///        0x1002 ç½‘ç»œå†™å¤±è´¥
+		///        0x2001 æ¥æ”¶å¿ƒè·³è¶…æ—¶
+		///        0x2002 å‘é€å¿ƒè·³å¤±è´¥
+		///        0x2003 æ”¶åˆ°é”™è¯¯æŠ¥æ–‡
 		virtual void OnFrontDisconnected(int nReason);
 
-		///ĞÄÌø³¬Ê±¾¯¸æ¡£µ±³¤Ê±¼äÎ´ÊÕµ½±¨ÎÄÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£
-		///@param nTimeLapse ¾àÀëÉÏ´Î½ÓÊÕ±¨ÎÄµÄÊ±¼ä
+		///å¿ƒè·³è¶…æ—¶è­¦å‘Šã€‚å½“é•¿æ—¶é—´æœªæ”¶åˆ°æŠ¥æ–‡æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚
+		///@param nTimeLapse è·ç¦»ä¸Šæ¬¡æ¥æ”¶æŠ¥æ–‡çš„æ—¶é—´
 		virtual void OnHeartBeatWarning(int nTimeLapse);
 
-		///µÇÂ¼ÇëÇóÏìÓ¦
+		///ç™»å½•è¯·æ±‚å“åº”
 		virtual void OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///µÇ³öÇëÇóÏìÓ¦
+		///ç™»å‡ºè¯·æ±‚å“åº”
 		virtual void OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///´íÎóÓ¦´ğ
+		///é”™è¯¯åº”ç­”
 		virtual void OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///¶©ÔÄĞĞÇéÓ¦´ğ
+		///è®¢é˜…è¡Œæƒ…åº”ç­”
 		virtual void OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///È¡Ïû¶©ÔÄĞĞÇéÓ¦´ğ
+		///å–æ¶ˆè®¢é˜…è¡Œæƒ…åº”ç­”
 		virtual void OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///Éî¶ÈĞĞÇéÍ¨Öª
+		///è®¢é˜…è¯¢ä»·åº”ç­”
+		virtual void OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+		///å–æ¶ˆè®¢é˜…è¯¢ä»·åº”ç­”
+		virtual void OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+
+		///æ·±åº¦è¡Œæƒ…é€šçŸ¥
 		virtual void OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData);
 
-#ifdef __CTP_MA__
-	public:
-		// »Øµ÷º¯Êı
-		Callback_OnFrontConnected p_OnFrontConnected;
-		Callback_OnFrontDisconnected p_OnFrontDisconnected;
-		Callback_OnHeartBeatWarning p_OnHeartBeatWarning;
-		Callback_OnRspUserLogin p_OnRspUserLogin;
-		Callback_OnRspUserLogout p_OnRspUserLogout;
-		Callback_OnRspError p_OnRspError;
-		Callback_OnRspSubMarketData p_OnRspSubMarketData;
-		Callback_OnRspUnSubMarketData p_OnRspUnSubMarketData;
-		Callback_OnRtnDepthMarketData p_OnRtnDepthMarketData;
-
-		// »Øµ÷º¯Êı¶ÔÓ¦µÄdelegate£¬±ØĞë±£³ÖÒ»·İ¶Ô¸ÃdeleageµÄÒıÓÃ£¬·ñÔòGC»á×Ô¶¯»ØÊÕ¸Ãdeleage²¢µ¼ÖÂÉÏÃæµÄ»Øµ÷º¯ÊıÊ§Ğ§
-		gcroot<Internal_FrontConnected^> d_FrontConnected;
-		gcroot<Internal_FrontDisconnected^> d_FrontDisconnected;
-		gcroot<Internal_HeartBeatWarning^> d_HeartBeatWarning;
-		gcroot<Internal_RspUserLogin^> d_RspUserLogin;
-		gcroot<Internal_RspUserLogout^> d_RspUserLogout;
-		gcroot<Internal_RspError^> d_RspError;
-
-		gcroot<Internal_RspSubMarketData^> d_RspSubMarketData;
-		gcroot<Internal_RspUnSubMarketData^> d_RspUnSubMarketData;
-		gcroot<Internal_RtnDepthMarketData^> d_RtnDepthMarketData;
-#else
-	private:
-		gcroot<CTPMDAdapter^> m_pAdapter;
-#endif
-
+		///è¯¢ä»·é€šçŸ¥
+		virtual void OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp);
 	};
 };

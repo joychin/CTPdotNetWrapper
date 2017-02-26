@@ -1,9 +1,11 @@
+﻿
+
+// V1,V2共享此文件
+
+
 #include "StdAfx.h"
 #include "Util.h"
 
-#include <string.h>
-#include <memory.h>
-#include <stdlib.h>
 
 using namespace System::Runtime::InteropServices;
 

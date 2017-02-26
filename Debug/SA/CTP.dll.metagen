@@ -176,7 +176,7 @@ Class CTP.ThostFtdcProductField: AutoLayout, AnsiClass, Class, Public, Sequentia
     System.String ProductID : Public, HasFieldMarshal
     System.String ProductName : Public, HasFieldMarshal
     System.String ExchangeID : Public, HasFieldMarshal
-    CTP.EnumProductClassTypeType ProductClass : Public
+    CTP.EnumProductClassType ProductClass : Public
     Int32 VolumeMultiple : Public
     Double PriceTick : Public
     Int32 MaxMarketOrderVolume : Public
@@ -198,7 +198,7 @@ Class CTP.ThostFtdcInstrumentField: AutoLayout, AnsiClass, Class, Public, Sequen
     System.String InstrumentName : Public, HasFieldMarshal
     System.String ExchangeInstID : Public, HasFieldMarshal
     System.String ProductID : Public, HasFieldMarshal
-    CTP.EnumProductClassTypeType ProductClass : Public
+    CTP.EnumProductClassType ProductClass : Public
     Int32 DeliveryYear : Public
     Int32 DeliveryMonth : Public
     Int32 MaxMarketOrderVolume : Public
@@ -1146,6 +1146,26 @@ Class CTP.ThostFtdcSyncingInstrumentTradingRightField: AutoLayout, AnsiClass, Cl
     System.String BrokerID : Public, HasFieldMarshal
     System.String InvestorID : Public, HasFieldMarshal
     CTP.EnumTradingRightType TradingRight : Public
+Class CTP.ThostFtdcQryOrderField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String BrokerID : Public, HasFieldMarshal
+    System.String InvestorID : Public, HasFieldMarshal
+    System.String InstrumentID : Public, HasFieldMarshal
+    System.String ExchangeID : Public, HasFieldMarshal
+    System.String OrderSysID : Public, HasFieldMarshal
+    System.String InsertTimeStart : Public, HasFieldMarshal
+    System.String InsertTimeEnd : Public, HasFieldMarshal
+Class CTP.ThostFtdcQryTradeField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String BrokerID : Public, HasFieldMarshal
+    System.String InvestorID : Public, HasFieldMarshal
+    System.String InstrumentID : Public, HasFieldMarshal
+    System.String ExchangeID : Public, HasFieldMarshal
+    System.String TradeID : Public, HasFieldMarshal
+    System.String TradeTimeStart : Public, HasFieldMarshal
+    System.String TradeTimeEnd : Public, HasFieldMarshal
 Class CTP.ThostFtdcQryInvestorPositionField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -1157,6 +1177,7 @@ Class CTP.ThostFtdcQryTradingAccountField: AutoLayout, AnsiClass, Class, Public,
   Fields:
     System.String BrokerID : Public, HasFieldMarshal
     System.String InvestorID : Public, HasFieldMarshal
+    System.String CurrencyID : Public, HasFieldMarshal
 Class CTP.ThostFtdcQryInvestorField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -1203,12 +1224,6 @@ Class CTP.ThostFtdcQryTraderField: AutoLayout, AnsiClass, Class, Public, Sequent
     System.String ExchangeID : Public, HasFieldMarshal
     System.String ParticipantID : Public, HasFieldMarshal
     System.String TraderID : Public, HasFieldMarshal
-Class CTP.ThostFtdcQryPartBrokerField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Fields:
-    System.String ExchangeID : Public, HasFieldMarshal
-    System.String BrokerID : Public, HasFieldMarshal
-    System.String ParticipantID : Public, HasFieldMarshal
 Class CTP.ThostFtdcQrySuperUserFunctionField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -1220,6 +1235,12 @@ Class CTP.ThostFtdcQryUserSessionField: AutoLayout, AnsiClass, Class, Public, Se
     Int32 SessionID : Public
     System.String BrokerID : Public, HasFieldMarshal
     System.String UserID : Public, HasFieldMarshal
+Class CTP.ThostFtdcQryPartBrokerField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String ExchangeID : Public, HasFieldMarshal
+    System.String BrokerID : Public, HasFieldMarshal
+    System.String ParticipantID : Public, HasFieldMarshal
 Class CTP.ThostFtdcQryFrontStatusField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -1295,7 +1316,30 @@ Class CTP.ThostFtdcQrySettlementInfoField: AutoLayout, AnsiClass, Class, Public,
     System.String BrokerID : Public, HasFieldMarshal
     System.String InvestorID : Public, HasFieldMarshal
     System.String TradingDay : Public, HasFieldMarshal
-Class CTP.ThostFtdcQryOrderField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+Class CTP.ThostFtdcQryExchangeMarginRateField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String BrokerID : Public, HasFieldMarshal
+    System.String InstrumentID : Public, HasFieldMarshal
+    CTP.EnumHedgeFlagType HedgeFlag : Public
+Class CTP.ThostFtdcQryExchangeMarginRateAdjustField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String BrokerID : Public, HasFieldMarshal
+    System.String InstrumentID : Public, HasFieldMarshal
+    CTP.EnumHedgeFlagType HedgeFlag : Public
+Class CTP.ThostFtdcQryExchangeRateField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String BrokerID : Public, HasFieldMarshal
+    System.String FromCurrencyID : Public, HasFieldMarshal
+    System.String ToCurrencyID : Public, HasFieldMarshal
+Class CTP.ThostFtdcQrySyncFundMortgageField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String BrokerID : Public, HasFieldMarshal
+    System.String MortgageSeqNo : Public, HasFieldMarshal
+Class CTP.ThostFtdcQryHisOrderField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     System.String BrokerID : Public, HasFieldMarshal
@@ -1305,16 +1349,8 @@ Class CTP.ThostFtdcQryOrderField: AutoLayout, AnsiClass, Class, Public, Sequenti
     System.String OrderSysID : Public, HasFieldMarshal
     System.String InsertTimeStart : Public, HasFieldMarshal
     System.String InsertTimeEnd : Public, HasFieldMarshal
-Class CTP.ThostFtdcQryTradeField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Fields:
-    System.String BrokerID : Public, HasFieldMarshal
-    System.String InvestorID : Public, HasFieldMarshal
-    System.String InstrumentID : Public, HasFieldMarshal
-    System.String ExchangeID : Public, HasFieldMarshal
-    System.String TradeID : Public, HasFieldMarshal
-    System.String TradeTimeStart : Public, HasFieldMarshal
-    System.String TradeTimeEnd : Public, HasFieldMarshal
+    System.String TradingDay : Public, HasFieldMarshal
+    Int32 SettlementID : Public
 Class CTP.ThostFtdcOptionInstrMiniMarginField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -1814,7 +1850,7 @@ Class CTP.ThostFtdcQuoteField: AutoLayout, AnsiClass, Class, Public, SequentialL
     System.String InsertDate : Public, HasFieldMarshal
     System.String InsertTime : Public, HasFieldMarshal
     System.String CancelTime : Public, HasFieldMarshal
-    SByte QuoteStatus IsSignUnspecifiedByte : Public
+    CTP.EnumOrderStatusType QuoteStatus : Public
     System.String ClearingPartID : Public, HasFieldMarshal
     Int32 SequenceNo : Public
     System.String AskOrderSysID : Public, HasFieldMarshal
@@ -1902,7 +1938,7 @@ Class CTP.ThostFtdcExchangeQuoteField: AutoLayout, AnsiClass, Class, Public, Seq
     System.String InsertDate : Public, HasFieldMarshal
     System.String InsertTime : Public, HasFieldMarshal
     System.String CancelTime : Public, HasFieldMarshal
-    SByte QuoteStatus IsSignUnspecifiedByte : Public
+    CTP.EnumOrderStatusType QuoteStatus : Public
     System.String ClearingPartID : Public, HasFieldMarshal
     Int32 SequenceNo : Public
     System.String AskOrderSysID : Public, HasFieldMarshal
@@ -1959,6 +1995,15 @@ Class CTP.ThostFtdcOptionInstrDeltaField: AutoLayout, AnsiClass, Class, Public, 
     System.String BrokerID : Public, HasFieldMarshal
     System.String InvestorID : Public, HasFieldMarshal
     Double Delta : Public
+Class CTP.ThostFtdcForQuoteRspField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String OrderSubmitStatus : Public, HasFieldMarshal
+    System.String InstrumentID : Public, HasFieldMarshal
+    System.String ForQuoteSysID : Public, HasFieldMarshal
+    System.String ForQuoteTime : Public, HasFieldMarshal
+    System.String ActionDay : Public, HasFieldMarshal
+    System.String ExchangeID : Public, HasFieldMarshal
 Class CTP.ThostFtdcStrikeOffsetField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -1967,7 +2012,7 @@ Class CTP.ThostFtdcStrikeOffsetField: AutoLayout, AnsiClass, Class, Public, Sequ
     System.String BrokerID : Public, HasFieldMarshal
     System.String InvestorID : Public, HasFieldMarshal
     Double Offset : Public
-    SByte OffsetType IsSignUnspecifiedByte : Public
+    CTP.EnumStrikeOffsetTypeType OffsetType : Public
 Class CTP.ThostFtdcQryStrikeOffsetField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -2371,7 +2416,7 @@ Class CTP.ThostFtdcInvestorPositionDetailField: AutoLayout, AnsiClass, Class, Pu
     System.String BrokerID : Public, HasFieldMarshal
     System.String InvestorID : Public, HasFieldMarshal
     CTP.EnumHedgeFlagType HedgeFlag : Public
-    SByte Direction IsSignUnspecifiedByte : Public
+    CTP.EnumDirectionType Direction : Public
     System.String OpenDate : Public, HasFieldMarshal
     System.String TradeID : Public, HasFieldMarshal
     Int32 Volume : Public
@@ -2594,13 +2639,13 @@ Class CTP.ThostFtdcParkedOrderField: AutoLayout, AnsiClass, Class, Public, Seque
     System.String CombHedgeFlag : Public, HasFieldMarshal
     Double LimitPrice : Public
     Int32 VolumeTotalOriginal : Public
-    SByte TimeCondition IsSignUnspecifiedByte : Public
+    CTP.EnumTimeConditionType TimeCondition : Public
     System.String GTDDate : Public, HasFieldMarshal
-    SByte VolumeCondition IsSignUnspecifiedByte : Public
+    CTP.EnumVolumeConditionType VolumeCondition : Public
     Int32 MinVolume : Public
-    SByte ContingentCondition IsSignUnspecifiedByte : Public
+    CTP.EnumContingentConditionType ContingentCondition : Public
     Double StopPrice : Public
-    SByte ForceCloseReason IsSignUnspecifiedByte : Public
+    CTP.EnumForceCloseReasonType ForceCloseReason : Public
     Int32 IsAutoSuspend : Public
     System.String BusinessUnit : Public, HasFieldMarshal
     Int32 RequestID : Public
@@ -2746,13 +2791,13 @@ Class CTP.ThostFtdcErrOrderField: AutoLayout, AnsiClass, Class, Public, Sequenti
     System.String CombHedgeFlag : Public, HasFieldMarshal
     Double LimitPrice : Public
     Int32 VolumeTotalOriginal : Public
-    SByte TimeCondition IsSignUnspecifiedByte : Public
+    CTP.EnumTimeConditionType TimeCondition : Public
     System.String GTDDate : Public, HasFieldMarshal
-    SByte VolumeCondition IsSignUnspecifiedByte : Public
+    CTP.EnumVolumeConditionType VolumeCondition : Public
     Int32 MinVolume : Public
-    SByte ContingentCondition IsSignUnspecifiedByte : Public
+    CTP.EnumContingentConditionType ContingentCondition : Public
     Double StopPrice : Public
-    SByte ForceCloseReason IsSignUnspecifiedByte : Public
+    CTP.EnumForceCloseReasonType ForceCloseReason : Public
     Int32 IsAutoSuspend : Public
     System.String BusinessUnit : Public, HasFieldMarshal
     Int32 RequestID : Public
@@ -2781,13 +2826,13 @@ Class CTP.ThostFtdcErrorConditionalOrderField: AutoLayout, AnsiClass, Class, Pub
     System.String CombHedgeFlag : Public, HasFieldMarshal
     Double LimitPrice : Public
     Int32 VolumeTotalOriginal : Public
-    SByte TimeCondition IsSignUnspecifiedByte : Public
+    CTP.EnumTimeConditionType TimeCondition : Public
     System.String GTDDate : Public, HasFieldMarshal
-    SByte VolumeCondition IsSignUnspecifiedByte : Public
+    CTP.EnumVolumeConditionType VolumeCondition : Public
     Int32 MinVolume : Public
-    SByte ContingentCondition IsSignUnspecifiedByte : Public
+    CTP.EnumContingentConditionType ContingentCondition : Public
     Double StopPrice : Public
-    SByte ForceCloseReason IsSignUnspecifiedByte : Public
+    CTP.EnumForceCloseReasonType ForceCloseReason : Public
     Int32 IsAutoSuspend : Public
     System.String BusinessUnit : Public, HasFieldMarshal
     Int32 RequestID : Public
@@ -2798,14 +2843,14 @@ Class CTP.ThostFtdcErrorConditionalOrderField: AutoLayout, AnsiClass, Class, Pub
     System.String ExchangeInstID : Public, HasFieldMarshal
     System.String TraderID : Public, HasFieldMarshal
     Int32 InstallID : Public
-    SByte OrderSubmitStatus IsSignUnspecifiedByte : Public
+    CTP.EnumOrderSubmitStatusType OrderSubmitStatus : Public
     Int32 NotifySequence : Public
     System.String TradingDay : Public, HasFieldMarshal
     Int32 SettlementID : Public
     System.String OrderSysID : Public, HasFieldMarshal
-    SByte OrderSource IsSignUnspecifiedByte : Public
-    SByte OrderStatus IsSignUnspecifiedByte : Public
-    SByte OrderType IsSignUnspecifiedByte : Public
+    CTP.EnumOrderSourceType OrderSource : Public
+    CTP.EnumOrderStatusType OrderStatus : Public
+    CTP.EnumOrderTypeType OrderType : Public
     Int32 VolumeTraded : Public
     Int32 VolumeTotal : Public
     System.String InsertDate : Public, HasFieldMarshal
@@ -2906,11 +2951,11 @@ Class CTP.ThostFtdcBrokerTradingParamsField: AutoLayout, AnsiClass, Class, Publi
   Fields:
     System.String BrokerID : Public, HasFieldMarshal
     System.String InvestorID : Public, HasFieldMarshal
-    SByte MarginPriceType IsSignUnspecifiedByte : Public
+    CTP.EnumMarginPriceTypeType MarginPriceType : Public
     CTP.EnumAlgorithmType Algorithm : Public
-    SByte AvailIncludeCloseProfit IsSignUnspecifiedByte : Public
+    CTP.EnumIncludeCloseProfitType AvailIncludeCloseProfit : Public
     System.String CurrencyID : Public, HasFieldMarshal
-    SByte OptionRoyaltyPriceType IsSignUnspecifiedByte : Public
+    CTP.EnumOptionRoyaltyPriceTypeType OptionRoyaltyPriceType : Public
 Class CTP.ThostFtdcQryBrokerTradingAlgosField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -2923,9 +2968,9 @@ Class CTP.ThostFtdcBrokerTradingAlgosField: AutoLayout, AnsiClass, Class, Public
     System.String BrokerID : Public, HasFieldMarshal
     System.String ExchangeID : Public, HasFieldMarshal
     System.String InstrumentID : Public, HasFieldMarshal
-    SByte HandlePositionAlgoID IsSignUnspecifiedByte : Public
-    SByte FindMarginRateAlgoID IsSignUnspecifiedByte : Public
-    SByte HandleTradingAccountAlgoID IsSignUnspecifiedByte : Public
+    CTP.EnumHandlePositionAlgoIDType HandlePositionAlgoID : Public
+    CTP.EnumFindMarginRateAlgoIDType FindMarginRateAlgoID : Public
+    CTP.EnumHandleTradingAccountAlgoIDType HandleTradingAccountAlgoID : Public
 Class CTP.ThostFtdcQueryBrokerDepositField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -2990,7 +3035,7 @@ Class CTP.ThostFtdcManualSyncBrokerUserOTPField: AutoLayout, AnsiClass, Class, P
   Fields:
     System.String BrokerID : Public, HasFieldMarshal
     System.String UserID : Public, HasFieldMarshal
-    SByte OTPType IsSignUnspecifiedByte : Public
+    CTP.EnumOTPTypeType OTPType : Public
     System.String FirstOTP : Public, HasFieldMarshal
     System.String SecondOTP : Public, HasFieldMarshal
 Class CTP.ThostFtdcCommRateModelField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
@@ -3116,7 +3161,7 @@ Class CTP.ThostFtdcQryBulletinField: AutoLayout, AnsiClass, Class, Public, Seque
     Int32 BulletinID : Public
     Int32 SequenceNo : Public
     System.String NewsType : Public, HasFieldMarshal
-    SByte NewsUrgency IsSignUnspecifiedByte : Public
+    System.String NewsUrgency : Public, HasFieldMarshal
 Class CTP.ThostFtdcReqOpenAccountField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
@@ -3152,7 +3197,7 @@ Class CTP.ThostFtdcReqOpenAccountField: AutoLayout, AnsiClass, Class, Public, Se
     Int32 InstallID : Public
     CTP.EnumYesNoIndicatorType VerifyCertNoFlag : Public
     System.String CurrencyID : Public, HasFieldMarshal
-    SByte CashExchangeCode IsSignUnspecifiedByte : Public
+    CTP.EnumMarginPriceTypeType CashExchangeCode : Public
     System.String Digest : Public, HasFieldMarshal
     CTP.EnumBankAccTypeType BankAccType : Public
     System.String DeviceID : Public, HasFieldMarshal
@@ -3200,7 +3245,7 @@ Class CTP.ThostFtdcReqCancelAccountField: AutoLayout, AnsiClass, Class, Public, 
     Int32 InstallID : Public
     CTP.EnumYesNoIndicatorType VerifyCertNoFlag : Public
     System.String CurrencyID : Public, HasFieldMarshal
-    SByte CashExchangeCode IsSignUnspecifiedByte : Public
+    CTP.EnumMarginPriceTypeType CashExchangeCode : Public
     System.String Digest : Public, HasFieldMarshal
     CTP.EnumBankAccTypeType BankAccType : Public
     System.String DeviceID : Public, HasFieldMarshal
@@ -3302,7 +3347,7 @@ Class CTP.ThostFtdcReqTransferField: AutoLayout, AnsiClass, Class, Public, Seque
     System.String OperNo : Public, HasFieldMarshal
     Int32 RequestID : Public
     Int32 TID : Public
-    SByte TransferStatus IsSignUnspecifiedByte : Public
+    CTP.EnumTransferStatusType TransferStatus : Public
     System.String LongCustomerName : Public, HasFieldMarshal
 Class CTP.ThostFtdcRspTransferField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -3349,7 +3394,7 @@ Class CTP.ThostFtdcRspTransferField: AutoLayout, AnsiClass, Class, Public, Seque
     System.String OperNo : Public, HasFieldMarshal
     Int32 RequestID : Public
     Int32 TID : Public
-    SByte TransferStatus IsSignUnspecifiedByte : Public
+    CTP.EnumTransferStatusType TransferStatus : Public
     Int32 ErrorID : Public
     System.String ErrorMsg : Public, HasFieldMarshal
     System.String LongCustomerName : Public, HasFieldMarshal
@@ -3405,7 +3450,7 @@ Class CTP.ThostFtdcReqRepealField: AutoLayout, AnsiClass, Class, Public, Sequent
     System.String OperNo : Public, HasFieldMarshal
     Int32 RequestID : Public
     Int32 TID : Public
-    SByte TransferStatus IsSignUnspecifiedByte : Public
+    CTP.EnumTransferStatusType TransferStatus : Public
     System.String LongCustomerName : Public, HasFieldMarshal
 Class CTP.ThostFtdcRspRepealField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -3459,7 +3504,7 @@ Class CTP.ThostFtdcRspRepealField: AutoLayout, AnsiClass, Class, Public, Sequent
     System.String OperNo : Public, HasFieldMarshal
     Int32 RequestID : Public
     Int32 TID : Public
-    SByte TransferStatus IsSignUnspecifiedByte : Public
+    CTP.EnumTransferStatusType TransferStatus : Public
     Int32 ErrorID : Public
     System.String ErrorMsg : Public, HasFieldMarshal
     System.String LongCustomerName : Public, HasFieldMarshal
@@ -3721,7 +3766,7 @@ Class CTP.ThostFtdcReqDayEndFileReadyField: AutoLayout, AnsiClass, Class, Public
     Int32 PlateSerial : Public
     CTP.EnumLastFragmentType LastFragment : Public
     Int32 SessionID : Public
-    SByte FileBusinessCode IsSignUnspecifiedByte : Public
+    CTP.EnumFileBusinessCodeType FileBusinessCode : Public
     System.String Digest : Public, HasFieldMarshal
 Class CTP.ThostFtdcReturnResultField: AutoLayout, AnsiClass, Class, Public, SequentialLayout, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -3887,7 +3932,7 @@ Class CTP.ThostFtdcTransferSerialField: AutoLayout, AnsiClass, Class, Public, Se
     System.String BankSerial : Public, HasFieldMarshal
     System.String BrokerID : Public, HasFieldMarshal
     System.String BrokerBranchID : Public, HasFieldMarshal
-    SByte FutureAccType IsSignUnspecifiedByte : Public
+    CTP.EnumFutureAccTypeType FutureAccType : Public
     System.String AccountID : Public, HasFieldMarshal
     System.String InvestorID : Public, HasFieldMarshal
     Int32 FutureSerial : Public
@@ -4052,7 +4097,7 @@ Class CTP.ThostFtdcOpenAccountField: AutoLayout, AnsiClass, Class, Public, Seque
     Int32 InstallID : Public
     CTP.EnumYesNoIndicatorType VerifyCertNoFlag : Public
     System.String CurrencyID : Public, HasFieldMarshal
-    SByte CashExchangeCode IsSignUnspecifiedByte : Public
+    CTP.EnumMarginPriceTypeType CashExchangeCode : Public
     System.String Digest : Public, HasFieldMarshal
     CTP.EnumBankAccTypeType BankAccType : Public
     System.String DeviceID : Public, HasFieldMarshal
@@ -4102,7 +4147,7 @@ Class CTP.ThostFtdcCancelAccountField: AutoLayout, AnsiClass, Class, Public, Seq
     Int32 InstallID : Public
     CTP.EnumYesNoIndicatorType VerifyCertNoFlag : Public
     System.String CurrencyID : Public, HasFieldMarshal
-    SByte CashExchangeCode IsSignUnspecifiedByte : Public
+    CTP.EnumMarginPriceTypeType CashExchangeCode : Public
     System.String Digest : Public, HasFieldMarshal
     CTP.EnumBankAccTypeType BankAccType : Public
     System.String DeviceID : Public, HasFieldMarshal
@@ -4309,6 +4354,23 @@ Class CTP.ThostFtdcReserveOpenAccountField: AutoLayout, AnsiClass, Class, Public
     CTP.EnumReserveOpenAccStasType ReserveOpenAccStas : Public
     Int32 ErrorID : Public
     System.String ErrorMsg : Public, HasFieldMarshal
+Class CTP.CTPMDAdapterBase: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
+  Interfaces:
+    System.IDisposable
+  Methods:
+    GetCtpVersionDate(): PrivateScope, Public, HideBySig
+    Release(): PrivateScope, Public, HideBySig
+    Init(): PrivateScope, Public, HideBySig
+    Join(): PrivateScope, Public, HideBySig
+    GetTradingDay(): PrivateScope, Public, HideBySig
+    RegisterFront(String): PrivateScope, Public, HideBySig
+    RegisterNameServer(String): PrivateScope, Public, HideBySig
+    RegisterFensUserInfo(ThostFtdcFensUserInfoField): PrivateScope, Public, HideBySig
+    SubscribeMarketData(String[]): PrivateScope, Public, HideBySig
+    UnSubscribeMarketData(String[]): PrivateScope, Public, HideBySig
+    ReqUserLogin(ThostFtdcReqUserLoginField, Int32): PrivateScope, Public, HideBySig
+    ReqUserLogout(ThostFtdcUserLogoutField, Int32): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
 Class CTP.FrontConnected: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
     Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
@@ -4371,6 +4433,48 @@ Class CTP.RtnDepthMarketData: AutoLayout, AnsiClass, Class, Public, Sealed, Befo
   Methods:
     Invoke(ThostFtdcDepthMarketDataField): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     BeginInvoke(ThostFtdcDepthMarketDataField, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspSubForQuote: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcSpecificInstrumentField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcSpecificInstrumentField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspUnSubForQuote: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcSpecificInstrumentField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcSpecificInstrumentField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspRtnForQuote: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcForQuoteRspField): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcForQuoteRspField, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspForQuoteInsert: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInputForQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInputForQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQuoteInsert: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInputQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInputQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQuoteAction: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInputQuoteActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInputQuoteActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class CTP.RspAuthenticate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
@@ -4449,6 +4553,34 @@ Class CTP.RspRemoveParkedOrderAction: AutoLayout, AnsiClass, Class, Public, Seal
     Invoke(ThostFtdcRemoveParkedOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     BeginInvoke(ThostFtdcRemoveParkedOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspExecOrderInsert: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInputExecOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInputExecOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspExecOrderAction: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInputExecOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInputExecOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspBatchOrderAction: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInputBatchOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInputBatchOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspCombActionInsert: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInputCombActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInputCombActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class CTP.RspQryOrder: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
     Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
@@ -4511,6 +4643,13 @@ Class CTP.RspQryExchange: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFi
   Methods:
     Invoke(ThostFtdcExchangeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     BeginInvoke(ThostFtdcExchangeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryProduct: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcProductField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcProductField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class CTP.RspQryInstrument: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
@@ -4582,6 +4721,125 @@ Class CTP.RspQryEWarrantOffset: AutoLayout, AnsiClass, Class, Public, Sealed, Be
     Invoke(ThostFtdcEWarrantOffsetField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     BeginInvoke(ThostFtdcEWarrantOffsetField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryInvestorProductGroupMargin: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInvestorProductGroupMarginField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInvestorProductGroupMarginField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryExchangeMarginRate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcExchangeMarginRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcExchangeMarginRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryExchangeMarginRateAdjust: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcExchangeMarginRateAdjustField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcExchangeMarginRateAdjustField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryExchangeRate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcExchangeRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcExchangeRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQrySecAgentACIDMap: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcSecAgentACIDMapField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcSecAgentACIDMapField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryProductExchRate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcProductExchRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcProductExchRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryProductGroup: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcProductGroupField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcProductGroupField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryMMInstrumentCommissionRate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcMMInstrumentCommissionRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcMMInstrumentCommissionRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryMMOptionInstrCommRate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcMMOptionInstrCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcMMOptionInstrCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryInstrumentOrderCommRate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcInstrumentOrderCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcInstrumentOrderCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryOptionInstrTradeCost: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcOptionInstrTradeCostField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcOptionInstrTradeCostField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryOptionInstrCommRate: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcOptionInstrCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcOptionInstrCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryExecOrder: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcExecOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcExecOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryForQuote: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcForQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcForQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryQuote: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryCombInstrumentGuard: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcCombInstrumentGuardField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcCombInstrumentGuardField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQryCombAction: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcCombActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcCombActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class CTP.RspQryTransferSerial: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
     Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
@@ -4624,6 +4882,13 @@ Class CTP.ErrRtnOrderAction: AutoLayout, AnsiClass, Class, Public, Sealed, Befor
     Invoke(ThostFtdcOrderActionField, ThostFtdcRspInfoField): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     BeginInvoke(ThostFtdcOrderActionField, ThostFtdcRspInfoField, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RtnBulletin: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcBulletinField): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcBulletinField, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class CTP.RtnInstrumentStatus: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
     Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
@@ -4644,6 +4909,13 @@ Class CTP.RtnErrorConditionalOrder: AutoLayout, AnsiClass, Class, Public, Sealed
   Methods:
     Invoke(ThostFtdcErrorConditionalOrderField): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     BeginInvoke(ThostFtdcErrorConditionalOrderField, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RtnCFMMCTradingAccountToken: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcCFMMCTradingAccountTokenField): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcCFMMCTradingAccountTokenField, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class CTP.RspQryContractBank: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
@@ -4686,6 +4958,13 @@ Class CTP.RspQryBrokerTradingAlgos: AutoLayout, AnsiClass, Class, Public, Sealed
   Methods:
     Invoke(ThostFtdcBrokerTradingAlgosField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     BeginInvoke(ThostFtdcBrokerTradingAlgosField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class CTP.RspQueryCFMMCTradingAccountToken: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ThostFtdcQueryCFMMCTradingAccountTokenField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ThostFtdcQueryCFMMCTradingAccountTokenField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal), AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class CTP.RtnFromBankToFutureByBank: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.MulticastDelegate
@@ -4842,12 +5121,15 @@ Class CTP.RtnChangeAccountByBank: AutoLayout, AnsiClass, Class, Public, Sealed, 
     BeginInvoke(ThostFtdcChangeAccountField, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
     EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
 Class CTP.CTPMDAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :CTP.CTPMDAdapterBase
+    Void .ctor(System.String, Boolean, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(System.String, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Interfaces:
-    System.IDisposable
   Events:
+    CTP.RspRtnForQuote OnRtnForQuoteRsp: SpecialName
     CTP.RtnDepthMarketData OnRtnDepthMarketData: SpecialName
+    CTP.RspUnSubForQuote OnRspUnSubForQuoteRsp: SpecialName
+    CTP.RspSubForQuote OnRspSubForQuoteRsp: SpecialName
     CTP.RspUnSubMarketData OnRspUnSubMarketData: SpecialName
     CTP.RspSubMarketData OnRspSubMarketData: SpecialName
     CTP.RspError OnRspError: SpecialName
@@ -4857,16 +5139,6 @@ Class CTP.CTPMDAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     CTP.FrontDisconnected OnFrontDisconnected: SpecialName
     CTP.FrontConnected OnFrontConnected: SpecialName
   Methods:
-    Release(): PrivateScope, Public, HideBySig
-    Init(): PrivateScope, Public, HideBySig
-    Join(): PrivateScope, Public, HideBySig
-    GetTradingDay(): PrivateScope, Public, HideBySig
-    RegisterFront(String): PrivateScope, Public, HideBySig
-    RegisterNameServer(String): PrivateScope, Public, HideBySig
-    SubscribeMarketData(String[]): PrivateScope, Public, HideBySig
-    UnSubscribeMarketData(String[]): PrivateScope, Public, HideBySig
-    ReqUserLogin(ThostFtdcReqUserLoginField, Int32): PrivateScope, Public, HideBySig
-    ReqUserLogout(ThostFtdcUserLogoutField, Int32): PrivateScope, Public, HideBySig
     add_OnFrontConnected(FrontConnected): PrivateScope, Public, HideBySig, SpecialName
     remove_OnFrontConnected(FrontConnected): PrivateScope, Public, HideBySig, SpecialName
     raise_OnFrontConnected(): PrivateScope, Public, HideBySig, SpecialName
@@ -4891,10 +5163,18 @@ Class CTP.CTPMDAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     add_OnRspUnSubMarketData(RspUnSubMarketData): PrivateScope, Public, HideBySig, SpecialName
     remove_OnRspUnSubMarketData(RspUnSubMarketData): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRspUnSubMarketData(ThostFtdcSpecificInstrumentField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspSubForQuoteRsp(RspSubForQuote): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspSubForQuoteRsp(RspSubForQuote): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspSubForQuoteRsp(ThostFtdcSpecificInstrumentField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspUnSubForQuoteRsp(RspUnSubForQuote): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspUnSubForQuoteRsp(RspUnSubForQuote): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspUnSubForQuoteRsp(ThostFtdcSpecificInstrumentField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
     add_OnRtnDepthMarketData(RtnDepthMarketData): PrivateScope, Public, HideBySig, SpecialName
     remove_OnRtnDepthMarketData(RtnDepthMarketData): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRtnDepthMarketData(ThostFtdcDepthMarketDataField): PrivateScope, Public, HideBySig, SpecialName
-    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+    add_OnRtnForQuoteRsp(RspRtnForQuote): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnForQuoteRsp(RspRtnForQuote): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnForQuoteRsp(ThostFtdcForQuoteRspField): PrivateScope, Public, HideBySig, SpecialName
 Struct CTP.EnumTeResumeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -4992,6 +5272,7 @@ Struct CTP.EnumFunctionCodeType: AutoLayout, AnsiClass, Class, Public, Sealed, B
     CTP.EnumFunctionCodeType ParkedOrderInsert = 67 : Public, Static, Literal, HasDefault
     CTP.EnumFunctionCodeType ParkedOrderAction = 68 : Public, Static, Literal, HasDefault
     CTP.EnumFunctionCodeType SyncOTP = 69 : Public, Static, Literal, HasDefault
+    CTP.EnumFunctionCodeType DeleteOrder = 70 : Public, Static, Literal, HasDefault
 Struct CTP.EnumBrokerFunctionCodeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5037,6 +5318,10 @@ Struct CTP.EnumBrokerFunctionCodeType: AutoLayout, AnsiClass, Class, Public, Sea
     CTP.EnumBrokerFunctionCodeType SendBizNotice = 70 : Public, Static, Literal, HasDefault
     CTP.EnumBrokerFunctionCodeType CfgRiskLevelStd = 71 : Public, Static, Literal, HasDefault
     CTP.EnumBrokerFunctionCodeType TbCommand = 72 : Public, Static, Literal, HasDefault
+    CTP.EnumBrokerFunctionCodeType DeleteOrder = 74 : Public, Static, Literal, HasDefault
+    CTP.EnumBrokerFunctionCodeType ParkedOrderInsert = 75 : Public, Static, Literal, HasDefault
+    CTP.EnumBrokerFunctionCodeType ParkedOrderAction = 76 : Public, Static, Literal, HasDefault
+    CTP.EnumBrokerFunctionCodeType ExecOrderNoCheck = 77 : Public, Static, Literal, HasDefault
 Struct CTP.EnumOrderActionStatusType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5110,15 +5395,16 @@ Struct CTP.EnumTradingRoleType: AutoLayout, AnsiClass, Class, Public, Sealed, Be
     CTP.EnumTradingRoleType Broker = 49 : Public, Static, Literal, HasDefault
     CTP.EnumTradingRoleType Host = 50 : Public, Static, Literal, HasDefault
     CTP.EnumTradingRoleType Maker = 51 : Public, Static, Literal, HasDefault
-Struct CTP.EnumProductClassTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+Struct CTP.EnumProductClassType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
     Byte value__ : Public, SpecialName, RTSpecialName
-    CTP.EnumProductClassTypeType Futures = 49 : Public, Static, Literal, HasDefault
-    CTP.EnumProductClassTypeType Options = 50 : Public, Static, Literal, HasDefault
-    CTP.EnumProductClassTypeType Combination = 51 : Public, Static, Literal, HasDefault
-    CTP.EnumProductClassTypeType Spot = 52 : Public, Static, Literal, HasDefault
-    CTP.EnumProductClassTypeType EFP = 53 : Public, Static, Literal, HasDefault
+    CTP.EnumProductClassType Futures = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumProductClassType Options = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumProductClassType Combination = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumProductClassType Spot = 52 : Public, Static, Literal, HasDefault
+    CTP.EnumProductClassType EFP = 53 : Public, Static, Literal, HasDefault
+    CTP.EnumProductClassType SpotOption = 54 : Public, Static, Literal, HasDefault
 Struct CTP.EnumInstLifePhaseType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5176,6 +5462,7 @@ Struct CTP.EnumClientIDTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, B
     CTP.EnumClientIDTypeType Speculation = 49 : Public, Static, Literal, HasDefault
     CTP.EnumClientIDTypeType Arbitrage = 50 : Public, Static, Literal, HasDefault
     CTP.EnumClientIDTypeType Hedge = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumClientIDTypeType MarketMaker = 53 : Public, Static, Literal, HasDefault
 Struct CTP.EnumOrderPriceTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5384,6 +5671,12 @@ Struct CTP.EnumExchangeSettlementParamIDType: AutoLayout, AnsiClass, Class, Publ
     CTP.EnumExchangeSettlementParamIDType DCEDelivFee = 53 : Public, Static, Literal, HasDefault
     CTP.EnumExchangeSettlementParamIDType CFFEXMinPrepa = 54 : Public, Static, Literal, HasDefault
     CTP.EnumExchangeSettlementParamIDType CZCESettlementType = 55 : Public, Static, Literal, HasDefault
+    CTP.EnumExchangeSettlementParamIDType ExchDelivFeeMode = 57 : Public, Static, Literal, HasDefault
+    CTP.EnumExchangeSettlementParamIDType DelivFeeMode = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumExchangeSettlementParamIDType CZCEComMarginType = 65 : Public, Static, Literal, HasDefault
+    CTP.EnumExchangeSettlementParamIDType DceComMarginType = 66 : Public, Static, Literal, HasDefault
+    CTP.EnumExchangeSettlementParamIDType OptOutDisCountRate = 97 : Public, Static, Literal, HasDefault
+    CTP.EnumExchangeSettlementParamIDType OptMiniGuarantee = 98 : Public, Static, Literal, HasDefault
 Struct CTP.EnumSystemParamIDType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5408,6 +5701,9 @@ Struct CTP.EnumSystemParamIDType: AutoLayout, AnsiClass, Class, Public, Sealed, 
     CTP.EnumSystemParamIDType InvestorIDType = 97 : Public, Static, Literal, HasDefault
     CTP.EnumSystemParamIDType FreezeMaxReMain = 114 : Public, Static, Literal, HasDefault
     CTP.EnumSystemParamIDType IsSync = 65 : Public, Static, Literal, HasDefault
+    CTP.EnumSystemParamIDType RelieveOpenLimit = 79 : Public, Static, Literal, HasDefault
+    CTP.EnumSystemParamIDType IsStandardFreeze = 88 : Public, Static, Literal, HasDefault
+    CTP.EnumSystemParamIDType CZCENormalProductHedge = 66 : Public, Static, Literal, HasDefault
 Struct CTP.EnumTradeParamIDType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5415,6 +5711,17 @@ Struct CTP.EnumTradeParamIDType: AutoLayout, AnsiClass, Class, Public, Sealed, B
     CTP.EnumTradeParamIDType EncryptionStandard = 69 : Public, Static, Literal, HasDefault
     CTP.EnumTradeParamIDType RiskMode = 82 : Public, Static, Literal, HasDefault
     CTP.EnumTradeParamIDType RiskModeGlobal = 71 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType modeEncode = 80 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType tickMode = 84 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType SingleUserSessionMaxNum = 83 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType LoginFailMaxNum = 76 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType IsAuthForce = 65 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType IsPosiFreeze = 70 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType IsPosiLimit = 77 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType ForQuoteTimeInterval = 81 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType IsFuturePosiLimit = 66 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType IsFutureOrderFreq = 67 : Public, Static, Literal, HasDefault
+    CTP.EnumTradeParamIDType IsExecOrderProfit = 72 : Public, Static, Literal, HasDefault
 Struct CTP.EnumFileIDType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5427,6 +5734,10 @@ Struct CTP.EnumFileIDType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeF
     CTP.EnumFileIDType CSRCData = 82 : Public, Static, Literal, HasDefault
     CTP.EnumFileIDType CZCEClose = 76 : Public, Static, Literal, HasDefault
     CTP.EnumFileIDType CZCENoClose = 78 : Public, Static, Literal, HasDefault
+    CTP.EnumFileIDType PositionDtl = 68 : Public, Static, Literal, HasDefault
+    CTP.EnumFileIDType OptionStrike = 83 : Public, Static, Literal, HasDefault
+    CTP.EnumFileIDType SettlementPriceComparison = 77 : Public, Static, Literal, HasDefault
+    CTP.EnumFileIDType NonTradePosChange = 66 : Public, Static, Literal, HasDefault
 Struct CTP.EnumFileTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5496,6 +5807,7 @@ Struct CTP.EnumFundIOTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, Bef
     Byte value__ : Public, SpecialName, RTSpecialName
     CTP.EnumFundIOTypeType FundIO = 49 : Public, Static, Literal, HasDefault
     CTP.EnumFundIOTypeType Transfer = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumFundIOTypeType SwapCurrency = 51 : Public, Static, Literal, HasDefault
 Struct CTP.EnumFundTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5503,6 +5815,7 @@ Struct CTP.EnumFundTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, Befor
     CTP.EnumFundTypeType Deposite = 49 : Public, Static, Literal, HasDefault
     CTP.EnumFundTypeType ItemFund = 50 : Public, Static, Literal, HasDefault
     CTP.EnumFundTypeType Company = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumFundTypeType InnerTransfer = 52 : Public, Static, Literal, HasDefault
 Struct CTP.EnumFundDirectionType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -5549,6 +5862,8 @@ Struct CTP.EnumInvestorTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, B
     CTP.EnumInvestorTypeType Person = 48 : Public, Static, Literal, HasDefault
     CTP.EnumInvestorTypeType Company = 49 : Public, Static, Literal, HasDefault
     CTP.EnumInvestorTypeType Fund = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumInvestorTypeType SpecialOrgan = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumInvestorTypeType Asset = 52 : Public, Static, Literal, HasDefault
 Struct CTP.EnumBrokerTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -6162,6 +6477,9 @@ Struct CTP.EnumFBTUserEventTypeType: AutoLayout, AnsiClass, Class, Public, Seale
     CTP.EnumFBTUserEventTypeType QueryFutureAccount = 57 : Public, Static, Literal, HasDefault
     CTP.EnumFBTUserEventTypeType SignOut = 65 : Public, Static, Literal, HasDefault
     CTP.EnumFBTUserEventTypeType SyncKey = 66 : Public, Static, Literal, HasDefault
+    CTP.EnumFBTUserEventTypeType ReserveOpenAccount = 67 : Public, Static, Literal, HasDefault
+    CTP.EnumFBTUserEventTypeType CancelReserveOpenAccount = 68 : Public, Static, Literal, HasDefault
+    CTP.EnumFBTUserEventTypeType ReserveOpenAccountConfirm = 69 : Public, Static, Literal, HasDefault
     CTP.EnumFBTUserEventTypeType Other = 90 : Public, Static, Literal, HasDefault
 Struct CTP.EnumDBOperationType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
@@ -6183,6 +6501,61 @@ Struct CTP.EnumSyncTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, Befor
     CTP.EnumSyncTypeType OneOffSync = 48 : Public, Static, Literal, HasDefault
     CTP.EnumSyncTypeType TimerSync = 49 : Public, Static, Literal, HasDefault
     CTP.EnumSyncTypeType TimerFullSync = 50 : Public, Static, Literal, HasDefault
+Struct CTP.EnumExDirectionType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumExDirectionType Settlement = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumExDirectionType Sale = 49 : Public, Static, Literal, HasDefault
+Struct CTP.EnumFBEResultFlagType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumFBEResultFlagType Success = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEResultFlagType InsufficientBalance = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEResultFlagType UnknownTrading = 56 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEResultFlagType Fail = 120 : Public, Static, Literal, HasDefault
+Struct CTP.EnumFBEExchStatusType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumFBEExchStatusType Normal = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEExchStatusType ReExchange = 49 : Public, Static, Literal, HasDefault
+Struct CTP.EnumFBEFileFlagType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumFBEFileFlagType DataPackage = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEFileFlagType File = 49 : Public, Static, Literal, HasDefault
+Struct CTP.EnumFBEAlreadyTradeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumFBEAlreadyTradeType NotTrade = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEAlreadyTradeType Trade = 49 : Public, Static, Literal, HasDefault
+Struct CTP.EnumFBEUserEventTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumFBEUserEventTypeType SignIn = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType Exchange = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType ReExchange = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType QueryBankAccount = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType QueryExchDetial = 52 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType QueryExchSummary = 53 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType QueryExchRate = 54 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType CheckBankAccount = 55 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType SignOut = 56 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEUserEventTypeType Other = 90 : Public, Static, Literal, HasDefault
+Struct CTP.EnumFBEReqFlagType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumFBEReqFlagType UnProcessed = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEReqFlagType WaitSend = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEReqFlagType SendSuccess = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEReqFlagType SendFailed = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumFBEReqFlagType WaitReSend = 52 : Public, Static, Literal, HasDefault
 Struct CTP.EnumNotifyClassType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -6294,6 +6667,9 @@ Struct CTP.EnumClientTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, Bef
     CTP.EnumClientTypeType All = 48 : Public, Static, Literal, HasDefault
     CTP.EnumClientTypeType Person = 49 : Public, Static, Literal, HasDefault
     CTP.EnumClientTypeType Company = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumClientTypeType Other = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumClientTypeType SpecialOrgan = 52 : Public, Static, Literal, HasDefault
+    CTP.EnumClientTypeType Asset = 53 : Public, Static, Literal, HasDefault
 Struct CTP.EnumExchangeIDTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -6302,6 +6678,7 @@ Struct CTP.EnumExchangeIDTypeType: AutoLayout, AnsiClass, Class, Public, Sealed,
     CTP.EnumExchangeIDTypeType CZCE = 90 : Public, Static, Literal, HasDefault
     CTP.EnumExchangeIDTypeType DCE = 68 : Public, Static, Literal, HasDefault
     CTP.EnumExchangeIDTypeType CFFEX = 74 : Public, Static, Literal, HasDefault
+    CTP.EnumExchangeIDTypeType INE = 78 : Public, Static, Literal, HasDefault
 Struct CTP.EnumExClientIDTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -6594,6 +6971,8 @@ Struct CTP.EnumRightParamTypeType: AutoLayout, AnsiClass, Class, Public, Sealed,
     Byte value__ : Public, SpecialName, RTSpecialName
     CTP.EnumRightParamTypeType Freeze = 49 : Public, Static, Literal, HasDefault
     CTP.EnumRightParamTypeType FreezeActive = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumRightParamTypeType OpenLimit = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumRightParamTypeType RelieveOpenLimit = 52 : Public, Static, Literal, HasDefault
 Struct CTP.EnumDataStatusType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -6742,6 +7121,95 @@ Struct CTP.EnumMortgageFundUseRangeTypeType: AutoLayout, AnsiClass, Class, Publi
     CTP.EnumMortgageFundUseRangeTypeType None = 48 : Public, Static, Literal, HasDefault
     CTP.EnumMortgageFundUseRangeTypeType Margin = 49 : Public, Static, Literal, HasDefault
     CTP.EnumMortgageFundUseRangeTypeType All = 50 : Public, Static, Literal, HasDefault
+Struct CTP.EnumSpecProductTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumSpecProductTypeType CzceHedge = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumSpecProductTypeType IneForeignCurrency = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumSpecProductTypeType DceOpenClose = 51 : Public, Static, Literal, HasDefault
+Struct CTP.EnumFundMortgageTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumFundMortgageTypeType Mortgage = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumFundMortgageTypeType Redemption = 50 : Public, Static, Literal, HasDefault
+Struct CTP.EnumAccountSettlementParamIDType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumAccountSettlementParamIDType BaseMargin = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumAccountSettlementParamIDType LowestInterest = 50 : Public, Static, Literal, HasDefault
+Struct CTP.EnumFundMortDirectionType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumFundMortDirectionType In = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumFundMortDirectionType Out = 50 : Public, Static, Literal, HasDefault
+Struct CTP.EnumBusinessClassType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumBusinessClassType Profit = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumBusinessClassType Loss = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumBusinessClassType Other = 90 : Public, Static, Literal, HasDefault
+Struct CTP.EnumSwapSourceTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumSwapSourceTypeType Manual = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumSwapSourceTypeType Automatic = 49 : Public, Static, Literal, HasDefault
+Struct CTP.EnumCurrExDirectionType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumCurrExDirectionType Settlement = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumCurrExDirectionType Sale = 49 : Public, Static, Literal, HasDefault
+Struct CTP.EnumCurrencySwapStatusType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumCurrencySwapStatusType Entry = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumCurrencySwapStatusType Approve = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumCurrencySwapStatusType Refuse = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumCurrencySwapStatusType Revoke = 52 : Public, Static, Literal, HasDefault
+    CTP.EnumCurrencySwapStatusType Send = 53 : Public, Static, Literal, HasDefault
+    CTP.EnumCurrencySwapStatusType Success = 54 : Public, Static, Literal, HasDefault
+    CTP.EnumCurrencySwapStatusType Failure = 55 : Public, Static, Literal, HasDefault
+Struct CTP.EnumReqFlagType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumReqFlagType NoSend = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumReqFlagType SendSuccess = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumReqFlagType SendFailed = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumReqFlagType WaitReSend = 51 : Public, Static, Literal, HasDefault
+Struct CTP.EnumResFlagType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumResFlagType Success = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumResFlagType InsuffiCient = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumResFlagType UnKnown = 56 : Public, Static, Literal, HasDefault
+Struct CTP.EnumExStatusType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumExStatusType Before = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumExStatusType After = 49 : Public, Static, Literal, HasDefault
+Struct CTP.EnumClientRegionType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumClientRegionType Domestic = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumClientRegionType GMT = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumClientRegionType Foreign = 51 : Public, Static, Literal, HasDefault
+Struct CTP.EnumHasBoardType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumHasBoardType No = 48 : Public, Static, Literal, HasDefault
+    CTP.EnumHasBoardType Yes = 49 : Public, Static, Literal, HasDefault
 Struct CTP.EnumStartModeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -6919,12 +7387,26 @@ Struct CTP.EnumCombDirectionType: AutoLayout, AnsiClass, Class, Public, Sealed, 
     Byte value__ : Public, SpecialName, RTSpecialName
     CTP.EnumCombDirectionType Comb = 48 : Public, Static, Literal, HasDefault
     CTP.EnumCombDirectionType UnComb = 49 : Public, Static, Literal, HasDefault
+Struct CTP.EnumOptionRoyaltyPriceTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumOptionRoyaltyPriceTypeType PreSettlementPrice = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumOptionRoyaltyPriceTypeType OpenPrice = 52 : Public, Static, Literal, HasDefault
 Struct CTP.EnumBalanceAlgorithmType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
     Byte value__ : Public, SpecialName, RTSpecialName
     CTP.EnumBalanceAlgorithmType Default = 49 : Public, Static, Literal, HasDefault
     CTP.EnumBalanceAlgorithmType IncludeOptValLost = 50 : Public, Static, Literal, HasDefault
+Struct CTP.EnumStrikeOffsetTypeType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Byte value__ : Public, SpecialName, RTSpecialName
+    CTP.EnumStrikeOffsetTypeType RealValue = 49 : Public, Static, Literal, HasDefault
+    CTP.EnumStrikeOffsetTypeType ProfitValue = 50 : Public, Static, Literal, HasDefault
+    CTP.EnumStrikeOffsetTypeType RealRatio = 51 : Public, Static, Literal, HasDefault
+    CTP.EnumStrikeOffsetTypeType ProfitRatio = 52 : Public, Static, Literal, HasDefault
 Struct CTP.EnumReserveOpenAccStasType: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
   :System.Enum
   Fields:
@@ -6933,11 +7415,76 @@ Struct CTP.EnumReserveOpenAccStasType: AutoLayout, AnsiClass, Class, Public, Sea
     CTP.EnumReserveOpenAccStasType Cancelled = 49 : Public, Static, Literal, HasDefault
     CTP.EnumReserveOpenAccStasType Opened = 50 : Public, Static, Literal, HasDefault
     CTP.EnumReserveOpenAccStasType Invalid = 51 : Public, Static, Literal, HasDefault
-Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-    Void .ctor(System.String, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class CTP.CTPTraderAdapterBase: AutoLayout, AnsiClass, Class, Public, Abstract, BeforeFieldInit
   Interfaces:
     System.IDisposable
+  Methods:
+    GetCtpVersionDate(): PrivateScope, Public, HideBySig
+    Release(): PrivateScope, Public, HideBySig
+    Init(): PrivateScope, Public, HideBySig
+    Join(): PrivateScope, Public, HideBySig
+    GetTradingDay(): PrivateScope, Public, HideBySig
+    RegisterFront(String): PrivateScope, Public, HideBySig
+    RegisterNameServer(String): PrivateScope, Public, HideBySig
+    RegisterFensUserInfo(ThostFtdcFensUserInfoField): PrivateScope, Public, HideBySig
+    SubscribePrivateTopic(EnumTeResumeType): PrivateScope, Public, HideBySig
+    SubscribePublicTopic(EnumTeResumeType): PrivateScope, Public, HideBySig
+    ReqAuthenticate(ThostFtdcReqAuthenticateField, Int32): PrivateScope, Public, HideBySig
+    ReqUserLogin(ThostFtdcReqUserLoginField, Int32): PrivateScope, Public, HideBySig
+    ReqUserLogout(ThostFtdcUserLogoutField, Int32): PrivateScope, Public, HideBySig
+    ReqUserPasswordUpdate(ThostFtdcUserPasswordUpdateField, Int32): PrivateScope, Public, HideBySig
+    ReqTradingAccountPasswordUpdate(ThostFtdcTradingAccountPasswordUpdateField, Int32): PrivateScope, Public, HideBySig
+    ReqOrderInsert(ThostFtdcInputOrderField, Int32): PrivateScope, Public, HideBySig
+    ReqParkedOrderInsert(ThostFtdcParkedOrderField, Int32): PrivateScope, Public, HideBySig
+    ReqParkedOrderAction(ThostFtdcParkedOrderActionField, Int32): PrivateScope, Public, HideBySig
+    ReqOrderAction(ThostFtdcInputOrderActionField, Int32): PrivateScope, Public, HideBySig
+    ReqQueryMaxOrderVolume(ThostFtdcQueryMaxOrderVolumeField, Int32): PrivateScope, Public, HideBySig
+    ReqSettlementInfoConfirm(ThostFtdcSettlementInfoConfirmField, Int32): PrivateScope, Public, HideBySig
+    ReqRemoveParkedOrder(ThostFtdcRemoveParkedOrderField, Int32): PrivateScope, Public, HideBySig
+    ReqRemoveParkedOrderAction(ThostFtdcRemoveParkedOrderActionField, Int32): PrivateScope, Public, HideBySig
+    ReqQryOrder(ThostFtdcQryOrderField, Int32): PrivateScope, Public, HideBySig
+    ReqQryTrade(ThostFtdcQryTradeField, Int32): PrivateScope, Public, HideBySig
+    ReqQryInvestorPosition(ThostFtdcQryInvestorPositionField, Int32): PrivateScope, Public, HideBySig
+    ReqQryTradingAccount(ThostFtdcQryTradingAccountField, Int32): PrivateScope, Public, HideBySig
+    ReqQryInvestor(ThostFtdcQryInvestorField, Int32): PrivateScope, Public, HideBySig
+    ReqQryTradingCode(ThostFtdcQryTradingCodeField, Int32): PrivateScope, Public, HideBySig
+    ReqQryInstrumentMarginRate(ThostFtdcQryInstrumentMarginRateField, Int32): PrivateScope, Public, HideBySig
+    ReqQryInstrumentCommissionRate(ThostFtdcQryInstrumentCommissionRateField, Int32): PrivateScope, Public, HideBySig
+    ReqQryExchange(ThostFtdcQryExchangeField, Int32): PrivateScope, Public, HideBySig
+    ReqQryProduct(ThostFtdcQryProductField, Int32): PrivateScope, Public, HideBySig
+    ReqQryInstrument(ThostFtdcQryInstrumentField, Int32): PrivateScope, Public, HideBySig
+    ReqQryDepthMarketData(ThostFtdcQryDepthMarketDataField, Int32): PrivateScope, Public, HideBySig
+    ReqQrySettlementInfo(ThostFtdcQrySettlementInfoField, Int32): PrivateScope, Public, HideBySig
+    ReqQryTransferBank(ThostFtdcQryTransferBankField, Int32): PrivateScope, Public, HideBySig
+    ReqQryInvestorPositionDetail(ThostFtdcQryInvestorPositionDetailField, Int32): PrivateScope, Public, HideBySig
+    ReqQryNotice(ThostFtdcQryNoticeField, Int32): PrivateScope, Public, HideBySig
+    ReqQrySettlementInfoConfirm(ThostFtdcQrySettlementInfoConfirmField, Int32): PrivateScope, Public, HideBySig
+    ReqQryInvestorPositionCombineDetail(ThostFtdcQryInvestorPositionCombineDetailField, Int32): PrivateScope, Public, HideBySig
+    ReqQryCFMMCTradingAccountKey(ThostFtdcQryCFMMCTradingAccountKeyField, Int32): PrivateScope, Public, HideBySig
+    ReqQryEWarrantOffset(ThostFtdcQryEWarrantOffsetField, Int32): PrivateScope, Public, HideBySig
+    ReqQryInvestorProductGroupMargin(ThostFtdcQryInvestorProductGroupMarginField, Int32): PrivateScope, Public, HideBySig
+    ReqQryExchangeMarginRate(ThostFtdcQryExchangeMarginRateField, Int32): PrivateScope, Public, HideBySig
+    ReqQryExchangeMarginRateAdjust(ThostFtdcQryExchangeMarginRateAdjustField, Int32): PrivateScope, Public, HideBySig
+    ReqQryExchangeRate(ThostFtdcQryExchangeRateField, Int32): PrivateScope, Public, HideBySig
+    ReqQrySecAgentACIDMap(ThostFtdcQrySecAgentACIDMapField, Int32): PrivateScope, Public, HideBySig
+    ReqQryTransferSerial(ThostFtdcQryTransferSerialField, Int32): PrivateScope, Public, HideBySig
+    ReqQryAccountregister(ThostFtdcQryAccountregisterField, Int32): PrivateScope, Public, HideBySig
+    ReqQryContractBank(ThostFtdcQryContractBankField, Int32): PrivateScope, Public, HideBySig
+    ReqQryParkedOrder(ThostFtdcQryParkedOrderField, Int32): PrivateScope, Public, HideBySig
+    ReqQryParkedOrderAction(ThostFtdcQryParkedOrderActionField, Int32): PrivateScope, Public, HideBySig
+    ReqQryTradingNotice(ThostFtdcQryTradingNoticeField, Int32): PrivateScope, Public, HideBySig
+    ReqQryBrokerTradingParams(ThostFtdcQryBrokerTradingParamsField, Int32): PrivateScope, Public, HideBySig
+    ReqQryBrokerTradingAlgos(ThostFtdcQryBrokerTradingAlgosField, Int32): PrivateScope, Public, HideBySig
+    ReqQueryCFMMCTradingAccountToken(ThostFtdcQueryCFMMCTradingAccountTokenField, Int32): PrivateScope, Public, HideBySig
+    ReqFromBankToFutureByFuture(ThostFtdcReqTransferField, Int32): PrivateScope, Public, HideBySig
+    ReqFromFutureToBankByFuture(ThostFtdcReqTransferField, Int32): PrivateScope, Public, HideBySig
+    ReqQueryBankAccountMoneyByFuture(ThostFtdcReqQueryAccountField, Int32): PrivateScope, Public, HideBySig
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
+Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :CTP.CTPTraderAdapterBase
+    Void .ctor(System.String, Boolean): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Events:
     CTP.RtnChangeAccountByBank OnRtnChangeAccountByBank: SpecialName
     CTP.RtnCancelAccountByBank OnRtnCancelAccountByBank: SpecialName
@@ -6961,15 +7508,18 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     CTP.RtnRepealFromBankToFutureByBank OnRtnRepealFromBankToFutureByBank: SpecialName
     CTP.RtnFromFutureToBankByBank OnRtnFromFutureToBankByBank: SpecialName
     CTP.RtnFromBankToFutureByBank OnRtnFromBankToFutureByBank: SpecialName
+    CTP.RspQueryCFMMCTradingAccountToken OnRspQueryCFMMCTradingAccountToken: SpecialName
     CTP.RspQryBrokerTradingAlgos OnRspQryBrokerTradingAlgos: SpecialName
     CTP.RspQryBrokerTradingParams OnRspQryBrokerTradingParams: SpecialName
     CTP.RspQryTradingNotice OnRspQryTradingNotice: SpecialName
     CTP.RspQryParkedOrderAction OnRspQryParkedOrderAction: SpecialName
     CTP.RspQryParkedOrder OnRspQryParkedOrder: SpecialName
     CTP.RspQryContractBank OnRspQryContractBank: SpecialName
+    CTP.RtnCFMMCTradingAccountToken OnRtnCFMMCTradingAccountToken: SpecialName
     CTP.RtnErrorConditionalOrder OnRtnErrorConditionalOrder: SpecialName
     CTP.RtnTradingNotice OnRtnTradingNotice: SpecialName
     CTP.RtnInstrumentStatus OnRtnInstrumentStatus: SpecialName
+    CTP.RtnBulletin OnRtnBulletin: SpecialName
     CTP.ErrRtnOrderAction OnErrRtnOrderAction: SpecialName
     CTP.ErrRtnOrderInsert OnErrRtnOrderInsert: SpecialName
     CTP.RtnTrade OnRtnTrade: SpecialName
@@ -6977,6 +7527,22 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     CTP.RspError OnRspError: SpecialName
     CTP.RspQryAccountregister OnRspQryAccountregister: SpecialName
     CTP.RspQryTransferSerial OnRspQryTransferSerial: SpecialName
+    CTP.RspQryCombAction OnRspQryCombAction: SpecialName
+    CTP.RspQryCombInstrumentGuard OnRspQryCombInstrumentGuard: SpecialName
+    CTP.RspQryForQuote OnRspQryForQuote: SpecialName
+    CTP.RspQryExecOrder OnRspQryExecOrder: SpecialName
+    CTP.RspQryOptionInstrCommRate OnRspQryOptionInstrCommRate: SpecialName
+    CTP.RspQryOptionInstrTradeCost OnRspQryOptionInstrTradeCost: SpecialName
+    CTP.RspQryInstrumentOrderCommRate OnRspQryInstrumentOrderCommRate: SpecialName
+    CTP.RspQryMMOptionInstrCommRate OnRspQryMMOptionInstrCommRate: SpecialName
+    CTP.RspQryMMInstrumentCommissionRate OnRspQryMMInstrumentCommissionRate: SpecialName
+    CTP.RspQryProductGroup OnRspQryProductGroup: SpecialName
+    CTP.RspQryProductExchRate OnRspQryProductExchRate: SpecialName
+    CTP.RspQrySecAgentACIDMap OnRspQrySecAgentACIDMap: SpecialName
+    CTP.RspQryExchangeRate OnRspQryExchangeRate: SpecialName
+    CTP.RspQryExchangeMarginRateAdjust OnRspQryExchangeMarginRateAdjust: SpecialName
+    CTP.RspQryExchangeMarginRate OnRspQryExchangeMarginRate: SpecialName
+    CTP.RspQryInvestorProductGroupMargin OnRspQryInvestorProductGroupMargin: SpecialName
     CTP.RspQryEWarrantOffset OnRspQryEWarrantOffset: SpecialName
     CTP.RspQryCFMMCTradingAccountKey OnRspQryCFMMCTradingAccountKey: SpecialName
     CTP.RspQryInvestorPositionCombineDetail OnRspQryInvestorPositionCombineDetail: SpecialName
@@ -6987,6 +7553,7 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     CTP.RspQrySettlementInfo OnRspQrySettlementInfo: SpecialName
     CTP.RspQryDepthMarketData OnRspQryDepthMarketData: SpecialName
     CTP.RspQryInstrument OnRspQryInstrument: SpecialName
+    CTP.RspQryProduct OnRspQryProduct: SpecialName
     CTP.RspQryExchange OnRspQryExchange: SpecialName
     CTP.RspQryInstrumentCommissionRate OnRspQryInstrumentCommissionRate: SpecialName
     CTP.RspQryInstrumentMarginRate OnRspQryInstrumentMarginRate: SpecialName
@@ -6996,6 +7563,13 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     CTP.RspQryInvestorPosition OnRspQryInvestorPosition: SpecialName
     CTP.RspQryTrade OnRspQryTrade: SpecialName
     CTP.RspQryOrder OnRspQryOrder: SpecialName
+    CTP.RspCombActionInsert OnRspCombActionInsert: SpecialName
+    CTP.RspBatchOrderAction OnRspBatchOrderAction: SpecialName
+    CTP.RspQuoteAction OnRspQuoteAction: SpecialName
+    CTP.RspQuoteInsert OnRspQuoteInsert: SpecialName
+    CTP.RspForQuoteInsert OnRspForQuoteInsert: SpecialName
+    CTP.RspExecOrderAction OnRspExecOrderAction: SpecialName
+    CTP.RspExecOrderInsert OnRspExecOrderInsert: SpecialName
     CTP.RspRemoveParkedOrderAction OnRspRemoveParkedOrderAction: SpecialName
     CTP.RspRemoveParkedOrder OnRspRemoveParkedOrder: SpecialName
     CTP.RspSettlementInfoConfirm OnRspSettlementInfoConfirm: SpecialName
@@ -7013,80 +7587,6 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     CTP.FrontDisconnected OnFrontDisconnected: SpecialName
     CTP.FrontConnected OnFrontConnected: SpecialName
   Methods:
-    add_OnRspFromBankToFutureByFuture(RspFromBankToFutureByFuture): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspFromBankToFutureByFuture(RspFromBankToFutureByFuture): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspFromBankToFutureByFuture(ThostFtdcReqTransferField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspFromFutureToBankByFuture(RspFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspFromFutureToBankByFuture(RspFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspFromFutureToBankByFuture(ThostFtdcReqTransferField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQueryBankAccountMoneyByFuture(RspQueryBankAccountMoneyByFuture): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQueryBankAccountMoneyByFuture(RspQueryBankAccountMoneyByFuture): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQueryBankAccountMoneyByFuture(ThostFtdcReqQueryAccountField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnOpenAccountByBank(RtnOpenAccountByBank): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnOpenAccountByBank(RtnOpenAccountByBank): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnOpenAccountByBank(ThostFtdcOpenAccountField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnCancelAccountByBank(RtnCancelAccountByBank): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnCancelAccountByBank(RtnCancelAccountByBank): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnCancelAccountByBank(ThostFtdcCancelAccountField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnChangeAccountByBank(RtnChangeAccountByBank): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnChangeAccountByBank(RtnChangeAccountByBank): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnChangeAccountByBank(ThostFtdcChangeAccountField): PrivateScope, Public, HideBySig, SpecialName
-    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
-    raise_OnRtnOrder(ThostFtdcOrderField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnTrade(RtnTrade): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnTrade(RtnTrade): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnTrade(ThostFtdcTradeField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnErrRtnOrderInsert(ErrRtnOrderInsert): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnErrRtnOrderInsert(ErrRtnOrderInsert): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnErrRtnOrderInsert(ThostFtdcInputOrderField, ThostFtdcRspInfoField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnErrRtnOrderAction(ErrRtnOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnErrRtnOrderAction(ErrRtnOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnErrRtnOrderAction(ThostFtdcOrderActionField, ThostFtdcRspInfoField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnInstrumentStatus(RtnInstrumentStatus): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnInstrumentStatus(RtnInstrumentStatus): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnInstrumentStatus(ThostFtdcInstrumentStatusField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnTradingNotice(RtnTradingNotice): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnTradingNotice(RtnTradingNotice): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnTradingNotice(ThostFtdcTradingNoticeInfoField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnErrorConditionalOrder(RtnErrorConditionalOrder): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnErrorConditionalOrder(RtnErrorConditionalOrder): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnErrorConditionalOrder(ThostFtdcErrorConditionalOrderField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryContractBank(RspQryContractBank): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryContractBank(RspQryContractBank): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryContractBank(ThostFtdcContractBankField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryParkedOrder(RspQryParkedOrder): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryParkedOrder(RspQryParkedOrder): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryParkedOrder(ThostFtdcParkedOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryParkedOrderAction(RspQryParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryParkedOrderAction(RspQryParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryParkedOrderAction(ThostFtdcParkedOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryTradingNotice(RspQryTradingNotice): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryTradingNotice(RspQryTradingNotice): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryTradingNotice(ThostFtdcTradingNoticeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryBrokerTradingParams(RspQryBrokerTradingParams): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryBrokerTradingParams(RspQryBrokerTradingParams): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryBrokerTradingParams(ThostFtdcBrokerTradingParamsField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryBrokerTradingAlgos(RspQryBrokerTradingAlgos): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryBrokerTradingAlgos(RspQryBrokerTradingAlgos): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryBrokerTradingAlgos(ThostFtdcBrokerTradingAlgosField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnFromBankToFutureByBank(RtnFromBankToFutureByBank): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnFromBankToFutureByBank(RtnFromBankToFutureByBank): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnFromBankToFutureByBank(ThostFtdcRspTransferField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnFromFutureToBankByBank(RtnFromFutureToBankByBank): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnFromFutureToBankByBank(RtnFromFutureToBankByBank): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnFromFutureToBankByBank(ThostFtdcRspTransferField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnRepealFromBankToFutureByBank(RtnRepealFromBankToFutureByBank): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnRepealFromBankToFutureByBank(RtnRepealFromBankToFutureByBank): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnRepealFromBankToFutureByBank(ThostFtdcRspRepealField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnRepealFromFutureToBankByBank(RtnRepealFromFutureToBankByBank): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnRepealFromFutureToBankByBank(RtnRepealFromFutureToBankByBank): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnRepealFromFutureToBankByBank(ThostFtdcRspRepealField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnFromBankToFutureByFuture(RtnFromBankToFutureByFuture): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnFromBankToFutureByFuture(RtnFromBankToFutureByFuture): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnFromBankToFutureByFuture(ThostFtdcRspTransferField): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnFromFutureToBankByFuture(RtnFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnFromFutureToBankByFuture(RtnFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRtnFromFutureToBankByFuture(ThostFtdcRspTransferField): PrivateScope, Public, HideBySig, SpecialName
     add_OnRtnRepealFromBankToFutureByFutureManual(RtnRepealFromBankToFutureByFutureManual): PrivateScope, Public, HideBySig, SpecialName
     remove_OnRtnRepealFromBankToFutureByFutureManual(RtnRepealFromBankToFutureByFutureManual): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRtnRepealFromBankToFutureByFutureManual(ThostFtdcRspRepealField): PrivateScope, Public, HideBySig, SpecialName
@@ -7117,36 +7617,109 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     add_OnRtnRepealFromFutureToBankByFuture(RtnRepealFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
     remove_OnRtnRepealFromFutureToBankByFuture(RtnRepealFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRtnRepealFromFutureToBankByFuture(ThostFtdcRspRepealField): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspParkedOrderAction(RspParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspParkedOrderAction(ThostFtdcParkedOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspOrderAction(RspOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspOrderAction(RspOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspOrderAction(ThostFtdcInputOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQueryMaxOrderVolume(RspQueryMaxOrderVolume): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQueryMaxOrderVolume(RspQueryMaxOrderVolume): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQueryMaxOrderVolume(ThostFtdcQueryMaxOrderVolumeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspSettlementInfoConfirm(RspSettlementInfoConfirm): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspSettlementInfoConfirm(RspSettlementInfoConfirm): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspSettlementInfoConfirm(ThostFtdcSettlementInfoConfirmField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspRemoveParkedOrder(RspRemoveParkedOrder): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspRemoveParkedOrder(RspRemoveParkedOrder): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspRemoveParkedOrder(ThostFtdcRemoveParkedOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspRemoveParkedOrderAction(RspRemoveParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspRemoveParkedOrderAction(RspRemoveParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspRemoveParkedOrderAction(ThostFtdcRemoveParkedOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryOrder(RspQryOrder): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryOrder(RspQryOrder): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryOrder(ThostFtdcOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryTrade(RspQryTrade): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryTrade(RspQryTrade): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryTrade(ThostFtdcTradeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryInvestorPosition(RspQryInvestorPosition): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryInvestorPosition(RspQryInvestorPosition): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryInvestorPosition(ThostFtdcInvestorPositionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryTradingAccount(RspQryTradingAccount): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryTradingAccount(RspQryTradingAccount): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryTradingAccount(ThostFtdcTradingAccountField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryInvestor(RspQryInvestor): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspFromBankToFutureByFuture(RspFromBankToFutureByFuture): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspFromBankToFutureByFuture(RspFromBankToFutureByFuture): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspFromBankToFutureByFuture(ThostFtdcReqTransferField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspFromFutureToBankByFuture(RspFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspFromFutureToBankByFuture(RspFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspFromFutureToBankByFuture(ThostFtdcReqTransferField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQueryBankAccountMoneyByFuture(RspQueryBankAccountMoneyByFuture): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQueryBankAccountMoneyByFuture(RspQueryBankAccountMoneyByFuture): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQueryBankAccountMoneyByFuture(ThostFtdcReqQueryAccountField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnOpenAccountByBank(RtnOpenAccountByBank): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnOpenAccountByBank(RtnOpenAccountByBank): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnOpenAccountByBank(ThostFtdcOpenAccountField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnCancelAccountByBank(RtnCancelAccountByBank): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnCancelAccountByBank(RtnCancelAccountByBank): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnCancelAccountByBank(ThostFtdcCancelAccountField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnChangeAccountByBank(RtnChangeAccountByBank): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnChangeAccountByBank(RtnChangeAccountByBank): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnChangeAccountByBank(ThostFtdcChangeAccountField): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryExecOrder(ThostFtdcExecOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryForQuote(RspQryForQuote): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryForQuote(RspQryForQuote): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryForQuote(ThostFtdcForQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryCombInstrumentGuard(RspQryCombInstrumentGuard): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryCombInstrumentGuard(RspQryCombInstrumentGuard): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryCombInstrumentGuard(ThostFtdcCombInstrumentGuardField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryCombAction(RspQryCombAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryCombAction(RspQryCombAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryCombAction(ThostFtdcCombActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryTransferSerial(RspQryTransferSerial): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryTransferSerial(RspQryTransferSerial): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryTransferSerial(ThostFtdcTransferSerialField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryAccountregister(RspQryAccountregister): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryAccountregister(RspQryAccountregister): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryAccountregister(ThostFtdcAccountregisterField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspError(RspError): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspError(RspError): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspError(ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnOrder(RtnOrder): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnOrder(RtnOrder): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnOrder(ThostFtdcOrderField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnTrade(RtnTrade): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnTrade(RtnTrade): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnTrade(ThostFtdcTradeField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnErrRtnOrderInsert(ErrRtnOrderInsert): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnErrRtnOrderInsert(ErrRtnOrderInsert): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnErrRtnOrderInsert(ThostFtdcInputOrderField, ThostFtdcRspInfoField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnErrRtnOrderAction(ErrRtnOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnErrRtnOrderAction(ErrRtnOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnErrRtnOrderAction(ThostFtdcOrderActionField, ThostFtdcRspInfoField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnBulletin(RtnBulletin): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnBulletin(RtnBulletin): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnBulletin(ThostFtdcBulletinField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnInstrumentStatus(RtnInstrumentStatus): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnInstrumentStatus(RtnInstrumentStatus): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnInstrumentStatus(ThostFtdcInstrumentStatusField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnTradingNotice(RtnTradingNotice): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnTradingNotice(RtnTradingNotice): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnTradingNotice(ThostFtdcTradingNoticeInfoField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnErrorConditionalOrder(RtnErrorConditionalOrder): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnErrorConditionalOrder(RtnErrorConditionalOrder): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnErrorConditionalOrder(ThostFtdcErrorConditionalOrderField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnCFMMCTradingAccountToken(RtnCFMMCTradingAccountToken): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnCFMMCTradingAccountToken(RtnCFMMCTradingAccountToken): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnCFMMCTradingAccountToken(ThostFtdcCFMMCTradingAccountTokenField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryContractBank(RspQryContractBank): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryContractBank(RspQryContractBank): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryContractBank(ThostFtdcContractBankField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryParkedOrder(RspQryParkedOrder): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryParkedOrder(RspQryParkedOrder): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryParkedOrder(ThostFtdcParkedOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryParkedOrderAction(RspQryParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryParkedOrderAction(RspQryParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryParkedOrderAction(ThostFtdcParkedOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryTradingNotice(RspQryTradingNotice): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryTradingNotice(RspQryTradingNotice): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryTradingNotice(ThostFtdcTradingNoticeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryBrokerTradingParams(RspQryBrokerTradingParams): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryBrokerTradingParams(RspQryBrokerTradingParams): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryBrokerTradingParams(ThostFtdcBrokerTradingParamsField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryBrokerTradingAlgos(RspQryBrokerTradingAlgos): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryBrokerTradingAlgos(RspQryBrokerTradingAlgos): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryBrokerTradingAlgos(ThostFtdcBrokerTradingAlgosField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQueryCFMMCTradingAccountToken(RspQueryCFMMCTradingAccountToken): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQueryCFMMCTradingAccountToken(RspQueryCFMMCTradingAccountToken): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQueryCFMMCTradingAccountToken(ThostFtdcQueryCFMMCTradingAccountTokenField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnFromBankToFutureByBank(RtnFromBankToFutureByBank): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnFromBankToFutureByBank(RtnFromBankToFutureByBank): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnFromBankToFutureByBank(ThostFtdcRspTransferField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnFromFutureToBankByBank(RtnFromFutureToBankByBank): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnFromFutureToBankByBank(RtnFromFutureToBankByBank): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnFromFutureToBankByBank(ThostFtdcRspTransferField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnRepealFromBankToFutureByBank(RtnRepealFromBankToFutureByBank): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnRepealFromBankToFutureByBank(RtnRepealFromBankToFutureByBank): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnRepealFromBankToFutureByBank(ThostFtdcRspRepealField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnRepealFromFutureToBankByBank(RtnRepealFromFutureToBankByBank): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnRepealFromFutureToBankByBank(RtnRepealFromFutureToBankByBank): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnRepealFromFutureToBankByBank(ThostFtdcRspRepealField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnFromBankToFutureByFuture(RtnFromBankToFutureByFuture): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnFromBankToFutureByFuture(RtnFromBankToFutureByFuture): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnFromBankToFutureByFuture(ThostFtdcRspTransferField): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRtnFromFutureToBankByFuture(RtnFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRtnFromFutureToBankByFuture(RtnFromFutureToBankByFuture): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRtnFromFutureToBankByFuture(ThostFtdcRspTransferField): PrivateScope, Public, HideBySig, SpecialName
     remove_OnRspQryInvestor(RspQryInvestor): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRspQryInvestor(ThostFtdcInvestorField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
     add_OnRspQryTradingCode(RspQryTradingCode): PrivateScope, Public, HideBySig, SpecialName
@@ -7161,6 +7734,9 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     add_OnRspQryExchange(RspQryExchange): PrivateScope, Public, HideBySig, SpecialName
     remove_OnRspQryExchange(RspQryExchange): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRspQryExchange(ThostFtdcExchangeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryProduct(RspQryProduct): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryProduct(RspQryProduct): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryProduct(ThostFtdcProductField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
     add_OnRspQryInstrument(RspQryInstrument): PrivateScope, Public, HideBySig, SpecialName
     remove_OnRspQryInstrument(RspQryInstrument): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRspQryInstrument(ThostFtdcInstrumentField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
@@ -7191,68 +7767,44 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     add_OnRspQryEWarrantOffset(RspQryEWarrantOffset): PrivateScope, Public, HideBySig, SpecialName
     remove_OnRspQryEWarrantOffset(RspQryEWarrantOffset): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRspQryEWarrantOffset(ThostFtdcEWarrantOffsetField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryTransferSerial(RspQryTransferSerial): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryTransferSerial(RspQryTransferSerial): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryTransferSerial(ThostFtdcTransferSerialField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspQryAccountregister(RspQryAccountregister): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspQryAccountregister(RspQryAccountregister): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspQryAccountregister(ThostFtdcAccountregisterField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRspError(RspError): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRspError(RspError): PrivateScope, Public, HideBySig, SpecialName
-    raise_OnRspError(ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
-    add_OnRtnOrder(RtnOrder): PrivateScope, Public, HideBySig, SpecialName
-    remove_OnRtnOrder(RtnOrder): PrivateScope, Public, HideBySig, SpecialName
-    Release(): PrivateScope, Public, HideBySig
-    Init(): PrivateScope, Public, HideBySig
-    Join(): PrivateScope, Public, HideBySig
-    GetTradingDay(): PrivateScope, Public, HideBySig
-    RegisterFront(String): PrivateScope, Public, HideBySig
-    RegisterNameServer(String): PrivateScope, Public, HideBySig
-    SubscribePrivateTopic(EnumTeResumeType): PrivateScope, Public, HideBySig
-    SubscribePublicTopic(EnumTeResumeType): PrivateScope, Public, HideBySig
-    ReqAuthenticate(ThostFtdcReqAuthenticateField, Int32): PrivateScope, Public, HideBySig
-    ReqUserLogin(ThostFtdcReqUserLoginField, Int32): PrivateScope, Public, HideBySig
-    ReqUserLogout(ThostFtdcUserLogoutField, Int32): PrivateScope, Public, HideBySig
-    ReqUserPasswordUpdate(ThostFtdcUserPasswordUpdateField, Int32): PrivateScope, Public, HideBySig
-    ReqTradingAccountPasswordUpdate(ThostFtdcTradingAccountPasswordUpdateField, Int32): PrivateScope, Public, HideBySig
-    ReqOrderInsert(ThostFtdcInputOrderField, Int32): PrivateScope, Public, HideBySig
-    ReqParkedOrderInsert(ThostFtdcParkedOrderField, Int32): PrivateScope, Public, HideBySig
-    ReqParkedOrderAction(ThostFtdcParkedOrderActionField, Int32): PrivateScope, Public, HideBySig
-    ReqOrderAction(ThostFtdcInputOrderActionField, Int32): PrivateScope, Public, HideBySig
-    ReqQueryMaxOrderVolume(ThostFtdcQueryMaxOrderVolumeField, Int32): PrivateScope, Public, HideBySig
-    ReqSettlementInfoConfirm(ThostFtdcSettlementInfoConfirmField, Int32): PrivateScope, Public, HideBySig
-    ReqRemoveParkedOrder(ThostFtdcRemoveParkedOrderField, Int32): PrivateScope, Public, HideBySig
-    ReqRemoveParkedOrderAction(ThostFtdcRemoveParkedOrderActionField, Int32): PrivateScope, Public, HideBySig
-    ReqQryOrder(ThostFtdcQryOrderField, Int32): PrivateScope, Public, HideBySig
-    ReqQryTrade(ThostFtdcQryTradeField, Int32): PrivateScope, Public, HideBySig
-    ReqQryInvestorPosition(ThostFtdcQryInvestorPositionField, Int32): PrivateScope, Public, HideBySig
-    ReqQryTradingAccount(ThostFtdcQryTradingAccountField, Int32): PrivateScope, Public, HideBySig
-    ReqQryInvestor(ThostFtdcQryInvestorField, Int32): PrivateScope, Public, HideBySig
-    ReqQryTradingCode(ThostFtdcQryTradingCodeField, Int32): PrivateScope, Public, HideBySig
-    ReqQryInstrumentMarginRate(ThostFtdcQryInstrumentMarginRateField, Int32): PrivateScope, Public, HideBySig
-    ReqQryInstrumentCommissionRate(ThostFtdcQryInstrumentCommissionRateField, Int32): PrivateScope, Public, HideBySig
-    ReqQryExchange(ThostFtdcQryExchangeField, Int32): PrivateScope, Public, HideBySig
-    ReqQryInstrument(ThostFtdcQryInstrumentField, Int32): PrivateScope, Public, HideBySig
-    ReqQryDepthMarketData(ThostFtdcQryDepthMarketDataField, Int32): PrivateScope, Public, HideBySig
-    ReqQrySettlementInfo(ThostFtdcQrySettlementInfoField, Int32): PrivateScope, Public, HideBySig
-    ReqQryTransferBank(ThostFtdcQryTransferBankField, Int32): PrivateScope, Public, HideBySig
-    ReqQryInvestorPositionDetail(ThostFtdcQryInvestorPositionDetailField, Int32): PrivateScope, Public, HideBySig
-    ReqQryNotice(ThostFtdcQryNoticeField, Int32): PrivateScope, Public, HideBySig
-    ReqQrySettlementInfoConfirm(ThostFtdcQrySettlementInfoConfirmField, Int32): PrivateScope, Public, HideBySig
-    ReqQryInvestorPositionCombineDetail(ThostFtdcQryInvestorPositionCombineDetailField, Int32): PrivateScope, Public, HideBySig
-    ReqQryCFMMCTradingAccountKey(ThostFtdcQryCFMMCTradingAccountKeyField, Int32): PrivateScope, Public, HideBySig
-    ReqQryEWarrantOffset(ThostFtdcQryEWarrantOffsetField, Int32): PrivateScope, Public, HideBySig
-    ReqQryTransferSerial(ThostFtdcQryTransferSerialField, Int32): PrivateScope, Public, HideBySig
-    ReqQryAccountregister(ThostFtdcQryAccountregisterField, Int32): PrivateScope, Public, HideBySig
-    ReqQryContractBank(ThostFtdcQryContractBankField, Int32): PrivateScope, Public, HideBySig
-    ReqQryParkedOrder(ThostFtdcQryParkedOrderField, Int32): PrivateScope, Public, HideBySig
-    ReqQryParkedOrderAction(ThostFtdcQryParkedOrderActionField, Int32): PrivateScope, Public, HideBySig
-    ReqQryTradingNotice(ThostFtdcQryTradingNoticeField, Int32): PrivateScope, Public, HideBySig
-    ReqQryBrokerTradingParams(ThostFtdcQryBrokerTradingParamsField, Int32): PrivateScope, Public, HideBySig
-    ReqQryBrokerTradingAlgos(ThostFtdcQryBrokerTradingAlgosField, Int32): PrivateScope, Public, HideBySig
-    ReqFromBankToFutureByFuture(ThostFtdcReqTransferField, Int32): PrivateScope, Public, HideBySig
-    ReqFromFutureToBankByFuture(ThostFtdcReqTransferField, Int32): PrivateScope, Public, HideBySig
-    ReqQueryBankAccountMoneyByFuture(ThostFtdcReqQueryAccountField, Int32): PrivateScope, Public, HideBySig
+    add_OnRspQryInvestorProductGroupMargin(RspQryInvestorProductGroupMargin): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryInvestorProductGroupMargin(RspQryInvestorProductGroupMargin): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryInvestorProductGroupMargin(ThostFtdcInvestorProductGroupMarginField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryExchangeMarginRate(RspQryExchangeMarginRate): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryExchangeMarginRate(RspQryExchangeMarginRate): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryExchangeMarginRate(ThostFtdcExchangeMarginRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryExchangeMarginRateAdjust(RspQryExchangeMarginRateAdjust): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryExchangeMarginRateAdjust(RspQryExchangeMarginRateAdjust): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryExchangeMarginRateAdjust(ThostFtdcExchangeMarginRateAdjustField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryExchangeRate(RspQryExchangeRate): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryExchangeRate(RspQryExchangeRate): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryExchangeRate(ThostFtdcExchangeRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQrySecAgentACIDMap(RspQrySecAgentACIDMap): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQrySecAgentACIDMap(RspQrySecAgentACIDMap): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQrySecAgentACIDMap(ThostFtdcSecAgentACIDMapField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryProductExchRate(RspQryProductExchRate): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryProductExchRate(RspQryProductExchRate): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryProductExchRate(ThostFtdcProductExchRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryProductGroup(RspQryProductGroup): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryProductGroup(RspQryProductGroup): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryProductGroup(ThostFtdcProductGroupField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryMMInstrumentCommissionRate(RspQryMMInstrumentCommissionRate): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryMMInstrumentCommissionRate(RspQryMMInstrumentCommissionRate): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryMMInstrumentCommissionRate(ThostFtdcMMInstrumentCommissionRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryMMOptionInstrCommRate(RspQryMMOptionInstrCommRate): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryMMOptionInstrCommRate(RspQryMMOptionInstrCommRate): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryMMOptionInstrCommRate(ThostFtdcMMOptionInstrCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryInstrumentOrderCommRate(RspQryInstrumentOrderCommRate): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryInstrumentOrderCommRate(RspQryInstrumentOrderCommRate): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryInstrumentOrderCommRate(ThostFtdcInstrumentOrderCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryOptionInstrTradeCost(RspQryOptionInstrTradeCost): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryOptionInstrTradeCost(RspQryOptionInstrTradeCost): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryOptionInstrTradeCost(ThostFtdcOptionInstrTradeCostField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryOptionInstrCommRate(RspQryOptionInstrCommRate): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryOptionInstrCommRate(RspQryOptionInstrCommRate): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryOptionInstrCommRate(ThostFtdcOptionInstrCommRateField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryExecOrder(RspQryExecOrder): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryExecOrder(RspQryExecOrder): PrivateScope, Public, HideBySig, SpecialName
     add_OnFrontConnected(FrontConnected): PrivateScope, Public, HideBySig, SpecialName
     remove_OnFrontConnected(FrontConnected): PrivateScope, Public, HideBySig, SpecialName
     raise_OnFrontConnected(): PrivateScope, Public, HideBySig, SpecialName
@@ -7284,3 +7836,54 @@ Class CTP.CTPTraderAdapter: AutoLayout, AnsiClass, Class, Public, BeforeFieldIni
     remove_OnRspParkedOrderInsert(RspParkedOrderInsert): PrivateScope, Public, HideBySig, SpecialName
     raise_OnRspParkedOrderInsert(ThostFtdcParkedOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
     add_OnRspParkedOrderAction(RspParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspParkedOrderAction(RspParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspParkedOrderAction(ThostFtdcParkedOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspOrderAction(RspOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspOrderAction(RspOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspOrderAction(ThostFtdcInputOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQueryMaxOrderVolume(RspQueryMaxOrderVolume): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQueryMaxOrderVolume(RspQueryMaxOrderVolume): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQueryMaxOrderVolume(ThostFtdcQueryMaxOrderVolumeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspSettlementInfoConfirm(RspSettlementInfoConfirm): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspSettlementInfoConfirm(RspSettlementInfoConfirm): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspSettlementInfoConfirm(ThostFtdcSettlementInfoConfirmField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspRemoveParkedOrder(RspRemoveParkedOrder): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspRemoveParkedOrder(RspRemoveParkedOrder): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspRemoveParkedOrder(ThostFtdcRemoveParkedOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspRemoveParkedOrderAction(RspRemoveParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspRemoveParkedOrderAction(RspRemoveParkedOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspRemoveParkedOrderAction(ThostFtdcRemoveParkedOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspExecOrderInsert(RspExecOrderInsert): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspExecOrderInsert(RspExecOrderInsert): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspExecOrderInsert(ThostFtdcInputExecOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspExecOrderAction(RspExecOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspExecOrderAction(RspExecOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspExecOrderAction(ThostFtdcInputExecOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspForQuoteInsert(RspForQuoteInsert): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspForQuoteInsert(RspForQuoteInsert): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspForQuoteInsert(ThostFtdcInputForQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQuoteInsert(RspQuoteInsert): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQuoteInsert(RspQuoteInsert): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQuoteInsert(ThostFtdcInputQuoteField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQuoteAction(RspQuoteAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQuoteAction(RspQuoteAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQuoteAction(ThostFtdcInputQuoteActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspBatchOrderAction(RspBatchOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspBatchOrderAction(RspBatchOrderAction): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspBatchOrderAction(ThostFtdcInputBatchOrderActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspCombActionInsert(RspCombActionInsert): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspCombActionInsert(RspCombActionInsert): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspCombActionInsert(ThostFtdcInputCombActionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryOrder(RspQryOrder): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryOrder(RspQryOrder): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryOrder(ThostFtdcOrderField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryTrade(RspQryTrade): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryTrade(RspQryTrade): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryTrade(ThostFtdcTradeField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryInvestorPosition(RspQryInvestorPosition): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryInvestorPosition(RspQryInvestorPosition): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryInvestorPosition(ThostFtdcInvestorPositionField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryTradingAccount(RspQryTradingAccount): PrivateScope, Public, HideBySig, SpecialName
+    remove_OnRspQryTradingAccount(RspQryTradingAccount): PrivateScope, Public, HideBySig, SpecialName
+    raise_OnRspQryTradingAccount(ThostFtdcTradingAccountField, ThostFtdcRspInfoField, Int32, Boolean(HasFieldMarshal)): PrivateScope, Public, HideBySig, SpecialName
+    add_OnRspQryInvestor(RspQryInvestor): PrivateScope, Public, HideBySig, SpecialName

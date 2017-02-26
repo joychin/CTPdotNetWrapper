@@ -1,1100 +1,1088 @@
-/////////////////////////////////////////////////////////////////////////
-/// ÉÏÆÚ¼¼Êõ CTP C++ ==> .Net Framework Adapter
-/// Author:	shawn666.liu@gmail.com
+ï»¿/////////////////////////////////////////////////////////////////////////
+/// ä¸ŠæœŸæŠ€æœ¯ CTP C++ ==> .Net Framework Adapter
+/// Author:	shawn666.liu@hotmail.com
 /// Date: 20120422
 /////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
 
-#include "Util.h"
-#include "TraderSpi.h"
-
-using namespace Native;
-
-namespace  Native {
-	class CTraderSpi;
-};
+#include "CTPTraderAdapterBase.h"
+#include "Delegates.h"
 
 namespace CTP {
 
 	/// <summary>
-	/// ÍĞ¹ÜÀà,TraderAPI Adapter
+	/// æ‰˜ç®¡ç±»,TraderAPI Adapter
 	/// </summary>
-	public ref class CTPTraderAdapter
+	public ref class CTPTraderAdapter : public CTPTraderAdapterBase
 	{
 	public:
 		/// <summary>
-		///´´½¨CTPTraderAdapter
-		///´æÖü¶©ÔÄĞÅÏ¢ÎÄ¼şµÄÄ¿Â¼£¬Ä¬ÈÏÎªµ±Ç°Ä¿Â¼
+		///åˆ›å»ºCTPTraderAdapter
+		///å­˜è´®è®¢é˜…ä¿¡æ¯æ–‡ä»¶çš„ç›®å½•ï¼Œé»˜è®¤ä¸ºå½“å‰ç›®å½•
 		/// </summary>
 		CTPTraderAdapter(void);
 		/// <summary>
-		///´´½¨CTPTraderAdapter
+		///åˆ›å»ºCTPTraderAdapter
 		/// </summary>
-		/// <param name="pszFlowPath">´æÖü¶©ÔÄĞÅÏ¢ÎÄ¼şµÄÄ¿Â¼£¬Ä¬ÈÏÎªµ±Ç°Ä¿Â¼</param>
-		/// <param name="bIsUsingUdp">ÊÇ·ñÊ¹ÓÃUDPĞ­Òé</param>
+		/// <param name="pszFlowPath">å­˜è´®è®¢é˜…ä¿¡æ¯æ–‡ä»¶çš„ç›®å½•</param>
+		CTPTraderAdapter(String^ pszFlowPath);
+		/// <summary>
+		///åˆ›å»ºCTPTraderAdapter, ä¸ºå…¼å®¹æ€§ä¿ç•™æ­¤å‡½æ•°, bIsUsingUdpå‚æ•°å°†è¢«å¿½ç•¥
+		/// </summary>
+		/// <param name="pszFlowPath">å­˜è´®è®¢é˜…ä¿¡æ¯æ–‡ä»¶çš„ç›®å½•</param>
 		CTPTraderAdapter(String^ pszFlowPath, bool bIsUsingUdp);
-	private:
-		~CTPTraderAdapter(void);
-		CThostFtdcTraderApi* m_pApi;
-		CTraderSpi* m_pSpi;
-	public:
-		/// <summary>
-		///É¾³ı½Ó¿Ú¶ÔÏó±¾Éí
-		///@remark ²»ÔÙÊ¹ÓÃ±¾½Ó¿Ú¶ÔÏóÊ±,µ÷ÓÃ¸Ãº¯ÊıÉ¾³ı½Ó¿Ú¶ÔÏó
-		/// </summary>
-		void Release();
-
-		/// <summary>
-		///³õÊ¼»¯
-		///@remark ³õÊ¼»¯ÔËĞĞ»·¾³,Ö»ÓĞµ÷ÓÃºó,½Ó¿Ú²Å¿ªÊ¼¹¤×÷
-		/// </summary>
-		void Init();
-
-		/// <summary>
-		///µÈ´ı½Ó¿ÚÏß³Ì½áÊøÔËĞĞ
-		///@return Ïß³ÌÍË³ö´úÂë
-		/// </summary>
-		int Join();
-
-		/// <summary>
-		///»ñÈ¡µ±Ç°½»Ò×ÈÕ
-		///@remark Ö»ÓĞµÇÂ¼³É¹¦ºó,²ÅÄÜµÃµ½ÕıÈ·µÄ½»Ò×ÈÕ
-		/// </summary>
-		/// <returns>»ñÈ¡µ½µÄ½»Ò×ÈÕ</returns>
-		String^ GetTradingDay();
-
-		/// <summary>
-		///×¢²áÇ°ÖÃ»úÍøÂçµØÖ·
-		///@param pszFrontAddress£ºÇ°ÖÃ»úÍøÂçµØÖ·¡£
-		///@remark ÍøÂçµØÖ·µÄ¸ñÊ½Îª£º¡°protocol://ipaddress:port¡±£¬Èç£º¡±tcp://127.0.0.1:17001¡±¡£ 
-		///@remark ¡°tcp¡±´ú±í´«ÊäĞ­Òé£¬¡°127.0.0.1¡±´ú±í·şÎñÆ÷µØÖ·¡£¡±17001¡±´ú±í·şÎñÆ÷¶Ë¿ÚºÅ¡£
-		/// </summary>
-		void RegisterFront(String^ pszFrontAddress);
-
-		/// <summary>
-		///×¢²áÃû×Ö·şÎñÆ÷ÍøÂçµØÖ·
-		///@param pszNsAddress£ºÃû×Ö·şÎñÆ÷ÍøÂçµØÖ·¡£
-		///@remark ÍøÂçµØÖ·µÄ¸ñÊ½Îª£º¡°protocol://ipaddress:port¡±£¬Èç£º¡±tcp://127.0.0.1:12001¡±¡£ 
-		///@remark ¡°tcp¡±´ú±í´«ÊäĞ­Òé£¬¡°127.0.0.1¡±´ú±í·şÎñÆ÷µØÖ·¡£¡±12001¡±´ú±í·şÎñÆ÷¶Ë¿ÚºÅ¡£
-		///@remark RegisterNameServerÓÅÏÈÓÚRegisterFront
-		/// </summary>
-		void RegisterNameServer(String^ pszNsAddress);
-
-		///×¢²á»Øµ÷½Ó¿Ú
-		///@param pSpi ÅÉÉú×Ô»Øµ÷½Ó¿ÚÀàµÄÊµÀı
-		/// void RegisterSpi(ThostFtdcTraderSpi^ pSpi);
-
-		/// <summary>
-		///¶©ÔÄË½ÓĞÁ÷¡£
-		///@param nResumeType Ë½ÓĞÁ÷ÖØ´«·½Ê½  
-		///        THOST_TERT_RESTART:´Ó±¾½»Ò×ÈÕ¿ªÊ¼ÖØ´«
-		///        THOST_TERT_RESUME:´ÓÉÏ´ÎÊÕµ½µÄĞø´«
-		///        THOST_TERT_QUICK:Ö»´«ËÍµÇÂ¼ºóË½ÓĞÁ÷µÄÄÚÈİ
-		///@remark ¸Ã·½·¨ÒªÔÚInit·½·¨Ç°µ÷ÓÃ¡£Èô²»µ÷ÓÃÔò²»»áÊÕµ½Ë½ÓĞÁ÷µÄÊı¾İ¡£
-		/// </summary>
-		void SubscribePrivateTopic(EnumTeResumeType nResumeType);
-
-		/// <summary>
-		///¶©ÔÄ¹«¹²Á÷¡£
-		///@param nResumeType ¹«¹²Á÷ÖØ´«·½Ê½  
-		///        THOST_TERT_RESTART:´Ó±¾½»Ò×ÈÕ¿ªÊ¼ÖØ´«
-		///        THOST_TERT_RESUME:´ÓÉÏ´ÎÊÕµ½µÄĞø´«
-		///        THOST_TERT_QUICK:Ö»´«ËÍµÇÂ¼ºó¹«¹²Á÷µÄÄÚÈİ
-		///@remark ¸Ã·½·¨ÒªÔÚInit·½·¨Ç°µ÷ÓÃ¡£Èô²»µ÷ÓÃÔò²»»áÊÕµ½¹«¹²Á÷µÄÊı¾İ¡£
-		/// </summary>
-		void SubscribePublicTopic(EnumTeResumeType nResumeType);
-
-		/// <summary>
-		///¿Í»§¶ËÈÏÖ¤ÇëÇó
-		/// </summary>
-		int ReqAuthenticate(ThostFtdcReqAuthenticateField^ pReqAuthenticateField, int nRequestID);
-
-		/// <summary>
-		///ÓÃ»§µÇÂ¼ÇëÇó
-		/// </summary>
-		int ReqUserLogin(ThostFtdcReqUserLoginField^ pReqUserLoginField, int nRequestID);
-
-		/// <summary>
-		///µÇ³öÇëÇó
-		/// </summary>
-		int ReqUserLogout(ThostFtdcUserLogoutField^ pUserLogout, int nRequestID);
-
-		/// <summary>
-		///ÓÃ»§¿ÚÁî¸üĞÂÇëÇó
-		/// </summary>
-		int ReqUserPasswordUpdate(ThostFtdcUserPasswordUpdateField^ pUserPasswordUpdate, int nRequestID);
-
-		/// <summary>
-		///×Ê½ğÕË»§¿ÚÁî¸üĞÂÇëÇó
-		/// </summary>
-		int ReqTradingAccountPasswordUpdate(ThostFtdcTradingAccountPasswordUpdateField^ pTradingAccountPasswordUpdate, int nRequestID);
-
-		/// <summary>
-		///±¨µ¥Â¼ÈëÇëÇó
-		/// </summary>
-		int ReqOrderInsert(ThostFtdcInputOrderField^ pInputOrder, int nRequestID);
-
-		/// <summary>
-		///Ô¤Âñµ¥Â¼ÈëÇëÇó
-		/// </summary>
-		int ReqParkedOrderInsert(ThostFtdcParkedOrderField^ pParkedOrder, int nRequestID);
-
-		/// <summary>
-		///Ô¤Âñ³·µ¥Â¼ÈëÇëÇó
-		/// </summary>
-		int ReqParkedOrderAction(ThostFtdcParkedOrderActionField^ pParkedOrderAction, int nRequestID);
-
-		/// <summary>
-		///±¨µ¥²Ù×÷ÇëÇó
-		/// </summary>
-		int ReqOrderAction(ThostFtdcInputOrderActionField^ pInputOrderAction, int nRequestID);
-
-		/// <summary>
-		///²éÑ¯×î´ó±¨µ¥ÊıÁ¿ÇëÇó
-		/// </summary>
-		int ReqQueryMaxOrderVolume(ThostFtdcQueryMaxOrderVolumeField^ pQueryMaxOrderVolume, int nRequestID);
-
-		/// <summary>
-		///Í¶×ÊÕß½áËã½á¹ûÈ·ÈÏ
-		/// </summary>
-		int ReqSettlementInfoConfirm(ThostFtdcSettlementInfoConfirmField^ pSettlementInfoConfirm, int nRequestID);
-
-		/// <summary>
-		///ÇëÇóÉ¾³ıÔ¤Âñµ¥
-		/// </summary>
-		int ReqRemoveParkedOrder(ThostFtdcRemoveParkedOrderField^ pRemoveParkedOrder, int nRequestID);
-
-		/// <summary>
-		///ÇëÇóÉ¾³ıÔ¤Âñ³·µ¥
-		/// </summary>
-		int ReqRemoveParkedOrderAction(ThostFtdcRemoveParkedOrderActionField^ pRemoveParkedOrderAction, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯±¨µ¥
-		/// </summary>
-		int ReqQryOrder(ThostFtdcQryOrderField^ pQryOrder, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯³É½»
-		/// </summary>
-		int ReqQryTrade(ThostFtdcQryTradeField^ pQryTrade, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²Ö
-		/// </summary>
-		int ReqQryInvestorPosition(ThostFtdcQryInvestorPositionField^ pQryInvestorPosition, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯×Ê½ğÕË»§
-		/// </summary>
-		int ReqQryTradingAccount(ThostFtdcQryTradingAccountField^ pQryTradingAccount, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯Í¶×ÊÕß
-		/// </summary>
-		int ReqQryInvestor(ThostFtdcQryInvestorField^ pQryInvestor, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯½»Ò×±àÂë
-		/// </summary>
-		int ReqQryTradingCode(ThostFtdcQryTradingCodeField^ pQryTradingCode, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯ºÏÔ¼±£Ö¤½ğÂÊ
-		/// </summary>
-		int ReqQryInstrumentMarginRate(ThostFtdcQryInstrumentMarginRateField^ pQryInstrumentMarginRate, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯ºÏÔ¼ÊÖĞø·ÑÂÊ
-		/// </summary>
-		int ReqQryInstrumentCommissionRate(ThostFtdcQryInstrumentCommissionRateField^ pQryInstrumentCommissionRate, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯½»Ò×Ëù
-		/// </summary>
-		int ReqQryExchange(ThostFtdcQryExchangeField^ pQryExchange, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯ºÏÔ¼
-		/// </summary>
-		int ReqQryInstrument(ThostFtdcQryInstrumentField^ pQryInstrument, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯ĞĞÇé
-		/// </summary>
-		int ReqQryDepthMarketData(ThostFtdcQryDepthMarketDataField^ pQryDepthMarketData, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯Í¶×ÊÕß½áËã½á¹û
-		/// </summary>
-		int ReqQrySettlementInfo(ThostFtdcQrySettlementInfoField^ pQrySettlementInfo, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯×ªÕÊÒøĞĞ
-		/// </summary>
-		int ReqQryTransferBank(ThostFtdcQryTransferBankField^ pQryTransferBank, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸
-		/// </summary>
-		int ReqQryInvestorPositionDetail(ThostFtdcQryInvestorPositionDetailField^ pQryInvestorPositionDetail, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯¿Í»§Í¨Öª
-		/// </summary>
-		int ReqQryNotice(ThostFtdcQryNoticeField^ pQryNotice, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯½áËãĞÅÏ¢È·ÈÏ
-		/// </summary>
-		int ReqQrySettlementInfoConfirm(ThostFtdcQrySettlementInfoConfirmField^ pQrySettlementInfoConfirm, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸
-		/// </summary>
-		int ReqQryInvestorPositionCombineDetail(ThostFtdcQryInvestorPositionCombineDetailField^ pQryInvestorPositionCombineDetail, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯±£Ö¤½ğ¼à¹ÜÏµÍ³¾­¼Í¹«Ë¾×Ê½ğÕË»§ÃÜÔ¿
-		/// </summary>
-		int ReqQryCFMMCTradingAccountKey(ThostFtdcQryCFMMCTradingAccountKeyField^ pQryCFMMCTradingAccountKey, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯²Öµ¥ÕÛµÖĞÅÏ¢
-		/// </summary>
-		int ReqQryEWarrantOffset(ThostFtdcQryEWarrantOffsetField^ pQryEWarrantOffset, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯×ªÕÊÁ÷Ë®
-		/// </summary>
-		int ReqQryTransferSerial(ThostFtdcQryTransferSerialField^ pQryTransferSerial, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯ÒøÆÚÇ©Ô¼¹ØÏµ
-		/// </summary>
-		int ReqQryAccountregister(ThostFtdcQryAccountregisterField^ pQryAccountregister, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯Ç©Ô¼ÒøĞĞ
-		/// </summary>
-		int ReqQryContractBank(ThostFtdcQryContractBankField^ pQryContractBank, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯Ô¤Âñµ¥
-		/// </summary>
-		int ReqQryParkedOrder(ThostFtdcQryParkedOrderField^ pQryParkedOrder, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯Ô¤Âñ³·µ¥
-		/// </summary>
-		int ReqQryParkedOrderAction(ThostFtdcQryParkedOrderActionField^ pQryParkedOrderAction, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯½»Ò×Í¨Öª
-		/// </summary>
-		int ReqQryTradingNotice(ThostFtdcQryTradingNoticeField^ pQryTradingNotice, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯¾­¼Í¹«Ë¾½»Ò×²ÎÊı
-		/// </summary>
-		int ReqQryBrokerTradingParams(ThostFtdcQryBrokerTradingParamsField^ pQryBrokerTradingParams, int nRequestID);
-
-		/// <summary>
-		///ÇëÇó²éÑ¯¾­¼Í¹«Ë¾½»Ò×Ëã·¨
-		/// </summary>
-		int ReqQryBrokerTradingAlgos(ThostFtdcQryBrokerTradingAlgosField^ pQryBrokerTradingAlgos, int nRequestID);
-
-		/// <summary>
-		///ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÇëÇó
-		/// </summary>
-		int ReqFromBankToFutureByFuture(ThostFtdcReqTransferField^ pReqTransfer, int nRequestID);
-
-		/// <summary>
-		///ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÇëÇó
-		/// </summary>
-		int ReqFromFutureToBankByFuture(ThostFtdcReqTransferField^ pReqTransfer, int nRequestID);
-
-		/// <summary>
-		///ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶îÇëÇó
-		/// </summary>
-		int ReqQueryBankAccountMoneyByFuture(ThostFtdcReqQueryAccountField^ pReqQueryAccount, int nRequestID);
 
 		// events
 	public:
 		/// <summary>
-		/// µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨½¨Á¢ÆğÍ¨ĞÅÁ¬½ÓÊ±£¨»¹Î´µÇÂ¼Ç°£©£¬¸Ã·½·¨±»µ÷ÓÃ¡£
+		/// å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°å»ºç«‹èµ·é€šä¿¡è¿æ¥æ—¶ï¼ˆè¿˜æœªç™»å½•å‰ï¼‰ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚
 		/// </summary>
 		event FrontConnected^ OnFrontConnected {
-			void add(FrontConnected^ handler) {
+			void add(FrontConnected^ handler ) {
 				FrontConnected_delegate += handler;
 			}
 			void remove(FrontConnected^ handler) {
 				FrontConnected_delegate -= handler;
 			}
 			void raise() {
-				if (FrontConnected_delegate)
+				if(FrontConnected_delegate)
 					FrontConnected_delegate();
 			}
 		}
 
 		/// <summary>
-		/// µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨Í¨ĞÅÁ¬½Ó¶Ï¿ªÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£µ±·¢ÉúÕâ¸öÇé¿öºó£¬API»á×Ô¶¯ÖØĞÂÁ¬½Ó£¬¿Í»§¶Ë¿É²»×ö´¦Àí¡£
-		/// ´íÎóÔ­Òò
-		/// 0x1001 ÍøÂç¶ÁÊ§°Ü
-		/// 0x1002 ÍøÂçĞ´Ê§°Ü
-		/// 0x2001 ½ÓÊÕĞÄÌø³¬Ê±
-		/// 0x2002 ·¢ËÍĞÄÌøÊ§°Ü
-		/// 0x2003 ÊÕµ½´íÎó±¨ÎÄ
+		/// å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°é€šä¿¡è¿æ¥æ–­å¼€æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚å½“å‘ç”Ÿè¿™ä¸ªæƒ…å†µåï¼ŒAPIä¼šè‡ªåŠ¨é‡æ–°è¿æ¥ï¼Œå®¢æˆ·ç«¯å¯ä¸åšå¤„ç†ã€‚
+		/// é”™è¯¯åŸå› 
+		/// 0x1001 ç½‘ç»œè¯»å¤±è´¥
+		/// 0x1002 ç½‘ç»œå†™å¤±è´¥
+		/// 0x2001 æ¥æ”¶å¿ƒè·³è¶…æ—¶
+		/// 0x2002 å‘é€å¿ƒè·³å¤±è´¥
+		/// 0x2003 æ”¶åˆ°é”™è¯¯æŠ¥æ–‡
 		/// </summary>
 		event FrontDisconnected^ OnFrontDisconnected {
-			void add(FrontDisconnected^ handler) {
+			void add(FrontDisconnected^ handler ) {
 				FrontDisconnected_delegate += handler;
 			}
 			void remove(FrontDisconnected^ handler) {
 				FrontDisconnected_delegate -= handler;
 			}
 			void raise(int nReason) {
-				if (FrontDisconnected_delegate)
+				if(FrontDisconnected_delegate)
 					FrontDisconnected_delegate(nReason);
 			}
 		}
 
 		/// <summary>
-		///ĞÄÌø³¬Ê±¾¯¸æ¡£µ±³¤Ê±¼äÎ´ÊÕµ½±¨ÎÄÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£
-		///@param nTimeLapse ¾àÀëÉÏ´Î½ÓÊÕ±¨ÎÄµÄÊ±¼ä
+		///å¿ƒè·³è¶…æ—¶è­¦å‘Šã€‚å½“é•¿æ—¶é—´æœªæ”¶åˆ°æŠ¥æ–‡æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚
+		///@param nTimeLapse è·ç¦»ä¸Šæ¬¡æ¥æ”¶æŠ¥æ–‡çš„æ—¶é—´
 		/// </summary>
 		event HeartBeatWarning^ OnHeartBeatWarning {
-			void add(HeartBeatWarning^ handler) {
+			void add(HeartBeatWarning^ handler ) {
 				HeartBeatWarning_delegate += handler;
 			}
 			void remove(HeartBeatWarning^ handler) {
 				HeartBeatWarning_delegate -= handler;
 			}
 			void raise(int nTimeLapse) {
-				if (HeartBeatWarning_delegate)
+				if(HeartBeatWarning_delegate)
 					HeartBeatWarning_delegate(nTimeLapse);
 			}
 		}
 
 		/// <summary>
-		/// µÇÂ¼ÇëÇóÏìÓ¦
+		/// ç™»å½•è¯·æ±‚å“åº”
 		/// </summary>
 		event RspUserLogin^ OnRspUserLogin {
-			void add(RspUserLogin^ handler) {
+			void add(RspUserLogin^ handler ) {
 				RspUserLogin_delegate += handler;
 			}
 			void remove(RspUserLogin^ handler) {
 				RspUserLogin_delegate -= handler;
 			}
-			void raise(ThostFtdcRspUserLoginField^ pRspUserLogin, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspUserLogin_delegate)
+			void raise(ThostFtdcRspUserLoginField^ pRspUserLogin, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
+				if(RspUserLogin_delegate)
 					RspUserLogin_delegate(pRspUserLogin, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// µÇ³öÇëÇóÏìÓ¦
+		/// ç™»å‡ºè¯·æ±‚å“åº”
 		/// </summary>
 		event RspUserLogout^ OnRspUserLogout {
-			void add(RspUserLogout^ handler) { RspUserLogout_delegate += handler; }
-			void remove(RspUserLogout^ handler) { RspUserLogout_delegate -= handler; }
-			void raise(ThostFtdcUserLogoutField^ pUserLogout, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspUserLogout_delegate) RspUserLogout_delegate(pUserLogout, pRspInfo, nRequestID, bIsLast);
-			}
+			void add(RspUserLogout^ handler ) {RspUserLogout_delegate += handler;}
+			void remove(RspUserLogout^ handler) {RspUserLogout_delegate -= handler;}
+			void raise(ThostFtdcUserLogoutField^ pUserLogout, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { 
+				if(RspUserLogout_delegate) RspUserLogout_delegate(pUserLogout, pRspInfo, nRequestID, bIsLast); }
 		}
 
 
 		/// <summary>
-		/// ¿Í»§¶ËÈÏÖ¤ÏìÓ¦
+		/// å®¢æˆ·ç«¯è®¤è¯å“åº”
 		/// </summary>
-		event RspAuthenticate^ OnRspAuthenticate {
+		event RspAuthenticate^ OnRspAuthenticate{
 			void add(RspAuthenticate^ handler) { RspAuthenticate_delegate += handler; }
 			void remove(RspAuthenticate^ handler) { RspAuthenticate_delegate -= handler; }
 			void raise(ThostFtdcRspAuthenticateField^ pRspAuthenticateField, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspAuthenticate_delegate) RspAuthenticate_delegate(pRspAuthenticateField, pRspInfo, nRequestID, bIsLast);
+				if(RspAuthenticate_delegate) RspAuthenticate_delegate(pRspAuthenticateField, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// ÓÃ»§¿ÚÁî¸üĞÂÇëÇóÏìÓ¦
+		/// ç”¨æˆ·å£ä»¤æ›´æ–°è¯·æ±‚å“åº”
 		/// </summary>
-		event RspUserPasswordUpdate^ OnRspUserPasswordUpdate {
+		event RspUserPasswordUpdate^ OnRspUserPasswordUpdate{
 			void add(RspUserPasswordUpdate^ handler) { RspUserPasswordUpdate_delegate += handler; }
 			void remove(RspUserPasswordUpdate^ handler) { RspUserPasswordUpdate_delegate -= handler; }
 			void raise(ThostFtdcUserPasswordUpdateField^ pUserPasswordUpdate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspUserPasswordUpdate_delegate) RspUserPasswordUpdate_delegate(pUserPasswordUpdate, pRspInfo, nRequestID, bIsLast);
+				if(RspUserPasswordUpdate_delegate) RspUserPasswordUpdate_delegate(pUserPasswordUpdate, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// ×Ê½ğÕË»§¿ÚÁî¸üĞÂÇëÇóÏìÓ¦
+		/// èµ„é‡‘è´¦æˆ·å£ä»¤æ›´æ–°è¯·æ±‚å“åº”
 		/// </summary>
-		event RspTradingAccountPasswordUpdate^ OnRspTradingAccountPasswordUpdate {
+		event RspTradingAccountPasswordUpdate^ OnRspTradingAccountPasswordUpdate{
 			void add(RspTradingAccountPasswordUpdate^ handler) { RspTradingAccountPasswordUpdate_delegate += handler; }
 			void remove(RspTradingAccountPasswordUpdate^ handler) { RspTradingAccountPasswordUpdate_delegate -= handler; }
 			void raise(ThostFtdcTradingAccountPasswordUpdateField^ pTradingAccountPasswordUpdate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspTradingAccountPasswordUpdate_delegate) RspTradingAccountPasswordUpdate_delegate(pTradingAccountPasswordUpdate, pRspInfo, nRequestID, bIsLast);
+				if(RspTradingAccountPasswordUpdate_delegate) RspTradingAccountPasswordUpdate_delegate(pTradingAccountPasswordUpdate, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// ±¨µ¥Â¼ÈëÇëÇóÏìÓ¦
+		/// æŠ¥å•å½•å…¥è¯·æ±‚å“åº”
 		/// </summary>
-		event RspOrderInsert^ OnRspOrderInsert {
+		event RspOrderInsert^ OnRspOrderInsert{
 			void add(RspOrderInsert^ handler) { RspOrderInsert_delegate += handler; }
 			void remove(RspOrderInsert^ handler) { RspOrderInsert_delegate -= handler; }
 			void raise(ThostFtdcInputOrderField^ pInputOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspOrderInsert_delegate) RspOrderInsert_delegate(pInputOrder, pRspInfo, nRequestID, bIsLast);
+				if(RspOrderInsert_delegate) RspOrderInsert_delegate(pInputOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// Ô¤Âñµ¥Â¼ÈëÇëÇóÏìÓ¦
+		/// é¢„åŸ‹å•å½•å…¥è¯·æ±‚å“åº”
 		/// </summary>
-		event RspParkedOrderInsert^ OnRspParkedOrderInsert {
+		event RspParkedOrderInsert^ OnRspParkedOrderInsert{
 			void add(RspParkedOrderInsert^ handler) { RspParkedOrderInsert_delegate += handler; }
 			void remove(RspParkedOrderInsert^ handler) { RspParkedOrderInsert_delegate -= handler; }
 			void raise(ThostFtdcParkedOrderField^ pParkedOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspParkedOrderInsert_delegate) RspParkedOrderInsert_delegate(pParkedOrder, pRspInfo, nRequestID, bIsLast);
+				if(RspParkedOrderInsert_delegate) RspParkedOrderInsert_delegate(pParkedOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// Ô¤Âñ³·µ¥Â¼ÈëÇëÇóÏìÓ¦
+		/// é¢„åŸ‹æ’¤å•å½•å…¥è¯·æ±‚å“åº”
 		/// </summary>
-		event RspParkedOrderAction^ OnRspParkedOrderAction {
+		event RspParkedOrderAction^ OnRspParkedOrderAction{
 			void add(RspParkedOrderAction^ handler) { RspParkedOrderAction_delegate += handler; }
 			void remove(RspParkedOrderAction^ handler) { RspParkedOrderAction_delegate -= handler; }
 			void raise(ThostFtdcParkedOrderActionField^ pParkedOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspParkedOrderAction_delegate) RspParkedOrderAction_delegate(pParkedOrderAction, pRspInfo, nRequestID, bIsLast);
+				if(RspParkedOrderAction_delegate) RspParkedOrderAction_delegate(pParkedOrderAction, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// ±¨µ¥²Ù×÷ÇëÇóÏìÓ¦
+		/// æŠ¥å•æ“ä½œè¯·æ±‚å“åº”
 		/// </summary>
-		event RspOrderAction^ OnRspOrderAction {
+		event RspOrderAction^ OnRspOrderAction{
 			void add(RspOrderAction^ handler) { RspOrderAction_delegate += handler; }
 			void remove(RspOrderAction^ handler) { RspOrderAction_delegate -= handler; }
 			void raise(ThostFtdcInputOrderActionField^ pInputOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspOrderAction_delegate) RspOrderAction_delegate(pInputOrderAction, pRspInfo, nRequestID, bIsLast);
+				if(RspOrderAction_delegate) RspOrderAction_delegate(pInputOrderAction, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// ²éÑ¯×î´ó±¨µ¥ÊıÁ¿ÏìÓ¦
+		/// æŸ¥è¯¢æœ€å¤§æŠ¥å•æ•°é‡å“åº”
 		/// </summary>
-		event RspQueryMaxOrderVolume^ OnRspQueryMaxOrderVolume {
+		event RspQueryMaxOrderVolume^ OnRspQueryMaxOrderVolume{
 			void add(RspQueryMaxOrderVolume^ handler) { RspQueryMaxOrderVolume_delegate += handler; }
 			void remove(RspQueryMaxOrderVolume^ handler) { RspQueryMaxOrderVolume_delegate -= handler; }
 			void raise(ThostFtdcQueryMaxOrderVolumeField^ pQueryMaxOrderVolume, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQueryMaxOrderVolume_delegate) RspQueryMaxOrderVolume_delegate(pQueryMaxOrderVolume, pRspInfo, nRequestID, bIsLast);
+				if(RspQueryMaxOrderVolume_delegate) RspQueryMaxOrderVolume_delegate(pQueryMaxOrderVolume, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// Í¶×ÊÕß½áËã½á¹ûÈ·ÈÏÏìÓ¦
+		/// æŠ•èµ„è€…ç»“ç®—ç»“æœç¡®è®¤å“åº”
 		/// </summary>
-		event RspSettlementInfoConfirm^ OnRspSettlementInfoConfirm {
+		event RspSettlementInfoConfirm^ OnRspSettlementInfoConfirm{
 			void add(RspSettlementInfoConfirm^ handler) { RspSettlementInfoConfirm_delegate += handler; }
 			void remove(RspSettlementInfoConfirm^ handler) { RspSettlementInfoConfirm_delegate -= handler; }
 			void raise(ThostFtdcSettlementInfoConfirmField^ pSettlementInfoConfirm, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspSettlementInfoConfirm_delegate) RspSettlementInfoConfirm_delegate(pSettlementInfoConfirm, pRspInfo, nRequestID, bIsLast);
+				if(RspSettlementInfoConfirm_delegate) RspSettlementInfoConfirm_delegate(pSettlementInfoConfirm, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// É¾³ıÔ¤Âñµ¥ÏìÓ¦
+		/// åˆ é™¤é¢„åŸ‹å•å“åº”
 		/// </summary>
-		event RspRemoveParkedOrder^ OnRspRemoveParkedOrder {
+		event RspRemoveParkedOrder^ OnRspRemoveParkedOrder{
 			void add(RspRemoveParkedOrder^ handler) { RspRemoveParkedOrder_delegate += handler; }
 			void remove(RspRemoveParkedOrder^ handler) { RspRemoveParkedOrder_delegate -= handler; }
 			void raise(ThostFtdcRemoveParkedOrderField^ pRemoveParkedOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspRemoveParkedOrder_delegate) RspRemoveParkedOrder_delegate(pRemoveParkedOrder, pRspInfo, nRequestID, bIsLast);
+				if(RspRemoveParkedOrder_delegate) RspRemoveParkedOrder_delegate(pRemoveParkedOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// É¾³ıÔ¤Âñ³·µ¥ÏìÓ¦
+		/// åˆ é™¤é¢„åŸ‹æ’¤å•å“åº”
 		/// </summary>
-		event RspRemoveParkedOrderAction^ OnRspRemoveParkedOrderAction {
+		event RspRemoveParkedOrderAction^ OnRspRemoveParkedOrderAction{
 			void add(RspRemoveParkedOrderAction^ handler) { RspRemoveParkedOrderAction_delegate += handler; }
 			void remove(RspRemoveParkedOrderAction^ handler) { RspRemoveParkedOrderAction_delegate -= handler; }
 			void raise(ThostFtdcRemoveParkedOrderActionField^ pRemoveParkedOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspRemoveParkedOrderAction_delegate) RspRemoveParkedOrderAction_delegate(pRemoveParkedOrderAction, pRspInfo, nRequestID, bIsLast);
+				if(RspRemoveParkedOrderAction_delegate) RspRemoveParkedOrderAction_delegate(pRemoveParkedOrderAction, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯±¨µ¥ÏìÓ¦
+		/// æ‰§è¡Œå®£å‘Šå½•å…¥è¯·æ±‚å“åº”
 		/// </summary>
-		event RspQryOrder^ OnRspQryOrder {
+		event RspExecOrderInsert^ OnRspExecOrderInsert {
+			void add(RspExecOrderInsert^ handler) { RspExecOrderInsert_delegate += handler; }
+			void remove(RspExecOrderInsert^ handler) { RspExecOrderInsert_delegate -= handler; }
+			void raise(ThostFtdcInputExecOrderField^ pInputExecOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspExecOrderInsert_delegate) RspExecOrderInsert_delegate(pInputExecOrder, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// æ‰§è¡Œå®£å‘Šæ“ä½œè¯·æ±‚å“åº”
+		/// </summary>
+		event RspExecOrderAction^ OnRspExecOrderAction {
+			void add(RspExecOrderAction^ handler) { RspExecOrderAction_delegate += handler; }
+			void remove(RspExecOrderAction^ handler) { RspExecOrderAction_delegate -= handler; }
+			void raise(ThostFtdcInputExecOrderActionField^ pInputExecOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspExecOrderAction_delegate) RspExecOrderAction_delegate(pInputExecOrderAction, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯¢ä»·å½•å…¥è¯·æ±‚å“åº”
+		/// </summary>
+		event RspForQuoteInsert^ OnRspForQuoteInsert {
+			void add(RspForQuoteInsert^ handler) { RspForQuoteInsert_delegate += handler; }
+			void remove(RspForQuoteInsert^ handler) { RspForQuoteInsert_delegate -= handler; }
+			void raise(ThostFtdcInputForQuoteField^ pInputForQuote, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspForQuoteInsert_delegate) RspForQuoteInsert_delegate(pInputForQuote, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// æŠ¥ä»·å½•å…¥è¯·æ±‚å“åº”
+		/// </summary>
+		event RspQuoteInsert^ OnRspQuoteInsert {
+			void add(RspQuoteInsert^ handler) { RspQuoteInsert_delegate += handler; }
+			void remove(RspQuoteInsert^ handler) { RspQuoteInsert_delegate -= handler; }
+			void raise(ThostFtdcInputQuoteField^ pInputQuote, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQuoteInsert_delegate) RspQuoteInsert_delegate(pInputQuote, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// æŠ¥ä»·æ“ä½œè¯·æ±‚å“åº”
+		/// </summary>
+		event RspQuoteAction^ OnRspQuoteAction {
+			void add(RspQuoteAction^ handler) { RspQuoteAction_delegate += handler; }
+			void remove(RspQuoteAction^ handler) { RspQuoteAction_delegate -= handler; }
+			void raise(ThostFtdcInputQuoteActionField^ pInputQuoteAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQuoteAction_delegate) RspQuoteAction_delegate(pInputQuoteAction, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// æŠ¥ä»·æ“ä½œè¯·æ±‚å“åº”
+		/// </summary>
+		event RspBatchOrderAction^ OnRspBatchOrderAction {
+			void add(RspBatchOrderAction^ handler) { RspBatchOrderAction_delegate += handler; }
+			void remove(RspBatchOrderAction^ handler) { RspBatchOrderAction_delegate -= handler; }
+			void raise(ThostFtdcInputBatchOrderActionField^ pInputBatchOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspBatchOrderAction_delegate) RspBatchOrderAction_delegate(pInputBatchOrderAction, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// ç”³è¯·ç»„åˆå½•å…¥è¯·æ±‚å“åº”
+		/// </summary>
+		event RspCombActionInsert^ OnRspCombActionInsert {
+			void add(RspCombActionInsert^ handler) { RspCombActionInsert_delegate += handler; }
+			void remove(RspCombActionInsert^ handler) { RspCombActionInsert_delegate -= handler; }
+			void raise(ThostFtdcInputCombActionField^ pInputCombAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspCombActionInsert_delegate) RspCombActionInsert_delegate(pInputCombAction, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢æŠ¥å•å“åº”
+		/// </summary>
+		event RspQryOrder^ OnRspQryOrder{
 			void add(RspQryOrder^ handler) { RspQryOrder_delegate += handler; }
 			void remove(RspQryOrder^ handler) { RspQryOrder_delegate -= handler; }
 			void raise(ThostFtdcOrderField^ pOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryOrder_delegate) RspQryOrder_delegate(pOrder, pRspInfo, nRequestID, bIsLast);
+				if(RspQryOrder_delegate) RspQryOrder_delegate(pOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯³É½»ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢æˆäº¤å“åº”
 		/// </summary>
-		event RspQryTrade^ OnRspQryTrade {
+		event RspQryTrade^ OnRspQryTrade{
 			void add(RspQryTrade^ handler) { RspQryTrade_delegate += handler; }
 			void remove(RspQryTrade^ handler) { RspQryTrade_delegate -= handler; }
 			void raise(ThostFtdcTradeField^ pTrade, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryTrade_delegate) RspQryTrade_delegate(pTrade, pRspInfo, nRequestID, bIsLast);
+				if(RspQryTrade_delegate) RspQryTrade_delegate(pTrade, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æŒä»“å“åº”
 		/// </summary>
-		event RspQryInvestorPosition^ OnRspQryInvestorPosition {
+		event RspQryInvestorPosition^ OnRspQryInvestorPosition{
 			void add(RspQryInvestorPosition^ handler) { RspQryInvestorPosition_delegate += handler; }
 			void remove(RspQryInvestorPosition^ handler) { RspQryInvestorPosition_delegate -= handler; }
 			void raise(ThostFtdcInvestorPositionField^ pInvestorPosition, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryInvestorPosition_delegate) RspQryInvestorPosition_delegate(pInvestorPosition, pRspInfo, nRequestID, bIsLast);
+				if(RspQryInvestorPosition_delegate) RspQryInvestorPosition_delegate(pInvestorPosition, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯×Ê½ğÕË»§ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢èµ„é‡‘è´¦æˆ·å“åº”
 		/// </summary>
-		event RspQryTradingAccount^ OnRspQryTradingAccount {
+		event RspQryTradingAccount^ OnRspQryTradingAccount{
 			void add(RspQryTradingAccount^ handler) { RspQryTradingAccount_delegate += handler; }
 			void remove(RspQryTradingAccount^ handler) { RspQryTradingAccount_delegate -= handler; }
 			void raise(ThostFtdcTradingAccountField^ pTradingAccount, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryTradingAccount_delegate) RspQryTradingAccount_delegate(pTradingAccount, pRspInfo, nRequestID, bIsLast);
+				if(RspQryTradingAccount_delegate) RspQryTradingAccount_delegate(pTradingAccount, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯Í¶×ÊÕßÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…å“åº”
 		/// </summary>
-		event RspQryInvestor^ OnRspQryInvestor {
+		event RspQryInvestor^ OnRspQryInvestor{
 			void add(RspQryInvestor^ handler) { RspQryInvestor_delegate += handler; }
 			void remove(RspQryInvestor^ handler) { RspQryInvestor_delegate -= handler; }
 			void raise(ThostFtdcInvestorField^ pInvestor, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryInvestor_delegate) RspQryInvestor_delegate(pInvestor, pRspInfo, nRequestID, bIsLast);
+				if(RspQryInvestor_delegate) RspQryInvestor_delegate(pInvestor, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯½»Ò×±àÂëÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢äº¤æ˜“ç¼–ç å“åº”
 		/// </summary>
-		event RspQryTradingCode^ OnRspQryTradingCode {
+		event RspQryTradingCode^ OnRspQryTradingCode{
 			void add(RspQryTradingCode^ handler) { RspQryTradingCode_delegate += handler; }
 			void remove(RspQryTradingCode^ handler) { RspQryTradingCode_delegate -= handler; }
 			void raise(ThostFtdcTradingCodeField^ pTradingCode, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryTradingCode_delegate) RspQryTradingCode_delegate(pTradingCode, pRspInfo, nRequestID, bIsLast);
+				if(RspQryTradingCode_delegate) RspQryTradingCode_delegate(pTradingCode, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯ºÏÔ¼±£Ö¤½ğÂÊÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢åˆçº¦ä¿è¯é‡‘ç‡å“åº”
 		/// </summary>
-		event RspQryInstrumentMarginRate^ OnRspQryInstrumentMarginRate {
+		event RspQryInstrumentMarginRate^ OnRspQryInstrumentMarginRate{
 			void add(RspQryInstrumentMarginRate^ handler) { RspQryInstrumentMarginRate_delegate += handler; }
 			void remove(RspQryInstrumentMarginRate^ handler) { RspQryInstrumentMarginRate_delegate -= handler; }
 			void raise(ThostFtdcInstrumentMarginRateField^ pInstrumentMarginRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryInstrumentMarginRate_delegate) RspQryInstrumentMarginRate_delegate(pInstrumentMarginRate, pRspInfo, nRequestID, bIsLast);
+				if(RspQryInstrumentMarginRate_delegate) RspQryInstrumentMarginRate_delegate(pInstrumentMarginRate, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯ºÏÔ¼ÊÖĞø·ÑÂÊÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢åˆçº¦æ‰‹ç»­è´¹ç‡å“åº”
 		/// </summary>
-		event RspQryInstrumentCommissionRate^ OnRspQryInstrumentCommissionRate {
+		event RspQryInstrumentCommissionRate^ OnRspQryInstrumentCommissionRate{
 			void add(RspQryInstrumentCommissionRate^ handler) { RspQryInstrumentCommissionRate_delegate += handler; }
 			void remove(RspQryInstrumentCommissionRate^ handler) { RspQryInstrumentCommissionRate_delegate -= handler; }
 			void raise(ThostFtdcInstrumentCommissionRateField^ pInstrumentCommissionRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryInstrumentCommissionRate_delegate) RspQryInstrumentCommissionRate_delegate(pInstrumentCommissionRate, pRspInfo, nRequestID, bIsLast);
+				if(RspQryInstrumentCommissionRate_delegate) RspQryInstrumentCommissionRate_delegate(pInstrumentCommissionRate, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯½»Ò×ËùÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€å“åº”
 		/// </summary>
-		event RspQryExchange^ OnRspQryExchange {
+		event RspQryExchange^ OnRspQryExchange{
 			void add(RspQryExchange^ handler) { RspQryExchange_delegate += handler; }
 			void remove(RspQryExchange^ handler) { RspQryExchange_delegate -= handler; }
 			void raise(ThostFtdcExchangeField^ pExchange, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryExchange_delegate) RspQryExchange_delegate(pExchange, pRspInfo, nRequestID, bIsLast);
+				if(RspQryExchange_delegate) RspQryExchange_delegate(pExchange, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯ºÏÔ¼ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢äº§å“å“åº”
 		/// </summary>
-		event RspQryInstrument^ OnRspQryInstrument {
+		event RspQryProduct^ OnRspQryProduct{
+			void add(RspQryProduct^ handler) { RspQryProduct_delegate += handler; }
+			void remove(RspQryProduct^ handler) { RspQryProduct_delegate -= handler; }
+			void raise(ThostFtdcProductField^ pProduct, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryProduct_delegate) RspQryProduct_delegate(pProduct, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢åˆçº¦å“åº”
+		/// </summary>
+		event RspQryInstrument^ OnRspQryInstrument{
 			void add(RspQryInstrument^ handler) { RspQryInstrument_delegate += handler; }
 			void remove(RspQryInstrument^ handler) { RspQryInstrument_delegate -= handler; }
 			void raise(ThostFtdcInstrumentField^ pInstrument, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryInstrument_delegate) RspQryInstrument_delegate(pInstrument, pRspInfo, nRequestID, bIsLast);
+				if(RspQryInstrument_delegate) RspQryInstrument_delegate(pInstrument, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯ĞĞÇéÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢è¡Œæƒ…å“åº”
 		/// </summary>
-		event RspQryDepthMarketData^ OnRspQryDepthMarketData {
+		event RspQryDepthMarketData^ OnRspQryDepthMarketData{
 			void add(RspQryDepthMarketData^ handler) { RspQryDepthMarketData_delegate += handler; }
 			void remove(RspQryDepthMarketData^ handler) { RspQryDepthMarketData_delegate -= handler; }
 			void raise(ThostFtdcDepthMarketDataField^ pDepthMarketData, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryDepthMarketData_delegate) RspQryDepthMarketData_delegate(pDepthMarketData, pRspInfo, nRequestID, bIsLast);
+				if(RspQryDepthMarketData_delegate) RspQryDepthMarketData_delegate(pDepthMarketData, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯Í¶×ÊÕß½áËã½á¹ûÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…ç»“ç®—ç»“æœå“åº”
 		/// </summary>
-		event RspQrySettlementInfo^ OnRspQrySettlementInfo {
+		event RspQrySettlementInfo^ OnRspQrySettlementInfo{
 			void add(RspQrySettlementInfo^ handler) { RspQrySettlementInfo_delegate += handler; }
 			void remove(RspQrySettlementInfo^ handler) { RspQrySettlementInfo_delegate -= handler; }
 			void raise(ThostFtdcSettlementInfoField^ pSettlementInfo, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQrySettlementInfo_delegate) RspQrySettlementInfo_delegate(pSettlementInfo, pRspInfo, nRequestID, bIsLast);
+				if(RspQrySettlementInfo_delegate) RspQrySettlementInfo_delegate(pSettlementInfo, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯×ªÕÊÒøĞĞÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢è½¬å¸é“¶è¡Œå“åº”
 		/// </summary>
-		event RspQryTransferBank^ OnRspQryTransferBank {
+		event RspQryTransferBank^ OnRspQryTransferBank{
 			void add(RspQryTransferBank^ handler) { RspQryTransferBank_delegate += handler; }
 			void remove(RspQryTransferBank^ handler) { RspQryTransferBank_delegate -= handler; }
 			void raise(ThostFtdcTransferBankField^ pTransferBank, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryTransferBank_delegate) RspQryTransferBank_delegate(pTransferBank, pRspInfo, nRequestID, bIsLast);
+				if(RspQryTransferBank_delegate) RspQryTransferBank_delegate(pTransferBank, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æŒä»“æ˜ç»†å“åº”
 		/// </summary>
-		event RspQryInvestorPositionDetail^ OnRspQryInvestorPositionDetail {
+		event RspQryInvestorPositionDetail^ OnRspQryInvestorPositionDetail{
 			void add(RspQryInvestorPositionDetail^ handler) { RspQryInvestorPositionDetail_delegate += handler; }
 			void remove(RspQryInvestorPositionDetail^ handler) { RspQryInvestorPositionDetail_delegate -= handler; }
 			void raise(ThostFtdcInvestorPositionDetailField^ pInvestorPositionDetail, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryInvestorPositionDetail_delegate) RspQryInvestorPositionDetail_delegate(pInvestorPositionDetail, pRspInfo, nRequestID, bIsLast);
+				if(RspQryInvestorPositionDetail_delegate) RspQryInvestorPositionDetail_delegate(pInvestorPositionDetail, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯¿Í»§Í¨ÖªÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢å®¢æˆ·é€šçŸ¥å“åº”
 		/// </summary>
-		event RspQryNotice^ OnRspQryNotice {
+		event RspQryNotice^ OnRspQryNotice{
 			void add(RspQryNotice^ handler) { RspQryNotice_delegate += handler; }
 			void remove(RspQryNotice^ handler) { RspQryNotice_delegate -= handler; }
 			void raise(ThostFtdcNoticeField^ pNotice, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryNotice_delegate) RspQryNotice_delegate(pNotice, pRspInfo, nRequestID, bIsLast);
+				if(RspQryNotice_delegate) RspQryNotice_delegate(pNotice, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯½áËãĞÅÏ¢È·ÈÏÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢ç»“ç®—ä¿¡æ¯ç¡®è®¤å“åº”
 		/// </summary>
-		event RspQrySettlementInfoConfirm^ OnRspQrySettlementInfoConfirm {
+		event RspQrySettlementInfoConfirm^ OnRspQrySettlementInfoConfirm{
 			void add(RspQrySettlementInfoConfirm^ handler) { RspQrySettlementInfoConfirm_delegate += handler; }
 			void remove(RspQrySettlementInfoConfirm^ handler) { RspQrySettlementInfoConfirm_delegate -= handler; }
 			void raise(ThostFtdcSettlementInfoConfirmField^ pSettlementInfoConfirm, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQrySettlementInfoConfirm_delegate) RspQrySettlementInfoConfirm_delegate(pSettlementInfoConfirm, pRspInfo, nRequestID, bIsLast);
+				if(RspQrySettlementInfoConfirm_delegate) RspQrySettlementInfoConfirm_delegate(pSettlementInfoConfirm, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æŒä»“æ˜ç»†å“åº”
 		/// </summary>
-		event RspQryInvestorPositionCombineDetail^ OnRspQryInvestorPositionCombineDetail {
+		event RspQryInvestorPositionCombineDetail^ OnRspQryInvestorPositionCombineDetail{
 			void add(RspQryInvestorPositionCombineDetail^ handler) { RspQryInvestorPositionCombineDetail_delegate += handler; }
 			void remove(RspQryInvestorPositionCombineDetail^ handler) { RspQryInvestorPositionCombineDetail_delegate -= handler; }
 			void raise(ThostFtdcInvestorPositionCombineDetailField^ pInvestorPositionCombineDetail, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryInvestorPositionCombineDetail_delegate) RspQryInvestorPositionCombineDetail_delegate(pInvestorPositionCombineDetail, pRspInfo, nRequestID, bIsLast);
+				if(RspQryInvestorPositionCombineDetail_delegate) RspQryInvestorPositionCombineDetail_delegate(pInvestorPositionCombineDetail, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ²éÑ¯±£Ö¤½ğ¼à¹ÜÏµÍ³¾­¼Í¹«Ë¾×Ê½ğÕË»§ÃÜÔ¿ÏìÓ¦
+		/// æŸ¥è¯¢ä¿è¯é‡‘ç›‘ç®¡ç³»ç»Ÿç»çºªå…¬å¸èµ„é‡‘è´¦æˆ·å¯†é’¥å“åº”
 		/// </summary>
-		event RspQryCFMMCTradingAccountKey^ OnRspQryCFMMCTradingAccountKey {
+		event RspQryCFMMCTradingAccountKey^ OnRspQryCFMMCTradingAccountKey{
 			void add(RspQryCFMMCTradingAccountKey^ handler) { RspQryCFMMCTradingAccountKey_delegate += handler; }
 			void remove(RspQryCFMMCTradingAccountKey^ handler) { RspQryCFMMCTradingAccountKey_delegate -= handler; }
 			void raise(ThostFtdcCFMMCTradingAccountKeyField^ pCFMMCTradingAccountKey, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryCFMMCTradingAccountKey_delegate) RspQryCFMMCTradingAccountKey_delegate(pCFMMCTradingAccountKey, pRspInfo, nRequestID, bIsLast);
+				if(RspQryCFMMCTradingAccountKey_delegate) RspQryCFMMCTradingAccountKey_delegate(pCFMMCTradingAccountKey, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯²Öµ¥ÕÛµÖĞÅÏ¢ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢ä»“å•æŠ˜æŠµä¿¡æ¯å“åº”
 		/// </summary>
-		event RspQryEWarrantOffset^ OnRspQryEWarrantOffset {
+		event RspQryEWarrantOffset^ OnRspQryEWarrantOffset{
 			void add(RspQryEWarrantOffset^ handler) { RspQryEWarrantOffset_delegate += handler; }
 			void remove(RspQryEWarrantOffset^ handler) { RspQryEWarrantOffset_delegate -= handler; }
 			void raise(ThostFtdcEWarrantOffsetField^ pEWarrantOffset, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryEWarrantOffset_delegate) RspQryEWarrantOffset_delegate(pEWarrantOffset, pRspInfo, nRequestID, bIsLast);
+				if(RspQryEWarrantOffset_delegate) RspQryEWarrantOffset_delegate(pEWarrantOffset, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯×ªÕÊÁ÷Ë®ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…å“ç§/è·¨å“ç§ä¿è¯é‡‘å“åº”
 		/// </summary>
-		event RspQryTransferSerial^ OnRspQryTransferSerial {
+		event RspQryInvestorProductGroupMargin^ OnRspQryInvestorProductGroupMargin{
+			void add(RspQryInvestorProductGroupMargin^ handler) { RspQryInvestorProductGroupMargin_delegate += handler; }
+			void remove(RspQryInvestorProductGroupMargin^ handler) { RspQryInvestorProductGroupMargin_delegate -= handler; }
+			void raise(ThostFtdcInvestorProductGroupMarginField^ pField, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryInvestorProductGroupMargin_delegate) RspQryInvestorProductGroupMargin_delegate(pField, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€ä¿è¯é‡‘ç‡å“åº”
+		/// </summary>
+		event RspQryExchangeMarginRate^ OnRspQryExchangeMarginRate{
+			void add(RspQryExchangeMarginRate^ handler) { RspQryExchangeMarginRate_delegate += handler; }
+			void remove(RspQryExchangeMarginRate^ handler) { RspQryExchangeMarginRate_delegate -= handler; }
+			void raise(ThostFtdcExchangeMarginRateField^ pField, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryExchangeMarginRate_delegate) RspQryExchangeMarginRate_delegate(pField, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€è°ƒæ•´ä¿è¯é‡‘ç‡å“åº”
+		/// </summary>
+		event RspQryExchangeMarginRateAdjust^ OnRspQryExchangeMarginRateAdjust{
+			void add(RspQryExchangeMarginRateAdjust^ handler) { RspQryExchangeMarginRateAdjust_delegate += handler; }
+			void remove(RspQryExchangeMarginRateAdjust^ handler) { RspQryExchangeMarginRateAdjust_delegate -= handler; }
+			void raise(ThostFtdcExchangeMarginRateAdjustField^ pField, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryExchangeMarginRateAdjust_delegate) RspQryExchangeMarginRateAdjust_delegate(pField, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢æ±‡ç‡å“åº”
+		/// </summary>
+		event RspQryExchangeRate^ OnRspQryExchangeRate{
+			void add(RspQryExchangeRate^ handler) { RspQryExchangeRate_delegate += handler; }
+			void remove(RspQryExchangeRate^ handler) { RspQryExchangeRate_delegate -= handler; }
+			void raise(ThostFtdcExchangeRateField^ pField, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryExchangeRate_delegate) RspQryExchangeRate_delegate(pField, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢äºŒçº§ä»£ç†æ“ä½œå‘˜é“¶æœŸæƒé™å“åº”
+		/// </summary>
+		event RspQrySecAgentACIDMap^ OnRspQrySecAgentACIDMap{
+			void add(RspQrySecAgentACIDMap^ handler) { RspQrySecAgentACIDMap_delegate += handler; }
+			void remove(RspQrySecAgentACIDMap^ handler) { RspQrySecAgentACIDMap_delegate -= handler; }
+			void raise(ThostFtdcSecAgentACIDMapField^ pField, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQrySecAgentACIDMap_delegate) RspQrySecAgentACIDMap_delegate(pField, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢äº§å“æŠ¥ä»·æ±‡ç‡
+		/// </summary>
+		event RspQryProductExchRate^ OnRspQryProductExchRate {
+			void add(RspQryProductExchRate^ handler) { RspQryProductExchRate_delegate += handler; }
+			void remove(RspQryProductExchRate^ handler) { RspQryProductExchRate_delegate -= handler; }
+			void raise(ThostFtdcProductExchRateField^ pProductExchRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryProductExchRate_delegate) RspQryProductExchRate_delegate(pProductExchRate, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢äº§å“æŠ¥ä»·æ±‡ç‡
+		/// </summary>
+		event RspQryProductGroup^ OnRspQryProductGroup {
+			void add(RspQryProductGroup^ handler) { RspQryProductGroup_delegate += handler; }
+			void remove(RspQryProductGroup^ handler) { RspQryProductGroup_delegate -= handler; }
+			void raise(ThostFtdcProductGroupField^ pProductGroup, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryProductGroup_delegate) RspQryProductGroup_delegate(pProductGroup, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢åšå¸‚å•†åˆçº¦æ‰‹ç»­è´¹ç‡å“åº”
+		/// </summary>
+		event RspQryMMInstrumentCommissionRate^ OnRspQryMMInstrumentCommissionRate {
+			void add(RspQryMMInstrumentCommissionRate^ handler) { RspQryMMInstrumentCommissionRate_delegate += handler; }
+			void remove(RspQryMMInstrumentCommissionRate^ handler) { RspQryMMInstrumentCommissionRate_delegate -= handler; }
+			void raise(ThostFtdcMMInstrumentCommissionRateField^ pMMInstrumentCommissionRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryProductGroup_delegate) RspQryMMInstrumentCommissionRate_delegate(pMMInstrumentCommissionRate, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢åšå¸‚å•†æœŸæƒåˆçº¦æ‰‹ç»­è´¹å“åº”
+		/// </summary>
+		event RspQryMMOptionInstrCommRate^ OnRspQryMMOptionInstrCommRate {
+			void add(RspQryMMOptionInstrCommRate^ handler) { RspQryMMOptionInstrCommRate_delegate += handler; }
+			void remove(RspQryMMOptionInstrCommRate^ handler) { RspQryMMOptionInstrCommRate_delegate -= handler; }
+			void raise(ThostFtdcMMOptionInstrCommRateField^ pMMOptionInstrCommRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryMMOptionInstrCommRate_delegate) RspQryMMOptionInstrCommRate_delegate(pMMOptionInstrCommRate, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢æŠ¥å•æ‰‹ç»­è´¹å“åº”
+		/// </summary>
+		event RspQryInstrumentOrderCommRate^ OnRspQryInstrumentOrderCommRate {
+			void add(RspQryInstrumentOrderCommRate^ handler) { RspQryInstrumentOrderCommRate_delegate += handler; }
+			void remove(RspQryInstrumentOrderCommRate^ handler) { RspQryInstrumentOrderCommRate_delegate -= handler; }
+			void raise(ThostFtdcInstrumentOrderCommRateField^ pInstrumentOrderCommRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryInstrumentOrderCommRate_delegate) RspQryInstrumentOrderCommRate_delegate(pInstrumentOrderCommRate, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢æœŸæƒäº¤æ˜“æˆæœ¬å“åº”
+		/// </summary>
+		event RspQryOptionInstrTradeCost^ OnRspQryOptionInstrTradeCost {
+			void add(RspQryOptionInstrTradeCost^ handler) { RspQryOptionInstrTradeCost_delegate += handler; }
+			void remove(RspQryOptionInstrTradeCost^ handler) { RspQryOptionInstrTradeCost_delegate -= handler; }
+			void raise(ThostFtdcOptionInstrTradeCostField^ pOptionInstrTradeCost, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryOptionInstrTradeCost_delegate) RspQryOptionInstrTradeCost_delegate(pOptionInstrTradeCost, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢æœŸæƒåˆçº¦æ‰‹ç»­è´¹å“åº”
+		/// </summary>
+		event RspQryOptionInstrCommRate^ OnRspQryOptionInstrCommRate {
+			void add(RspQryOptionInstrCommRate^ handler) { RspQryOptionInstrCommRate_delegate += handler; }
+			void remove(RspQryOptionInstrCommRate^ handler) { RspQryOptionInstrCommRate_delegate -= handler; }
+			void raise(ThostFtdcOptionInstrCommRateField^ pOptionInstrCommRate, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryOptionInstrCommRate_delegate) RspQryOptionInstrCommRate_delegate(pOptionInstrCommRate, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢æ‰§è¡Œå®£å‘Šå“åº”
+		/// </summary>
+		event RspQryExecOrder^ OnRspQryExecOrder {
+			void add(RspQryExecOrder^ handler) { RspQryExecOrder_delegate += handler; }
+			void remove(RspQryExecOrder^ handler) { RspQryExecOrder_delegate -= handler; }
+			void raise(ThostFtdcExecOrderField^ pExecOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryExecOrder_delegate) RspQryExecOrder_delegate(pExecOrder, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢è¯¢ä»·å“åº”
+		/// </summary>
+		event RspQryForQuote^ OnRspQryForQuote {
+			void add(RspQryForQuote^ handler) { RspQryForQuote_delegate += handler; }
+			void remove(RspQryForQuote^ handler) { RspQryForQuote_delegate -= handler; }
+			void raise(ThostFtdcForQuoteField^ pForQuote, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryForQuote_delegate) RspQryForQuote_delegate(pForQuote, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢è¯¢ä»·å“åº”
+		/// </summary>
+		event RspQryCombInstrumentGuard^ OnRspQryCombInstrumentGuard {
+			void add(RspQryCombInstrumentGuard^ handler) { RspQryCombInstrumentGuard_delegate += handler; }
+			void remove(RspQryCombInstrumentGuard^ handler) { RspQryCombInstrumentGuard_delegate -= handler; }
+			void raise(ThostFtdcCombInstrumentGuardField^ pCombInstrumentGuard, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryCombInstrumentGuard_delegate) RspQryCombInstrumentGuard_delegate(pCombInstrumentGuard, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢ç”³è¯·ç»„åˆå“åº”
+		/// </summary>
+		event RspQryCombAction^ OnRspQryCombAction {
+			void add(RspQryCombAction^ handler) { RspQryCombAction_delegate += handler; }
+			void remove(RspQryCombAction^ handler) { RspQryCombAction_delegate -= handler; }
+			void raise(ThostFtdcCombActionField^ pCombAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQryCombAction_delegate) RspQryCombAction_delegate(pCombAction, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢è½¬å¸æµæ°´å“åº”
+		/// </summary>
+		event RspQryTransferSerial^ OnRspQryTransferSerial{
 			void add(RspQryTransferSerial^ handler) { RspQryTransferSerial_delegate += handler; }
 			void remove(RspQryTransferSerial^ handler) { RspQryTransferSerial_delegate -= handler; }
 			void raise(ThostFtdcTransferSerialField^ pTransferSerial, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryTransferSerial_delegate) RspQryTransferSerial_delegate(pTransferSerial, pRspInfo, nRequestID, bIsLast);
+				if(RspQryTransferSerial_delegate) RspQryTransferSerial_delegate(pTransferSerial, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯ÒøÆÚÇ©Ô¼¹ØÏµÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢é“¶æœŸç­¾çº¦å…³ç³»å“åº”
 		/// </summary>
-		event RspQryAccountregister^ OnRspQryAccountregister {
+		event RspQryAccountregister^ OnRspQryAccountregister{
 			void add(RspQryAccountregister^ handler) { RspQryAccountregister_delegate += handler; }
 			void remove(RspQryAccountregister^ handler) { RspQryAccountregister_delegate -= handler; }
 			void raise(ThostFtdcAccountregisterField^ pAccountregister, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryAccountregister_delegate) RspQryAccountregister_delegate(pAccountregister, pRspInfo, nRequestID, bIsLast);
+				if(RspQryAccountregister_delegate) RspQryAccountregister_delegate(pAccountregister, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
 		/// <summary>
-		/// ´íÎóÓ¦´ğ
+		/// é”™è¯¯åº”ç­”
 		/// </summary>
 		event RspError^ OnRspError {
-			void add(RspError^ handler) { RspError_delegate += handler; }
-			void remove(RspError^ handler) { RspError_delegate -= handler; }
-			void raise(ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { if (RspError_delegate) RspError_delegate(pRspInfo, nRequestID, bIsLast); }
+			void add(RspError^ handler ) { RspError_delegate += handler; }
+			void remove(RspError^ handler) {RspError_delegate -= handler; }
+			void raise(ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) { if(RspError_delegate) RspError_delegate(pRspInfo, nRequestID, bIsLast); }
 		}
 		/// <summary>
-		/// ±¨µ¥Í¨Öª
+		/// æŠ¥å•é€šçŸ¥
 		/// </summary>
-		event RtnOrder^ OnRtnOrder {
+		event RtnOrder^ OnRtnOrder{
 			void add(RtnOrder^ handler) { RtnOrder_delegate += handler; }
 			void remove(RtnOrder^ handler) { RtnOrder_delegate -= handler; }
 			void raise(ThostFtdcOrderField^ pOrder) {
-				if (RtnOrder_delegate) RtnOrder_delegate(pOrder);
+				if(RtnOrder_delegate) RtnOrder_delegate(pOrder);
 			}
 		}
 		/// <summary>
-		/// ³É½»Í¨Öª
+		/// æˆäº¤é€šçŸ¥
 		/// </summary>
-		event RtnTrade^ OnRtnTrade {
+		event RtnTrade^ OnRtnTrade{
 			void add(RtnTrade^ handler) { RtnTrade_delegate += handler; }
 			void remove(RtnTrade^ handler) { RtnTrade_delegate -= handler; }
 			void raise(ThostFtdcTradeField^ pTrade) {
-				if (RtnTrade_delegate) RtnTrade_delegate(pTrade);
+				if(RtnTrade_delegate) RtnTrade_delegate(pTrade);
 			}
 		}
 		/// <summary>
-		/// ±¨µ¥Â¼Èë´íÎó»Ø±¨
+		/// æŠ¥å•å½•å…¥é”™è¯¯å›æŠ¥
 		/// </summary>
-		event ErrRtnOrderInsert^ OnErrRtnOrderInsert {
+		event ErrRtnOrderInsert^ OnErrRtnOrderInsert{
 			void add(ErrRtnOrderInsert^ handler) { ErrRtnOrderInsert_delegate += handler; }
 			void remove(ErrRtnOrderInsert^ handler) { ErrRtnOrderInsert_delegate -= handler; }
 			void raise(ThostFtdcInputOrderField^ pInputOrder, ThostFtdcRspInfoField^ pRspInfo) {
-				if (ErrRtnOrderInsert_delegate) ErrRtnOrderInsert_delegate(pInputOrder, pRspInfo);
+				if(ErrRtnOrderInsert_delegate) ErrRtnOrderInsert_delegate(pInputOrder, pRspInfo);
 			}
 		}
 		/// <summary>
-		/// ±¨µ¥²Ù×÷´íÎó»Ø±¨
+		/// æŠ¥å•æ“ä½œé”™è¯¯å›æŠ¥
 		/// </summary>
-		event ErrRtnOrderAction^ OnErrRtnOrderAction {
+		event ErrRtnOrderAction^ OnErrRtnOrderAction{
 			void add(ErrRtnOrderAction^ handler) { ErrRtnOrderAction_delegate += handler; }
 			void remove(ErrRtnOrderAction^ handler) { ErrRtnOrderAction_delegate -= handler; }
 			void raise(ThostFtdcOrderActionField^ pOrderAction, ThostFtdcRspInfoField^ pRspInfo) {
-				if (ErrRtnOrderAction_delegate) ErrRtnOrderAction_delegate(pOrderAction, pRspInfo);
+				if(ErrRtnOrderAction_delegate) ErrRtnOrderAction_delegate(pOrderAction, pRspInfo);
 			}
 		}
 		/// <summary>
-		/// ºÏÔ¼½»Ò××´Ì¬Í¨Öª
+		/// äº¤æ˜“æ‰€å…¬å‘Šé€šçŸ¥
 		/// </summary>
-		event RtnInstrumentStatus^ OnRtnInstrumentStatus {
+		event RtnBulletin^ OnRtnBulletin {
+			void add(RtnBulletin^ handler) { RtnBulletin_delegate += handler; }
+			void remove(RtnBulletin^ handler) { RtnBulletin_delegate -= handler; }
+			void raise(ThostFtdcBulletinField^ pBulletin) {
+				if (RtnBulletin_delegate) RtnBulletin_delegate(pBulletin);
+			}
+		}
+		/// <summary>
+		/// åˆçº¦äº¤æ˜“çŠ¶æ€é€šçŸ¥
+		/// </summary>
+		event RtnInstrumentStatus^ OnRtnInstrumentStatus{
 			void add(RtnInstrumentStatus^ handler) { RtnInstrumentStatus_delegate += handler; }
 			void remove(RtnInstrumentStatus^ handler) { RtnInstrumentStatus_delegate -= handler; }
 			void raise(ThostFtdcInstrumentStatusField^ pInstrumentStatus) {
-				if (RtnInstrumentStatus_delegate) RtnInstrumentStatus_delegate(pInstrumentStatus);
+				if(RtnInstrumentStatus_delegate) RtnInstrumentStatus_delegate(pInstrumentStatus);
 			}
 		}
 		/// <summary>
-		/// ½»Ò×Í¨Öª
+		/// äº¤æ˜“é€šçŸ¥
 		/// </summary>
-		event RtnTradingNotice^ OnRtnTradingNotice {
+		event RtnTradingNotice^ OnRtnTradingNotice{
 			void add(RtnTradingNotice^ handler) { RtnTradingNotice_delegate += handler; }
 			void remove(RtnTradingNotice^ handler) { RtnTradingNotice_delegate -= handler; }
 			void raise(ThostFtdcTradingNoticeInfoField^ pTradingNoticeInfo) {
-				if (RtnTradingNotice_delegate) RtnTradingNotice_delegate(pTradingNoticeInfo);
+				if(RtnTradingNotice_delegate) RtnTradingNotice_delegate(pTradingNoticeInfo);
 			}
 		}
 		/// <summary>
-		/// ÌáÊ¾Ìõ¼şµ¥Ğ£Ñé´íÎó
+		/// æç¤ºæ¡ä»¶å•æ ¡éªŒé”™è¯¯
 		/// </summary>
-		event RtnErrorConditionalOrder^ OnRtnErrorConditionalOrder {
+		event RtnErrorConditionalOrder^ OnRtnErrorConditionalOrder{
 			void add(RtnErrorConditionalOrder^ handler) { RtnErrorConditionalOrder_delegate += handler; }
 			void remove(RtnErrorConditionalOrder^ handler) { RtnErrorConditionalOrder_delegate -= handler; }
 			void raise(ThostFtdcErrorConditionalOrderField^ pErrorConditionalOrder) {
-				if (RtnErrorConditionalOrder_delegate) RtnErrorConditionalOrder_delegate(pErrorConditionalOrder);
+				if(RtnErrorConditionalOrder_delegate) RtnErrorConditionalOrder_delegate(pErrorConditionalOrder);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯Ç©Ô¼ÒøĞĞÏìÓ¦
+		/// ä¿è¯é‡‘ç›‘æ§ä¸­å¿ƒç”¨æˆ·ä»¤ç‰Œ
 		/// </summary>
-		event RspQryContractBank^ OnRspQryContractBank {
+		event RtnCFMMCTradingAccountToken^ OnRtnCFMMCTradingAccountToken{
+			void add(RtnCFMMCTradingAccountToken^ handler) { RtnCFMMCTradingAccountToken_delegate += handler; }
+			void remove(RtnCFMMCTradingAccountToken^ handler) { RtnCFMMCTradingAccountToken_delegate -= handler; }
+			void raise(ThostFtdcCFMMCTradingAccountTokenField^ pCFMMCTradingAccountToken) {
+				if (RtnCFMMCTradingAccountToken_delegate) RtnCFMMCTradingAccountToken_delegate(pCFMMCTradingAccountToken);
+			}		   
+		}
+
+		/// <summary>
+		/// è¯·æ±‚æŸ¥è¯¢ç­¾çº¦é“¶è¡Œå“åº”
+		/// </summary>
+		event RspQryContractBank^ OnRspQryContractBank{
 			void add(RspQryContractBank^ handler) { RspQryContractBank_delegate += handler; }
 			void remove(RspQryContractBank^ handler) { RspQryContractBank_delegate -= handler; }
 			void raise(ThostFtdcContractBankField^ pContractBank, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryContractBank_delegate) RspQryContractBank_delegate(pContractBank, pRspInfo, nRequestID, bIsLast);
+				if(RspQryContractBank_delegate) RspQryContractBank_delegate(pContractBank, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯Ô¤Âñµ¥ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢é¢„åŸ‹å•å“åº”
 		/// </summary>
-		event RspQryParkedOrder^ OnRspQryParkedOrder {
+		event RspQryParkedOrder^ OnRspQryParkedOrder{
 			void add(RspQryParkedOrder^ handler) { RspQryParkedOrder_delegate += handler; }
 			void remove(RspQryParkedOrder^ handler) { RspQryParkedOrder_delegate -= handler; }
 			void raise(ThostFtdcParkedOrderField^ pParkedOrder, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryParkedOrder_delegate) RspQryParkedOrder_delegate(pParkedOrder, pRspInfo, nRequestID, bIsLast);
+				if(RspQryParkedOrder_delegate) RspQryParkedOrder_delegate(pParkedOrder, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯Ô¤Âñ³·µ¥ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢é¢„åŸ‹æ’¤å•å“åº”
 		/// </summary>
-		event RspQryParkedOrderAction^ OnRspQryParkedOrderAction {
+		event RspQryParkedOrderAction^ OnRspQryParkedOrderAction{
 			void add(RspQryParkedOrderAction^ handler) { RspQryParkedOrderAction_delegate += handler; }
 			void remove(RspQryParkedOrderAction^ handler) { RspQryParkedOrderAction_delegate -= handler; }
 			void raise(ThostFtdcParkedOrderActionField^ pParkedOrderAction, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryParkedOrderAction_delegate) RspQryParkedOrderAction_delegate(pParkedOrderAction, pRspInfo, nRequestID, bIsLast);
+				if(RspQryParkedOrderAction_delegate) RspQryParkedOrderAction_delegate(pParkedOrderAction, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯½»Ò×Í¨ÖªÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢äº¤æ˜“é€šçŸ¥å“åº”
 		/// </summary>
-		event RspQryTradingNotice^ OnRspQryTradingNotice {
+		event RspQryTradingNotice^ OnRspQryTradingNotice{
 			void add(RspQryTradingNotice^ handler) { RspQryTradingNotice_delegate += handler; }
 			void remove(RspQryTradingNotice^ handler) { RspQryTradingNotice_delegate -= handler; }
 			void raise(ThostFtdcTradingNoticeField^ pTradingNotice, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryTradingNotice_delegate) RspQryTradingNotice_delegate(pTradingNotice, pRspInfo, nRequestID, bIsLast);
+				if(RspQryTradingNotice_delegate) RspQryTradingNotice_delegate(pTradingNotice, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯¾­¼Í¹«Ë¾½»Ò×²ÎÊıÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢ç»çºªå…¬å¸äº¤æ˜“å‚æ•°å“åº”
 		/// </summary>
-		event RspQryBrokerTradingParams^ OnRspQryBrokerTradingParams {
+		event RspQryBrokerTradingParams^ OnRspQryBrokerTradingParams{
 			void add(RspQryBrokerTradingParams^ handler) { RspQryBrokerTradingParams_delegate += handler; }
 			void remove(RspQryBrokerTradingParams^ handler) { RspQryBrokerTradingParams_delegate -= handler; }
 			void raise(ThostFtdcBrokerTradingParamsField^ pBrokerTradingParams, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryBrokerTradingParams_delegate) RspQryBrokerTradingParams_delegate(pBrokerTradingParams, pRspInfo, nRequestID, bIsLast);
+				if(RspQryBrokerTradingParams_delegate) RspQryBrokerTradingParams_delegate(pBrokerTradingParams, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÇëÇó²éÑ¯¾­¼Í¹«Ë¾½»Ò×Ëã·¨ÏìÓ¦
+		/// è¯·æ±‚æŸ¥è¯¢ç»çºªå…¬å¸äº¤æ˜“ç®—æ³•å“åº”
 		/// </summary>
-		event RspQryBrokerTradingAlgos^ OnRspQryBrokerTradingAlgos {
+		event RspQryBrokerTradingAlgos^ OnRspQryBrokerTradingAlgos{
 			void add(RspQryBrokerTradingAlgos^ handler) { RspQryBrokerTradingAlgos_delegate += handler; }
 			void remove(RspQryBrokerTradingAlgos^ handler) { RspQryBrokerTradingAlgos_delegate -= handler; }
 			void raise(ThostFtdcBrokerTradingAlgosField^ pBrokerTradingAlgos, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQryBrokerTradingAlgos_delegate) RspQryBrokerTradingAlgos_delegate(pBrokerTradingAlgos, pRspInfo, nRequestID, bIsLast);
+				if(RspQryBrokerTradingAlgos_delegate) RspQryBrokerTradingAlgos_delegate(pBrokerTradingAlgos, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 		/// <summary>
-		/// ÒøĞĞ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÍ¨Öª
+		/// è¯·æ±‚æŸ¥è¯¢ç›‘æ§ä¸­å¿ƒç”¨æˆ·ä»¤ç‰Œ
 		/// </summary>
-		event RtnFromBankToFutureByBank^ OnRtnFromBankToFutureByBank {
-			void add(RtnFromBankToFutureByBank^ handler) { RtnFromBankToFutureByBank_delegate += handler; }
-			void remove(RtnFromBankToFutureByBank^ handler) { RtnFromBankToFutureByBank_delegate -= handler; }
-			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
-				if (RtnFromBankToFutureByBank_delegate) RtnFromBankToFutureByBank_delegate(pRspTransfer);
-			}
-		}
-		/// <summary>
-		/// ÒøĞĞ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÍ¨Öª
-		/// </summary>
-		event RtnFromFutureToBankByBank^ OnRtnFromFutureToBankByBank {
-			void add(RtnFromFutureToBankByBank^ handler) { RtnFromFutureToBankByBank_delegate += handler; }
-			void remove(RtnFromFutureToBankByBank^ handler) { RtnFromFutureToBankByBank_delegate -= handler; }
-			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
-				if (RtnFromFutureToBankByBank_delegate) RtnFromFutureToBankByBank_delegate(pRspTransfer);
-			}
-		}
-		/// <summary>
-		/// ÒøĞĞ·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÍ¨Öª
-		/// </summary>
-		event RtnRepealFromBankToFutureByBank^ OnRtnRepealFromBankToFutureByBank {
-			void add(RtnRepealFromBankToFutureByBank^ handler) { RtnRepealFromBankToFutureByBank_delegate += handler; }
-			void remove(RtnRepealFromBankToFutureByBank^ handler) { RtnRepealFromBankToFutureByBank_delegate -= handler; }
-			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if (RtnRepealFromBankToFutureByBank_delegate) RtnRepealFromBankToFutureByBank_delegate(pRspRepeal);
-			}
-		}
-		/// <summary>
-		/// ÒøĞĞ·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÍ¨Öª
-		/// </summary>
-		event RtnRepealFromFutureToBankByBank^ OnRtnRepealFromFutureToBankByBank {
-			void add(RtnRepealFromFutureToBankByBank^ handler) { RtnRepealFromFutureToBankByBank_delegate += handler; }
-			void remove(RtnRepealFromFutureToBankByBank^ handler) { RtnRepealFromFutureToBankByBank_delegate -= handler; }
-			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if (RtnRepealFromFutureToBankByBank_delegate) RtnRepealFromFutureToBankByBank_delegate(pRspRepeal);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÍ¨Öª
-		/// </summary>
-		event RtnFromBankToFutureByFuture^ OnRtnFromBankToFutureByFuture {
-			void add(RtnFromBankToFutureByFuture^ handler) { RtnFromBankToFutureByFuture_delegate += handler; }
-			void remove(RtnFromBankToFutureByFuture^ handler) { RtnFromBankToFutureByFuture_delegate -= handler; }
-			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
-				if (RtnFromBankToFutureByFuture_delegate) RtnFromBankToFutureByFuture_delegate(pRspTransfer);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÍ¨Öª
-		/// </summary>
-		event RtnFromFutureToBankByFuture^ OnRtnFromFutureToBankByFuture {
-			void add(RtnFromFutureToBankByFuture^ handler) { RtnFromFutureToBankByFuture_delegate += handler; }
-			void remove(RtnFromFutureToBankByFuture^ handler) { RtnFromFutureToBankByFuture_delegate -= handler; }
-			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
-				if (RtnFromFutureToBankByFuture_delegate) RtnFromFutureToBankByFuture_delegate(pRspTransfer);
-			}
-		}
-		/// <summary>
-		/// ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
-		/// </summary>
-		event RtnRepealFromBankToFutureByFutureManual^ OnRtnRepealFromBankToFutureByFutureManual {
-			void add(RtnRepealFromBankToFutureByFutureManual^ handler) { RtnRepealFromBankToFutureByFutureManual_delegate += handler; }
-			void remove(RtnRepealFromBankToFutureByFutureManual^ handler) { RtnRepealFromBankToFutureByFutureManual_delegate -= handler; }
-			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if (RtnRepealFromBankToFutureByFutureManual_delegate) RtnRepealFromBankToFutureByFutureManual_delegate(pRspRepeal);
-			}
-		}
-		/// <summary>
-		/// ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
-		/// </summary>
-		event RtnRepealFromFutureToBankByFutureManual^ OnRtnRepealFromFutureToBankByFutureManual {
-			void add(RtnRepealFromFutureToBankByFutureManual^ handler) { RtnRepealFromFutureToBankByFutureManual_delegate += handler; }
-			void remove(RtnRepealFromFutureToBankByFutureManual^ handler) { RtnRepealFromFutureToBankByFutureManual_delegate -= handler; }
-			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if (RtnRepealFromFutureToBankByFutureManual_delegate) RtnRepealFromFutureToBankByFutureManual_delegate(pRspRepeal);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶îÍ¨Öª
-		/// </summary>
-		event RtnQueryBankBalanceByFuture^ OnRtnQueryBankBalanceByFuture {
-			void add(RtnQueryBankBalanceByFuture^ handler) { RtnQueryBankBalanceByFuture_delegate += handler; }
-			void remove(RtnQueryBankBalanceByFuture^ handler) { RtnQueryBankBalanceByFuture_delegate -= handler; }
-			void raise(ThostFtdcNotifyQueryAccountField^ pNotifyQueryAccount) {
-				if (RtnQueryBankBalanceByFuture_delegate) RtnQueryBankBalanceByFuture_delegate(pNotifyQueryAccount);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õ´íÎó»Ø±¨
-		/// </summary>
-		event ErrRtnBankToFutureByFuture^ OnErrRtnBankToFutureByFuture {
-			void add(ErrRtnBankToFutureByFuture^ handler) { ErrRtnBankToFutureByFuture_delegate += handler; }
-			void remove(ErrRtnBankToFutureByFuture^ handler) { ErrRtnBankToFutureByFuture_delegate -= handler; }
-			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo) {
-				if (ErrRtnBankToFutureByFuture_delegate) ErrRtnBankToFutureByFuture_delegate(pReqTransfer, pRspInfo);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞ´íÎó»Ø±¨
-		/// </summary>
-		event ErrRtnFutureToBankByFuture^ OnErrRtnFutureToBankByFuture {
-			void add(ErrRtnFutureToBankByFuture^ handler) { ErrRtnFutureToBankByFuture_delegate += handler; }
-			void remove(ErrRtnFutureToBankByFuture^ handler) { ErrRtnFutureToBankByFuture_delegate -= handler; }
-			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo) {
-				if (ErrRtnFutureToBankByFuture_delegate) ErrRtnFutureToBankByFuture_delegate(pReqTransfer, pRspInfo);
-			}
-		}
-		/// <summary>
-		/// ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õ´íÎó»Ø±¨
-		/// </summary>
-		event ErrRtnRepealBankToFutureByFutureManual^ OnErrRtnRepealBankToFutureByFutureManual {
-			void add(ErrRtnRepealBankToFutureByFutureManual^ handler) { ErrRtnRepealBankToFutureByFutureManual_delegate += handler; }
-			void remove(ErrRtnRepealBankToFutureByFutureManual^ handler) { ErrRtnRepealBankToFutureByFutureManual_delegate -= handler; }
-			void raise(ThostFtdcReqRepealField^ pReqRepeal, ThostFtdcRspInfoField^ pRspInfo) {
-				if (ErrRtnRepealBankToFutureByFutureManual_delegate) ErrRtnRepealBankToFutureByFutureManual_delegate(pReqRepeal, pRspInfo);
-			}
-		}
-		/// <summary>
-		/// ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞ´íÎó»Ø±¨
-		/// </summary>
-		event ErrRtnRepealFutureToBankByFutureManual^ OnErrRtnRepealFutureToBankByFutureManual {
-			void add(ErrRtnRepealFutureToBankByFutureManual^ handler) { ErrRtnRepealFutureToBankByFutureManual_delegate += handler; }
-			void remove(ErrRtnRepealFutureToBankByFutureManual^ handler) { ErrRtnRepealFutureToBankByFutureManual_delegate -= handler; }
-			void raise(ThostFtdcReqRepealField^ pReqRepeal, ThostFtdcRspInfoField^ pRspInfo) {
-				if (ErrRtnRepealFutureToBankByFutureManual_delegate) ErrRtnRepealFutureToBankByFutureManual_delegate(pReqRepeal, pRspInfo);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶î´íÎó»Ø±¨
-		/// </summary>
-		event ErrRtnQueryBankBalanceByFuture^ OnErrRtnQueryBankBalanceByFuture {
-			void add(ErrRtnQueryBankBalanceByFuture^ handler) { ErrRtnQueryBankBalanceByFuture_delegate += handler; }
-			void remove(ErrRtnQueryBankBalanceByFuture^ handler) { ErrRtnQueryBankBalanceByFuture_delegate -= handler; }
-			void raise(ThostFtdcReqQueryAccountField^ pReqQueryAccount, ThostFtdcRspInfoField^ pRspInfo) {
-				if (ErrRtnQueryBankBalanceByFuture_delegate) ErrRtnQueryBankBalanceByFuture_delegate(pReqQueryAccount, pRspInfo);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
-		/// </summary>
-		event RtnRepealFromBankToFutureByFuture^ OnRtnRepealFromBankToFutureByFuture {
-			void add(RtnRepealFromBankToFutureByFuture^ handler) { RtnRepealFromBankToFutureByFuture_delegate += handler; }
-			void remove(RtnRepealFromBankToFutureByFuture^ handler) { RtnRepealFromBankToFutureByFuture_delegate -= handler; }
-			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if (RtnRepealFromBankToFutureByFuture_delegate) RtnRepealFromBankToFutureByFuture_delegate(pRspRepeal);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
-		/// </summary>
-		event RtnRepealFromFutureToBankByFuture^ OnRtnRepealFromFutureToBankByFuture {
-			void add(RtnRepealFromFutureToBankByFuture^ handler) { RtnRepealFromFutureToBankByFuture_delegate += handler; }
-			void remove(RtnRepealFromFutureToBankByFuture^ handler) { RtnRepealFromFutureToBankByFuture_delegate -= handler; }
-			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
-				if (RtnRepealFromFutureToBankByFuture_delegate) RtnRepealFromFutureToBankByFuture_delegate(pRspRepeal);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÓ¦´ğ
-		/// </summary>
-		event RspFromBankToFutureByFuture^ OnRspFromBankToFutureByFuture {
-			void add(RspFromBankToFutureByFuture^ handler) { RspFromBankToFutureByFuture_delegate += handler; }
-			void remove(RspFromBankToFutureByFuture^ handler) { RspFromBankToFutureByFuture_delegate -= handler; }
-			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspFromBankToFutureByFuture_delegate) RspFromBankToFutureByFuture_delegate(pReqTransfer, pRspInfo, nRequestID, bIsLast);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÓ¦´ğ
-		/// </summary>
-		event RspFromFutureToBankByFuture^ OnRspFromFutureToBankByFuture {
-			void add(RspFromFutureToBankByFuture^ handler) { RspFromFutureToBankByFuture_delegate += handler; }
-			void remove(RspFromFutureToBankByFuture^ handler) { RspFromFutureToBankByFuture_delegate -= handler; }
-			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspFromFutureToBankByFuture_delegate) RspFromFutureToBankByFuture_delegate(pReqTransfer, pRspInfo, nRequestID, bIsLast);
-			}
-		}
-		/// <summary>
-		/// ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶îÓ¦´ğ
-		/// </summary>
-		event RspQueryBankAccountMoneyByFuture^ OnRspQueryBankAccountMoneyByFuture {
-			void add(RspQueryBankAccountMoneyByFuture^ handler) { RspQueryBankAccountMoneyByFuture_delegate += handler; }
-			void remove(RspQueryBankAccountMoneyByFuture^ handler) { RspQueryBankAccountMoneyByFuture_delegate -= handler; }
-			void raise(ThostFtdcReqQueryAccountField^ pReqQueryAccount, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
-				if (RspQueryBankAccountMoneyByFuture_delegate) RspQueryBankAccountMoneyByFuture_delegate(pReqQueryAccount, pRspInfo, nRequestID, bIsLast);
-			}
-		}
-		/// <summary>
-		/// ÒøĞĞ·¢ÆğÒøÆÚ¿ª»§Í¨Öª
-		/// </summary>
-		event RtnOpenAccountByBank^ OnRtnOpenAccountByBank {
-			void add(RtnOpenAccountByBank^ handler) { RtnOpenAccountByBank_delegate += handler; }
-			void remove(RtnOpenAccountByBank^ handler) { RtnOpenAccountByBank_delegate -= handler; }
-			void raise(ThostFtdcOpenAccountField^ pOpenAccount) {
-				if (RtnOpenAccountByBank_delegate) RtnOpenAccountByBank_delegate(pOpenAccount);
-			}
-		}
-		/// <summary>
-		/// ÒøĞĞ·¢ÆğÒøÆÚÏú»§Í¨Öª
-		/// </summary>
-		event RtnCancelAccountByBank^ OnRtnCancelAccountByBank {
-			void add(RtnCancelAccountByBank^ handler) { RtnCancelAccountByBank_delegate += handler; }
-			void remove(RtnCancelAccountByBank^ handler) { RtnCancelAccountByBank_delegate -= handler; }
-			void raise(ThostFtdcCancelAccountField^ pCancelAccount) {
-				if (RtnCancelAccountByBank_delegate) RtnCancelAccountByBank_delegate(pCancelAccount);
-			}
-		}
-		/// <summary>
-		/// ÒøĞĞ·¢Æğ±ä¸üÒøĞĞÕËºÅÍ¨Öª
-		/// </summary>
-		event RtnChangeAccountByBank^ OnRtnChangeAccountByBank {
-			void add(RtnChangeAccountByBank^ handler) { RtnChangeAccountByBank_delegate += handler; }
-			void remove(RtnChangeAccountByBank^ handler) { RtnChangeAccountByBank_delegate -= handler; }
-			void raise(ThostFtdcChangeAccountField^ pChangeAccount) {
-				if (RtnChangeAccountByBank_delegate) RtnChangeAccountByBank_delegate(pChangeAccount);
+		event RspQueryCFMMCTradingAccountToken^ OnRspQueryCFMMCTradingAccountToken{
+			void add(RspQueryCFMMCTradingAccountToken^ handler) { RspQueryCFMMCTradingAccountToken_delegate += handler; }
+			void remove(RspQueryCFMMCTradingAccountToken^ handler) { RspQueryCFMMCTradingAccountToken_delegate -= handler; }
+			void raise(ThostFtdcQueryCFMMCTradingAccountTokenField^ pQueryCFMMCTradingAccountToken, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if (RspQueryCFMMCTradingAccountToken_delegate) RspQueryCFMMCTradingAccountToken_delegate(pQueryCFMMCTradingAccountToken, pRspInfo, nRequestID, bIsLast);
 			}
 		}
 
+		/// <summary>
+		/// é“¶è¡Œå‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é€šçŸ¥
+		/// </summary>
+		event RtnFromBankToFutureByBank^ OnRtnFromBankToFutureByBank{
+			void add(RtnFromBankToFutureByBank^ handler) { RtnFromBankToFutureByBank_delegate += handler; }
+			void remove(RtnFromBankToFutureByBank^ handler) { RtnFromBankToFutureByBank_delegate -= handler; }
+			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
+				if(RtnFromBankToFutureByBank_delegate) RtnFromBankToFutureByBank_delegate(pRspTransfer);
+			}
+		}
+		/// <summary>
+		/// é“¶è¡Œå‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé€šçŸ¥
+		/// </summary>
+		event RtnFromFutureToBankByBank^ OnRtnFromFutureToBankByBank{
+			void add(RtnFromFutureToBankByBank^ handler) { RtnFromFutureToBankByBank_delegate += handler; }
+			void remove(RtnFromFutureToBankByBank^ handler) { RtnFromFutureToBankByBank_delegate -= handler; }
+			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
+				if(RtnFromFutureToBankByBank_delegate) RtnFromFutureToBankByBank_delegate(pRspTransfer);
+			}
+		}
+		/// <summary>
+		/// é“¶è¡Œå‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§é€šçŸ¥
+		/// </summary>
+		event RtnRepealFromBankToFutureByBank^ OnRtnRepealFromBankToFutureByBank{
+			void add(RtnRepealFromBankToFutureByBank^ handler) { RtnRepealFromBankToFutureByBank_delegate += handler; }
+			void remove(RtnRepealFromBankToFutureByBank^ handler) { RtnRepealFromBankToFutureByBank_delegate -= handler; }
+			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
+				if(RtnRepealFromBankToFutureByBank_delegate) RtnRepealFromBankToFutureByBank_delegate(pRspRepeal);
+			}
+		}
+		/// <summary>
+		/// é“¶è¡Œå‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œé€šçŸ¥
+		/// </summary>
+		event RtnRepealFromFutureToBankByBank^ OnRtnRepealFromFutureToBankByBank{
+			void add(RtnRepealFromFutureToBankByBank^ handler) { RtnRepealFromFutureToBankByBank_delegate += handler; }
+			void remove(RtnRepealFromFutureToBankByBank^ handler) { RtnRepealFromFutureToBankByBank_delegate -= handler; }
+			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
+				if(RtnRepealFromFutureToBankByBank_delegate) RtnRepealFromFutureToBankByBank_delegate(pRspRepeal);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é€šçŸ¥
+		/// </summary>
+		event RtnFromBankToFutureByFuture^ OnRtnFromBankToFutureByFuture{
+			void add(RtnFromBankToFutureByFuture^ handler) { RtnFromBankToFutureByFuture_delegate += handler; }
+			void remove(RtnFromBankToFutureByFuture^ handler) { RtnFromBankToFutureByFuture_delegate -= handler; }
+			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
+				if(RtnFromBankToFutureByFuture_delegate) RtnFromBankToFutureByFuture_delegate(pRspTransfer);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé€šçŸ¥
+		/// </summary>
+		event RtnFromFutureToBankByFuture^ OnRtnFromFutureToBankByFuture{
+			void add(RtnFromFutureToBankByFuture^ handler) { RtnFromFutureToBankByFuture_delegate += handler; }
+			void remove(RtnFromFutureToBankByFuture^ handler) { RtnFromFutureToBankByFuture_delegate -= handler; }
+			void raise(ThostFtdcRspTransferField^ pRspTransfer) {
+				if(RtnFromFutureToBankByFuture_delegate) RtnFromFutureToBankByFuture_delegate(pRspTransfer);
+			}
+		}
+		/// <summary>
+		/// ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§è¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
+		/// </summary>
+		event RtnRepealFromBankToFutureByFutureManual^ OnRtnRepealFromBankToFutureByFutureManual{
+			void add(RtnRepealFromBankToFutureByFutureManual^ handler) { RtnRepealFromBankToFutureByFutureManual_delegate += handler; }
+			void remove(RtnRepealFromBankToFutureByFutureManual^ handler) { RtnRepealFromBankToFutureByFutureManual_delegate -= handler; }
+			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
+				if(RtnRepealFromBankToFutureByFutureManual_delegate) RtnRepealFromBankToFutureByFutureManual_delegate(pRspRepeal);
+			}
+		}
+		/// <summary>
+		/// ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œè¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
+		/// </summary>
+		event RtnRepealFromFutureToBankByFutureManual^ OnRtnRepealFromFutureToBankByFutureManual{
+			void add(RtnRepealFromFutureToBankByFutureManual^ handler) { RtnRepealFromFutureToBankByFutureManual_delegate += handler; }
+			void remove(RtnRepealFromFutureToBankByFutureManual^ handler) { RtnRepealFromFutureToBankByFutureManual_delegate -= handler; }
+			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
+				if(RtnRepealFromFutureToBankByFutureManual_delegate) RtnRepealFromFutureToBankByFutureManual_delegate(pRspRepeal);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢é€šçŸ¥
+		/// </summary>
+		event RtnQueryBankBalanceByFuture^ OnRtnQueryBankBalanceByFuture{
+			void add(RtnQueryBankBalanceByFuture^ handler) { RtnQueryBankBalanceByFuture_delegate += handler; }
+			void remove(RtnQueryBankBalanceByFuture^ handler) { RtnQueryBankBalanceByFuture_delegate -= handler; }
+			void raise(ThostFtdcNotifyQueryAccountField^ pNotifyQueryAccount) {
+				if(RtnQueryBankBalanceByFuture_delegate) RtnQueryBankBalanceByFuture_delegate(pNotifyQueryAccount);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é”™è¯¯å›æŠ¥
+		/// </summary>
+		event ErrRtnBankToFutureByFuture^ OnErrRtnBankToFutureByFuture{
+			void add(ErrRtnBankToFutureByFuture^ handler) { ErrRtnBankToFutureByFuture_delegate += handler; }
+			void remove(ErrRtnBankToFutureByFuture^ handler) { ErrRtnBankToFutureByFuture_delegate -= handler; }
+			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo) {
+				if(ErrRtnBankToFutureByFuture_delegate) ErrRtnBankToFutureByFuture_delegate(pReqTransfer, pRspInfo);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé”™è¯¯å›æŠ¥
+		/// </summary>
+		event ErrRtnFutureToBankByFuture^ OnErrRtnFutureToBankByFuture{
+			void add(ErrRtnFutureToBankByFuture^ handler) { ErrRtnFutureToBankByFuture_delegate += handler; }
+			void remove(ErrRtnFutureToBankByFuture^ handler) { ErrRtnFutureToBankByFuture_delegate -= handler; }
+			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo) {
+				if(ErrRtnFutureToBankByFuture_delegate) ErrRtnFutureToBankByFuture_delegate(pReqTransfer, pRspInfo);
+			}
+		}
+		/// <summary>
+		/// ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§é”™è¯¯å›æŠ¥
+		/// </summary>
+		event ErrRtnRepealBankToFutureByFutureManual^ OnErrRtnRepealBankToFutureByFutureManual{
+			void add(ErrRtnRepealBankToFutureByFutureManual^ handler) { ErrRtnRepealBankToFutureByFutureManual_delegate += handler; }
+			void remove(ErrRtnRepealBankToFutureByFutureManual^ handler) { ErrRtnRepealBankToFutureByFutureManual_delegate -= handler; }
+			void raise(ThostFtdcReqRepealField^ pReqRepeal, ThostFtdcRspInfoField^ pRspInfo) {
+				if(ErrRtnRepealBankToFutureByFutureManual_delegate) ErrRtnRepealBankToFutureByFutureManual_delegate(pReqRepeal, pRspInfo);
+			}
+		}
+		/// <summary>
+		/// ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œé”™è¯¯å›æŠ¥
+		/// </summary>
+		event ErrRtnRepealFutureToBankByFutureManual^ OnErrRtnRepealFutureToBankByFutureManual{
+			void add(ErrRtnRepealFutureToBankByFutureManual^ handler) { ErrRtnRepealFutureToBankByFutureManual_delegate += handler; }
+			void remove(ErrRtnRepealFutureToBankByFutureManual^ handler) { ErrRtnRepealFutureToBankByFutureManual_delegate -= handler; }
+			void raise(ThostFtdcReqRepealField^ pReqRepeal, ThostFtdcRspInfoField^ pRspInfo) {
+				if(ErrRtnRepealFutureToBankByFutureManual_delegate) ErrRtnRepealFutureToBankByFutureManual_delegate(pReqRepeal, pRspInfo);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢é”™è¯¯å›æŠ¥
+		/// </summary>
+		event ErrRtnQueryBankBalanceByFuture^ OnErrRtnQueryBankBalanceByFuture{
+			void add(ErrRtnQueryBankBalanceByFuture^ handler) { ErrRtnQueryBankBalanceByFuture_delegate += handler; }
+			void remove(ErrRtnQueryBankBalanceByFuture^ handler) { ErrRtnQueryBankBalanceByFuture_delegate -= handler; }
+			void raise(ThostFtdcReqQueryAccountField^ pReqQueryAccount, ThostFtdcRspInfoField^ pRspInfo) {
+				if(ErrRtnQueryBankBalanceByFuture_delegate) ErrRtnQueryBankBalanceByFuture_delegate(pReqQueryAccount, pRspInfo);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§è¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
+		/// </summary>
+		event RtnRepealFromBankToFutureByFuture^ OnRtnRepealFromBankToFutureByFuture{
+			void add(RtnRepealFromBankToFutureByFuture^ handler) { RtnRepealFromBankToFutureByFuture_delegate += handler; }
+			void remove(RtnRepealFromBankToFutureByFuture^ handler) { RtnRepealFromBankToFutureByFuture_delegate -= handler; }
+			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
+				if(RtnRepealFromBankToFutureByFuture_delegate) RtnRepealFromBankToFutureByFuture_delegate(pRspRepeal);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œè¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
+		/// </summary>
+		event RtnRepealFromFutureToBankByFuture^ OnRtnRepealFromFutureToBankByFuture{
+			void add(RtnRepealFromFutureToBankByFuture^ handler) { RtnRepealFromFutureToBankByFuture_delegate += handler; }
+			void remove(RtnRepealFromFutureToBankByFuture^ handler) { RtnRepealFromFutureToBankByFuture_delegate -= handler; }
+			void raise(ThostFtdcRspRepealField^ pRspRepeal) {
+				if(RtnRepealFromFutureToBankByFuture_delegate) RtnRepealFromFutureToBankByFuture_delegate(pRspRepeal);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§åº”ç­”
+		/// </summary>
+		event RspFromBankToFutureByFuture^ OnRspFromBankToFutureByFuture{
+			void add(RspFromBankToFutureByFuture^ handler) { RspFromBankToFutureByFuture_delegate += handler; }
+			void remove(RspFromBankToFutureByFuture^ handler) { RspFromBankToFutureByFuture_delegate -= handler; }
+			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if(RspFromBankToFutureByFuture_delegate) RspFromBankToFutureByFuture_delegate(pReqTransfer, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œåº”ç­”
+		/// </summary>
+		event RspFromFutureToBankByFuture^ OnRspFromFutureToBankByFuture{
+			void add(RspFromFutureToBankByFuture^ handler) { RspFromFutureToBankByFuture_delegate += handler; }
+			void remove(RspFromFutureToBankByFuture^ handler) { RspFromFutureToBankByFuture_delegate -= handler; }
+			void raise(ThostFtdcReqTransferField^ pReqTransfer, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if(RspFromFutureToBankByFuture_delegate) RspFromFutureToBankByFuture_delegate(pReqTransfer, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢åº”ç­”
+		/// </summary>
+		event RspQueryBankAccountMoneyByFuture^ OnRspQueryBankAccountMoneyByFuture{
+			void add(RspQueryBankAccountMoneyByFuture^ handler) { RspQueryBankAccountMoneyByFuture_delegate += handler; }
+			void remove(RspQueryBankAccountMoneyByFuture^ handler) { RspQueryBankAccountMoneyByFuture_delegate -= handler; }
+			void raise(ThostFtdcReqQueryAccountField^ pReqQueryAccount, ThostFtdcRspInfoField^ pRspInfo, int nRequestID, bool bIsLast) {
+				if(RspQueryBankAccountMoneyByFuture_delegate) RspQueryBankAccountMoneyByFuture_delegate(pReqQueryAccount, pRspInfo, nRequestID, bIsLast);
+			}
+		}
+		/// <summary>
+		/// é“¶è¡Œå‘èµ·é“¶æœŸå¼€æˆ·é€šçŸ¥
+		/// </summary>
+		event RtnOpenAccountByBank^ OnRtnOpenAccountByBank{
+			void add(RtnOpenAccountByBank^ handler) { RtnOpenAccountByBank_delegate += handler; }
+			void remove(RtnOpenAccountByBank^ handler) { RtnOpenAccountByBank_delegate -= handler; }
+			void raise(ThostFtdcOpenAccountField^ pOpenAccount) {
+				if(RtnOpenAccountByBank_delegate) RtnOpenAccountByBank_delegate(pOpenAccount);
+			}
+		}
+		/// <summary>
+		/// é“¶è¡Œå‘èµ·é“¶æœŸé”€æˆ·é€šçŸ¥
+		/// </summary>
+		event RtnCancelAccountByBank^ OnRtnCancelAccountByBank{
+			void add(RtnCancelAccountByBank^ handler) { RtnCancelAccountByBank_delegate += handler; }
+			void remove(RtnCancelAccountByBank^ handler) { RtnCancelAccountByBank_delegate -= handler; }
+			void raise(ThostFtdcCancelAccountField^ pCancelAccount) {
+				if(RtnCancelAccountByBank_delegate) RtnCancelAccountByBank_delegate(pCancelAccount);
+			}
+		}
+		/// <summary>
+		/// é“¶è¡Œå‘èµ·å˜æ›´é“¶è¡Œè´¦å·é€šçŸ¥
+		/// </summary>
+		event RtnChangeAccountByBank^ OnRtnChangeAccountByBank{
+			void add(RtnChangeAccountByBank^ handler) { RtnChangeAccountByBank_delegate += handler; }
+			void remove(RtnChangeAccountByBank^ handler) { RtnChangeAccountByBank_delegate -= handler; }
+			void raise(ThostFtdcChangeAccountField^ pChangeAccount) {
+				if(RtnChangeAccountByBank_delegate) RtnChangeAccountByBank_delegate(pChangeAccount);
+			}
+		}
+		
 		// delegates
 	private:
 		FrontConnected^ FrontConnected_delegate;
@@ -1115,6 +1103,13 @@ namespace CTP {
 		RspSettlementInfoConfirm^ RspSettlementInfoConfirm_delegate;
 		RspRemoveParkedOrder^ RspRemoveParkedOrder_delegate;
 		RspRemoveParkedOrderAction^ RspRemoveParkedOrderAction_delegate;
+		RspExecOrderInsert^ RspExecOrderInsert_delegate;
+		RspExecOrderAction^ RspExecOrderAction_delegate;
+		RspForQuoteInsert^ RspForQuoteInsert_delegate;
+		RspQuoteInsert^ RspQuoteInsert_delegate;
+		RspQuoteAction^ RspQuoteAction_delegate;
+		RspBatchOrderAction^ RspBatchOrderAction_delegate;
+		RspCombActionInsert^ RspCombActionInsert_delegate;
 		RspQryOrder^ RspQryOrder_delegate;
 		RspQryTrade^ RspQryTrade_delegate;
 		RspQryInvestorPosition^ RspQryInvestorPosition_delegate;
@@ -1124,6 +1119,7 @@ namespace CTP {
 		RspQryInstrumentMarginRate^ RspQryInstrumentMarginRate_delegate;
 		RspQryInstrumentCommissionRate^ RspQryInstrumentCommissionRate_delegate;
 		RspQryExchange^ RspQryExchange_delegate;
+		RspQryProduct^ RspQryProduct_delegate;
 		RspQryInstrument^ RspQryInstrument_delegate;
 		RspQryDepthMarketData^ RspQryDepthMarketData_delegate;
 		RspQrySettlementInfo^ RspQrySettlementInfo_delegate;
@@ -1134,21 +1130,41 @@ namespace CTP {
 		RspQryInvestorPositionCombineDetail^ RspQryInvestorPositionCombineDetail_delegate;
 		RspQryCFMMCTradingAccountKey^ RspQryCFMMCTradingAccountKey_delegate;
 		RspQryEWarrantOffset^ RspQryEWarrantOffset_delegate;
+		RspQryInvestorProductGroupMargin^ RspQryInvestorProductGroupMargin_delegate;
+		RspQryExchangeMarginRate ^ RspQryExchangeMarginRate_delegate;
+		RspQryExchangeMarginRateAdjust ^ RspQryExchangeMarginRateAdjust_delegate;
+		RspQryExchangeRate ^ RspQryExchangeRate_delegate;
+		RspQrySecAgentACIDMap ^ RspQrySecAgentACIDMap_delegate;
+		RspQryProductExchRate ^ RspQryProductExchRate_delegate;
+		RspQryProductGroup ^ RspQryProductGroup_delegate;
+		RspQryMMInstrumentCommissionRate ^ RspQryMMInstrumentCommissionRate_delegate;
+		RspQryMMOptionInstrCommRate ^ RspQryMMOptionInstrCommRate_delegate;
+		RspQryInstrumentOrderCommRate ^ RspQryInstrumentOrderCommRate_delegate;
+		RspQryOptionInstrTradeCost ^ RspQryOptionInstrTradeCost_delegate;
+		RspQryOptionInstrCommRate ^ RspQryOptionInstrCommRate_delegate;
+		RspQryExecOrder ^ RspQryExecOrder_delegate;
+		RspQryForQuote ^ RspQryForQuote_delegate;
+		RspQryQuote ^ RspQryQuote_delegate;
+		RspQryCombInstrumentGuard ^ RspQryCombInstrumentGuard_delegate;
+		RspQryCombAction ^ RspQryCombAction_delegate;
 		RspQryTransferSerial^ RspQryTransferSerial_delegate;
 		RspQryAccountregister^ RspQryAccountregister_delegate;
 		RtnOrder^ RtnOrder_delegate;
 		RtnTrade^ RtnTrade_delegate;
 		ErrRtnOrderInsert^ ErrRtnOrderInsert_delegate;
 		ErrRtnOrderAction^ ErrRtnOrderAction_delegate;
+		RtnBulletin^ RtnBulletin_delegate;
 		RtnInstrumentStatus^ RtnInstrumentStatus_delegate;
 		RtnTradingNotice^ RtnTradingNotice_delegate;
 		RtnErrorConditionalOrder^ RtnErrorConditionalOrder_delegate;
+		RtnCFMMCTradingAccountToken^ RtnCFMMCTradingAccountToken_delegate;
 		RspQryContractBank^ RspQryContractBank_delegate;
 		RspQryParkedOrder^ RspQryParkedOrder_delegate;
 		RspQryParkedOrderAction^ RspQryParkedOrderAction_delegate;
 		RspQryTradingNotice^ RspQryTradingNotice_delegate;
 		RspQryBrokerTradingParams^ RspQryBrokerTradingParams_delegate;
 		RspQryBrokerTradingAlgos^ RspQryBrokerTradingAlgos_delegate;
+		RspQueryCFMMCTradingAccountToken^ RspQueryCFMMCTradingAccountToken_delegate;
 		RtnFromBankToFutureByBank^ RtnFromBankToFutureByBank_delegate;
 		RtnFromFutureToBankByBank^ RtnFromFutureToBankByBank_delegate;
 		RtnRepealFromBankToFutureByBank^ RtnRepealFromBankToFutureByBank_delegate;
@@ -1172,7 +1188,7 @@ namespace CTP {
 		RtnCancelAccountByBank^ RtnCancelAccountByBank_delegate;
 		RtnChangeAccountByBank^ RtnChangeAccountByBank_delegate;
 #ifdef __CTP_MA__
-		// callbacks for MA
+		// callbacks for MA (Multiple AppDomain)
 	private:
 		void cbk_OnFrontConnected();
 		void cbk_OnFrontDisconnected(int nReason);
@@ -1199,6 +1215,7 @@ namespace CTP {
 		void cbk_OnRspQryInstrumentMarginRate(CThostFtdcInstrumentMarginRateField *pInstrumentMarginRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryInstrumentCommissionRate(CThostFtdcInstrumentCommissionRateField *pInstrumentCommissionRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryExchange(CThostFtdcExchangeField *pExchange, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+		void cbk_OnRspQryProduct(CThostFtdcProductField *pProduct, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQrySettlementInfo(CThostFtdcSettlementInfoField *pSettlementInfo, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
@@ -1209,6 +1226,11 @@ namespace CTP {
 		void cbk_OnRspQryInvestorPositionCombineDetail(CThostFtdcInvestorPositionCombineDetailField *pInvestorPositionCombineDetail, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryCFMMCTradingAccountKey(CThostFtdcCFMMCTradingAccountKeyField *pCFMMCTradingAccountKey, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryEWarrantOffset(CThostFtdcEWarrantOffsetField *pEWarrantOffset, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+		void cbk_OnRspQryInvestorProductGroupMargin(CThostFtdcInvestorProductGroupMarginField *pInvestorProductGroupMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+		void cbk_OnRspQryExchangeMarginRate(CThostFtdcExchangeMarginRateField *pExchangeMarginRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+		void cbk_OnRspQryExchangeMarginRateAdjust(CThostFtdcExchangeMarginRateAdjustField *pExchangeMarginRateAdjust, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+		void cbk_OnRspQryExchangeRate(CThostFtdcExchangeRateField *pExchangeRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+		void cbk_OnRspQrySecAgentACIDMap(CThostFtdcSecAgentACIDMapField *pSecAgentACIDMap, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryTransferSerial(CThostFtdcTransferSerialField *pTransferSerial, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryAccountregister(CThostFtdcAccountregisterField *pAccountregister, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
@@ -1219,12 +1241,14 @@ namespace CTP {
 		void cbk_OnRtnInstrumentStatus(CThostFtdcInstrumentStatusField *pInstrumentStatus);
 		void cbk_OnRtnTradingNotice(CThostFtdcTradingNoticeInfoField *pTradingNoticeInfo);
 		void cbk_OnRtnErrorConditionalOrder(CThostFtdcErrorConditionalOrderField *pErrorConditionalOrder);
+		void cbk_OnRtnCFMMCTradingAccountToken(CThostFtdcCFMMCTradingAccountTokenField *pCFMMCTradingAccountToken);
 		void cbk_OnRspQryContractBank(CThostFtdcContractBankField *pContractBank, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryParkedOrder(CThostFtdcParkedOrderField *pParkedOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryParkedOrderAction(CThostFtdcParkedOrderActionField *pParkedOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryTradingNotice(CThostFtdcTradingNoticeField *pTradingNotice, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryBrokerTradingParams(CThostFtdcBrokerTradingParamsField *pBrokerTradingParams, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRspQryBrokerTradingAlgos(CThostFtdcBrokerTradingAlgosField *pBrokerTradingAlgos, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+		void cbk_OnRspQueryCFMMCTradingAccountToken(CThostFtdcQueryCFMMCTradingAccountTokenField *pQueryCFMMCTradingAccountToken, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 		void cbk_OnRtnFromBankToFutureByBank(CThostFtdcRspTransferField *pRspTransfer);
 		void cbk_OnRtnFromFutureToBankByBank(CThostFtdcRspTransferField *pRspTransfer);
 		void cbk_OnRtnRepealFromBankToFutureByBank(CThostFtdcRspRepealField *pRspRepeal);
@@ -1247,8 +1271,9 @@ namespace CTP {
 		void cbk_OnRtnOpenAccountByBank(CThostFtdcOpenAccountField *pOpenAccount);
 		void cbk_OnRtnCancelAccountByBank(CThostFtdcCancelAccountField *pCancelAccount);
 		void cbk_OnRtnChangeAccountByBank(CThostFtdcChangeAccountField *pChangeAccount);
-		// ½«ËùÓĞ»Øµ÷º¯ÊıµØÖ·´«µİ¸øSPI
-		void RegisterCallbacks();
+	protected:
+		// å°†æ‰€æœ‰å›è°ƒå‡½æ•°åœ°å€ä¼ é€’ç»™SPI
+		virtual void RegisterCallbacks() override;
 #endif
 
 	};

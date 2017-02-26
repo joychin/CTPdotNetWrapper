@@ -10,22 +10,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CTP.VS2010.Net4.0", "CTP\CTP.VS2010.Net4.0.vcxproj", "{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CTPMA.VS2010.Net4.0", "CTP\CTPMA.VS2010.Net4.0.vcxproj", "{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoTrader", "DemoTrader\DemoTrader.csproj", "{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Debug|Win32.Build.0 = Debug|Win32
+		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Release|Any CPU.ActiveCfg = Release|Win32
 		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Release|Win32.ActiveCfg = Release|Win32
 		{321418DC-AFAB-4D02-9BC8-9A1D73D7BE1C}.Release|Win32.Build.0 = Release|Win32
-		{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}.Debug|Win32.ActiveCfg = Debug|Win32
-		{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}.Debug|Win32.Build.0 = Debug|Win32
-		{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}.Release|Win32.ActiveCfg = Release|Win32
-		{ACFB53E6-2DEC-42A2-BEE6-53B70FB64940}.Release|Win32.Build.0 = Release|Win32
+		{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}.Debug|Win32.Build.0 = Debug|Any CPU
+		{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}.Release|Win32.ActiveCfg = Release|Any CPU
+		{DFDAB962-97C1-41B1-BD85-7DBFAD72C0EE}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

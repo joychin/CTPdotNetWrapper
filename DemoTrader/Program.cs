@@ -17,10 +17,10 @@ namespace DemoTrader
     class testTraderApi
     {
         CTPTraderAdapter api = null;
-        string FRONT_ADDR = "tcp://asp-sim2-front1.financial-trading-platform.com:26205";  // 前置地址
-        string BROKER_ID = "2030";                       // 经纪公司代码
-        string INVESTOR_ID = "888888";                   // 投资者代码
-        string PASSWORD = "888888";                      // 用户密码, 888888账户的密码被人改了，没法用了
+        string FRONT_ADDR = "tcp://125.71.232.79:41205";  // 前置地址
+        string BROKER_ID = "1010";                       // 经纪公司代码
+        string INVESTOR_ID = "8600039";                   // 投资者代码
+        string PASSWORD = "999999";                      // 用户密码, 888888账户的密码被人改了，没法用了
         string INSTRUMENT_ID = "m1305";
         EnumDirectionType DIRECTION = EnumDirectionType.Sell;
         double LIMIT_PRICE = 4100;
@@ -41,6 +41,7 @@ namespace DemoTrader
             api.OnHeartBeatWarning += new HeartBeatWarning(OnHeartBeatWarning);
             api.OnRspError += new RspError(OnRspError);
             api.OnRspUserLogin += new RspUserLogin(OnRspUserLogin);
+            api.OnRspQryInvestorPositionDetail += new RspQryInvestorPositionDetail(OnQryInvestorPositionDetail);
             api.OnRspOrderAction += new RspOrderAction(OnRspOrderAction);
             api.OnRspOrderInsert += new RspOrderInsert(OnRspOrderInsert);
             api.OnRspQryInstrument += new RspQryInstrument(OnRspQryInstrument);
@@ -69,10 +70,17 @@ namespace DemoTrader
             }
         }
 
+        void OnQryInvestorPositionDetail(ThostFtdcInvestorPositionDetailField pInvestorPositionDetail, ThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
+        {
+            Console.WriteLine(pInvestorPositionDetail);
+        }
+
         void OnFrontConnected()
         {
             __DEBUGPF__();
             ReqUserLogin();
+
+           // OnRspQryInvestorPosition(new ThostFtdcInvestorPositionField() { BrokerID=BROKER_ID, InvestorID =INVESTOR_ID, InstrumentID = INSTRUMENT_ID},new ThostFtdcRspInfoField() { ErrorID=0,ErrorMsg=""},0,false);
         }
 
         void ReqUserLogin()
@@ -83,6 +91,11 @@ namespace DemoTrader
             req.Password = PASSWORD;
             int iResult = api.ReqUserLogin(req, ++iRequestID);
             Console.WriteLine("--->>> 发送用户登录请求: " + ((iResult == 0) ? "成功" : "失败"));
+        }
+
+        void QryInvestorPositionDetail()
+        {
+            api.ReqQryInvestorPositionDetail(new ThostFtdcQryInvestorPositionDetailField() { BrokerID = BROKER_ID, InstrumentID = INSTRUMENT_ID, InvestorID = INVESTOR_ID }, 0);
         }
 
         void OnRspUserLogin(ThostFtdcRspUserLoginField pRspUserLogin,ThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
@@ -155,7 +168,7 @@ namespace DemoTrader
 
         void OnRspQryTradingAccount(ThostFtdcTradingAccountField pTradingAccount, ThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
         {
-            __DEBUGPF__();
+            //__DEBUGPF__();
 
             if (bIsLast && !IsErrorRspInfo(pRspInfo))
             {
@@ -171,15 +184,18 @@ namespace DemoTrader
             req.BrokerID = BROKER_ID;
             req.InvestorID = INVESTOR_ID;
             req.InstrumentID = INSTRUMENT_ID;
+            api.ReqQryInvestorPositionDetail(new ThostFtdcQryInvestorPositionDetailField() { BrokerID=BROKER_ID,InstrumentID=INSTRUMENT_ID,InvestorID=INVESTOR_ID}, ++iRequestID);
             int iResult = api.ReqQryInvestorPosition(req, ++iRequestID);
             Console.WriteLine("--->>> 请求查询投资者持仓: " + ((iResult == 0) ? "成功" : "失败"));
         }
 
         void OnRspQryInvestorPosition(ThostFtdcInvestorPositionField pInvestorPosition, ThostFtdcRspInfoField pRspInfo, int nRequestID, bool bIsLast)
         {
+            Console.WriteLine(pInvestorPosition);
             __DEBUGPF__();
             if (bIsLast && !IsErrorRspInfo(pRspInfo))
             {
+                //Console.WriteLine(pRspInfo.ErrorMsg);
                 // 报单录入请求
                 ReqOrderInsert();
             }
@@ -205,11 +221,11 @@ namespace DemoTrader
             ///买卖方向: 
             req.Direction = DIRECTION;
             ///组合开平标志: 开仓
-            req.CombOffsetFlag_0 = CTP.EnumOffsetFlagType.Open;
+            req.CombOffsetFlag = CTP.EnumOffsetFlagType.Open;
 
 
             ///组合投机套保标志
-            req.CombHedgeFlag_0 = CTP.EnumHedgeFlagType.Speculation;
+            req.CombHedgeFlag = CTP.EnumHedgeFlagType.Speculation;
             ///价格
             req.LimitPrice = LIMIT_PRICE;
             ///数量: 1

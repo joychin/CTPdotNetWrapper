@@ -1,4 +1,6 @@
-// ÕâÊÇÖ÷ DLL ÎÄ¼þ¡£
+ï»¿// è¿™æ˜¯ä¸» DLL æ–‡ä»¶ã€‚
 
-#include "StdAfx.h"
+#include "stdafx.h"
+
+#include "CTP.h"
 

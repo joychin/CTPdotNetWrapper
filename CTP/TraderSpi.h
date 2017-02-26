@@ -1,407 +1,277 @@
-/////////////////////////////////////////////////////////////////////////
-/// ÉÏÆÚ¼¼Êõ CTP C++ => .Net Framework Adapter
-/// Author:	shawn666.liu@gmail.com
+ï»¿/////////////////////////////////////////////////////////////////////////
+/// ä¸ŠæœŸæŠ€æœ¯ CTP C++ => .Net Framework Adapter
+/// Author:	shawn666.liu@hotmail.com
 /// Date: 20120422
 /////////////////////////////////////////////////////////////////////////
 
+
+// V1,V2å…±äº«æ­¤æ–‡ä»¶
+
+
 #pragma once
 
-#include "Util.h"
-#include <vcclr.h>
-#include "Callbacks.h"
+#include "TraderSpiBase.h"
 #include "CTPTraderAdapter.h"
+
 
 namespace Native
 {
-	/// ·ÇÍĞ¹ÜÀà
-	class CTraderSpi : public CThostFtdcTraderSpi
+	/// éæ‰˜ç®¡ç±»
+	class CTraderSpi : public CTraderSpiBase
 	{
 	public:
-		/// ¹¹Ôìº¯Êı
+		/// æ„é€ å‡½æ•°
 		CTraderSpi(CTPTraderAdapter^ pAdapter);
 
-		///µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨½¨Á¢ÆğÍ¨ĞÅÁ¬½ÓÊ±£¨»¹Î´µÇÂ¼Ç°£©£¬¸Ã·½·¨±»µ÷ÓÃ¡£
+		///å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°å»ºç«‹èµ·é€šä¿¡è¿æ¥æ—¶ï¼ˆè¿˜æœªç™»å½•å‰ï¼‰ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚
 		virtual void OnFrontConnected();
 
-		///µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨Í¨ĞÅÁ¬½Ó¶Ï¿ªÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£µ±·¢ÉúÕâ¸öÇé¿öºó£¬API»á×Ô¶¯ÖØĞÂÁ¬½Ó£¬¿Í»§¶Ë¿É²»×ö´¦Àí¡£
-		///@param nReason ´íÎóÔ­Òò
-		///        0x1001 ÍøÂç¶ÁÊ§°Ü
-		///        0x1002 ÍøÂçĞ´Ê§°Ü
-		///        0x2001 ½ÓÊÕĞÄÌø³¬Ê±
-		///        0x2002 ·¢ËÍĞÄÌøÊ§°Ü
-		///        0x2003 ÊÕµ½´íÎó±¨ÎÄ
+		///å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°é€šä¿¡è¿æ¥æ–­å¼€æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚å½“å‘ç”Ÿè¿™ä¸ªæƒ…å†µåï¼ŒAPIä¼šè‡ªåŠ¨é‡æ–°è¿æ¥ï¼Œå®¢æˆ·ç«¯å¯ä¸åšå¤„ç†ã€‚
+		///@param nReason é”™è¯¯åŸå› 
+		///        0x1001 ç½‘ç»œè¯»å¤±è´¥
+		///        0x1002 ç½‘ç»œå†™å¤±è´¥
+		///        0x2001 æ¥æ”¶å¿ƒè·³è¶…æ—¶
+		///        0x2002 å‘é€å¿ƒè·³å¤±è´¥
+		///        0x2003 æ”¶åˆ°é”™è¯¯æŠ¥æ–‡
 		virtual void OnFrontDisconnected(int nReason);
 
-		///ĞÄÌø³¬Ê±¾¯¸æ¡£µ±³¤Ê±¼äÎ´ÊÕµ½±¨ÎÄÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£
-		///@param nTimeLapse ¾àÀëÉÏ´Î½ÓÊÕ±¨ÎÄµÄÊ±¼ä
+		///å¿ƒè·³è¶…æ—¶è­¦å‘Šã€‚å½“é•¿æ—¶é—´æœªæ”¶åˆ°æŠ¥æ–‡æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚
+		///@param nTimeLapse è·ç¦»ä¸Šæ¬¡æ¥æ”¶æŠ¥æ–‡çš„æ—¶é—´
 		virtual void OnHeartBeatWarning(int nTimeLapse);
 
-		///¿Í»§¶ËÈÏÖ¤ÏìÓ¦
+		///å®¢æˆ·ç«¯è®¤è¯å“åº”
 		virtual void OnRspAuthenticate(CThostFtdcRspAuthenticateField *pRspAuthenticateField, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///µÇÂ¼ÇëÇóÏìÓ¦
+		///ç™»å½•è¯·æ±‚å“åº”
 		virtual void OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///µÇ³öÇëÇóÏìÓ¦
+		///ç™»å‡ºè¯·æ±‚å“åº”
 		virtual void OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÓÃ»§¿ÚÁî¸üĞÂÇëÇóÏìÓ¦
+		///ç”¨æˆ·å£ä»¤æ›´æ–°è¯·æ±‚å“åº”
 		virtual void OnRspUserPasswordUpdate(CThostFtdcUserPasswordUpdateField *pUserPasswordUpdate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///×Ê½ğÕË»§¿ÚÁî¸üĞÂÇëÇóÏìÓ¦
+		///èµ„é‡‘è´¦æˆ·å£ä»¤æ›´æ–°è¯·æ±‚å“åº”
 		virtual void OnRspTradingAccountPasswordUpdate(CThostFtdcTradingAccountPasswordUpdateField *pTradingAccountPasswordUpdate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///±¨µ¥Â¼ÈëÇëÇóÏìÓ¦
+		///æŠ¥å•å½•å…¥è¯·æ±‚å“åº”
 		virtual void OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///Ô¤Âñµ¥Â¼ÈëÇëÇóÏìÓ¦
+		///é¢„åŸ‹å•å½•å…¥è¯·æ±‚å“åº”
 		virtual void OnRspParkedOrderInsert(CThostFtdcParkedOrderField *pParkedOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///Ô¤Âñ³·µ¥Â¼ÈëÇëÇóÏìÓ¦
+		///é¢„åŸ‹æ’¤å•å½•å…¥è¯·æ±‚å“åº”
 		virtual void OnRspParkedOrderAction(CThostFtdcParkedOrderActionField *pParkedOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///±¨µ¥²Ù×÷ÇëÇóÏìÓ¦
+		///æŠ¥å•æ“ä½œè¯·æ±‚å“åº”
 		virtual void OnRspOrderAction(CThostFtdcInputOrderActionField *pInputOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///²éÑ¯×î´ó±¨µ¥ÊıÁ¿ÏìÓ¦
+		///æŸ¥è¯¢æœ€å¤§æŠ¥å•æ•°é‡å“åº”
 		virtual void OnRspQueryMaxOrderVolume(CThostFtdcQueryMaxOrderVolumeField *pQueryMaxOrderVolume, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///Í¶×ÊÕß½áËã½á¹ûÈ·ÈÏÏìÓ¦
+		///æŠ•èµ„è€…ç»“ç®—ç»“æœç¡®è®¤å“åº”
 		virtual void OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField *pSettlementInfoConfirm, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///É¾³ıÔ¤Âñµ¥ÏìÓ¦
+		///åˆ é™¤é¢„åŸ‹å•å“åº”
 		virtual void OnRspRemoveParkedOrder(CThostFtdcRemoveParkedOrderField *pRemoveParkedOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///É¾³ıÔ¤Âñ³·µ¥ÏìÓ¦
+		///åˆ é™¤é¢„åŸ‹æ’¤å•å“åº”
 		virtual void OnRspRemoveParkedOrderAction(CThostFtdcRemoveParkedOrderActionField *pRemoveParkedOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯±¨µ¥ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢æŠ¥å•å“åº”
 		virtual void OnRspQryOrder(CThostFtdcOrderField *pOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯³É½»ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢æˆäº¤å“åº”
 		virtual void OnRspQryTrade(CThostFtdcTradeField *pTrade, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æŒä»“å“åº”
 		virtual void OnRspQryInvestorPosition(CThostFtdcInvestorPositionField *pInvestorPosition, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯×Ê½ğÕË»§ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢èµ„é‡‘è´¦æˆ·å“åº”
 		virtual void OnRspQryTradingAccount(CThostFtdcTradingAccountField *pTradingAccount, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯Í¶×ÊÕßÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…å“åº”
 		virtual void OnRspQryInvestor(CThostFtdcInvestorField *pInvestor, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯½»Ò×±àÂëÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“ç¼–ç å“åº”
 		virtual void OnRspQryTradingCode(CThostFtdcTradingCodeField *pTradingCode, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯ºÏÔ¼±£Ö¤½ğÂÊÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢åˆçº¦ä¿è¯é‡‘ç‡å“åº”
 		virtual void OnRspQryInstrumentMarginRate(CThostFtdcInstrumentMarginRateField *pInstrumentMarginRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯ºÏÔ¼ÊÖĞø·ÑÂÊÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢åˆçº¦æ‰‹ç»­è´¹ç‡å“åº”
 		virtual void OnRspQryInstrumentCommissionRate(CThostFtdcInstrumentCommissionRateField *pInstrumentCommissionRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯½»Ò×ËùÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€å“åº”
 		virtual void OnRspQryExchange(CThostFtdcExchangeField *pExchange, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯ºÏÔ¼ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢äº§å“å“åº”
+		virtual void OnRspQryProduct(CThostFtdcProductField *pProduct, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+		///è¯·æ±‚æŸ¥è¯¢åˆçº¦å“åº”
 		virtual void OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯ĞĞÇéÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢è¡Œæƒ…å“åº”
 		virtual void OnRspQryDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯Í¶×ÊÕß½áËã½á¹ûÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…ç»“ç®—ç»“æœå“åº”
 		virtual void OnRspQrySettlementInfo(CThostFtdcSettlementInfoField *pSettlementInfo, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯×ªÕÊÒøĞĞÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢è½¬å¸é“¶è¡Œå“åº”
 		virtual void OnRspQryTransferBank(CThostFtdcTransferBankField *pTransferBank, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æŒä»“æ˜ç»†å“åº”
 		virtual void OnRspQryInvestorPositionDetail(CThostFtdcInvestorPositionDetailField *pInvestorPositionDetail, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯¿Í»§Í¨ÖªÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢å®¢æˆ·é€šçŸ¥å“åº”
 		virtual void OnRspQryNotice(CThostFtdcNoticeField *pNotice, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯½áËãĞÅÏ¢È·ÈÏÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢ç»“ç®—ä¿¡æ¯ç¡®è®¤å“åº”
 		virtual void OnRspQrySettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField *pSettlementInfoConfirm, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯Í¶×ÊÕß³Ö²ÖÃ÷Ï¸ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…æŒä»“æ˜ç»†å“åº”
 		virtual void OnRspQryInvestorPositionCombineDetail(CThostFtdcInvestorPositionCombineDetailField *pInvestorPositionCombineDetail, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///²éÑ¯±£Ö¤½ğ¼à¹ÜÏµÍ³¾­¼Í¹«Ë¾×Ê½ğÕË»§ÃÜÔ¿ÏìÓ¦
+		///æŸ¥è¯¢ä¿è¯é‡‘ç›‘ç®¡ç³»ç»Ÿç»çºªå…¬å¸èµ„é‡‘è´¦æˆ·å¯†é’¥å“åº”
 		virtual void OnRspQryCFMMCTradingAccountKey(CThostFtdcCFMMCTradingAccountKeyField *pCFMMCTradingAccountKey, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯²Öµ¥ÕÛµÖĞÅÏ¢ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢ä»“å•æŠ˜æŠµä¿¡æ¯å“åº”
 		virtual void OnRspQryEWarrantOffset(CThostFtdcEWarrantOffsetField *pEWarrantOffset, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯×ªÕÊÁ÷Ë®ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢æŠ•èµ„è€…å“ç§/è·¨å“ç§ä¿è¯é‡‘å“åº”
+		virtual void OnRspQryInvestorProductGroupMargin(CThostFtdcInvestorProductGroupMarginField *pInvestorProductGroupMargin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+		///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€ä¿è¯é‡‘ç‡å“åº”
+		virtual void OnRspQryExchangeMarginRate(CThostFtdcExchangeMarginRateField *pExchangeMarginRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+		///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“æ‰€è°ƒæ•´ä¿è¯é‡‘ç‡å“åº”
+		virtual void OnRspQryExchangeMarginRateAdjust(CThostFtdcExchangeMarginRateAdjustField *pExchangeMarginRateAdjust, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+		///è¯·æ±‚æŸ¥è¯¢æ±‡ç‡å“åº”
+		virtual void OnRspQryExchangeRate(CThostFtdcExchangeRateField *pExchangeRate, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+		///è¯·æ±‚æŸ¥è¯¢äºŒçº§ä»£ç†æ“ä½œå‘˜é“¶æœŸæƒé™å“åº”
+		virtual void OnRspQrySecAgentACIDMap(CThostFtdcSecAgentACIDMapField *pSecAgentACIDMap, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+		///è¯·æ±‚æŸ¥è¯¢è½¬å¸æµæ°´å“åº”
 		virtual void OnRspQryTransferSerial(CThostFtdcTransferSerialField *pTransferSerial, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯ÒøÆÚÇ©Ô¼¹ØÏµÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢é“¶æœŸç­¾çº¦å…³ç³»å“åº”
 		virtual void OnRspQryAccountregister(CThostFtdcAccountregisterField *pAccountregister, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///´íÎóÓ¦´ğ
+		///é”™è¯¯åº”ç­”
 		virtual void OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///±¨µ¥Í¨Öª
+		///æŠ¥å•é€šçŸ¥
 		virtual void OnRtnOrder(CThostFtdcOrderField *pOrder);
 
-		///³É½»Í¨Öª
+		///æˆäº¤é€šçŸ¥
 		virtual void OnRtnTrade(CThostFtdcTradeField *pTrade);
 
-		///±¨µ¥Â¼Èë´íÎó»Ø±¨
+		///æŠ¥å•å½•å…¥é”™è¯¯å›æŠ¥
 		virtual void OnErrRtnOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo);
 
-		///±¨µ¥²Ù×÷´íÎó»Ø±¨
+		///æŠ¥å•æ“ä½œé”™è¯¯å›æŠ¥
 		virtual void OnErrRtnOrderAction(CThostFtdcOrderActionField *pOrderAction, CThostFtdcRspInfoField *pRspInfo);
 
-		///ºÏÔ¼½»Ò××´Ì¬Í¨Öª
+		///åˆçº¦äº¤æ˜“çŠ¶æ€é€šçŸ¥
 		virtual void OnRtnInstrumentStatus(CThostFtdcInstrumentStatusField *pInstrumentStatus);
 
-		///½»Ò×Í¨Öª
+		///äº¤æ˜“é€šçŸ¥
 		virtual void OnRtnTradingNotice(CThostFtdcTradingNoticeInfoField *pTradingNoticeInfo);
 
-		///ÌáÊ¾Ìõ¼şµ¥Ğ£Ñé´íÎó
+		///æç¤ºæ¡ä»¶å•æ ¡éªŒé”™è¯¯
 		virtual void OnRtnErrorConditionalOrder(CThostFtdcErrorConditionalOrderField *pErrorConditionalOrder);
 
-		///ÇëÇó²éÑ¯Ç©Ô¼ÒøĞĞÏìÓ¦
+		///ä¿è¯é‡‘ç›‘æ§ä¸­å¿ƒç”¨æˆ·ä»¤ç‰Œ
+		virtual void OnRtnCFMMCTradingAccountToken(CThostFtdcCFMMCTradingAccountTokenField *pCFMMCTradingAccountToken);
+
+		///è¯·æ±‚æŸ¥è¯¢ç­¾çº¦é“¶è¡Œå“åº”
 		virtual void OnRspQryContractBank(CThostFtdcContractBankField *pContractBank, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯Ô¤Âñµ¥ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢é¢„åŸ‹å•å“åº”
 		virtual void OnRspQryParkedOrder(CThostFtdcParkedOrderField *pParkedOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯Ô¤Âñ³·µ¥ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢é¢„åŸ‹æ’¤å•å“åº”
 		virtual void OnRspQryParkedOrderAction(CThostFtdcParkedOrderActionField *pParkedOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯½»Ò×Í¨ÖªÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢äº¤æ˜“é€šçŸ¥å“åº”
 		virtual void OnRspQryTradingNotice(CThostFtdcTradingNoticeField *pTradingNotice, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯¾­¼Í¹«Ë¾½»Ò×²ÎÊıÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢ç»çºªå…¬å¸äº¤æ˜“å‚æ•°å“åº”
 		virtual void OnRspQryBrokerTradingParams(CThostFtdcBrokerTradingParamsField *pBrokerTradingParams, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÇëÇó²éÑ¯¾­¼Í¹«Ë¾½»Ò×Ëã·¨ÏìÓ¦
+		///è¯·æ±‚æŸ¥è¯¢ç»çºªå…¬å¸äº¤æ˜“ç®—æ³•å“åº”
 		virtual void OnRspQryBrokerTradingAlgos(CThostFtdcBrokerTradingAlgosField *pBrokerTradingAlgos, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÒøĞĞ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÍ¨Öª
+		///è¯·æ±‚æŸ¥è¯¢ç›‘æ§ä¸­å¿ƒç”¨æˆ·ä»¤ç‰Œ
+		virtual void OnRspQueryCFMMCTradingAccountToken(CThostFtdcQueryCFMMCTradingAccountTokenField *pQueryCFMMCTradingAccountToken, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+
+		///é“¶è¡Œå‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é€šçŸ¥
 		virtual void OnRtnFromBankToFutureByBank(CThostFtdcRspTransferField *pRspTransfer);
 
-		///ÒøĞĞ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÍ¨Öª
+		///é“¶è¡Œå‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé€šçŸ¥
 		virtual void OnRtnFromFutureToBankByBank(CThostFtdcRspTransferField *pRspTransfer);
 
-		///ÒøĞĞ·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÍ¨Öª
+		///é“¶è¡Œå‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§é€šçŸ¥
 		virtual void OnRtnRepealFromBankToFutureByBank(CThostFtdcRspRepealField *pRspRepeal);
 
-		///ÒøĞĞ·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÍ¨Öª
+		///é“¶è¡Œå‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œé€šçŸ¥
 		virtual void OnRtnRepealFromFutureToBankByBank(CThostFtdcRspRepealField *pRspRepeal);
 
-		///ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÍ¨Öª
+		///æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é€šçŸ¥
 		virtual void OnRtnFromBankToFutureByFuture(CThostFtdcRspTransferField *pRspTransfer);
 
-		///ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÍ¨Öª
+		///æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé€šçŸ¥
 		virtual void OnRtnFromFutureToBankByFuture(CThostFtdcRspTransferField *pRspTransfer);
 
-		///ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
+		///ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§è¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
 		virtual void OnRtnRepealFromBankToFutureByFutureManual(CThostFtdcRspRepealField *pRspRepeal);
 
-		///ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
+		///ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œè¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
 		virtual void OnRtnRepealFromFutureToBankByFutureManual(CThostFtdcRspRepealField *pRspRepeal);
 
-		///ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶îÍ¨Öª
+		///æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢é€šçŸ¥
 		virtual void OnRtnQueryBankBalanceByFuture(CThostFtdcNotifyQueryAccountField *pNotifyQueryAccount);
 
-		///ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õ´íÎó»Ø±¨
+		///æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§é”™è¯¯å›æŠ¥
 		virtual void OnErrRtnBankToFutureByFuture(CThostFtdcReqTransferField *pReqTransfer, CThostFtdcRspInfoField *pRspInfo);
 
-		///ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞ´íÎó»Ø±¨
+		///æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œé”™è¯¯å›æŠ¥
 		virtual void OnErrRtnFutureToBankByFuture(CThostFtdcReqTransferField *pReqTransfer, CThostFtdcRspInfoField *pRspInfo);
 
-		///ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õ´íÎó»Ø±¨
+		///ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§é”™è¯¯å›æŠ¥
 		virtual void OnErrRtnRepealBankToFutureByFutureManual(CThostFtdcReqRepealField *pReqRepeal, CThostFtdcRspInfoField *pRspInfo);
 
-		///ÏµÍ³ÔËĞĞÊ±ÆÚ»õ¶ËÊÖ¹¤·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞ´íÎó»Ø±¨
+		///ç³»ç»Ÿè¿è¡Œæ—¶æœŸè´§ç«¯æ‰‹å·¥å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œé”™è¯¯å›æŠ¥
 		virtual void OnErrRtnRepealFutureToBankByFutureManual(CThostFtdcReqRepealField *pReqRepeal, CThostFtdcRspInfoField *pRspInfo);
 
-		///ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶î´íÎó»Ø±¨
+		///æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢é”™è¯¯å›æŠ¥
 		virtual void OnErrRtnQueryBankBalanceByFuture(CThostFtdcReqQueryAccountField *pReqQueryAccount, CThostFtdcRspInfoField *pRspInfo);
 
-		///ÆÚ»õ·¢Æğ³åÕıÒøĞĞ×ªÆÚ»õÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
+		///æœŸè´§å‘èµ·å†²æ­£é“¶è¡Œè½¬æœŸè´§è¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
 		virtual void OnRtnRepealFromBankToFutureByFuture(CThostFtdcRspRepealField *pRspRepeal);
 
-		///ÆÚ»õ·¢Æğ³åÕıÆÚ»õ×ªÒøĞĞÇëÇó£¬ÒøĞĞ´¦ÀíÍê±Ïºó±¨ÅÌ·¢»ØµÄÍ¨Öª
+		///æœŸè´§å‘èµ·å†²æ­£æœŸè´§è½¬é“¶è¡Œè¯·æ±‚ï¼Œé“¶è¡Œå¤„ç†å®Œæ¯•åæŠ¥ç›˜å‘å›çš„é€šçŸ¥
 		virtual void OnRtnRepealFromFutureToBankByFuture(CThostFtdcRspRepealField *pRspRepeal);
 
-		///ÆÚ»õ·¢ÆğÒøĞĞ×Ê½ğ×ªÆÚ»õÓ¦´ğ
+		///æœŸè´§å‘èµ·é“¶è¡Œèµ„é‡‘è½¬æœŸè´§åº”ç­”
 		virtual void OnRspFromBankToFutureByFuture(CThostFtdcReqTransferField *pReqTransfer, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÆÚ»õ·¢ÆğÆÚ»õ×Ê½ğ×ªÒøĞĞÓ¦´ğ
+		///æœŸè´§å‘èµ·æœŸè´§èµ„é‡‘è½¬é“¶è¡Œåº”ç­”
 		virtual void OnRspFromFutureToBankByFuture(CThostFtdcReqTransferField *pReqTransfer, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÆÚ»õ·¢Æğ²éÑ¯ÒøĞĞÓà¶îÓ¦´ğ
+		///æœŸè´§å‘èµ·æŸ¥è¯¢é“¶è¡Œä½™é¢åº”ç­”
 		virtual void OnRspQueryBankAccountMoneyByFuture(CThostFtdcReqQueryAccountField *pReqQueryAccount, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-		///ÒøĞĞ·¢ÆğÒøÆÚ¿ª»§Í¨Öª
+		///é“¶è¡Œå‘èµ·é“¶æœŸå¼€æˆ·é€šçŸ¥
 		virtual void OnRtnOpenAccountByBank(CThostFtdcOpenAccountField *pOpenAccount);
 
-		///ÒøĞĞ·¢ÆğÒøÆÚÏú»§Í¨Öª
+		///é“¶è¡Œå‘èµ·é“¶æœŸé”€æˆ·é€šçŸ¥
 		virtual void OnRtnCancelAccountByBank(CThostFtdcCancelAccountField *pCancelAccount);
 
-		///ÒøĞĞ·¢Æğ±ä¸üÒøĞĞÕËºÅÍ¨Öª
+		///é“¶è¡Œå‘èµ·å˜æ›´é“¶è¡Œè´¦å·é€šçŸ¥
 		virtual void OnRtnChangeAccountByBank(CThostFtdcChangeAccountField *pChangeAccount);
-
-#ifdef __CTP_MA__
-		// »Øµ÷º¯Êı
-	public:
-		Callback_OnFrontConnected p_OnFrontConnected;
-		Callback_OnFrontDisconnected p_OnFrontDisconnected;
-		Callback_OnHeartBeatWarning p_OnHeartBeatWarning;
-		Callback_OnRspAuthenticate p_OnRspAuthenticate;
-		Callback_OnRspUserLogin p_OnRspUserLogin;
-		Callback_OnRspUserLogout p_OnRspUserLogout;
-		Callback_OnRspUserPasswordUpdate p_OnRspUserPasswordUpdate;
-		Callback_OnRspTradingAccountPasswordUpdate p_OnRspTradingAccountPasswordUpdate;
-		Callback_OnRspOrderInsert p_OnRspOrderInsert;
-		Callback_OnRspParkedOrderInsert p_OnRspParkedOrderInsert;
-		Callback_OnRspParkedOrderAction p_OnRspParkedOrderAction;
-		Callback_OnRspOrderAction p_OnRspOrderAction;
-		Callback_OnRspQueryMaxOrderVolume p_OnRspQueryMaxOrderVolume;
-		Callback_OnRspSettlementInfoConfirm p_OnRspSettlementInfoConfirm;
-		Callback_OnRspRemoveParkedOrder p_OnRspRemoveParkedOrder;
-		Callback_OnRspRemoveParkedOrderAction p_OnRspRemoveParkedOrderAction;
-		Callback_OnRspQryOrder p_OnRspQryOrder;
-		Callback_OnRspQryTrade p_OnRspQryTrade;
-		Callback_OnRspQryInvestorPosition p_OnRspQryInvestorPosition;
-		Callback_OnRspQryTradingAccount p_OnRspQryTradingAccount;
-		Callback_OnRspQryInvestor p_OnRspQryInvestor;
-		Callback_OnRspQryTradingCode p_OnRspQryTradingCode;
-		Callback_OnRspQryInstrumentMarginRate p_OnRspQryInstrumentMarginRate;
-		Callback_OnRspQryInstrumentCommissionRate p_OnRspQryInstrumentCommissionRate;
-		Callback_OnRspQryExchange p_OnRspQryExchange;
-		Callback_OnRspQryInstrument p_OnRspQryInstrument;
-		Callback_OnRspQryDepthMarketData p_OnRspQryDepthMarketData;
-		Callback_OnRspQrySettlementInfo p_OnRspQrySettlementInfo;
-		Callback_OnRspQryTransferBank p_OnRspQryTransferBank;
-		Callback_OnRspQryInvestorPositionDetail p_OnRspQryInvestorPositionDetail;
-		Callback_OnRspQryNotice p_OnRspQryNotice;
-		Callback_OnRspQrySettlementInfoConfirm p_OnRspQrySettlementInfoConfirm;
-		Callback_OnRspQryInvestorPositionCombineDetail p_OnRspQryInvestorPositionCombineDetail;
-		Callback_OnRspQryCFMMCTradingAccountKey p_OnRspQryCFMMCTradingAccountKey;
-		Callback_OnRspQryEWarrantOffset p_OnRspQryEWarrantOffset;
-		Callback_OnRspQryTransferSerial p_OnRspQryTransferSerial;
-		Callback_OnRspQryAccountregister p_OnRspQryAccountregister;
-		Callback_OnRspError p_OnRspError;
-		Callback_OnRtnOrder p_OnRtnOrder;
-		Callback_OnRtnTrade p_OnRtnTrade;
-		Callback_OnErrRtnOrderInsert p_OnErrRtnOrderInsert;
-		Callback_OnErrRtnOrderAction p_OnErrRtnOrderAction;
-		Callback_OnRtnInstrumentStatus p_OnRtnInstrumentStatus;
-		Callback_OnRtnTradingNotice p_OnRtnTradingNotice;
-		Callback_OnRtnErrorConditionalOrder p_OnRtnErrorConditionalOrder;
-		Callback_OnRspQryContractBank p_OnRspQryContractBank;
-		Callback_OnRspQryParkedOrder p_OnRspQryParkedOrder;
-		Callback_OnRspQryParkedOrderAction p_OnRspQryParkedOrderAction;
-		Callback_OnRspQryTradingNotice p_OnRspQryTradingNotice;
-		Callback_OnRspQryBrokerTradingParams p_OnRspQryBrokerTradingParams;
-		Callback_OnRspQryBrokerTradingAlgos p_OnRspQryBrokerTradingAlgos;
-		Callback_OnRtnFromBankToFutureByBank p_OnRtnFromBankToFutureByBank;
-		Callback_OnRtnFromFutureToBankByBank p_OnRtnFromFutureToBankByBank;
-		Callback_OnRtnRepealFromBankToFutureByBank p_OnRtnRepealFromBankToFutureByBank;
-		Callback_OnRtnRepealFromFutureToBankByBank p_OnRtnRepealFromFutureToBankByBank;
-		Callback_OnRtnFromBankToFutureByFuture p_OnRtnFromBankToFutureByFuture;
-		Callback_OnRtnFromFutureToBankByFuture p_OnRtnFromFutureToBankByFuture;
-		Callback_OnRtnRepealFromBankToFutureByFutureManual p_OnRtnRepealFromBankToFutureByFutureManual;
-		Callback_OnRtnRepealFromFutureToBankByFutureManual p_OnRtnRepealFromFutureToBankByFutureManual;
-		Callback_OnRtnQueryBankBalanceByFuture p_OnRtnQueryBankBalanceByFuture;
-		Callback_OnErrRtnBankToFutureByFuture p_OnErrRtnBankToFutureByFuture;
-		Callback_OnErrRtnFutureToBankByFuture p_OnErrRtnFutureToBankByFuture;
-		Callback_OnErrRtnRepealBankToFutureByFutureManual p_OnErrRtnRepealBankToFutureByFutureManual;
-		Callback_OnErrRtnRepealFutureToBankByFutureManual p_OnErrRtnRepealFutureToBankByFutureManual;
-		Callback_OnErrRtnQueryBankBalanceByFuture p_OnErrRtnQueryBankBalanceByFuture;
-		Callback_OnRtnRepealFromBankToFutureByFuture p_OnRtnRepealFromBankToFutureByFuture;
-		Callback_OnRtnRepealFromFutureToBankByFuture p_OnRtnRepealFromFutureToBankByFuture;
-		Callback_OnRspFromBankToFutureByFuture p_OnRspFromBankToFutureByFuture;
-		Callback_OnRspFromFutureToBankByFuture p_OnRspFromFutureToBankByFuture;
-		Callback_OnRspQueryBankAccountMoneyByFuture p_OnRspQueryBankAccountMoneyByFuture;
-		Callback_OnRtnOpenAccountByBank p_OnRtnOpenAccountByBank;
-		Callback_OnRtnCancelAccountByBank p_OnRtnCancelAccountByBank;
-		Callback_OnRtnChangeAccountByBank p_OnRtnChangeAccountByBank;
-
-		// »Øµ÷º¯Êı¶ÔÓ¦µÄdelegate£¬±ØĞë±£³ÖÒ»·İ¶Ô¸ÃdeleageµÄÒıÓÃ£¬·ñÔòGC»á×Ô¶¯»ØÊÕ¸Ãdeleage²¢µ¼ÖÂÉÏÃæµÄ»Øµ÷º¯ÊıÊ§Ğ§
-		gcroot<Internal_FrontConnected^> d_FrontConnected;
-		gcroot<Internal_FrontDisconnected^> d_FrontDisconnected;
-		gcroot<Internal_HeartBeatWarning^> d_HeartBeatWarning;
-		gcroot<Internal_RspUserLogin^> d_RspUserLogin;
-		gcroot<Internal_RspUserLogout^> d_RspUserLogout;
-		gcroot<Internal_RspError^> d_RspError;
-
-		gcroot<Internal_RspAuthenticate^> d_RspAuthenticate;
-		gcroot<Internal_RspUserPasswordUpdate^> d_RspUserPasswordUpdate;
-		gcroot<Internal_RspTradingAccountPasswordUpdate^> d_RspTradingAccountPasswordUpdate;
-		gcroot<Internal_RspOrderInsert^> d_RspOrderInsert;
-		gcroot<Internal_RspParkedOrderInsert^> d_RspParkedOrderInsert;
-		gcroot<Internal_RspParkedOrderAction^> d_RspParkedOrderAction;
-		gcroot<Internal_RspOrderAction^> d_RspOrderAction;
-		gcroot<Internal_RspQueryMaxOrderVolume^> d_RspQueryMaxOrderVolume;
-		gcroot<Internal_RspSettlementInfoConfirm^> d_RspSettlementInfoConfirm;
-		gcroot<Internal_RspRemoveParkedOrder^> d_RspRemoveParkedOrder;
-		gcroot<Internal_RspRemoveParkedOrderAction^> d_RspRemoveParkedOrderAction;
-		gcroot<Internal_RspQryOrder^> d_RspQryOrder;
-		gcroot<Internal_RspQryTrade^> d_RspQryTrade;
-		gcroot<Internal_RspQryInvestorPosition^> d_RspQryInvestorPosition;
-		gcroot<Internal_RspQryTradingAccount^> d_RspQryTradingAccount;
-		gcroot<Internal_RspQryInvestor^> d_RspQryInvestor;
-		gcroot<Internal_RspQryTradingCode^> d_RspQryTradingCode;
-		gcroot<Internal_RspQryInstrumentMarginRate^> d_RspQryInstrumentMarginRate;
-		gcroot<Internal_RspQryInstrumentCommissionRate^> d_RspQryInstrumentCommissionRate;
-		gcroot<Internal_RspQryExchange^> d_RspQryExchange;
-		gcroot<Internal_RspQryInstrument^> d_RspQryInstrument;
-		gcroot<Internal_RspQryDepthMarketData^> d_RspQryDepthMarketData;
-		gcroot<Internal_RspQrySettlementInfo^> d_RspQrySettlementInfo;
-		gcroot<Internal_RspQryTransferBank^> d_RspQryTransferBank;
-		gcroot<Internal_RspQryInvestorPositionDetail^> d_RspQryInvestorPositionDetail;
-		gcroot<Internal_RspQryNotice^> d_RspQryNotice;
-		gcroot<Internal_RspQrySettlementInfoConfirm^> d_RspQrySettlementInfoConfirm;
-		gcroot<Internal_RspQryInvestorPositionCombineDetail^> d_RspQryInvestorPositionCombineDetail;
-		gcroot<Internal_RspQryCFMMCTradingAccountKey^> d_RspQryCFMMCTradingAccountKey;
-		gcroot<Internal_RspQryEWarrantOffset^> d_RspQryEWarrantOffset;
-		gcroot<Internal_RspQryTransferSerial^> d_RspQryTransferSerial;
-		gcroot<Internal_RspQryAccountregister^> d_RspQryAccountregister;
-		gcroot<Internal_RtnOrder^> d_RtnOrder;
-		gcroot<Internal_RtnTrade^> d_RtnTrade;
-		gcroot<Internal_ErrRtnOrderInsert^> d_ErrRtnOrderInsert;
-		gcroot<Internal_ErrRtnOrderAction^> d_ErrRtnOrderAction;
-		gcroot<Internal_RtnInstrumentStatus^> d_RtnInstrumentStatus;
-		gcroot<Internal_RtnTradingNotice^> d_RtnTradingNotice;
-		gcroot<Internal_RtnErrorConditionalOrder^> d_RtnErrorConditionalOrder;
-		gcroot<Internal_RspQryContractBank^> d_RspQryContractBank;
-		gcroot<Internal_RspQryParkedOrder^> d_RspQryParkedOrder;
-		gcroot<Internal_RspQryParkedOrderAction^> d_RspQryParkedOrderAction;
-		gcroot<Internal_RspQryTradingNotice^> d_RspQryTradingNotice;
-		gcroot<Internal_RspQryBrokerTradingParams^> d_RspQryBrokerTradingParams;
-		gcroot<Internal_RspQryBrokerTradingAlgos^> d_RspQryBrokerTradingAlgos;
-		gcroot<Internal_RtnFromBankToFutureByBank^> d_RtnFromBankToFutureByBank;
-		gcroot<Internal_RtnFromFutureToBankByBank^> d_RtnFromFutureToBankByBank;
-		gcroot<Internal_RtnRepealFromBankToFutureByBank^> d_RtnRepealFromBankToFutureByBank;
-		gcroot<Internal_RtnRepealFromFutureToBankByBank^> d_RtnRepealFromFutureToBankByBank;
-		gcroot<Internal_RtnFromBankToFutureByFuture^> d_RtnFromBankToFutureByFuture;
-		gcroot<Internal_RtnFromFutureToBankByFuture^> d_RtnFromFutureToBankByFuture;
-		gcroot<Internal_RtnRepealFromBankToFutureByFutureManual^> d_RtnRepealFromBankToFutureByFutureManual;
-		gcroot<Internal_RtnRepealFromFutureToBankByFutureManual^> d_RtnRepealFromFutureToBankByFutureManual;
-		gcroot<Internal_RtnQueryBankBalanceByFuture^> d_RtnQueryBankBalanceByFuture;
-		gcroot<Internal_ErrRtnBankToFutureByFuture^> d_ErrRtnBankToFutureByFuture;
-		gcroot<Internal_ErrRtnFutureToBankByFuture^> d_ErrRtnFutureToBankByFuture;
-		gcroot<Internal_ErrRtnRepealBankToFutureByFutureManual^> d_ErrRtnRepealBankToFutureByFutureManual;
-		gcroot<Internal_ErrRtnRepealFutureToBankByFutureManual^> d_ErrRtnRepealFutureToBankByFutureManual;
-		gcroot<Internal_ErrRtnQueryBankBalanceByFuture^> d_ErrRtnQueryBankBalanceByFuture;
-		gcroot<Internal_RtnRepealFromBankToFutureByFuture^> d_RtnRepealFromBankToFutureByFuture;
-		gcroot<Internal_RtnRepealFromFutureToBankByFuture^> d_RtnRepealFromFutureToBankByFuture;
-		gcroot<Internal_RspFromBankToFutureByFuture^> d_RspFromBankToFutureByFuture;
-		gcroot<Internal_RspFromFutureToBankByFuture^> d_RspFromFutureToBankByFuture;
-		gcroot<Internal_RspQueryBankAccountMoneyByFuture^> d_RspQueryBankAccountMoneyByFuture;
-		gcroot<Internal_RtnOpenAccountByBank^> d_RtnOpenAccountByBank;
-		gcroot<Internal_RtnCancelAccountByBank^> d_RtnCancelAccountByBank;
-		gcroot<Internal_RtnChangeAccountByBank^> d_RtnChangeAccountByBank;
-#else
-	private:
-		gcroot<CTPTraderAdapter^> m_pAdapter;
-#endif
 
 	};
 
