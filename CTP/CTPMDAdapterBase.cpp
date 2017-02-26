@@ -1,8 +1,4 @@
-﻿
-// V1,V2共享此文件
-
-
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 #include "MdSpi.h"
 #include "CTPMDAdapterBase.h"
 

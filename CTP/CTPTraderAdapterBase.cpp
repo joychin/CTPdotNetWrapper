@@ -1,8 +1,4 @@
 ﻿
-
-// V1,V2共享此文件
-
-
 #include "StdAfx.h"
 #include "TraderSpi.h"
 #include "CTPTraderAdapterBase.h"

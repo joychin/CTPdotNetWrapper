@@ -1,8 +1,5 @@
 ﻿
 
-// V1,V2共享此文件
-
-
 #include "StdAfx.h"
 #include "Util.h"
 

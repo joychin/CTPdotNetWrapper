@@ -1,14 +1,4 @@
-﻿/////////////////////////////////////////////////////////////////////////
-/// 上期技术 CTP C++ ==> .Net Framework Adapter
-/// Author:	shawn666.liu@hotmail.com
-/// Date: 20120420
-/////////////////////////////////////////////////////////////////////////
-
-
-// V1,V2共享此文件
-
-
-#pragma once
+﻿#pragma once
 
 #include "Util.h"
 #include "..\ThostTraderApi\ThostFtdcMdApi.h"
