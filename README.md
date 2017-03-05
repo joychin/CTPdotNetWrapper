@@ -1,5 +1,6 @@
 # CTPdotNetWrapper
 
+[![Build status](https://ci.appveyor.com/api/projects/status/biiillpk0ar6stv7?svg=true)](https://ci.appveyor.com/project/joychin/ctpdotnetwrapper)
 
 20160606版本的CTP
 
