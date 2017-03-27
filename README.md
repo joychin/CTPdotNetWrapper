@@ -7,7 +7,7 @@
 
 下载编译好的版本： https://github.com/joychin/CTPdotNetWrapper/releases
 
-由盛泰环球投资管理有限公司赞助开发：
-![Image of Sponsor](http://www.suntideglobal.com/Images/Icons/logo-hori.png)
-----------------------------
-感谢shawn666.liu@hotmail.com
+由[盛泰环球投资管理有限公司](http://www.suntideglobal.com)赞助开发：
+[![Image of Sponsor](http://www.suntideglobal.com/Images/Icons/logo-hori.png)]
+---------------------------------------------------------------------------------------------
+感谢shawn666.liu@hotmail.com的开源示例代码。
