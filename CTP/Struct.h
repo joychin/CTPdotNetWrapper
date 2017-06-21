@@ -9730,14 +9730,17 @@ namespace CTP
 		/// 买卖方向
 		/// </summary>
 		EnumDirectionType Direction;
+
 		/// <summary>
 		/// 组合开平标志
-		/// </summary>
-		EnumOffsetFlagType CombOffsetFlag;
+		/// </summary>		
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		EnumHedgeFlagType CombHedgeFlag;
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;
 		/// <summary>
 		/// 价格
 		/// </summary>
@@ -9875,8 +9878,9 @@ namespace CTP
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>
-		EnumOffsetFlagType CombOffsetFlag;
-		/// <summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;
+		/*/// <summary>
 		/// 组合开平标志
 		/// </summary>
 		EnumOffsetFlagType CombOffsetFlag_1;
@@ -9891,12 +9895,13 @@ namespace CTP
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>
-		EnumOffsetFlagType CombOffsetFlag_4;
+		EnumOffsetFlagType CombOffsetFlag_4;*/
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		EnumHedgeFlagType CombHedgeFlag;
-		/// <summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;
+		/*/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
 		EnumHedgeFlagType CombHedgeFlag_1;
@@ -9911,7 +9916,7 @@ namespace CTP
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		EnumHedgeFlagType CombHedgeFlag_4;
+		EnumHedgeFlagType CombHedgeFlag_4;*/
 		/// <summary>
 		/// 价格
 		/// </summary>
