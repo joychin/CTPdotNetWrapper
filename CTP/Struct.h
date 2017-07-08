@@ -9730,17 +9730,57 @@ namespace CTP
 		/// 买卖方向
 		/// </summary>
 		EnumDirectionType Direction;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_0;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_1;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_2;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_3;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_4;
 
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>		
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombOffsetFlag;
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;*/
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombHedgeFlag;
+		EnumHedgeFlagType CombHedgeFlag_0;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_1;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_2;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_3;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_4;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;*/
 		/// <summary>
 		/// 价格
 		/// </summary>
@@ -9878,9 +9918,8 @@ namespace CTP
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombOffsetFlag;
-		/*/// <summary>
+		EnumOffsetFlagType CombOffsetFlag_0;
+		/// <summary>
 		/// 组合开平标志
 		/// </summary>
 		EnumOffsetFlagType CombOffsetFlag_1;
@@ -9895,13 +9934,27 @@ namespace CTP
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>
-		EnumOffsetFlagType CombOffsetFlag_4;*/
-		/// <summary>
+		EnumOffsetFlagType CombOffsetFlag_4;
+
+		/*/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;*/
+
+		/*/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
 		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombHedgeFlag;
-		/*/// <summary>
+		String^ CombHedgeFlag;*/
+
+
+
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_0;
+		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
 		EnumHedgeFlagType CombHedgeFlag_1;
@@ -9916,7 +9969,7 @@ namespace CTP
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		EnumHedgeFlagType CombHedgeFlag_4;*/
+		EnumHedgeFlagType CombHedgeFlag_4;
 		/// <summary>
 		/// 价格
 		/// </summary>
@@ -10180,13 +10233,53 @@ namespace CTP
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombOffsetFlag;
+		EnumOffsetFlagType CombOffsetFlag_0;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_1;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_2;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_3;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_4;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;*/
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombHedgeFlag;
+		EnumHedgeFlagType CombHedgeFlag_0;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_1;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_2;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_3;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_4;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;*/
 		/// <summary>
 		/// 价格
 		/// </summary>
@@ -17817,13 +17910,53 @@ namespace CTP
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombOffsetFlag;
+		EnumOffsetFlagType CombOffsetFlag_0;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_1;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_2;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_3;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_4;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;*/
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombHedgeFlag;
+		EnumHedgeFlagType CombHedgeFlag_0;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_1;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_2;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_3;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_4;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;*/
 		///价格
 		double	LimitPrice;
 		///数量
@@ -18424,13 +18557,53 @@ namespace CTP
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombOffsetFlag;
+		EnumOffsetFlagType CombOffsetFlag_0;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_1;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_2;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_3;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_4;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;*/
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombHedgeFlag;
+		EnumHedgeFlagType CombHedgeFlag_0;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_1;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_2;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_3;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_4;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;*/
 		///价格
 		double	LimitPrice;
 		///数量
@@ -18569,13 +18742,53 @@ namespace CTP
 		/// <summary>
 		/// 组合开平标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombOffsetFlag;
+		EnumOffsetFlagType CombOffsetFlag_0;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_1;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_2;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_3;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		EnumOffsetFlagType CombOffsetFlag_4;
+		/// <summary>
+		/// 组合开平标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombOffsetFlag;*/
 		/// <summary>
 		/// 组合投机套保标志
 		/// </summary>
-		[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
-		String^ CombHedgeFlag;
+		EnumHedgeFlagType CombHedgeFlag_0;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_1;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_2;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_3;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		EnumHedgeFlagType CombHedgeFlag_4;
+		/// <summary>
+		/// 组合投机套保标志
+		/// </summary>
+		/*[MarshalAs(UnmanagedType::ByValTStr, SizeConst = 5)]
+		String^ CombHedgeFlag;*/
 		///价格
 		double	LimitPrice;
 		///数量
