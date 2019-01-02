@@ -10,4 +10,10 @@
 
 感谢[盛泰环球投资管理有限公司](http://www.suntideglobal.com)赞助开发：
 
+This project is dotnet api of Shanghai futures exchange api,develped on Visual studio 2015 and .net framework 4.0.
+Latest version of CTP is version 20160606(http://www.sfit.com.cn/5_2_DocumentDown.htm)
+You can download x64 release in https://github.com/joychin/CTPdotNetWrapper/releases ; If Win32 version is needed, you can clone code and build by yourself.
+Thanks to shawn666.liu@hotmail.com.
+Sponsored by SunTide Global Investment Management Co., Ltd.(http://www.suntideglobal.com)
+
 ![Image of Sponsor](http://www.suntideglobal.com/Images/Icons/logo-hori.png)
