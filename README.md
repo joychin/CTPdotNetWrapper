@@ -1,3 +1,4 @@
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)]
 [![Build status](https://ci.appveyor.com/api/projects/status/biiillpk0ar6stv7?svg=true)](https://ci.appveyor.com/project/joychin/ctpdotnetwrapper)
 
 上期期货API的.net封装版本，适用于.net framework 4.0 以上，采用Visual Studio 2015开发。
@@ -18,6 +19,4 @@ You can download x64 release in https://github.com/joychin/CTPdotNetWrapper/rele
 
 Thanks to shawn666.liu@hotmail.com.
 
-Sponsored by SunTide Global Investment Management Co., Ltd.(http://www.suntideglobal.com)
-
-![Image of Sponsor](http://www.suntideglobal.com/Images/Icons/logo-hori.png)
+Sponsored by SunTide Global Investment Management Co., Ltd.
